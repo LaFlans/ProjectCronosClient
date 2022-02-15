@@ -1,2 +1,2 @@
-# ProjectWitch
-魔法アクションゲーム
+# ProjectChronos
+アクションゲーム
