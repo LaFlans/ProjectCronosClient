@@ -64,6 +64,4 @@ ProjectCronos/Logs/
 ProjectCronos/obj/
 ProjectCronos/UserSettings/
 ProjectCronos/ProjectSettings/
-
-# ゲームリソース関連
-ProjectCronos/Assets/ProjectAssets
+ProjectCronos/Temp/
