@@ -65,3 +65,6 @@ ProjectCronos/obj/
 ProjectCronos/UserSettings/
 ProjectCronos/ProjectSettings/
 ProjectCronos/Temp/
+
+# git lfs管理
+ProjectCronos/Assets/ProjectAssets/
