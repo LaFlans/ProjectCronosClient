@@ -1,2 +1,2 @@
-# ProjectChronos
+# ProjectCronos
 アクションゲーム
