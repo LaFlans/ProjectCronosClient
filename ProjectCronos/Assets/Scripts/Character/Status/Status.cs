@@ -5,72 +5,72 @@ using UnityEngine;
 namespace ProjectCronos
 {
     /// <summary>
-    /// Šî‘bƒXƒe[ƒ^ƒXƒNƒ‰ƒX
+    /// åŸºç¤ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ã‚¯ãƒ©ã‚¹
     /// </summary>
     public class Status : MonoBehaviour
     {
         /// <summary>
-        /// HP‚ğ•\¦‚·‚éƒo[
+        /// HPã‚’è¡¨ç¤ºã™ã‚‹ãƒãƒ¼
         /// </summary>
         [SerializeField]
         HpBar hpBar;
 
         /// <summary>
-        /// Å‘å‘Ì—Í
+        /// æœ€å¤§ä½“åŠ›
         /// </summary>
         [SerializeField]
         public int maxHp { get; set; }
 
         /// <summary>
-        /// c‚è‘Ì—Í
+        /// æ®‹ã‚Šä½“åŠ›
         /// </summary>
         [SerializeField]
         public int currntHp { get; set; }
 
         /// <summary>
-        /// ˆÚ“®‘¬“x
+        /// ç§»å‹•é€Ÿåº¦
         /// </summary>
         [SerializeField]
         public int moveSpeed { get; set; }
 
         /// <summary>
-        /// UŒ‚—Í
+        /// æ”»æ’ƒåŠ›
         /// </summary>
         [SerializeField]
         public int attack { get; set; }
 
         /// <summary>
-        /// –‚–@UŒ‚—Í
+        /// é­”æ³•æ”»æ’ƒåŠ›
         /// </summary>
         [SerializeField]
         public int magicAttack { get; set; }
 
         /// <summary>
-        /// –hŒä—Í
+        /// é˜²å¾¡åŠ›
         /// </summary>
         [SerializeField]
         public int defence { get; set; }
 
         /// <summary>
-        /// –‚–@–hŒä—Í
+        /// é­”æ³•é˜²å¾¡åŠ›
         /// </summary>
         [SerializeField]
         public int magicDefence { get; set; }
 
         /// <summary>
-        /// ƒNƒŠƒeƒBƒJƒ‹‚ª”­¶‚·‚éŠm—¦(Šî–{‚Í0)
+        /// ã‚¯ãƒªãƒ†ã‚£ã‚«ãƒ«ãŒç™ºç”Ÿã™ã‚‹ç¢ºç‡(åŸºæœ¬ã¯0)
         /// </summary>
         [SerializeField]
         public float criticalRate { get; set; }
 
         /// <summary>
-        /// ƒNƒŠƒeƒBƒJƒ‹‚ª”­¶‚µ‚½‚ÉUŒ‚—Í‚É‚©‚©‚é”{—¦
+        /// ã‚¯ãƒªãƒ†ã‚£ã‚«ãƒ«ãŒç™ºç”Ÿã—ãŸæ™‚ã«æ”»æ’ƒåŠ›ã«ã‹ã‹ã‚‹å€ç‡
         /// </summary>
         [SerializeField]
         public float criticalDamageRate { get; set; }
 
         /// <summary>
-        /// ŠJnˆ—
+        /// é–‹å§‹å‡¦ç†
         /// </summary>
         [SerializeField]
         void Start()
@@ -79,7 +79,7 @@ namespace ProjectCronos
         }
 
         /// <summary>
-        /// ‰Šú‰»
+        /// åˆæœŸåŒ–
         /// </summary>
         public virtual void Initialize()
         {
@@ -88,10 +88,10 @@ namespace ProjectCronos
         }
 
         /// <summary>
-        /// ”í’eˆ—(HP‚ª‚O‚Ìê‡Atrue‚ğ•Ô‚·)
+        /// è¢«å¼¾æ™‚å‡¦ç†(HPãŒï¼ã®å ´åˆã€trueã‚’è¿”ã™)
         /// </summary>
-        /// <param name="value">ƒ_ƒ[ƒW‚Ì’l</param>
-        /// <returns>HP‚ª–³‚­‚È‚Á‚½ê‡true</returns>
+        /// <param name="value">ãƒ€ãƒ¡ãƒ¼ã‚¸ã®å€¤</param>
+        /// <returns>HPãŒç„¡ããªã£ãŸå ´åˆtrue</returns>
         public bool Damage(int value)
         {
             currntHp -= value;
@@ -107,7 +107,7 @@ namespace ProjectCronos
         }
 
         /// <summary>
-        /// HP•\¦XV
+        /// HPè¡¨ç¤ºæ›´æ–°
         /// </summary>
         void UpdateHpText()
         {

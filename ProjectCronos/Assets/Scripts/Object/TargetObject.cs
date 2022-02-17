@@ -30,7 +30,7 @@ namespace ProjectCronos
 
         public void SetTarget(GameObject p)
         {
-            // ƒ^[ƒQƒbƒg‚ğ‘S‰ğœ
+            // ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’å…¨è§£é™¤
             foreach (var target in targetGroup.m_Targets)
             {
                 targetGroup.RemoveMember(target.target);
@@ -45,7 +45,7 @@ namespace ProjectCronos
         }
 
         /// <summary>
-        /// ƒ^[ƒQƒbƒg‚ª“G‚©‚Ç‚¤‚©
+        /// ã‚¿ãƒ¼ã‚²ãƒƒãƒˆãŒæ•µã‹ã©ã†ã‹
         /// </summary>
         /// <returns></returns>
         public bool IsTargetEnemy()

@@ -8,13 +8,13 @@ namespace ProjectCronos
     public class HpBar : MonoBehaviour
     {
         /// <summary>
-        /// HP•\¦ƒeƒLƒXƒg
+        /// HPè¡¨ç¤ºãƒ†ã‚­ã‚¹ãƒˆ
         /// </summary>
         [SerializeField]
         TextMeshPro hpText;
 
         /// <summary>
-        /// ƒeƒLƒXƒgXV
+        /// ãƒ†ã‚­ã‚¹ãƒˆæ›´æ–°
         /// </summary>
         public void UpdateHpText(int value)
         {

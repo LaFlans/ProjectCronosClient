@@ -7,7 +7,7 @@ namespace ProjectCronos
     interface IEnemy
     {
         /// <summary>
-        /// oŒ»ˆ—
+        /// ÂoÅ’Â»Å½Å¾ÂË†â€”Â
         /// </summary>
         void Appear();
     }

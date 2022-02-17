@@ -8,41 +8,41 @@ namespace ProjectCronos
     public class Enemy : Character, IEnemy
     {
         /// <summary>
-        /// ‰Šú‰»
+        /// åˆæœŸåŒ–
         /// </summary>
         public override void Initialize()
         {
             base.Initialize();
-            Debug.Log("“G‰Šú‰»");
+            Debug.Log("æ•µåˆæœŸåŒ–");
         }
 
         /// <summary>
-        /// oŒ»ˆ—
+        /// å‡ºç¾æ™‚å‡¦ç†
         /// </summary>
         public override void Appear()
         {
-            Debug.Log("“GoŒ»");
+            Debug.Log("æ•µå‡ºç¾");
         }
 
         /// <summary>
-        /// ”í’eˆ—
+        /// è¢«å¼¾æ™‚å‡¦ç†
         /// </summary>
-        /// <param name="value">ƒ_ƒ[ƒW‚Ì’l</param>
+        /// <param name="value">ãƒ€ãƒ¡ãƒ¼ã‚¸ã®å€¤</param>
         public override void Damage(int value)
         {
             base.Damage(value);
-            Debug.Log("“G”í’e");
+            Debug.Log("æ•µè¢«å¼¾");
         }
 
         /// <summary>
-        /// €–Sˆ—
+        /// æ­»äº¡æ™‚å‡¦ç†
         /// </summary>
         public override void Death()
         {
             base.Death();
 
-            Debug.Log("“G€–S");
-            // ©g‚ğ”j‰ó
+            Debug.Log("æ•µæ­»äº¡");
+            // è‡ªèº«ã‚’ç ´å£Š
             Destroy(this.gameObject);
         }
     }

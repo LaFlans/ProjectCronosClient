@@ -10,57 +10,57 @@ namespace ProjectCronos
     public class Player : Character
     {
         /// <summary>
-        /// ˆÚ“®‘¬“x
+        /// ç§»å‹•é€Ÿåº¦
         /// </summary>
         [SerializeField]
         int moveSpeed = 10;
 
         /// <summary>
-        /// ‰ñ“]‘¬“x
+        /// å›è»¢é€Ÿåº¦
         /// </summary>
         [SerializeField]
         int rotateSpeed = 10;
 
         /// <summary>
-        /// õ“G”ÍˆÍ
+        /// ç´¢æ•µç¯„å›²
         /// </summary>
         [SerializeField]
         int searchRange = 10;
 
         /// <summary>
-        /// ƒŠƒWƒbƒhƒ{ƒfƒB
+        /// ãƒªã‚¸ãƒƒãƒ‰ãƒœãƒ‡ã‚£
         /// </summary>
         Rigidbody rigid;
 
         /// <summary>
-        /// ƒAƒjƒ[ƒ^[
+        /// ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚¿ãƒ¼
         /// </summary>
         Animator anim;
 
         /// <summary>
-        /// ‰ß‹‚ÌˆÊ’u
+        /// éå»ã®ä½ç½®
         /// </summary>
         Vector3 latestPos;
 
         /// <summary>
-        /// “ü—Í•ûŒü
+        /// å…¥åŠ›æ–¹å‘
         /// </summary>
         Vector3 inputVec;
 
         /// <summary>
-        /// –{
+        /// æœ¬
         /// </summary>
         [SerializeField]
         Book book;
 
         /// <summary>
-        /// –Ú•W‚Æ‚È‚éƒIƒuƒWƒFƒNƒg
+        /// ç›®æ¨™ã¨ãªã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
         /// </summary>
         [SerializeField]
         TargetObject targetObj;
 
         /// <summary>
-        /// ’e‚ªo‚é•p“x
+        /// å¼¾ãŒå‡ºã‚‹é »åº¦
         /// </summary>
         [SerializeField]
         float bulletFreq = 0.5f;
@@ -70,18 +70,18 @@ namespace ProjectCronos
         GameObject head;
 
         /// <summary>
-        /// ‘•”õ‚µ‚Ä‚¢‚é•Ší
+        /// è£…å‚™ã—ã¦ã„ã‚‹æ­¦å™¨
         /// </summary>
         [SerializeField]
         Weapon weapon;
 
         /// <summary>
-        /// ‘–‚Á‚Ä‚¢‚éó‘Ô‚©
+        /// èµ°ã£ã¦ã„ã‚‹çŠ¶æ…‹ã‹
         /// </summary>
         bool isRun = false;
 
         /// <summary>
-        /// ŠJnˆ—
+        /// é–‹å§‹å‡¦ç†
         /// </summary>
         void Start()
         {
@@ -89,7 +89,7 @@ namespace ProjectCronos
         }
 
         /// <summary>
-        /// ‰Šú‰»
+        /// åˆæœŸåŒ–
         /// </summary>
         public override void Initialize()
         {
@@ -100,15 +100,15 @@ namespace ProjectCronos
         }
 
         /// <summary>
-        /// oŒ»ˆ—
+        /// å‡ºç¾æ™‚å‡¦ç†
         /// </summary>
         public override void Appear()
         {
-            // ƒvƒŒƒCƒ„[‚Íˆê’U‰½‚à‚µ‚È‚¢
+            // ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¯ä¸€æ—¦ä½•ã‚‚ã—ãªã„
         }
 
         /// <summary>
-        /// ”í’e
+        /// è¢«å¼¾æ™‚
         /// </summary>
         public override void Damage(int value)
         {
@@ -116,7 +116,7 @@ namespace ProjectCronos
         }
 
         /// <summary>
-        /// €–S
+        /// æ­»äº¡æ™‚
         /// </summary>
         public override void Death()
         {
@@ -148,7 +148,7 @@ namespace ProjectCronos
         }
 
         /// <summary>
-        /// ’e‚ğŒ‚‚Â
+        /// å¼¾ã‚’æ’ƒã¤
         /// </summary>
         void Shot()
         {
@@ -158,7 +158,7 @@ namespace ProjectCronos
             {
                 if (bulletFreqTime < 0)
                 {
-                    // HACK: İŒv‚©‚çŒã‚ÅC³‚·‚é•K—v‚ ‚è
+                    // HACK: è¨­è¨ˆã‹ã‚‰å¾Œã§ä¿®æ­£ã™ã‚‹å¿…è¦ã‚ã‚Š
                     book.Shot(targetObj.IsTargetEnemy() ? targetObj.transform.position : Camera.main.transform.forward * 1000);
                     bulletFreqTime = bulletFreq;
                 }
@@ -166,27 +166,27 @@ namespace ProjectCronos
         }
 
         /// <summary>
-        /// ƒ^[ƒQƒbƒgƒƒbƒNƒIƒ“
+        /// ã‚¿ãƒ¼ã‚²ãƒƒãƒˆãƒ­ãƒƒã‚¯ã‚ªãƒ³
         /// </summary>
         void RockonTarget()
         {
             if (Gamepad.current.rightStickButton.wasPressedThisFrame)
             {
-                // ƒ^[ƒQƒbƒg‚ª‚¢‚éê‡AƒvƒŒƒCƒ„[‚Éƒ^[ƒQƒbƒg‚ğ–ß‚·
+                // ã‚¿ãƒ¼ã‚²ãƒƒãƒˆãŒã„ã‚‹å ´åˆã€ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã«ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚’æˆ»ã™
                 if (targetObj.IsTargetEnemy())
                 {
-                    Debug.Log("ƒƒbƒNƒIƒ“‰ğœ");
+                    Debug.Log("ãƒ­ãƒƒã‚¯ã‚ªãƒ³è§£é™¤");
                     targetObj.SetTarget(head);
                     return;
                 }
 
-                // ‚¢‚È‚¯‚ê‚Î•t‹ß‚Ìˆê”Ô‹ß‚¢“G‚ğ’T‚µ‚ÄƒƒbƒNƒIƒ“ˆ—‚ğs‚¤
+                // ã„ãªã‘ã‚Œã°ä»˜è¿‘ã®ä¸€ç•ªè¿‘ã„æ•µã‚’æ¢ã—ã¦ãƒ­ãƒƒã‚¯ã‚ªãƒ³å‡¦ç†ã‚’è¡Œã†
                 RockOn();
             }
         }
 
         /// <summary>
-        /// ƒƒbƒNƒIƒ“ˆ—
+        /// ãƒ­ãƒƒã‚¯ã‚ªãƒ³å‡¦ç†
         /// </summary>
         public void RockOn()
         {
@@ -217,7 +217,7 @@ namespace ProjectCronos
         }
 
         /// <summary>
-        /// ˆÚ“®
+        /// ç§»å‹•
         /// </summary>
         void Move()
         {
@@ -237,16 +237,16 @@ namespace ProjectCronos
         }
 
         /// <summary>
-        /// “ü—Í‚³‚ê‚Ä‚¢‚é•ûŒü‚ğæ“¾(ƒRƒ“ƒgƒ[ƒ‰[)
+        /// å…¥åŠ›ã•ã‚Œã¦ã„ã‚‹æ–¹å‘ã‚’å–å¾—(ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼)
         /// </summary>
-        /// <returns>ˆÚ“®‚·‚é•ûŒü‚ğ•Ô‚·</returns>
+        /// <returns>ç§»å‹•ã™ã‚‹æ–¹å‘ã‚’è¿”ã™</returns>
         Vector3 GetDirection()
         {
             return SetCameraDirection(new Vector3(inputVec.x, 0, inputVec.y));
         }
 
         /// <summary>
-        /// “ü—ÍƒCƒxƒ“ƒg
+        /// å…¥åŠ›ã‚¤ãƒ™ãƒ³ãƒˆ
         /// </summary>
         /// <param name="context"></param>
         public void OnMove(InputAction.CallbackContext context)
@@ -255,16 +255,16 @@ namespace ProjectCronos
         }
 
         /// <summary>
-        /// ƒJƒƒ‰‚ÌŒü‚«‚©‚çˆÚ“®•ûŒü‚ğŒvZ‚µ‚Ä•Ô‚·
+        /// ã‚«ãƒ¡ãƒ©ã®å‘ãã‹ã‚‰ç§»å‹•æ–¹å‘ã‚’è¨ˆç®—ã—ã¦è¿”ã™
         /// </summary>
-        /// <param name="inputDir">“ü—Í•ûŒü</param>
-        /// <returns>ˆÚ“®•ûŒü</returns>
+        /// <param name="inputDir">å…¥åŠ›æ–¹å‘</param>
+        /// <returns>ç§»å‹•æ–¹å‘</returns>
         Vector3 SetCameraDirection(Vector3 inputDir)
         {
-            // ƒJƒƒ‰‚Ì•ûŒü‚©‚çAX-Z•½–Ê‚Ì’PˆÊƒxƒNƒgƒ‹‚ğæ“¾
+            // ã‚«ãƒ¡ãƒ©ã®æ–¹å‘ã‹ã‚‰ã€X-Zå¹³é¢ã®å˜ä½ãƒ™ã‚¯ãƒˆãƒ«ã‚’å–å¾—
             Vector3 cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
 
-            // •ûŒüƒL[‚Ì“ü—Í’l‚ÆƒJƒƒ‰‚ÌŒü‚«‚©‚çAˆÚ“®•ûŒü‚ğŒˆ’è
+            // æ–¹å‘ã‚­ãƒ¼ã®å…¥åŠ›å€¤ã¨ã‚«ãƒ¡ãƒ©ã®å‘ãã‹ã‚‰ã€ç§»å‹•æ–¹å‘ã‚’æ±ºå®š
             Vector3 moveForward = cameraForward * inputDir.z + Camera.main.transform.right * inputDir.x;
 
             return moveForward;

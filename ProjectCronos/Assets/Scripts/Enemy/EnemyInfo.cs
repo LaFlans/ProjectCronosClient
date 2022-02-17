@@ -5,7 +5,7 @@ using UnityEngine;
 namespace ProjectCronos
 {
     /// <summary>
-    /// “G‚Ìî•ñƒNƒ‰ƒX
+    /// æ•µã®æƒ…å ±ã‚¯ãƒ©ã‚¹
     /// </summary>
     public class EnemyInfo : MonoBehaviour
     {
@@ -23,7 +23,7 @@ namespace ProjectCronos
 
         public Transform GetCenterPos()
         {
-            Debug.Log("transform‚ğ•Ô‚µ‚½‚æ");
+            Debug.Log("transformã‚’è¿”ã—ãŸã‚ˆ");
             return centerPos.transform;
         }
     }

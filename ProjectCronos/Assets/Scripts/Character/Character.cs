@@ -5,14 +5,14 @@ using UnityEngine;
 namespace ProjectCronos
 {
     /// <summary>
-    /// ƒLƒƒƒ‰ƒNƒ^[(ƒvƒŒƒCƒ„[‚â“G‚È‚Ç“®‚­‚â‚Â‘S”Ê)ƒNƒ‰ƒX
+    /// ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼(ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚„æ•µãªã©å‹•ãã‚„ã¤å…¨èˆ¬)ã‚¯ãƒ©ã‚¹
     /// </summary>
     public class Character : MonoBehaviour
     {
         Status status = null;
 
         /// <summary>
-        /// ŠJnˆ—
+        /// é–‹å§‹å‡¦ç†
         /// </summary>
         void Start()
         {
@@ -20,7 +20,7 @@ namespace ProjectCronos
         }
 
         /// <summary>
-        /// XV
+        /// æ›´æ–°
         /// </summary>
         void Update()
         {
@@ -28,7 +28,7 @@ namespace ProjectCronos
         }
 
         /// <summary>
-        /// ‰Šú‰»
+        /// åˆæœŸåŒ–
         /// </summary>
         public virtual void Initialize() 
         {
@@ -36,7 +36,7 @@ namespace ProjectCronos
         }
 
         /// <summary>
-        /// oŒ»ˆ—
+        /// å‡ºç¾æ™‚å‡¦ç†
         /// </summary>
         public virtual void Appear()
         {
@@ -44,11 +44,11 @@ namespace ProjectCronos
         }
 
         /// <summary>
-        /// ”í’eˆ—
+        /// è¢«å¼¾æ™‚å‡¦ç†
         /// </summary>
         public virtual void Damage(int value) 
         {
-            // ˆê’U“K“–‚È’l“ü‚ê‚Æ‚­
+            // ä¸€æ—¦é©å½“ãªå€¤å…¥ã‚Œã¨ã
             if (status.Damage(value))
             {
                 Death();
@@ -56,11 +56,11 @@ namespace ProjectCronos
         }
 
         /// <summary>
-        /// €–Sˆ—
+        /// æ­»äº¡æ™‚å‡¦ç†
         /// </summary>
         public virtual void Death()
         {
-            // ˆê’UÁ‚·
+            // ä¸€æ—¦æ¶ˆã™
             Destroy(this.gameObject);
         }
     }

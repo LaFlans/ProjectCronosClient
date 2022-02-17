@@ -5,7 +5,7 @@ using UnityEngine;
 namespace ProjectCronos
 {
     /// <summary>
-    /// プレイヤーのステータス
+    /// 繝励Ξ繧､繝､繝ｼ縺ｮ繧ｹ繝�繝ｼ繧ｿ繧ｹ
     /// </summary>
     public class PlayerStatus : Status
     {

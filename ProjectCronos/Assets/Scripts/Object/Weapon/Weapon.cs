@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// 武器全般インターフェース
-/// </summary>
-public class Weapon : MonoBehaviour
+namespace ProjectCronos
 {
+    /// <summary>
+    /// 豁ｦ蝎ｨ蜈ｨ闊ｬ繧､繝ｳ繧ｿ繝ｼ繝輔ぉ繝ｼ繧ｹ
+    /// </summary>
+    public class Weapon : MonoBehaviour
+    {
 
+    }
 }

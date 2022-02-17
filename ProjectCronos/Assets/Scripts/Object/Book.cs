@@ -7,15 +7,15 @@ namespace ProjectCronos
     public class Book : MonoBehaviour
     {
         /// <summary>
-        /// ’e¶¬ˆÊ’uƒIƒuƒWƒF
+        /// å¼¾ç”Ÿæˆä½ç½®ã‚ªãƒ–ã‚¸ã‚§
         /// </summary>
         [SerializeField]
         Transform bulletSpawnPosObj;
 
         /// <summary>
-        /// ’e‚ðŒ‚‚Â
+        /// å¼¾ã‚’æ’ƒã¤
         /// </summary>
-        /// <param name="targetVec">ƒ^[ƒQƒbƒg‚ÌƒxƒNƒgƒ‹</param>
+        /// <param name="targetVec">ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®ãƒ™ã‚¯ãƒˆãƒ«</param>
         public void Shot(Vector3 targetVec)
         {
             var bullet = Utility.CreatePrefab("Prefabs/EnergyBall");

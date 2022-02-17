@@ -5,29 +5,29 @@ using UnityEngine;
 namespace ProjectCronos
 {
     /// <summary>
-    /// Œ•“™‚Ì•Ší‰ñ‚è‚ÌŠî’êƒNƒ‰ƒX
+    /// å‰£ç­‰ã®æ­¦å™¨å›ã‚Šã®åŸºåº•ã‚¯ãƒ©ã‚¹
     /// </summary>
     public class Sword : Weapon
     {
         /// <summary>
-        /// “–‚½‚è”»’èƒRƒ“ƒ|[ƒlƒ“ƒg
+        /// å½“ãŸã‚Šåˆ¤å®šã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
         /// </summary>
         Collider col;
 
         /// <summary>
-        /// ŠJnˆ—
+        /// é–‹å§‹å‡¦ç†
         /// </summary>
         void Start()
         {
             col = GetComponent<Collider>();
             if(col == null)
             {
-                Debug.Log("Œ•‚Ì“–‚½‚è”»’èƒRƒ“ƒ|[ƒlƒ“ƒg‚ªİ’è‚³‚ê‚Ä‚¢‚Ü‚¹‚ñ");
+                Debug.Log("å‰£ã®å½“ãŸã‚Šåˆ¤å®šã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆãŒè¨­å®šã•ã‚Œã¦ã„ã¾ã›ã‚“");
             }
         }
 
         /// <summary>
-        /// “–‚½‚è”»’è‚ğ—LŒø‚É‚·‚é
+        /// å½“ãŸã‚Šåˆ¤å®šã‚’æœ‰åŠ¹ã«ã™ã‚‹
         /// </summary>
         public void EnableCollider()
         {
@@ -35,7 +35,7 @@ namespace ProjectCronos
         }
 
         /// <summary>
-        /// “–‚½‚è”»’è‚ğ–³Œø‚É‚·‚é
+        /// å½“ãŸã‚Šåˆ¤å®šã‚’ç„¡åŠ¹ã«ã™ã‚‹
         /// </summary>
         public void DisableCollider()
         {

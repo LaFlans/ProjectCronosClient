@@ -10,11 +10,11 @@ namespace ProjectCronos
         #region Prefab
 
         /// <summary>
-        /// ƒXƒNƒŠ[ƒ“À•W‚Å‚ÌƒvƒŒƒnƒu‚ğ¶¬
+        /// ã‚¹ã‚¯ãƒªãƒ¼ãƒ³åº§æ¨™ã§ã®ãƒ—ãƒ¬ãƒãƒ–ã‚’ç”Ÿæˆ
         /// </summary>
-        /// <param name="path">ƒvƒŒƒnƒu‚ÌƒpƒX</param>
-        /// <param name="pos">ƒvƒŒƒnƒu‚ğ¶¬‚·‚éˆÊ’u</param>
-        /// <param name="parent">ƒvƒŒƒnƒu‚Ìe‚É‚·‚éƒIƒuƒWƒFƒNƒg</param>
+        /// <param name="path">ãƒ—ãƒ¬ãƒãƒ–ã®ãƒ‘ã‚¹</param>
+        /// <param name="pos">ãƒ—ãƒ¬ãƒãƒ–ã‚’ç”Ÿæˆã™ã‚‹ä½ç½®</param>
+        /// <param name="parent">ãƒ—ãƒ¬ãƒãƒ–ã®è¦ªã«ã™ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</param>
         public static void CreateUIPrefab(string path, Vector3 pos, GameObject parent)
         {
             GameObject prefab = (GameObject)Resources.Load(path);
@@ -23,12 +23,12 @@ namespace ProjectCronos
         }
 
         /// <summary>
-        /// ƒXƒNƒŠ[ƒ“À•W‚Å‚ÌƒvƒŒƒnƒu‚ğ¶¬
+        /// ã‚¹ã‚¯ãƒªãƒ¼ãƒ³åº§æ¨™ã§ã®ãƒ—ãƒ¬ãƒãƒ–ã‚’ç”Ÿæˆ
         /// </summary>
-        /// <param name="path">ƒvƒŒƒnƒu‚ÌƒpƒX</param>
-        /// <param name="pos">ƒvƒŒƒnƒu‚ğ¶¬‚·‚éˆÊ’u</param>
-        /// <param name="time">ƒvƒŒƒnƒu‚ğÁ‚·ŠÔ</param>
-        /// <param name="parent">ƒvƒŒƒnƒu‚Ìe‚É‚·‚éƒIƒuƒWƒFƒNƒg</param>
+        /// <param name="path">ãƒ—ãƒ¬ãƒãƒ–ã®ãƒ‘ã‚¹</param>
+        /// <param name="pos">ãƒ—ãƒ¬ãƒãƒ–ã‚’ç”Ÿæˆã™ã‚‹ä½ç½®</param>
+        /// <param name="time">ãƒ—ãƒ¬ãƒãƒ–ã‚’æ¶ˆã™æ™‚é–“</param>
+        /// <param name="parent">ãƒ—ãƒ¬ãƒãƒ–ã®è¦ªã«ã™ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</param>
         public static void CreateUIPrefab(string path, Vector3 pos, float time, GameObject parent)
         {
             GameObject prefab = (GameObject)Resources.Load(path);
@@ -38,9 +38,9 @@ namespace ProjectCronos
         }
 
         /// <summary>
-        /// ƒvƒŒƒnƒu‚ÌƒTƒEƒ“ƒh‚ğ¶¬‚µ‚Äw’è‚µ‚½ŠÔŒã‚ÉÁ‚·
-        /// <param name="path">ƒTƒEƒ“ƒhƒvƒŒƒnƒu‚ÌƒpƒX</param>
-        /// <param name="time">ƒvƒŒƒnƒu‚ğÁ‚·ŠÔ</param>
+        /// ãƒ—ãƒ¬ãƒãƒ–ã®ã‚µã‚¦ãƒ³ãƒ‰ã‚’ç”Ÿæˆã—ã¦æŒ‡å®šã—ãŸæ™‚é–“å¾Œã«æ¶ˆã™
+        /// <param name="path">ã‚µã‚¦ãƒ³ãƒ‰ãƒ—ãƒ¬ãƒãƒ–ã®ãƒ‘ã‚¹</param>
+        /// <param name="time">ãƒ—ãƒ¬ãƒãƒ–ã‚’æ¶ˆã™æ™‚é–“</param>
         /// </summary>
         public static void CreateSE(string path, float time)
         {
@@ -50,10 +50,10 @@ namespace ProjectCronos
         }
 
         /// <summary>
-        ///@ƒvƒŒƒnƒu‚ğ¶¬‚µ‚ÄƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚ğ•Ô‚·
+        ///ã€€ãƒ—ãƒ¬ãƒãƒ–ã‚’ç”Ÿæˆã—ã¦ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’è¿”ã™
         /// </summary>
-        /// <param name="path"> ƒvƒŒƒnƒu‚ÌƒpƒX</param>
-        /// <returns>ƒvƒŒƒnƒu‚ÌƒQ[ƒ€ƒIƒuƒWƒFƒNƒg</returns>
+        /// <param name="path"> ãƒ—ãƒ¬ãƒãƒ–ã®ãƒ‘ã‚¹</param>
+        /// <returns>ãƒ—ãƒ¬ãƒãƒ–ã®ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</returns>
         public static GameObject CreatePrefab(string path)
         {
             GameObject prefab = (GameObject)Resources.Load(path);
@@ -61,9 +61,9 @@ namespace ProjectCronos
         }
 
         /// <summary>
-        /// ƒvƒŒƒnƒu‚ğ¶¬‚µ‚Äw’è‚µ‚½ŠÔŒã‚ÉÁ‚·
-        /// <param name="path">ƒvƒŒƒnƒu‚ÌƒpƒX</param>
-        /// <param name="time">ƒvƒŒƒnƒu‚ğÁ‚·ŠÔ</param>
+        /// ãƒ—ãƒ¬ãƒãƒ–ã‚’ç”Ÿæˆã—ã¦æŒ‡å®šã—ãŸæ™‚é–“å¾Œã«æ¶ˆã™
+        /// <param name="path">ãƒ—ãƒ¬ãƒãƒ–ã®ãƒ‘ã‚¹</param>
+        /// <param name="time">ãƒ—ãƒ¬ãƒãƒ–ã‚’æ¶ˆã™æ™‚é–“</param>
         /// </summary>
         public static void CreatePrefab(string path, float time)
         {
@@ -73,10 +73,10 @@ namespace ProjectCronos
         }
 
         /// <summary>
-        /// ƒvƒŒƒnƒu‚ğw’è‚µ‚½ˆÊ’u‚É¶¬‚µ‚Äw’è‚µ‚½ŠÔŒã‚ÉÁ‚·
-        /// <param name="path">ƒvƒŒƒnƒu‚ÌƒpƒX</param>
-        /// <param name="pos">ƒvƒŒƒnƒu‚ğ¶¬‚·‚éˆÊ’u</param>
-        /// <param name="time">ƒvƒŒƒnƒu‚ğÁ‚·ŠÔ</param>
+        /// ãƒ—ãƒ¬ãƒãƒ–ã‚’æŒ‡å®šã—ãŸä½ç½®ã«ç”Ÿæˆã—ã¦æŒ‡å®šã—ãŸæ™‚é–“å¾Œã«æ¶ˆã™
+        /// <param name="path">ãƒ—ãƒ¬ãƒãƒ–ã®ãƒ‘ã‚¹</param>
+        /// <param name="pos">ãƒ—ãƒ¬ãƒãƒ–ã‚’ç”Ÿæˆã™ã‚‹ä½ç½®</param>
+        /// <param name="time">ãƒ—ãƒ¬ãƒãƒ–ã‚’æ¶ˆã™æ™‚é–“</param>
         /// </summary>
         public static void CreatePrefab(string path, Vector3 pos, float time)
         {
@@ -86,11 +86,11 @@ namespace ProjectCronos
         }
 
         /// <summary>
-        /// ƒvƒŒƒnƒu‚ğw’è‚µ‚½ˆÊ’u‚É¶¬‚µ‚Äw’è‚µ‚½e‚ğƒZƒbƒg‚µ‚Äw’è‚µ‚½ŠÔŒã‚ÉÁ‚·
-        /// <param name="path">ƒvƒŒƒnƒu‚ÌƒpƒX</param>
-        /// <param name="pos">ƒvƒŒƒnƒu‚ğ¶¬‚·‚éˆÊ’u</param>
-        /// <param name="time">ƒvƒŒƒnƒu‚ğÁ‚·ŠÔ</param>
-        /// <param name="parent">ƒvƒŒƒnƒu‚Ìe‚É‚·‚éƒIƒuƒWƒFƒNƒg</param>
+        /// ãƒ—ãƒ¬ãƒãƒ–ã‚’æŒ‡å®šã—ãŸä½ç½®ã«ç”Ÿæˆã—ã¦æŒ‡å®šã—ãŸè¦ªã‚’ã‚»ãƒƒãƒˆã—ã¦æŒ‡å®šã—ãŸæ™‚é–“å¾Œã«æ¶ˆã™
+        /// <param name="path">ãƒ—ãƒ¬ãƒãƒ–ã®ãƒ‘ã‚¹</param>
+        /// <param name="pos">ãƒ—ãƒ¬ãƒãƒ–ã‚’ç”Ÿæˆã™ã‚‹ä½ç½®</param>
+        /// <param name="time">ãƒ—ãƒ¬ãƒãƒ–ã‚’æ¶ˆã™æ™‚é–“</param>
+        /// <param name="parent">ãƒ—ãƒ¬ãƒãƒ–ã®è¦ªã«ã™ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</param>
         /// </summary>
         public static void CreatePrefab(string path, Vector3 pos, float time, GameObject parent)
         {
@@ -100,11 +100,11 @@ namespace ProjectCronos
         }
 
         /// <summary>
-        /// ƒvƒŒƒnƒu‚ğw’è‚µ‚½ˆÊ’u‚Æ‰ñ“]‚Å¶¬‚µ‚Äw’è‚µ‚½ŠÔŒã‚ÉÁ‚·
-        /// <param name="path">ƒvƒŒƒnƒu‚ÌƒpƒX</param>
-        /// <param name="pos">ƒvƒŒƒnƒu‚ğ¶¬‚·‚éˆÊ’u</param>
-        /// <param name="rotation">ƒvƒŒƒnƒu‚ğ¶¬‚·‚éŠp“x</param>
-        /// <param name="time">ƒvƒŒƒnƒu‚ğÁ‚·ŠÔ</param>
+        /// ãƒ—ãƒ¬ãƒãƒ–ã‚’æŒ‡å®šã—ãŸä½ç½®ã¨å›è»¢ã§ç”Ÿæˆã—ã¦æŒ‡å®šã—ãŸæ™‚é–“å¾Œã«æ¶ˆã™
+        /// <param name="path">ãƒ—ãƒ¬ãƒãƒ–ã®ãƒ‘ã‚¹</param>
+        /// <param name="pos">ãƒ—ãƒ¬ãƒãƒ–ã‚’ç”Ÿæˆã™ã‚‹ä½ç½®</param>
+        /// <param name="rotation">ãƒ—ãƒ¬ãƒãƒ–ã‚’ç”Ÿæˆã™ã‚‹è§’åº¦</param>
+        /// <param name="time">ãƒ—ãƒ¬ãƒãƒ–ã‚’æ¶ˆã™æ™‚é–“</param>
         /// </summary>
         public static void CreatePrefab(string path, Vector3 pos, Quaternion rotation, float time)
         {
@@ -113,12 +113,12 @@ namespace ProjectCronos
             Destroy(obj, time);
         }
         /// <summary>
-        /// ƒvƒŒƒnƒu‚ğw’è‚µ‚½ˆÊ’u‚Æ‰ñ“]‚Å¶¬‚µ‚Äw’è‚µ‚½ŠÔŒã‚ÉÁ‚·
-        /// <param name="path">ƒvƒŒƒnƒu‚ÌƒpƒX</param>
-        /// <param name="pos">ƒvƒŒƒnƒu‚ğ¶¬‚·‚éˆÊ’u</param>
-        /// <param name="rotation">ƒvƒŒƒnƒu‚ğ¶¬‚·‚éŠp“x</param>
-        /// <param name="time">ƒvƒŒƒnƒu‚ğÁ‚·ŠÔ</param>
-        /// <param name="parent">ƒvƒŒƒnƒu‚Ìe‚É‚·‚éƒIƒuƒWƒFƒNƒg</param>
+        /// ãƒ—ãƒ¬ãƒãƒ–ã‚’æŒ‡å®šã—ãŸä½ç½®ã¨å›è»¢ã§ç”Ÿæˆã—ã¦æŒ‡å®šã—ãŸæ™‚é–“å¾Œã«æ¶ˆã™
+        /// <param name="path">ãƒ—ãƒ¬ãƒãƒ–ã®ãƒ‘ã‚¹</param>
+        /// <param name="pos">ãƒ—ãƒ¬ãƒãƒ–ã‚’ç”Ÿæˆã™ã‚‹ä½ç½®</param>
+        /// <param name="rotation">ãƒ—ãƒ¬ãƒãƒ–ã‚’ç”Ÿæˆã™ã‚‹è§’åº¦</param>
+        /// <param name="time">ãƒ—ãƒ¬ãƒãƒ–ã‚’æ¶ˆã™æ™‚é–“</param>
+        /// <param name="parent">ãƒ—ãƒ¬ãƒãƒ–ã®è¦ªã«ã™ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</param>
         /// </summary>
         public static void CreatePrefab(string path, Vector3 pos, Quaternion rotation, float time, GameObject parent)
         {
@@ -128,11 +128,11 @@ namespace ProjectCronos
         }
 
         /// <summary>
-        /// ƒvƒŒƒnƒu‚ğw’è‚µ‚½ˆÊ’u‚Æ‰ñ“]‚Å¶¬‚·‚é
+        /// ãƒ—ãƒ¬ãƒãƒ–ã‚’æŒ‡å®šã—ãŸä½ç½®ã¨å›è»¢ã§ç”Ÿæˆã™ã‚‹
         /// </summary>
-        /// <param name="path">ƒvƒŒƒnƒu‚ÌƒpƒX</param>
-        /// <param name="pos">ƒvƒŒƒnƒu‚ğ¶¬‚·‚éˆÊ’u</param>
-        /// <param name="rotation">ƒvƒŒƒnƒu‚ğ¶¬‚·‚éŠp“x</param>
+        /// <param name="path">ãƒ—ãƒ¬ãƒãƒ–ã®ãƒ‘ã‚¹</param>
+        /// <param name="pos">ãƒ—ãƒ¬ãƒãƒ–ã‚’ç”Ÿæˆã™ã‚‹ä½ç½®</param>
+        /// <param name="rotation">ãƒ—ãƒ¬ãƒãƒ–ã‚’ç”Ÿæˆã™ã‚‹è§’åº¦</param>
         public static void CreatePrefab(string path, Vector3 pos, Quaternion rotation)
         {
             GameObject prefab = (GameObject)Resources.Load(path);
@@ -140,11 +140,11 @@ namespace ProjectCronos
         }
 
         /// <summary>
-        /// ƒvƒŒƒnƒu‚ğw’è‚µ‚½ˆÊ’u‚ÆƒIƒCƒ‰[Šp‚Å¶¬‚·‚é
+        /// ãƒ—ãƒ¬ãƒãƒ–ã‚’æŒ‡å®šã—ãŸä½ç½®ã¨ã‚ªã‚¤ãƒ©ãƒ¼è§’ã§ç”Ÿæˆã™ã‚‹
         /// </summary>
-        /// <param name="path">ƒvƒŒƒnƒu‚ÌƒpƒX</param>
-        /// <param name="pos">ƒvƒŒƒnƒu‚ğ¶¬‚·‚éˆÊ’u</param>
-        /// <param name="eularAngle">ƒvƒŒƒnƒu‚ğ¶¬‚·‚éŠp“x(ƒIƒCƒ‰[Šp)</param>
+        /// <param name="path">ãƒ—ãƒ¬ãƒãƒ–ã®ãƒ‘ã‚¹</param>
+        /// <param name="pos">ãƒ—ãƒ¬ãƒãƒ–ã‚’ç”Ÿæˆã™ã‚‹ä½ç½®</param>
+        /// <param name="eularAngle">ãƒ—ãƒ¬ãƒãƒ–ã‚’ç”Ÿæˆã™ã‚‹è§’åº¦(ã‚ªã‚¤ãƒ©ãƒ¼è§’)</param>
         public static void CreatePrefab(string path, Vector3 pos, Vector3 eularAngle)
         {
             GameObject prefab = (GameObject)Resources.Load(path);
@@ -153,12 +153,12 @@ namespace ProjectCronos
         }
 
         /// <summary>
-        /// ƒvƒŒƒnƒu‚ğw’è‚µ‚½ˆÊ’u‚ÆƒIƒCƒ‰[Šp‚Å¶¬‚·‚é
+        /// ãƒ—ãƒ¬ãƒãƒ–ã‚’æŒ‡å®šã—ãŸä½ç½®ã¨ã‚ªã‚¤ãƒ©ãƒ¼è§’ã§ç”Ÿæˆã™ã‚‹
         /// </summary>
-        /// <param name="path">ƒvƒŒƒnƒu‚ÌƒpƒX</param>
-        /// <param name="pos">ƒvƒŒƒnƒu‚ğ¶¬‚·‚éˆÊ’u</param>
-        /// <param name="eularAngle">ƒvƒŒƒnƒu‚ğ¶¬‚·‚éŠp“x(ƒIƒCƒ‰[Šp)</param>
-        /// <param name="parent">ƒvƒŒƒnƒu‚Ìe‚É‚·‚éƒIƒuƒWƒFƒNƒg</param>
+        /// <param name="path">ãƒ—ãƒ¬ãƒãƒ–ã®ãƒ‘ã‚¹</param>
+        /// <param name="pos">ãƒ—ãƒ¬ãƒãƒ–ã‚’ç”Ÿæˆã™ã‚‹ä½ç½®</param>
+        /// <param name="eularAngle">ãƒ—ãƒ¬ãƒãƒ–ã‚’ç”Ÿæˆã™ã‚‹è§’åº¦(ã‚ªã‚¤ãƒ©ãƒ¼è§’)</param>
+        /// <param name="parent">ãƒ—ãƒ¬ãƒãƒ–ã®è¦ªã«ã™ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</param>
         public static void CreatePrefab(string path, Vector3 pos, Vector3 eularAngle, GameObject parent)
         {
             GameObject prefab = (GameObject)Resources.Load(path);
@@ -166,12 +166,12 @@ namespace ProjectCronos
             obj.transform.eulerAngles = eularAngle;
         }
         /// <summary>
-        /// ƒvƒŒƒnƒu‚ğw’è‚µ‚½ˆÊ’u‚ÆƒIƒCƒ‰[Šp‚Å¶¬‚·‚é
+        /// ãƒ—ãƒ¬ãƒãƒ–ã‚’æŒ‡å®šã—ãŸä½ç½®ã¨ã‚ªã‚¤ãƒ©ãƒ¼è§’ã§ç”Ÿæˆã™ã‚‹
         /// </summary>
-        /// <param name="path">ƒvƒŒƒnƒu‚ÌƒpƒX</param>
-        /// <param name="pos">ƒvƒŒƒnƒu‚ğ¶¬‚·‚éˆÊ’u</param>
-        /// <param name="eularAngle">ƒvƒŒƒnƒu‚ğ¶¬‚·‚éŠp“x(ƒIƒCƒ‰[Šp)</param>
-        /// <param name="time">ƒvƒŒƒnƒu‚ğÁ‚·ŠÔ</param>
+        /// <param name="path">ãƒ—ãƒ¬ãƒãƒ–ã®ãƒ‘ã‚¹</param>
+        /// <param name="pos">ãƒ—ãƒ¬ãƒãƒ–ã‚’ç”Ÿæˆã™ã‚‹ä½ç½®</param>
+        /// <param name="eularAngle">ãƒ—ãƒ¬ãƒãƒ–ã‚’ç”Ÿæˆã™ã‚‹è§’åº¦(ã‚ªã‚¤ãƒ©ãƒ¼è§’)</param>
+        /// <param name="time">ãƒ—ãƒ¬ãƒãƒ–ã‚’æ¶ˆã™æ™‚é–“</param>
         public static void CreatePrefab(string path, Vector3 pos, Vector3 eularAngle, float time)
         {
             GameObject prefab = (GameObject)Resources.Load(path);
@@ -182,20 +182,20 @@ namespace ProjectCronos
 
 
         /// <summary>
-        /// ƒvƒŒƒnƒu‚ğw’è‚µ‚½ˆÊ’u‚Å¶¬‚·‚é
+        /// ãƒ—ãƒ¬ãƒãƒ–ã‚’æŒ‡å®šã—ãŸä½ç½®ã§ç”Ÿæˆã™ã‚‹
         /// </summary>
-        /// <param name="path">ƒvƒŒƒnƒu‚ÌƒpƒX</param>
-        /// <param name="pos">ƒvƒŒƒnƒu‚ğ¶¬‚·‚éˆÊ’u</param>
+        /// <param name="path">ãƒ—ãƒ¬ãƒãƒ–ã®ãƒ‘ã‚¹</param>
+        /// <param name="pos">ãƒ—ãƒ¬ãƒãƒ–ã‚’ç”Ÿæˆã™ã‚‹ä½ç½®</param>
         public static void CreatePrefab(string path, Vector3 pos)
         {
             GameObject prefab = (GameObject)Resources.Load(path);
             Instantiate(prefab, pos, Quaternion.identity);
         }
         /// <summary>
-        /// ƒvƒŒƒnƒu‚ğw’è‚µ‚½ˆÊ’u‚É¶¬‚µ‚Äw’è‚µ‚½e‚ğƒZƒbƒg‚µ‚Äw’è‚µ‚½ŠÔŒã‚ÉÁ‚·
-        /// <param name="path">ƒvƒŒƒnƒu‚ÌƒpƒX</param>
-        /// <param name="time">ƒvƒŒƒnƒu‚ğÁ‚·ŠÔ</param>
-        /// <param name="parent">ƒvƒŒƒnƒu‚Ìe‚É‚·‚éƒIƒuƒWƒFƒNƒg</param>
+        /// ãƒ—ãƒ¬ãƒãƒ–ã‚’æŒ‡å®šã—ãŸä½ç½®ã«ç”Ÿæˆã—ã¦æŒ‡å®šã—ãŸè¦ªã‚’ã‚»ãƒƒãƒˆã—ã¦æŒ‡å®šã—ãŸæ™‚é–“å¾Œã«æ¶ˆã™
+        /// <param name="path">ãƒ—ãƒ¬ãƒãƒ–ã®ãƒ‘ã‚¹</param>
+        /// <param name="time">ãƒ—ãƒ¬ãƒãƒ–ã‚’æ¶ˆã™æ™‚é–“</param>
+        /// <param name="parent">ãƒ—ãƒ¬ãƒãƒ–ã®è¦ªã«ã™ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</param>
         /// </summary>
         public static void CreatePrefab(string path, float time, GameObject parent)
         {
@@ -204,10 +204,10 @@ namespace ProjectCronos
             Destroy(obj, time);
         }
         /// <summary>
-        /// ƒvƒŒƒnƒu‚ğw’è‚µ‚½ˆÊ’u‚É¶¬‚µ‚Äw’è‚µ‚½e‚ğƒZƒbƒg‚µ‚Äw’è‚µ‚½ŠÔŒã‚ÉÁ‚·
-        /// <param name="path">ƒvƒŒƒnƒu‚ÌƒpƒX</param>
-        /// <param name="pos">ƒvƒŒƒnƒu‚ğ¶¬‚·‚éˆÊ’u</param>
-        /// <param name="parent">ƒvƒŒƒnƒu‚Ìe‚É‚·‚éƒIƒuƒWƒFƒNƒg</param>
+        /// ãƒ—ãƒ¬ãƒãƒ–ã‚’æŒ‡å®šã—ãŸä½ç½®ã«ç”Ÿæˆã—ã¦æŒ‡å®šã—ãŸè¦ªã‚’ã‚»ãƒƒãƒˆã—ã¦æŒ‡å®šã—ãŸæ™‚é–“å¾Œã«æ¶ˆã™
+        /// <param name="path">ãƒ—ãƒ¬ãƒãƒ–ã®ãƒ‘ã‚¹</param>
+        /// <param name="pos">ãƒ—ãƒ¬ãƒãƒ–ã‚’ç”Ÿæˆã™ã‚‹ä½ç½®</param>
+        /// <param name="parent">ãƒ—ãƒ¬ãƒãƒ–ã®è¦ªã«ã™ã‚‹ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</param>
         /// </summary>
         public static void CreatePrefab(string path, Vector3 pos, GameObject parent)
         {
@@ -219,13 +219,13 @@ namespace ProjectCronos
 
         #region Clone
         //****************************************************************************************************************************************************************************************
-        //@ƒNƒ[ƒ“
+        //ã€€ã‚¯ãƒ­ãƒ¼ãƒ³
         //****************************************************************************************************************************************************************************************
         /// <summary>
-        /// ƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚ÌƒNƒ[ƒ“‚ğ¶¬‚·‚é
+        /// ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ã‚¯ãƒ­ãƒ¼ãƒ³ã‚’ç”Ÿæˆã™ã‚‹
         /// </summary>
         /// <param name="go"></param>
-        /// <returns>ƒNƒ[ƒ“ƒQ[ƒ€ƒIƒuƒWƒFƒNƒg</returns>
+        /// <returns>ã‚¯ãƒ­ãƒ¼ãƒ³ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</returns>
         public static GameObject CreateClone(GameObject go)
         {
             var clone = GameObject.Instantiate(go) as GameObject;
@@ -237,13 +237,13 @@ namespace ProjectCronos
 
         #region Material
         /// <summary>
-        /// ƒ^[ƒQƒbƒg‚ÌqƒIƒuƒWƒFƒNƒgŠÜ‚Ş‚·‚×‚Ä‚ÌƒIƒuƒWƒFƒNƒg‚Ìƒ}ƒeƒŠƒAƒ‹ƒJƒ‰[‚ğw’è‚µ‚½F‚É•Ï‚¦‚é
+        /// ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®å­ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆå«ã‚€ã™ã¹ã¦ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ãƒãƒ†ãƒªã‚¢ãƒ«ã‚«ãƒ©ãƒ¼ã‚’æŒ‡å®šã—ãŸè‰²ã«å¤‰ãˆã‚‹
         /// </summary>
-        /// <param name="targetObject">ƒ^[ƒQƒbƒgƒIƒuƒWƒFƒNƒg</param>
-        /// <param name="color">•ÏX‚µ‚½‚¢F</param>
+        /// <param name="targetObject">ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</param>
+        /// <param name="color">å¤‰æ›´ã—ãŸã„è‰²</param>
         public static void ChangeMaterialOfGameObject(GameObject targetObject, Material mat)
         {
-            //“ü—Í‚³‚ê‚½ƒIƒuƒWƒFƒNƒg‚ÌRenderer‚ğ‘S‚Äæ“¾‚µA‚³‚ç‚É‚»‚ÌRenderer‚Éİ’è‚³‚ê‚Ä‚¢‚é‘SMaterial‚ğ•Ï‚¦‚é
+            //å…¥åŠ›ã•ã‚ŒãŸã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®Rendererã‚’å…¨ã¦å–å¾—ã—ã€ã•ã‚‰ã«ãã®Rendererã«è¨­å®šã•ã‚Œã¦ã„ã‚‹å…¨Materialã‚’å¤‰ãˆã‚‹
             foreach (Renderer targetRenderer in targetObject.GetComponents<Renderer>())
             {
                 targetRenderer.material = mat;
@@ -253,20 +253,20 @@ namespace ProjectCronos
                 //}
             }
 
-            //“ü—Í‚³‚ê‚½ƒIƒuƒWƒFƒNƒg‚Ìq‚É‚à“¯—l‚Ìˆ—‚ğs‚¤
+            //å…¥åŠ›ã•ã‚ŒãŸã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®å­ã«ã‚‚åŒæ§˜ã®å‡¦ç†ã‚’è¡Œã†
             for (int i = 0; i < targetObject.transform.childCount; i++)
             {
                 ChangeMaterialOfGameObject(targetObject.transform.GetChild(i).gameObject, mat);
             }
         }
         /// <summary>
-        /// ƒ^[ƒQƒbƒg‚ÌqƒIƒuƒWƒFƒNƒgŠÜ‚Ş‚·‚×‚Ä‚ÌƒIƒuƒWƒFƒNƒg‚Ìƒ}ƒeƒŠƒAƒ‹ƒJƒ‰[‚ğw’è‚µ‚½F‚É•Ï‚¦‚é
+        /// ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®å­ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆå«ã‚€ã™ã¹ã¦ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ãƒãƒ†ãƒªã‚¢ãƒ«ã‚«ãƒ©ãƒ¼ã‚’æŒ‡å®šã—ãŸè‰²ã«å¤‰ãˆã‚‹
         /// </summary>
-        /// <param name="targetObject">ƒ^[ƒQƒbƒgƒIƒuƒWƒFƒNƒg</param>
-        /// <param name="color">•ÏX‚µ‚½‚¢F</param>
+        /// <param name="targetObject">ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</param>
+        /// <param name="color">å¤‰æ›´ã—ãŸã„è‰²</param>
         public static void ChangeColorOfGameObject(GameObject targetObject, Color color)
         {
-            //“ü—Í‚³‚ê‚½ƒIƒuƒWƒFƒNƒg‚ÌRenderer‚ğ‘S‚Äæ“¾‚µA‚³‚ç‚É‚»‚ÌRenderer‚Éİ’è‚³‚ê‚Ä‚¢‚é‘SMaterial‚ÌF‚ğ•Ï‚¦‚é
+            //å…¥åŠ›ã•ã‚ŒãŸã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®Rendererã‚’å…¨ã¦å–å¾—ã—ã€ã•ã‚‰ã«ãã®Rendererã«è¨­å®šã•ã‚Œã¦ã„ã‚‹å…¨Materialã®è‰²ã‚’å¤‰ãˆã‚‹
             foreach (Renderer targetRenderer in targetObject.GetComponents<Renderer>())
             {
                 foreach (Material material in targetRenderer.materials)
@@ -275,21 +275,21 @@ namespace ProjectCronos
                 }
             }
 
-            //“ü—Í‚³‚ê‚½ƒIƒuƒWƒFƒNƒg‚Ìq‚É‚à“¯—l‚Ìˆ—‚ğs‚¤
+            //å…¥åŠ›ã•ã‚ŒãŸã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®å­ã«ã‚‚åŒæ§˜ã®å‡¦ç†ã‚’è¡Œã†
             for (int i = 0; i < targetObject.transform.childCount; i++)
             {
                 ChangeColorOfGameObject(targetObject.transform.GetChild(i).gameObject, color);
             }
         }
         /// <summary>
-        /// ƒ^[ƒQƒbƒg‚ÌqƒIƒuƒWƒFƒNƒgŠÜ‚Ş‚·‚×‚Ä‚ÌƒIƒuƒWƒFƒNƒg‚Ìw’è‚µ‚½ƒ}ƒeƒŠƒAƒ‹ƒJƒ‰[‚ğw’è‚µ‚½F‚É•Ï‚¦‚é
+        /// ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®å­ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆå«ã‚€ã™ã¹ã¦ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®æŒ‡å®šã—ãŸãƒãƒ†ãƒªã‚¢ãƒ«ã‚«ãƒ©ãƒ¼ã‚’æŒ‡å®šã—ãŸè‰²ã«å¤‰ãˆã‚‹
         /// </summary>
-        /// <param name="targetObject">ƒ^[ƒQƒbƒgƒIƒuƒWƒFƒNƒg</param>
-        /// <param name="colorName">•ÏX‚µ‚½‚¢ƒJƒ‰[‚Ì–¼‘O</param>
-        /// <param name="color">•ÏX‚µ‚½‚¢F</param>
+        /// <param name="targetObject">ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ</param>
+        /// <param name="colorName">å¤‰æ›´ã—ãŸã„ã‚«ãƒ©ãƒ¼ã®åå‰</param>
+        /// <param name="color">å¤‰æ›´ã—ãŸã„è‰²</param>
         public static void ChangeColorOfGameObject(GameObject targetObject, string colorName, Color color)
         {
-            //“ü—Í‚³‚ê‚½ƒIƒuƒWƒFƒNƒg‚ÌRenderer‚ğ‘S‚Äæ“¾‚µA‚³‚ç‚É‚»‚ÌRenderer‚Éİ’è‚³‚ê‚Ä‚¢‚é‘SMaterial‚ÌF‚ğ•Ï‚¦‚é
+            //å…¥åŠ›ã•ã‚ŒãŸã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®Rendererã‚’å…¨ã¦å–å¾—ã—ã€ã•ã‚‰ã«ãã®Rendererã«è¨­å®šã•ã‚Œã¦ã„ã‚‹å…¨Materialã®è‰²ã‚’å¤‰ãˆã‚‹
             foreach (Renderer targetRenderer in targetObject.GetComponents<Renderer>())
             {
 
@@ -299,7 +299,7 @@ namespace ProjectCronos
                 }
             }
 
-            //“ü—Í‚³‚ê‚½ƒIƒuƒWƒFƒNƒg‚Ìq‚É‚à“¯—l‚Ìˆ—‚ğs‚¤
+            //å…¥åŠ›ã•ã‚ŒãŸã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®å­ã«ã‚‚åŒæ§˜ã®å‡¦ç†ã‚’è¡Œã†
             for (int i = 0; i < targetObject.transform.childCount; i++)
             {
                 ChangeColorOfGameObject(targetObject.transform.GetChild(i).gameObject, colorName, color);
@@ -312,17 +312,17 @@ namespace ProjectCronos
 
         #region IEnumerator
 
-        //@–Ú“I’n(target)‚Æ–Ú“I’n‚Ü‚Å‚ÌŠÔ(time)
+        //ã€€ç›®çš„åœ°(target)ã¨ç›®çš„åœ°ã¾ã§ã®æ™‚é–“(time)
         public static IEnumerator ToTargetPos(GameObject obj, Vector3 target, float time)
         {
             Vector3 startPos = obj.transform.position;
             Vector3 endPos = target;
 
-            float startTime = Time.time; //@“’…—\’èŠÔ
+            float startTime = Time.time; //ã€€åˆ°ç€äºˆå®šæ™‚é–“
             var diff = Time.time - startTime;
             while (time > diff)
             {
-                diff = Time.time - startTime; //@Œo‰ßŠÔ
+                diff = Time.time - startTime; //ã€€çµŒéæ™‚é–“
                 var rate = diff / time;
                 obj.transform.position = Vector3.Lerp(startPos, endPos, rate);
                 yield return null;
@@ -331,17 +331,17 @@ namespace ProjectCronos
 
             yield return null;
         }
-        //@–Ú“I’n(target)‚Æ–Ú“I’n‚Ü‚Å‚ÌŠÔ(time)
+        //ã€€ç›®çš„åœ°(target)ã¨ç›®çš„åœ°ã¾ã§ã®æ™‚é–“(time)
         public static IEnumerator ToTargetLookPos(GameObject obj, Vector3 target, float time)
         {
             Vector3 startPos = obj.transform.position;
             Vector3 endPos = target;
 
-            float startTime = Time.time; //@“’…—\’èŠÔ
+            float startTime = Time.time; //ã€€åˆ°ç€äºˆå®šæ™‚é–“
             var diff = Time.time - startTime;
             while (time > diff)
             {
-                diff = Time.time - startTime; //@Œo‰ßŠÔ
+                diff = Time.time - startTime; //ã€€çµŒéæ™‚é–“
                 var rate = diff / time;
                 obj.transform.position = Vector3.Lerp(startPos, endPos, rate);
 
@@ -353,7 +353,7 @@ namespace ProjectCronos
             yield return null;
         }
 
-        //@ƒtƒF[ƒhƒCƒ“
+        //ã€€ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¤ãƒ³
         public static IEnumerator FadeIn(Image fadeImage, float speed)
         {
             while (fadeImage.color.a > 0)
@@ -364,7 +364,7 @@ namespace ProjectCronos
             fadeImage.color = new Color(fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, 0);
             yield return null;
         }
-        //@ƒtƒF[ƒhƒAƒEƒg
+        //ã€€ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¢ã‚¦ãƒˆ
         public static IEnumerator FadeOut(Image fadeImage, float speed)
         {
             while (fadeImage.color.a < 1)
@@ -379,19 +379,19 @@ namespace ProjectCronos
 
         #region UI
         /// <summary>
-        /// ƒ^[ƒQƒbƒg‚ÌqƒIƒuƒWƒFƒNƒgŠÜ‚Ş‚·‚×‚Ä‚ÌƒIƒuƒWƒFƒNƒg‚ÌƒeƒLƒXƒgƒJƒ‰[‚ğw’è‚µ‚½F‚É•Ï‚¦‚é
+        /// ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã®å­ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆå«ã‚€ã™ã¹ã¦ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ãƒ†ã‚­ã‚¹ãƒˆã‚«ãƒ©ãƒ¼ã‚’æŒ‡å®šã—ãŸè‰²ã«å¤‰ãˆã‚‹
         /// </summary>
-        /// <param name="targetText">ƒ^[ƒQƒbƒgƒeƒLƒXƒg</param>
-        /// <param name="color">•ÏX‚µ‚½‚¢F</param>
+        /// <param name="targetText">ã‚¿ãƒ¼ã‚²ãƒƒãƒˆãƒ†ã‚­ã‚¹ãƒˆ</param>
+        /// <param name="color">å¤‰æ›´ã—ãŸã„è‰²</param>
         public static void ChangeColorOfText(GameObject targetText, Color color)
         {
-            //“ü—Í‚³‚ê‚½ƒIƒuƒWƒFƒNƒg‚ÌText‚ğ‘S‚Äæ“¾‚µAƒeƒLƒXƒgƒJƒ‰[‚ğ•Ï‚¦‚é
+            //å…¥åŠ›ã•ã‚ŒãŸã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®Textã‚’å…¨ã¦å–å¾—ã—ã€ãƒ†ã‚­ã‚¹ãƒˆã‚«ãƒ©ãƒ¼ã‚’å¤‰ãˆã‚‹
             foreach (Text target in targetText.GetComponents<Text>())
             {
                 target.color = color;
             }
 
-            //“ü—Í‚³‚ê‚½ƒIƒuƒWƒFƒNƒg‚Ìq‚É‚à“¯—l‚Ìˆ—‚ğs‚¤
+            //å…¥åŠ›ã•ã‚ŒãŸã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®å­ã«ã‚‚åŒæ§˜ã®å‡¦ç†ã‚’è¡Œã†
             for (int i = 0; i < targetText.transform.childCount; i++)
             {
                 ChangeColorOfGameObject(targetText.transform.GetChild(i).gameObject, color);

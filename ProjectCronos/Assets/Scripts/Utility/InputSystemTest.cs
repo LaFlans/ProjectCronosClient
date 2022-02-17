@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
 
 /// <summary>
-/// InputSystem“ü—ÍƒeƒXƒg
+/// InputSystemå…¥åŠ›ãƒ†ã‚¹ãƒˆ
 /// </summary>
 namespace ProjectCronos
 {
@@ -35,29 +35,29 @@ namespace ProjectCronos
         }
 
         /// <summary>
-        /// ƒL[ƒ{[ƒh“ü—ÍƒeƒXƒg
+        /// ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰å…¥åŠ›ãƒ†ã‚¹ãƒˆ
         /// </summary>
         void KeyboardInputTest()
         {
-            // A~ZƒL[
+            // A~Zã‚­ãƒ¼
             for (char str = 'A'; str <= 'Z'; ++str)
             {
-                // ‰Ÿ‚³‚ê‚½1ƒtƒŒ[ƒ€‚¾‚¯”»’è
+                // æŠ¼ã•ã‚ŒãŸ1ãƒ•ãƒ¬ãƒ¼ãƒ ã ã‘åˆ¤å®š
                 if (((KeyControl)Keyboard.current[str.ToString()]).wasPressedThisFrame)
                 {
 
-                    Debug.Log(str + "ƒL[‚ª‰Ÿ‚³‚ê‚½‚æI");
+                    Debug.Log(str + "ã‚­ãƒ¼ãŒæŠ¼ã•ã‚ŒãŸã‚ˆï¼");
                 }
             }
 
-            // ”šƒL[
+            // æ•°å­—ã‚­ãƒ¼
             for (int i = 0; i <= 9; i++)
             {
-                // ‰Ÿ‚³‚ê‚½1ƒtƒŒ[ƒ€‚¾‚¯”»’è
+                // æŠ¼ã•ã‚ŒãŸ1ãƒ•ãƒ¬ãƒ¼ãƒ ã ã‘åˆ¤å®š
                 if (((KeyControl)Keyboard.current[i.ToString()]).wasPressedThisFrame)
                 {
 
-                    Debug.Log(i + "ƒL[‚ª‰Ÿ‚³‚ê‚½‚æI");
+                    Debug.Log(i + "ã‚­ãƒ¼ãŒæŠ¼ã•ã‚ŒãŸã‚ˆï¼");
                 }
             }
         }
@@ -72,7 +72,7 @@ namespace ProjectCronos
 
             GUI.color = Color.green;
 
-            // ƒ}ƒEƒX
+            // ãƒã‚¦ã‚¹
             if (isShowMouse)
             {
                 GUILayout.Label($"mouseLeft: {Mouse.current.leftButton.isPressed}");
@@ -82,7 +82,7 @@ namespace ProjectCronos
                 GUILayout.Label($"mouseMiddle: {Mouse.current.middleButton.isPressed}");
             }
 
-            // ƒRƒ“ƒgƒ[ƒ‰[
+            // ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãƒ¼
             if (isShowController)
             {
                 GUILayout.Label($"DPad: {Gamepad.current.dpad.ReadValue()}");
