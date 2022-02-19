@@ -5,7 +5,7 @@ using UnityEngine;
 namespace ProjectCronos
 {
     /// <summary>
-    /// “G‚ÌƒXƒe[ƒ^ƒX
+    /// 敵のステータス
     /// </summary>
     public class EnemyStatus : Status
     {
