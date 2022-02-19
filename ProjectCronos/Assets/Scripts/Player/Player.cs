@@ -70,12 +70,6 @@ namespace ProjectCronos
         GameObject head;
 
         /// <summary>
-        /// 装備している武器
-        /// </summary>
-        [SerializeField]
-        Weapon weapon;
-
-        /// <summary>
         /// 走っている状態か
         /// </summary>
         bool isRun = false;
