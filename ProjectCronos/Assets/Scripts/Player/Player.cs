@@ -128,9 +128,8 @@ namespace ProjectCronos
             //    anim.SetBool("IsRun", isRun);
             //}
 
-            Move();
-            Shot();
-            RockonTarget();
+            // Shot();
+            // RockonTarget();
         }
 
         /// <summary>
@@ -138,7 +137,7 @@ namespace ProjectCronos
         /// </summary>
         void FixedUpdate()
         {
-
+            Move();
         }
 
         /// <summary>
@@ -220,7 +219,7 @@ namespace ProjectCronos
 
             rigid.velocity = new Vector3(vec.x * speed, rigid.velocity.y, vec.z * speed);
 
-            anim.SetFloat("Speed", rigid.velocity.magnitude);
+            anim.SetFloat("Speed", vec.magnitude);
 
             if (vec.magnitude > 0.1f)
             {
