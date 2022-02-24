@@ -533,7 +533,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 73c176f402d2c2f4d929aa5da7585d17, type: 2}
+  - {fileID: 2100000, guid: 34b0bed30de46dc4e97171ccac606651, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1188,7 +1188,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 73c176f402d2c2f4d929aa5da7585d17, type: 2}
+  - {fileID: 2100000, guid: 995ef098e42922843b2702264bfe8520, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1732,7 +1732,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 506688254}
-  m_LocalRotation: {x: 0.029783031, y: 0.0011356156, z: 0.000033837103, w: -0.99955577}
+  m_LocalRotation: {x: 0.029783031, y: 0.0011355812, z: 0.00003383608, w: -0.99955577}
   m_LocalPosition: {x: 0, y: 36.58, z: -89.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -2490,7 +2490,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.5277778, y: 1}
+    m_SensorSize: {x: 1.537037, y: 1}
     Iso: 200
     ShutterSpeed: 0.005
     Aperture: 16
@@ -2513,7 +2513,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 941220833}
-  m_LocalRotation: {x: -0.02978297, y: -0.0011356156, z: -0.000033837034, w: 0.99955577}
+  m_LocalRotation: {x: -0.02978296, y: -0.0011355812, z: -0.000033836, w: 0.99955577}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2635,7 +2635,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 73c176f402d2c2f4d929aa5da7585d17, type: 2}
+  - {fileID: 2100000, guid: 724bf2a6cc894d745bb8198d9cef26f9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3306,7 +3306,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.5277778, y: 1}
+    m_SensorSize: {x: 1.537037, y: 1}
     Iso: 200
     ShutterSpeed: 0.005
     Aperture: 16
@@ -3735,7 +3735,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 73c176f402d2c2f4d929aa5da7585d17, type: 2}
+  - {fileID: 2100000, guid: 724bf2a6cc894d745bb8198d9cef26f9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4260,7 +4260,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.5277778, y: 1}
+    m_SensorSize: {x: 1.537037, y: 1}
     Iso: 200
     ShutterSpeed: 0.005
     Aperture: 16
@@ -4283,7 +4283,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1877808188}
-  m_LocalRotation: {x: -0.02978296, y: -0.0011355812, z: -0.000033836, w: 0.99955577}
+  m_LocalRotation: {x: -0.02978297, y: -0.0011355812, z: -0.00003383601, w: 0.99955577}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -4316,7 +4316,6 @@ MonoBehaviour:
   bulletFreq: 0.5
   head: {fileID: 521413237}
   jumpPower: 10
-  groundCheckObj: {fileID: 0}
 --- !u!114 &1891490854
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4783,7 +4782,6 @@ MonoBehaviour:
   bulletFreq: 0.5
   head: {fileID: 1683415150}
   jumpPower: 50
-  groundCheckObj: {fileID: 1351397009}
 --- !u!136 &2072850097
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -4900,7 +4898,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.5277778, y: 1}
+    m_SensorSize: {x: 1.537037, y: 1}
     Iso: 200
     ShutterSpeed: 0.005
     Aperture: 16
@@ -4923,7 +4921,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2139317805}
-  m_LocalRotation: {x: -0.02978297, y: -0.0011356156, z: -0.000033837034, w: 0.99955577}
+  m_LocalRotation: {x: -0.02978296, y: -0.0011355812, z: -0.000033836, w: 0.99955577}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -16926,7 +16924,6 @@ MonoBehaviour:
   bulletFreq: 0.5
   head: {fileID: 521413237}
   jumpPower: 10
-  groundCheckObj: {fileID: 0}
 --- !u!1 &9157934963935338167
 GameObject:
   m_ObjectHideFlags: 0
