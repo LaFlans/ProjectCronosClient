@@ -66,13 +66,40 @@ namespace ProjectCronos
         float bulletFreq = 0.5f;
         float bulletFreqTime = 0.0f;
 
+        /// <summary>
+        /// プレイヤーの頭の位置を示すオブジェクト
+        /// </summary>
         [SerializeField]
         GameObject head;
 
         /// <summary>
-        /// 走っている状態か
+        /// ジャンプしたか
         /// </summary>
-        bool isRun = false;
+        bool isJump = false;
+
+        /// <summary>
+        /// 地面に着地している状態か
+        /// </summary>
+        bool isGround = false;
+
+        /// <summary>
+        /// ジャンプ力
+        /// </summary>
+        [SerializeField]
+        float jumpPower = 10.0f;
+
+        /// <summary>
+        /// ジャンプ状態
+        /// </summary>
+        enum JumpState
+        {
+            eIDOL,      // ジャンプしていない状態
+            eSTART,     // ジャンプ開始
+            eJUMP,      // ジャンプ中
+            eLANDING,   // 着地
+        };
+
+        JumpState jumpState = JumpState.eIDOL;
 
         /// <summary>
         /// 開始処理
@@ -122,14 +149,13 @@ namespace ProjectCronos
         /// </summary>
         void Update()
         {
-            //if (Gamepad.current.leftStickButton.wasPressedThisFrame)
-            //{
-            //    isRun = !isRun;
-            //    anim.SetBool("IsRun", isRun);
-            //}
+            if (jumpState == JumpState.eJUMP && isGround)
+            {
+                jumpState = JumpState.eIDOL;
+                rigid.velocity = Vector3.zero;
+            }
 
-            // Shot();
-            // RockonTarget();
+            JumpStart();
         }
 
         /// <summary>
@@ -137,7 +163,58 @@ namespace ProjectCronos
         /// </summary>
         void FixedUpdate()
         {
+            if (isJump)
+            {
+                isJump = false;
+                jumpState = JumpState.eJUMP;
+                rigid.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
+            }
+
             Move();
+        }
+
+        /// <summary>
+        /// プレイヤーの着地判定時のイベント
+        /// </summary>
+        public void OnLanding()
+        {
+            isGround = true;
+            anim.SetBool("IsGround", true);
+        }
+
+        /// <summary>
+        /// プレイヤーの離陸判定時のイベント
+        /// </summary>
+        public void OnTakeoff()
+        {
+            isGround = false;
+            anim.SetBool("IsGround", false);
+        }
+
+        /// <summary>
+        /// ジャンプ開始処理
+        /// </summary>
+        void JumpStart()
+        {
+            if (Gamepad.current.buttonSouth.wasPressedThisFrame && 
+                isGround && 
+                jumpState == JumpState.eIDOL)
+            {
+                jumpState = JumpState.eSTART;
+                anim.SetTrigger("Jump");
+            }
+        }
+
+        /// <summary>
+        /// ジャンプ処理
+        /// </summary>
+        public void Jump()
+        {
+            if (!isJump)
+            {
+                isJump = true;
+                OnTakeoff();
+            }
         }
 
         /// <summary>
