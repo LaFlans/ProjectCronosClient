@@ -212,8 +212,16 @@ namespace ProjectCronos
         {
             if (!isJump)
             {
-                isJump = true;
-                OnTakeoff();
+                // 地面に接地している時はジャンプ、宙に浮いている場合はジャンプ処理を行わない
+                if (isGround)
+                {
+                    isJump = true;
+                    OnTakeoff();
+                }
+                else
+                {
+                    jumpState = JumpState.eIDOL;
+                }
             }
         }
 
