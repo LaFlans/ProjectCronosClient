@@ -79,7 +79,7 @@ MonoBehaviour:
     lightLayerName4: Light Layer 4
     lightLayerName5: Light Layer 5
     lightLayerName6: Light Layer 6
-    lightLayerName7: Light Layer 7
+    lightLayerName7: None Light Layer
     supportDistortion: 1
     supportTransparentBackface: 1
     supportTransparentDepthPrepass: 1

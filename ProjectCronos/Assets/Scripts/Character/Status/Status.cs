@@ -83,7 +83,8 @@ namespace ProjectCronos
         /// </summary>
         public virtual void Initialize()
         {
-            currntHp = 10;
+            maxHp = 10;
+            currntHp = maxHp;
             UpdateHpText();
         }
 
@@ -113,7 +114,7 @@ namespace ProjectCronos
         {
             if (hpBar != null)
             {
-                hpBar.UpdateHpText(currntHp);
+                hpBar.UpdateHpText(currntHp, maxHp);
             }
         }
     }

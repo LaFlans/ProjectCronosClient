@@ -7,7 +7,7 @@ namespace ProjectCronos
     interface IEnemy
     {
         /// <summary>
-        /// oŒ»Žžˆ—
+        /// 出現時処理
         /// </summary>
         void Appear();
     }

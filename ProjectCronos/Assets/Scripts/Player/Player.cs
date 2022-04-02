@@ -59,6 +59,9 @@ namespace ProjectCronos
         [SerializeField]
         TargetObject targetObj;
 
+        [SerializeField]
+        Transform[] spawnPos;
+
         /// <summary>
         /// 弾が出る頻度
         /// </summary>
@@ -89,6 +92,11 @@ namespace ProjectCronos
         float jumpPower = 10.0f;
 
         /// <summary>
+        /// 操作可能かどうか
+        /// </summary>
+        bool isControl;
+
+        /// <summary>
         /// ジャンプ状態
         /// </summary>
         enum JumpState
@@ -102,14 +110,6 @@ namespace ProjectCronos
         JumpState jumpState = JumpState.eIDOL;
 
         /// <summary>
-        /// 開始処理
-        /// </summary>
-        void Start()
-        {
-            Initialize();
-        }
-
-        /// <summary>
         /// 初期化
         /// </summary>
         public override void Initialize()
@@ -118,6 +118,10 @@ namespace ProjectCronos
 
             rigid = this.GetComponent<Rigidbody>();
             anim = this.GetComponent<Animator>();
+
+            // 状態設定
+            isControl = true;
+            jumpState = JumpState.eIDOL;
         }
 
         /// <summary>
@@ -155,7 +159,40 @@ namespace ProjectCronos
                 rigid.velocity = Vector3.zero;
             }
 
+            Attack();
             JumpStart();
+        }
+
+        void Attack()
+        {
+            if (Gamepad.current.buttonWest.wasPressedThisFrame)
+            {
+                anim.SetTrigger("Attack");
+            }
+        }
+
+        /// <summary>
+        /// 第一段階攻撃アニメーションイベント
+        /// </summary>
+        void AnimEventAttackFirst()
+        {
+            Utility.CreateObject("Assets/Resources_moved/Prefabs/SummonEffect.prefab", spawnPos[0]);
+        }
+
+        /// <summary>
+        /// 第一段階攻撃アニメーションイベント
+        /// </summary>
+        void AnimEventAttackSecond()
+        {
+            Utility.CreateObject("Assets/Resources_moved/Prefabs/SummonEffect.prefab", spawnPos[1]);
+        }
+
+        /// <summary>
+        /// 第一段階攻撃アニメーションイベント
+        /// </summary>
+        void AnimEventAttackThird()
+        {
+            Utility.CreateObject("Assets/Resources_moved/Prefabs/SummonEffect.prefab", spawnPos[2]);
         }
 
         /// <summary>

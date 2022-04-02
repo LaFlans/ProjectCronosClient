@@ -13,7 +13,7 @@ namespace ProjectCronos
         public override void Initialize()
         {
             base.Initialize();
-            Debug.Log("敵初期化");
+            //Debug.Log("敵初期化");
         }
 
         /// <summary>
@@ -21,7 +21,7 @@ namespace ProjectCronos
         /// </summary>
         public override void Appear()
         {
-            Debug.Log("敵出現");
+            //Debug.Log("敵出現");
         }
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace ProjectCronos
         public override void Damage(int value)
         {
             base.Damage(value);
-            Debug.Log("敵被弾");
+            //Debug.Log("敵被弾");
         }
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace ProjectCronos
         {
             base.Death();
 
-            Debug.Log("敵死亡");
+            //Debug.Log("敵死亡");
             // 自身を破壊
             Destroy(this.gameObject);
         }

@@ -46,8 +46,9 @@ namespace ProjectCronos
         {
             if (col.gameObject.tag == "Enemy")
             {
-                col.gameObject.GetComponent<Enemy>().Damage(1);
-                Utility.CreatePrefab("Prefabs/BulletHitEffect", this.transform.position, 0.5f);
+                col.gameObject.GetComponent<EnemyBody>().Damage(1);
+                Vector3 hitPos = col.ClosestPointOnBounds(this.transform.position);
+                Utility.CreateObject("Prefabs/DamageEffect1", hitPos, 1.0f);
             }
         }
     }

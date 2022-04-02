@@ -13,12 +13,20 @@ namespace ProjectCronos
         [SerializeField]
         TextMeshPro hpText;
 
+        float hpRate;
+        float hpMax;
+
         /// <summary>
         /// テキスト更新
         /// </summary>
-        public void UpdateHpText(int value)
+        public void UpdateHpText(int value, int hpMax)
         {
             hpText.text = value.ToString();
+
+            // 3Dバー表示対応
+            var scale = this.transform.localScale;
+            scale.x = (float)value / (float)hpMax;
+            this.transform.localScale = scale;
         }
     }
 }

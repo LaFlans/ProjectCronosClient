@@ -2,11 +2,87 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.AddressableAssets;
 
 namespace ProjectCronos
 {
     public class Utility : MonoBehaviour
     {
+        #region Addressables
+        /// <summary>
+        /// Addressableなゲームオブジェクトを生成
+        /// </summary>
+        /// <param name="path">アドレス</param>
+        public static void CreateObject(string path)
+        {
+            Addressables.LoadAssetAsync<GameObject>(path).Completed += op => { Instantiate(op.Result); };
+        }
+
+        /// <summary>
+        /// Addressableなゲームオブジェクトを生成
+        /// </summary>
+        /// <param name="path">アドレス</param>
+        /// <param name="pos">オブジェクトを生成する位置</param>
+        public static void CreateObject(string path, Vector3 pos)
+        {
+            Addressables.LoadAssetAsync<GameObject>(path).Completed += op =>
+            {
+                Instantiate(op.Result);
+                op.Result.transform.position = pos;
+            };
+        }
+
+        /// <summary>
+        /// Addressableなゲームオブジェクトを生成
+        /// </summary>
+        /// <param name="path">アドレス</param>
+        /// <param name="pos">オブジェクトを生成する位置</param>
+        /// <param name="time">プレハブを消す時間</param>
+        public static void CreateObject(string path, Vector3 pos, float time)
+        {
+            Addressables.LoadAssetAsync<GameObject>(path).Completed += op =>
+            {
+                GameObject obj = Instantiate(op.Result);
+                obj.transform.position = pos;
+                Destroy(obj, time);
+            };
+        }
+
+        /// <summary>
+        /// Addressableなゲームオブジェクトを生成
+        /// </summary>
+        /// <param name="path">アドレス</param>
+        /// <param name="pos">オブジェクトを生成する位置</param>
+        /// <param name="rotation">プレハブを生成する角度</param>
+        public static void CreateObject(string path, Vector3 pos, Quaternion rotation)
+        {
+            Addressables.LoadAssetAsync<GameObject>(path).Completed += op =>
+            {
+                Instantiate(op.Result);
+                op.Result.transform.position = pos;
+                op.Result.transform.rotation = rotation;
+            };
+        }
+
+        /// <summary>
+        /// Addressableなゲームオブジェクトを生成
+        /// </summary>
+        /// <param name="path">アドレス</param>
+        /// <param name="transform">生成するオブジェクトのトランスフォーム</param>
+        public static void CreateObject(string path, Transform transform)
+        {
+            Addressables.LoadAssetAsync<GameObject>(path).Completed += op =>
+            {
+                GameObject obj = Instantiate(op.Result);
+                obj.transform.position = transform.position;
+                obj.transform.rotation = transform.rotation;
+                obj.transform.localScale = transform.localScale;
+            };
+        }
+
+
+        #endregion
+
         #region Prefab
 
         /// <summary>
