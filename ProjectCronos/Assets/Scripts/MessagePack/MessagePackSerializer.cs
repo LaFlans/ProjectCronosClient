@@ -20,7 +20,6 @@ namespace MessagePack
     {
         private const int LZ4NotCompressionSizeInLz4BlockType = 64;
         private const int MaxHintSize = 1024 * 1024;
-        private static MessagePackSerializerOptions defaultOptions;
 
         /// <summary>
         /// Gets or sets the default set of options to use when not explicitly specified for a method call.
@@ -34,20 +33,7 @@ namespace MessagePack
         /// If you are an app author, realize that setting this property impacts the entire application so it should only be
         /// set once, and before any use of <see cref="MessagePackSerializer"/> occurs.
         /// </remarks>
-        public static MessagePackSerializerOptions DefaultOptions
-        {
-            get
-            {
-                if (defaultOptions is null)
-                {
-                    defaultOptions = MessagePackSerializerOptions.Standard;
-                }
-
-                return defaultOptions;
-            }
-
-            set => defaultOptions = value;
-        }
+        public static MessagePackSerializerOptions DefaultOptions { get; set; } = MessagePackSerializerOptions.Standard;
 
         /// <summary>
         /// A thread-local, recyclable array that may be used for short bursts of code.
@@ -93,7 +79,7 @@ namespace MessagePack
             {
                 if (options.Compression.IsCompression() && !PrimitiveChecker<T>.IsMessagePackFixedSizePrimitive)
                 {
-                    using (var scratchRental = options.SequencePool.Rent())
+                    using (var scratchRental = SequencePool.Shared.Rent())
                     {
                         var scratch = scratchRental.Value;
                         MessagePackWriter scratchWriter = writer.Clone(scratch);
@@ -133,8 +119,7 @@ namespace MessagePack
                 scratchArray = array = new byte[65536];
             }
 
-            options = options ?? DefaultOptions;
-            var msgpackWriter = new MessagePackWriter(options.SequencePool, array)
+            var msgpackWriter = new MessagePackWriter(SequencePool.Shared, array)
             {
                 CancellationToken = cancellationToken,
             };
@@ -152,10 +137,8 @@ namespace MessagePack
         /// <exception cref="MessagePackSerializationException">Thrown when any error occurs during serialization.</exception>
         public static void Serialize<T>(Stream stream, T value, MessagePackSerializerOptions options = null, CancellationToken cancellationToken = default)
         {
-            options = options ?? DefaultOptions;
             cancellationToken.ThrowIfCancellationRequested();
-
-            using (SequencePool.Rental sequenceRental = options.SequencePool.Rent())
+            using (SequencePool.Rental sequenceRental = SequencePool.Shared.Rent())
             {
                 Serialize<T>(sequenceRental.Value, value, options, cancellationToken);
 
@@ -185,10 +168,8 @@ namespace MessagePack
         /// <exception cref="MessagePackSerializationException">Thrown when any error occurs during serialization.</exception>
         public static async Task SerializeAsync<T>(Stream stream, T value, MessagePackSerializerOptions options = null, CancellationToken cancellationToken = default)
         {
-            options = options ?? DefaultOptions;
             cancellationToken.ThrowIfCancellationRequested();
-
-            using (SequencePool.Rental sequenceRental = options.SequencePool.Rent())
+            using (SequencePool.Rental sequenceRental = SequencePool.Shared.Rent())
             {
                 Serialize<T>(sequenceRental.Value, value, options, cancellationToken);
 
@@ -241,7 +222,7 @@ namespace MessagePack
             {
                 if (options.Compression.IsCompression())
                 {
-                    using (var msgPackUncompressedRental = options.SequencePool.Rent())
+                    using (var msgPackUncompressedRental = SequencePool.Shared.Rent())
                     {
                         var msgPackUncompressed = msgPackUncompressedRental.Value;
                         if (TryDecompress(ref reader, msgPackUncompressed))
@@ -334,14 +315,12 @@ namespace MessagePack
         /// </remarks>
         public static T Deserialize<T>(Stream stream, MessagePackSerializerOptions options = null, CancellationToken cancellationToken = default)
         {
-            options = options ?? DefaultOptions;
-
             if (TryDeserializeFromMemoryStream(stream, options, cancellationToken, out T result))
             {
                 return result;
             }
 
-            using (var sequenceRental = options.SequencePool.Rent())
+            using (var sequenceRental = SequencePool.Shared.Rent())
             {
                 var sequence = sequenceRental.Value;
                 try
@@ -383,14 +362,12 @@ namespace MessagePack
         /// </remarks>
         public static async ValueTask<T> DeserializeAsync<T>(Stream stream, MessagePackSerializerOptions options = null, CancellationToken cancellationToken = default)
         {
-            options = options ?? DefaultOptions;
-
             if (TryDeserializeFromMemoryStream(stream, options, cancellationToken, out T result))
             {
                 return result;
             }
 
-            using (var sequenceRental = options.SequencePool.Rent())
+            using (var sequenceRental = SequencePool.Shared.Rent())
             {
                 var sequence = sequenceRental.Value;
                 try

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 5352.723, g: 7716.4414, b: 9255.781, a: 1}
+  m_IndirectSpecularColor: {r: 5353.936, g: 7712.289, b: 9251.391, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2211,7 +2211,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 0.32786885, y: 1}
+    m_SensorSize: {x: 1.9655738, y: 1}
     Iso: 200
     ShutterSpeed: 0.005
     Aperture: 16
@@ -2234,7 +2234,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 941220833}
-  m_LocalRotation: {x: -0.029782971, y: -0.0011355812, z: -0.00003383601, w: 0.99955577}
+  m_LocalRotation: {x: -0.029782997, y: -0.0011355812, z: -0.00003383604, w: 0.99955577}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -3346,7 +3346,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 0.32786885, y: 1}
+    m_SensorSize: {x: 1.9655738, y: 1}
     Iso: 200
     ShutterSpeed: 0.005
     Aperture: 16
@@ -4512,7 +4512,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 0.32786885, y: 1}
+    m_SensorSize: {x: 1.9655738, y: 1}
     Iso: 200
     ShutterSpeed: 0.005
     Aperture: 16
@@ -4535,7 +4535,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1877808188}
-  m_LocalRotation: {x: -0.029782971, y: -0.0011356156, z: -0.000033837037, w: 0.99955577}
+  m_LocalRotation: {x: -0.029782997, y: -0.0011356156, z: -0.000033837063, w: 0.99955577}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -5007,7 +5007,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 0.32786885, y: 1}
+    m_SensorSize: {x: 1.9655738, y: 1}
     Iso: 200
     ShutterSpeed: 0.005
     Aperture: 16
@@ -5030,7 +5030,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2139317805}
-  m_LocalRotation: {x: -0.029782971, y: -0.0011355812, z: -0.00003383601, w: 0.99955577}
+  m_LocalRotation: {x: -0.029782997, y: -0.0011355812, z: -0.00003383604, w: 0.99955577}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -6432,6 +6432,7 @@ GameObject:
   - component: {fileID: 2072850093}
   - component: {fileID: 2072850094}
   - component: {fileID: 2072850095}
+  - component: {fileID: 919132149443807950}
   m_Layer: 0
   m_Name: boxman
   m_TagString: Untagged
@@ -6439,6 +6440,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &919132149443807950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132149443807949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc53597787a53694aa7f30ca186a3f33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &931642799982180026
 Transform:
   m_ObjectHideFlags: 0

@@ -122,6 +122,10 @@ namespace ProjectCronos
             // 状態設定
             isControl = true;
             jumpState = JumpState.eIDOL;
+
+            MasterDownloader.DownloadMasterData();
+            TestTable temp = MasterDownloader.DB.TestTableTable.FindById(1);
+            Debug.Log(temp.Name);
         }
 
         /// <summary>
