@@ -1,21 +1,20 @@
 ﻿using UnityEngine;
+using System;
 
 namespace ProjectCronos
 {
-    public class ProductSound : ISingleton<ProductSound>
+    class ProductDebug : ISingleton<ProductDebug>
     {
+        GameObject graphy;
+
         /// <summary>
         /// 初期化
         /// </summary>
         /// <returns>初期化に成功したかどうか</returns>
         protected override bool Initialize()
         {
+            Utility.CreateObject("Assets/Resources_moved/Prefabs/Graphy.prefab");
             return true;
-        }
-
-        public void Hello()
-        {
-            Debug.Log("Hello");
         }
     }
 }

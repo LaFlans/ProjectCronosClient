@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AddressableAssets;
+using UnityEngine.SceneManagement;
 
 namespace ProjectCronos
 {
@@ -16,6 +17,33 @@ namespace ProjectCronos
         public static void CreateObject(string path)
         {
             Addressables.LoadAssetAsync<GameObject>(path).Completed += op => { Instantiate(op.Result); };
+        }
+
+        /// <summary>
+        /// Addressableなゲームオブジェクトを生成
+        /// </summary>
+        /// <param name="path">アドレス</param>
+        /// <param name="callback">読み込み完了時コールバック</param>
+        public static void CreateObject(string path, Action<GameObject> callback)
+        {
+            Addressables.LoadAssetAsync<GameObject>(path).Completed += op => {
+                Instantiate(op.Result);
+                callback(op.Result);
+            };
+        }
+
+        /// <summary>
+        /// Addressableなゲームオブジェクトを生成
+        /// </summary>
+        /// <param name="path">アドレス</param>
+        /// <param name="callback">読み込み完了時コールバック</param>
+        /// <param name="parent">プレハブの親にするオブジェクト</param>
+        public static void CreateObject(string path, Action<GameObject> callback, Transform parent)
+        {
+            Addressables.LoadAssetAsync<GameObject>(path).Completed += op => {
+                Instantiate(op.Result, parent);
+                callback(op.Result);
+            };
         }
 
         /// <summary>
@@ -79,7 +107,6 @@ namespace ProjectCronos
                 obj.transform.localScale = transform.localScale;
             };
         }
-
 
         #endregion
 
@@ -474,6 +501,42 @@ namespace ProjectCronos
             }
         }
 
+        #endregion
+
+        #region Scene
+
+        /// <summary>
+        /// すでにシーンが読み込まれているかを返す
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public static bool IsAlreadyLoadScene(string name)
+        {
+            var count = SceneManager.sceneCount;
+            for (int i = 0; i < count;i++)
+            {
+                if (SceneManager.GetSceneAt(i).name == name)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+        #endregion
+
+        #region Application
+        /// <summary>
+        /// アプリケーション終了処理
+        /// </summary>
+        public static void ApplicationQuit()
+        {
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#elif UNITY_STANDALONE
+            Application.Quit();
+#endif
+        }
         #endregion
     }
 }

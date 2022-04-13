@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -25,12 +25,12 @@ namespace ProjectCronos
         }
 
         /// <summary>
-        /// ƒAƒjƒ[ƒVƒ‡ƒ“I—¹ƒCƒxƒ“ƒg
+        /// ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³çµ‚äº†æ™‚ã‚¤ãƒ™ãƒ³ãƒˆ
         /// </summary>
         void AnimationFinishEvent()
         {
-            // ©g‚ğ”j‰ó
-            // TODO: ƒ[ƒvƒz[ƒ‹‚ğk¬‚µ‚Ä”j‰ó
+            // è‡ªèº«ã‚’ç ´å£Š
+            // TODO: ãƒ¯ãƒ¼ãƒ—ãƒ›ãƒ¼ãƒ«ã‚’ç¸®å°ã—ã¦ç ´å£Š
             Destroy(this.gameObject);
         }
     }

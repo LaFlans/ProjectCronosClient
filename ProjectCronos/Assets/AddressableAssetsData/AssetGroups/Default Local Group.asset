@@ -25,6 +25,16 @@ MonoBehaviour:
     m_Address: Prefabs/DamageEffect1
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 1a9ed044122388a48b7986c6ccc71ac5
+    m_Address: Assets/Resources_moved/Prefabs/Popup/ApplicationQuitPopup.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Preload
+    - preload
+  - m_GUID: 998cb53eedfcd9e49b39c18f9bd3334a
+    m_Address: Assets/Resources_moved/Prefabs/Graphy.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 935c614e6cbfb024884f0f3e5a7850c3, type: 2}
   m_SchemaSet:
