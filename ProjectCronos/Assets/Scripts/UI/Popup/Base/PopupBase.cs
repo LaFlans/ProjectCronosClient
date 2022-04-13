@@ -1,11 +1,11 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.UI;
 using System;
 
 namespace ProjectCronos
 {
     /// <summary>
-    /// ƒ|ƒbƒvƒAƒbƒv‚Ìƒx[ƒX‚Æ‚È‚éƒNƒ‰ƒX
+    /// ãƒãƒƒãƒ—ã‚¢ãƒƒãƒ—ã®ãƒ™ãƒ¼ã‚¹ã¨ãªã‚‹ã‚¯ãƒ©ã‚¹
     /// </summary>
     public abstract class PopupBase : MonoBehaviour
     {
@@ -17,19 +17,19 @@ namespace ProjectCronos
         Button otherButton;
 
         /// <summary>
-        /// ƒ|ƒWƒeƒBƒuƒ{ƒ^ƒ“‚ğ‰Ÿ‚µ‚½‚ÌƒR[ƒ‹ƒoƒbƒN
+        /// ãƒã‚¸ãƒ†ã‚£ãƒ–ãƒœã‚¿ãƒ³ã‚’æŠ¼ã—ãŸæ™‚ã®ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯
         /// </summary>
         protected Action positiveAction;
         /// <summary>
-        /// ƒlƒKƒeƒBƒuƒ{ƒ^ƒ“‚ğ‰Ÿ‚µ‚½‚ÌƒR[ƒ‹ƒoƒbƒN
+        /// ãƒã‚¬ãƒ†ã‚£ãƒ–ãƒœã‚¿ãƒ³ã‚’æŠ¼ã—ãŸæ™‚ã®ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯
         /// </summary>
         protected Action negativeAction;
         /// <summary>
-        /// ‚»‚Ì‘¼ƒ{ƒ^ƒ“‚ğ‰Ÿ‚µ‚½‚ÌƒR[ƒ‹ƒoƒbƒN
+        /// ãã®ä»–ãƒœã‚¿ãƒ³ã‚’æŠ¼ã—ãŸæ™‚ã®ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯
         /// </summary>
         protected Action otherAction;
         /// <summary>
-        /// ƒ|ƒbƒvƒAƒbƒv‚ğ•Â‚¶‚½‚ÌƒR[ƒ‹ƒoƒbƒN
+        /// ãƒãƒƒãƒ—ã‚¢ãƒƒãƒ—ã‚’é–‰ã˜ãŸæ™‚ã®ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯
         /// </summary>
         protected Action closeAction;
 
@@ -78,7 +78,7 @@ namespace ProjectCronos
         }
 
         /// <summary>
-        /// ƒ|ƒbƒvƒAƒbƒv‚ğ•Â‚¶‚éˆ—
+        /// ãƒãƒƒãƒ—ã‚¢ãƒƒãƒ—ã‚’é–‰ã˜ã‚‹å‡¦ç†
         /// </summary>
         protected void Close()
         {

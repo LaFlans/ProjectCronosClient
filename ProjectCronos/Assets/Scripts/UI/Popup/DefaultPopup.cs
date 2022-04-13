@@ -1,11 +1,11 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using TMPro;
 using System;
 
 namespace ProjectCronos
 {
     /// <summary>
-    /// ƒfƒtƒHƒ‹ƒgƒ|ƒbƒvƒAƒbƒv
+    /// ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆãƒãƒƒãƒ—ã‚¢ãƒƒãƒ—
     /// </summary>
     class DefaultPopup : PopupBase
     {
@@ -29,20 +29,20 @@ namespace ProjectCronos
         {
             canvasGroup.alpha = 0;
 
-            // ƒƒbƒZ[ƒWİ’è
-            titleText.text = "ƒfƒtƒHƒ‹ƒgƒ|ƒbƒvƒAƒbƒv";
-            messageText.text = "ƒeƒXƒg—p‚Ìƒ|ƒbƒvƒAƒbƒv‚Å‚·";
+            // ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸è¨­å®š
+            titleText.text = "ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆãƒãƒƒãƒ—ã‚¢ãƒƒãƒ—";
+            messageText.text = "ãƒ†ã‚¹ãƒˆç”¨ã®ãƒãƒƒãƒ—ã‚¢ãƒƒãƒ—ã§ã™";
             positiveButtonMessageText.text = "YES";
             negativeButtonMessageText.text = "NO";
             otherButtonMessageText.text = "OTHER";
 
-            // ƒAƒNƒVƒ‡ƒ“İ’è
+            // ã‚¢ã‚¯ã‚·ãƒ§ãƒ³è¨­å®š
             positiveAction = OnClickPositiveButton;
             negativeAction = OnClickNegativeButton;
             otherAction = OnClickOtherButton;
             closeAction = callback;
 
-            // ƒ{ƒ^ƒ“‚Ìİ’è
+            // ãƒœã‚¿ãƒ³ã®è¨­å®š
             ButtonSetup();
 
             isSetup = true;
@@ -55,26 +55,26 @@ namespace ProjectCronos
                 isOpenAnimation = true;
                 canvasGroup.alpha = 1;
 
-                // ƒAƒjƒ[ƒVƒ‡ƒ“ŠJn
+                // ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³é–‹å§‹
                 GetComponent<Animator>().SetTrigger("Open");
             }
         }
 
         void OnClickPositiveButton()
         {
-            Debug.Log("ƒ|ƒWƒeƒBƒuƒ{ƒ^ƒ“‚ğ‰Ÿ‚µ‚½‚æI");
+            Debug.Log("ãƒã‚¸ãƒ†ã‚£ãƒ–ãƒœã‚¿ãƒ³ã‚’æŠ¼ã—ãŸã‚ˆï¼");
             Close();
         }
 
         void OnClickNegativeButton()
         {
-            Debug.Log("ƒlƒKƒeƒBƒuƒ{ƒ^ƒ“‚ğ‰Ÿ‚µ‚½‚æI");
+            Debug.Log("ãƒã‚¬ãƒ†ã‚£ãƒ–ãƒœã‚¿ãƒ³ã‚’æŠ¼ã—ãŸã‚ˆï¼");
             Close();
         }
 
         void OnClickOtherButton()
         {
-            Debug.Log("‚»‚Ì‘¼ƒ{ƒ^ƒ“‚ğ‰Ÿ‚µ‚½‚æI");
+            Debug.Log("ãã®ä»–ãƒœã‚¿ãƒ³ã‚’æŠ¼ã—ãŸã‚ˆï¼");
             Close();
         }
     }

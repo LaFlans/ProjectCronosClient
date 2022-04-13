@@ -1,4 +1,4 @@
-using MasterMemory;
+﻿using MasterMemory;
 using MessagePack;
 
 /// <summary>

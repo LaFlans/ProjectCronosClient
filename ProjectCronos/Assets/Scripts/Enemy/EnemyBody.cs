@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,12 +7,12 @@ namespace ProjectCronos
     public class EnemyBody : MonoBehaviour
     {
         /// <summary>
-        /// e‚ß
+        /// è¦ª
         /// </summary>
         Enemy enemy;
         
         /// <summary>
-        /// ƒ_ƒ[ƒW”{—¦
+        /// ãƒ€ãƒ¡ãƒ¼ã‚¸å€ç‡
         /// </summary>
         [SerializeField]
         int damageRate = 1;
@@ -23,7 +23,7 @@ namespace ProjectCronos
         }
 
         /// <summary>
-        /// ƒ_ƒ[ƒW‚ğ—^‚¦‚é
+        /// ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’ä¸ãˆã‚‹
         /// </summary>
         public void Damage(int value)
         {

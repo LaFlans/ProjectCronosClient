@@ -35,6 +35,10 @@ MonoBehaviour:
     m_Address: Assets/Resources_moved/Prefabs/Graphy.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: a3c0a8458a9f08b43bc00fd310b2a277
+    m_Address: Assets/Resources_moved/Prefabs/Popup/DefaultPopup.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 935c614e6cbfb024884f0f3e5a7850c3, type: 2}
   m_SchemaSet:
