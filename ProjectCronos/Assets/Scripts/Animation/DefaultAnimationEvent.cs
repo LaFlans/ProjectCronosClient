@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
@@ -17,7 +17,7 @@ namespace ProjectCronos
         }
 
         /// <summary>
-        /// ƒAƒjƒ[ƒVƒ‡ƒ“ŠJn
+        /// ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³é–‹å§‹æ™‚
         /// </summary>
         public void AnimationStart()
         {
@@ -25,7 +25,7 @@ namespace ProjectCronos
         }
 
         /// <summary>
-        /// ƒAƒjƒ[ƒVƒ‡ƒ“I—¹
+        /// ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³çµ‚äº†æ™‚
         /// </summary>
         public void AnimationFinish()
         {

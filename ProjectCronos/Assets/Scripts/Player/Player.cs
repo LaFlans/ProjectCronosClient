@@ -96,18 +96,7 @@ namespace ProjectCronos
         /// </summary>
         bool isControl;
 
-        /// <summary>
-        /// ジャンプ状態
-        /// </summary>
-        enum JumpState
-        {
-            eIDOL,      // ジャンプしていない状態
-            eSTART,     // ジャンプ開始
-            eJUMP,      // ジャンプ中
-            eLANDING,   // 着地
-        };
-
-        JumpState jumpState = JumpState.eIDOL;
+        EnumCollection.Player.PLAYER_JUMP_STATE jumpState = EnumCollection.Player.PLAYER_JUMP_STATE.IDOL;
 
         /// <summary>
         /// 初期化
@@ -121,11 +110,10 @@ namespace ProjectCronos
 
             // 状態設定
             isControl = true;
-            jumpState = JumpState.eIDOL;
+            jumpState = EnumCollection.Player.PLAYER_JUMP_STATE.IDOL;
 
             MasterDownloader.DownloadMasterData();
             TestTable temp = MasterDownloader.DB.TestTableTable.FindById(1);
-            Debug.Log(temp.Name);
         }
 
         /// <summary>
@@ -157,9 +145,9 @@ namespace ProjectCronos
         /// </summary>
         void Update()
         {
-            if (jumpState == JumpState.eJUMP && isGround)
+            if (jumpState == EnumCollection.Player.PLAYER_JUMP_STATE.JUMP && isGround)
             {
-                jumpState = JumpState.eIDOL;
+                jumpState = EnumCollection.Player.PLAYER_JUMP_STATE.IDOL;
                 rigid.velocity = Vector3.zero;
             }
 
@@ -207,7 +195,7 @@ namespace ProjectCronos
             if (isJump)
             {
                 isJump = false;
-                jumpState = JumpState.eJUMP;
+                jumpState = EnumCollection.Player.PLAYER_JUMP_STATE.JUMP;
                 rigid.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
             }
 
@@ -239,9 +227,9 @@ namespace ProjectCronos
         {
             if (Gamepad.current.buttonSouth.wasPressedThisFrame && 
                 isGround && 
-                jumpState == JumpState.eIDOL)
+                jumpState == EnumCollection.Player.PLAYER_JUMP_STATE.IDOL)
             {
-                jumpState = JumpState.eSTART;
+                jumpState = EnumCollection.Player.PLAYER_JUMP_STATE.START;
                 anim.SetTrigger("Jump");
             }
         }
@@ -261,7 +249,7 @@ namespace ProjectCronos
                 }
                 else
                 {
-                    jumpState = JumpState.eIDOL;
+                    jumpState = EnumCollection.Player.PLAYER_JUMP_STATE.IDOL;
                 }
             }
         }

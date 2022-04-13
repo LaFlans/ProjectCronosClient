@@ -1,17 +1,29 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Controls;
 
 namespace ProjectCronos
 {
-    public class ApplicationQuit : MonoBehaviour
+    class ApplicationQuit : MonoBehaviour
     {
+        bool isShowQuitPopup;
+
+        void Start()
+        {
+            isShowQuitPopup = false;
+        }
+
         void Update()
         {
-            if (Gamepad.current.startButton.wasPressedThisFrame)
+            if (Input.GetKeyDown(KeyCode.Escape) || Gamepad.current.startButton.wasPressedThisFrame)
             {
-                Debug.Log("スタートボタンを押したよ！");
-                ProductSound.Instance.Hello();
+                if (!isShowQuitPopup)
+                {
+                    isShowQuitPopup = true;
+                    var obj = PopupManager.Instance.GetPopupObject(
+                        EnumCollection.Popup.POPUP_TYPE.QUIT_APPLICATION);
+
+                    obj.GetComponent<PopupBase>().Setup(() => { isShowQuitPopup = false; });
+                }
             }
         }
     }
