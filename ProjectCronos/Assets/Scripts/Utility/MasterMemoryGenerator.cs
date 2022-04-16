@@ -15,17 +15,7 @@ public class MasterMemoryGenerator
         UnityEngine.Debug.Log($"{nameof(ExecuteMasterMemoryCodeGenerator)} : start");
 
         var exProcess = new Process();
-        var filePath = $"{Application.dataPath}/MasterData/GeneratorTools/MasterMemory.Generator";
-        var exeFileName = "";
-#if UNITY_EDITOR_WIN
-        exeFileName = "/win-x64/MasterMemory.Generator.exe";
-#elif UNITY_EDITOR_OSX
-        exeFileName = "/osx-x64/MasterMemory.Generator";
-#elif UNITY_EDITOR_LINUX
-        exeFileName = "/linux-x64/MasterMemory.Generator";
-#else
-        return;
-#endif
+
         var psi = new ProcessStartInfo()
         {
             CreateNoWindow = true,
@@ -33,10 +23,9 @@ public class MasterMemoryGenerator
             RedirectStandardOutput = true,
             RedirectStandardError = true,
             UseShellExecute = false,
-            FileName = filePath + exeFileName,
-            // TODO: 使用する場合はPath, Argumentsを変更してください
+            FileName = "dotnet",
             Arguments =
-                $@"-i ""{Application.dataPath}/MasterData/TableDefines"" -o ""{Application.dataPath}/MasterData/Generated/MasterMemory"" -c -n Generated",
+                $@"dotnet-mmgen -i ""{Application.dataPath}/MasterData/TableDefines"" -o ""{Application.dataPath}/MasterData/Generated/MasterMemory"" -c -n Generated",
         };
 
         var p = Process.Start(psi);

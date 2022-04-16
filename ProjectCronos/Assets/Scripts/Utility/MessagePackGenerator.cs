@@ -16,18 +16,6 @@ public class MessagePackGenerator
 
         var exProcess = new Process();
 
-        var filePath = $"{Application.dataPath}/MasterData/GeneratorTools/mpc";
-        var exeFileName = "";
-#if UNITY_EDITOR_WIN
-        exeFileName = "/win/mpc.exe";
-#elif UNITY_EDITOR_OSX
-        exeFileName = "/osx/mpc";
-#elif UNITY_EDITOR_LINUX
-        exeFileName = "/linux/mpc";
-#else
-        return;
-#endif
-
         var psi = new ProcessStartInfo()
         {
             CreateNoWindow = true,
@@ -35,10 +23,9 @@ public class MessagePackGenerator
             RedirectStandardOutput = true,
             RedirectStandardError = true,
             UseShellExecute = false,
-            FileName = filePath + exeFileName,
-            // TODO: 使用する場合はPathを変更してください
+            FileName = "dotnet",
             Arguments =
-                $@"-i ""{Application.dataPath}/MasterData/TableDefines"" -o ""{Application.dataPath}/MasterData/Generated/MessagePack""",
+                $@"mpc -i ""{Application.dataPath}/MasterData/TableDefines"" -o ""{Application.dataPath}/MasterData/Generated/MessagePack""",
         };
 
         var p = Process.Start(psi);
