@@ -5,6 +5,29 @@
     /// </summary>
     namespace EnumCollection
     {   
+        namespace Input
+        {
+            public enum INPUT_STATUS
+            {
+                /// <summary>
+                /// 操作不能
+                /// </summary>
+                UNCONTROLLABLE,
+                /// <summary>
+                /// UI側の操作可能
+                /// </summary>
+                UI,
+                /// <summary>
+                /// プレイヤー側の操作可能
+                /// </summary>
+                PLAYER,
+                /// <summary>
+                /// 要素数
+                /// </summary>
+                MAXMUM,
+            }
+        }
+
         /// <summary>
         /// シーン関連
         /// </summary>
@@ -49,6 +72,29 @@
                 /// アプリケーション終了確認ポップアップ
                 /// </summary>
                 QUIT_APPLICATION,
+                /// <summary>
+                /// 要素数
+                /// </summary>
+                MAXMUM,
+            }
+
+            /// <summary>
+            /// ポップアップの選択状態
+            /// </summary>
+            public enum POPUP_SELECT_STATUS
+            {
+                /// <summary>
+                /// ポジティブの状態
+                /// </summary>
+                POSITIVE,
+                /// <summary>
+                /// ネガティブの状態
+                /// </summary>
+                NEGATIVE,
+                /// <summary>
+                /// その他の状態
+                /// </summary>
+                OTHER,
                 /// <summary>
                 /// 要素数
                 /// </summary>

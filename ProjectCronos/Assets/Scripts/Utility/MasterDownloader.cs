@@ -1,18 +1,17 @@
-﻿using UnityEngine;
-using Generated;
+﻿//using UnityEngine;
+//using Generated;
+//namespace ProjectCronos
+//{
+//    // TODO: よしなに変更してください
+//    public class MasterDownloader
+//    {
+//        private static MemoryDatabase _db;
 
-namespace ProjectCronos
-{
-    // TODO: よしなに変更してください
-    public class MasterDownloader
-    {
-        private static MemoryDatabase _db;
+//        public static MemoryDatabase DB => _db;
 
-        public static MemoryDatabase DB => _db;
-
-        public static void DownloadMasterData()
-        {
-            _db = new MemoryDatabase((Resources.Load("master-data") as TextAsset).bytes);
-        }
-    }
-}
+//        public static void DownloadMasterData()
+//        {
+//            _db = new MemoryDatabase((Resources.Load("master-data") as TextAsset).bytes);
+//        }
+//    }
+//}

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Linq;
 
@@ -112,8 +110,10 @@ namespace ProjectCronos
             isControl = true;
             jumpState = EnumCollection.Player.PLAYER_JUMP_STATE.IDOL;
 
-            MasterDownloader.DownloadMasterData();
-            TestTable temp = MasterDownloader.DB.TestTableTable.FindById(1);
+            //MasterDownloader.DownloadMasterData();
+            //TestTable temp = MasterDownloader.DB.TestTableTable.FindById(1);
+
+            //var testData = MasterDownloader.DB.TestTableTable;
         }
 
         /// <summary>
@@ -152,7 +152,7 @@ namespace ProjectCronos
             }
 
             Attack();
-            JumpStart();
+            //JumpStart();
         }
 
         void Attack()

@@ -37,9 +37,10 @@ namespace ProjectCronos
             otherButtonMessageText.text = "OTHER";
 
             // アクション設定
-            positiveAction = OnClickPositiveButton;
-            negativeAction = OnClickNegativeButton;
-            otherAction = OnClickOtherButton;
+            buttonActions[(int)EnumCollection.Popup.POPUP_SELECT_STATUS.POSITIVE] = OnClickPositiveButton;
+            buttonActions[(int)EnumCollection.Popup.POPUP_SELECT_STATUS.NEGATIVE] = OnClickNegativeButton;
+            buttonActions[(int)EnumCollection.Popup.POPUP_SELECT_STATUS.OTHER] = OnClickOtherButton;
+
             closeAction = callback;
 
             // ボタンの設定

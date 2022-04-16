@@ -35,18 +35,17 @@ namespace ProjectCronos
             negativeButtonMessageText.text = "いいえ";
 
             // アクション設定
-            positiveAction = OnClickPositiveButton;
-            negativeAction = OnClickNegativeButton;
+            buttonActions = new Action[(int)EnumCollection.Popup.POPUP_SELECT_STATUS.MAXMUM];
+            buttonActions[(int)EnumCollection.Popup.POPUP_SELECT_STATUS.POSITIVE] = OnClickPositiveButton;
+            buttonActions[(int)EnumCollection.Popup.POPUP_SELECT_STATUS.NEGATIVE] = OnClickNegativeButton;
+
             closeAction = callback;
 
             // ボタンの設定
             ButtonSetup();
 
             isSetup = true;
-        }
 
-        void Update()
-        {
             if (!isOpenAnimation && isSetup)
             {
                 isOpenAnimation = true;
