@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "isRoot": true,
+  "tools": {
+    "mastermemory.generator": {
+      "version": "2.4.3",
+      "commands": [
+        "dotnet-mmgen"
+      ]
+    },
+    "messagepack.generator": {
+      "version": "2.3.85",
+      "commands": [
+        "mpc"
+      ]
+    }
+  }
+}
