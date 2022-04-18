@@ -1,24 +1,24 @@
-﻿//using Generated;
-//using MessagePack.Resolvers;
-//using MessagePack;
-//using UnityEngine;
+﻿using Generated;
+using MessagePack.Resolvers;
+using MessagePack;
+using UnityEngine;
 
-//namespace ProjectCronos
-//{
-//    public static class Initializer
-//    {
-//        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-//        public static void Initialize()
-//        {
-//            StaticCompositeResolver.Instance.Register
-//            (
-//                MasterMemoryResolver.Instance,
-//                GeneratedResolver.Instance,
-//                StandardResolver.Instance
-//            );
+namespace ProjectCronos
+{
+    public static class Initializer
+    {
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+        public static void Initialize()
+        {
+            StaticCompositeResolver.Instance.Register
+            (
+                MasterMemoryResolver.Instance,
+                GeneratedResolver.Instance,
+                StandardResolver.Instance
+            );
 
-//            var options = MessagePackSerializerOptions.Standard.WithResolver(StaticCompositeResolver.Instance);
-//            MessagePackSerializer.DefaultOptions = options;
-//        }
-//    }
-//}
+            var options = MessagePackSerializerOptions.Standard.WithResolver(StaticCompositeResolver.Instance);
+            MessagePackSerializer.DefaultOptions = options;
+        }
+    }
+}

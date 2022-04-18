@@ -4,17 +4,19 @@ using MasterMemory.Validation;
 using MasterMemory;
 using MessagePack;
 using System.Collections.Generic;
+using System.Collections;
 using System;
+using UnityEngine;
 
 namespace Generated.Tables
 {
-   public sealed partial class TestTable : TableBase<Test>, ITableUniqueValidate
+   public sealed partial class SampleTable : TableBase<Sample>, ITableUniqueValidate
    {
-        public Func<Test, int> PrimaryKeySelector => primaryIndexSelector;
-        readonly Func<Test, int> primaryIndexSelector;
+        public Func<Sample, int> PrimaryKeySelector => primaryIndexSelector;
+        readonly Func<Sample, int> primaryIndexSelector;
 
 
-        public TestTable(Test[] sortedData)
+        public SampleTable(Sample[] sortedData)
             : base(sortedData)
         {
             this.primaryIndexSelector = x => x.Id;
@@ -25,7 +27,7 @@ namespace Generated.Tables
 
 
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-        public Test FindById(int key)
+        public Sample FindById(int key)
         {
             var lo = 0;
             var hi = data.Length - 1;
@@ -42,7 +44,7 @@ namespace Generated.Tables
         }
 
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-        public bool TryFindById(int key, out Test result)
+        public bool TryFindById(int key, out Sample result)
         {
             var lo = 0;
             var hi = data.Length - 1;
@@ -59,12 +61,12 @@ namespace Generated.Tables
             return false;
         }
 
-        public Test FindClosestById(int key, bool selectLower = true)
+        public Sample FindClosestById(int key, bool selectLower = true)
         {
             return FindUniqueClosestCore(data, primaryIndexSelector, System.Collections.Generic.Comparer<int>.Default, key, selectLower);
         }
 
-        public RangeView<Test> FindRangeById(int min, int max, bool ascendant = true)
+        public RangeView<Sample> FindRangeById(int min, int max, bool ascendant = true)
         {
             return FindUniqueRangeCore(data, primaryIndexSelector, System.Collections.Generic.Comparer<int>.Default, min, max, ascendant);
         }
@@ -83,17 +85,16 @@ namespace Generated.Tables
 
         public static MasterMemory.Meta.MetaTable CreateMetaTable()
         {
-            return new MasterMemory.Meta.MetaTable(typeof(Test), typeof(TestTable), "m_test",
+            return new MasterMemory.Meta.MetaTable(typeof(Sample), typeof(SampleTable), "m_sample",
                 new MasterMemory.Meta.MetaProperty[]
                 {
-                    new MasterMemory.Meta.MetaProperty(typeof(Test).GetProperty("Id")),
-                    new MasterMemory.Meta.MetaProperty(typeof(Test).GetProperty("Name")),
-                    new MasterMemory.Meta.MetaProperty(typeof(Test).GetProperty("Hp")),
-                    new MasterMemory.Meta.MetaProperty(typeof(Test).GetProperty("Attack")),
+                    new MasterMemory.Meta.MetaProperty(typeof(Sample).GetProperty("Id")),
+                    new MasterMemory.Meta.MetaProperty(typeof(Sample).GetProperty("Name")),
+                    new MasterMemory.Meta.MetaProperty(typeof(Sample).GetProperty("Path")),
                 },
                 new MasterMemory.Meta.MetaIndex[]{
                     new MasterMemory.Meta.MetaIndex(new System.Reflection.PropertyInfo[] {
-                        typeof(Test).GetProperty("Id"),
+                        typeof(Sample).GetProperty("Id"),
                     }, true, true, System.Collections.Generic.Comparer<int>.Default),
                 });
         }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class MasterMemoryGenerator
 {
     [MenuItem("MasterMemory/CodeGenerate")]
-    private static void GenerateMasterMemory()
+    public static void GenerateMasterMemory()
     {
         ExecuteMasterMemoryCodeGenerator();
     }

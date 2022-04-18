@@ -19,18 +19,16 @@ namespace MessagePack.Formatters
     using global::System.Buffers;
     using global::MessagePack;
 
-    public sealed class TestFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::Test>
+    public sealed class SampleFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::Sample>
     {
         // Id
         private static global::System.ReadOnlySpan<byte> GetSpan_Id() => new byte[1 + 2] { 162, 73, 100 };
         // Name
         private static global::System.ReadOnlySpan<byte> GetSpan_Name() => new byte[1 + 4] { 164, 78, 97, 109, 101 };
-        // Hp
-        private static global::System.ReadOnlySpan<byte> GetSpan_Hp() => new byte[1 + 2] { 162, 72, 112 };
-        // Attack
-        private static global::System.ReadOnlySpan<byte> GetSpan_Attack() => new byte[1 + 6] { 166, 65, 116, 116, 97, 99, 107 };
+        // Path
+        private static global::System.ReadOnlySpan<byte> GetSpan_Path() => new byte[1 + 4] { 164, 80, 97, 116, 104 };
 
-        public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::Test value, global::MessagePack.MessagePackSerializerOptions options)
+        public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::Sample value, global::MessagePack.MessagePackSerializerOptions options)
         {
             if (value is null)
             {
@@ -39,18 +37,16 @@ namespace MessagePack.Formatters
             }
 
             var formatterResolver = options.Resolver;
-            writer.WriteMapHeader(4);
+            writer.WriteMapHeader(3);
             writer.WriteRaw(GetSpan_Id());
             writer.Write(value.Id);
             writer.WriteRaw(GetSpan_Name());
             formatterResolver.GetFormatterWithVerify<string>().Serialize(ref writer, value.Name, options);
-            writer.WriteRaw(GetSpan_Hp());
-            writer.Write(value.Hp);
-            writer.WriteRaw(GetSpan_Attack());
-            writer.Write(value.Attack);
+            writer.WriteRaw(GetSpan_Path());
+            formatterResolver.GetFormatterWithVerify<string>().Serialize(ref writer, value.Path, options);
         }
 
-        public global::Test Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
+        public global::Sample Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
         {
             if (reader.TryReadNil())
             {
@@ -62,8 +58,7 @@ namespace MessagePack.Formatters
             var length = reader.ReadMapHeader();
             var __Id__ = default(int);
             var __Name__ = default(string);
-            var __Hp__ = default(int);
-            var __Attack__ = default(float);
+            var __Path__ = default(string);
 
             for (int i = 0; i < length; i++)
             {
@@ -75,31 +70,26 @@ namespace MessagePack.Formatters
                       reader.Skip();
                       continue;
                     case 2:
+                        if (global::MessagePack.Internal.AutomataKeyGen.GetKey(ref stringKey) != 25673UL) { goto FAIL; }
+
+                        __Id__ = reader.ReadInt32();
+                        continue;
+                    case 4:
                         switch (global::MessagePack.Internal.AutomataKeyGen.GetKey(ref stringKey))
                         {
                             default: goto FAIL;
-                            case 25673UL:
-                                __Id__ = reader.ReadInt32();
+                            case 1701667150UL:
+                                __Name__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(ref reader, options);
                                 continue;
-                            case 28744UL:
-                                __Hp__ = reader.ReadInt32();
+                            case 1752457552UL:
+                                __Path__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(ref reader, options);
                                 continue;
                         }
-                    case 4:
-                        if (global::MessagePack.Internal.AutomataKeyGen.GetKey(ref stringKey) != 1701667150UL) { goto FAIL; }
-
-                        __Name__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(ref reader, options);
-                        continue;
-                    case 6:
-                        if (global::MessagePack.Internal.AutomataKeyGen.GetKey(ref stringKey) != 118074580956225UL) { goto FAIL; }
-
-                        __Attack__ = reader.ReadSingle();
-                        continue;
 
                 }
             }
 
-            var ____result = new global::Test(__Id__, __Name__, __Hp__, __Attack__);
+            var ____result = new global::Sample(__Id__, __Name__, __Path__);
             reader.Depth--;
             return ____result;
         }

@@ -4,7 +4,9 @@ using MasterMemory.Validation;
 using MasterMemory;
 using MessagePack;
 using System.Collections.Generic;
+using System.Collections;
 using System;
+using UnityEngine;
 using Generated.Tables;
 
 namespace Generated
@@ -23,11 +25,47 @@ namespace Generated
             return memory;
         }
 
+        public void ReplaceAll(System.Collections.Generic.IList<Sample> data)
+        {
+            var newData = CloneAndSortBy(data, x => x.Id, System.Collections.Generic.Comparer<int>.Default);
+            var table = new SampleTable(newData);
+            memory = new MemoryDatabase(
+                table,
+                memory.TestTable
+            
+            );
+        }
+
+        public void RemoveSample(int[] keys)
+        {
+            var data = RemoveCore(memory.SampleTable.GetRawDataUnsafe(), keys, x => x.Id, System.Collections.Generic.Comparer<int>.Default);
+            var newData = CloneAndSortBy(data, x => x.Id, System.Collections.Generic.Comparer<int>.Default);
+            var table = new SampleTable(newData);
+            memory = new MemoryDatabase(
+                table,
+                memory.TestTable
+            
+            );
+        }
+
+        public void Diff(Sample[] addOrReplaceData)
+        {
+            var data = DiffCore(memory.SampleTable.GetRawDataUnsafe(), addOrReplaceData, x => x.Id, System.Collections.Generic.Comparer<int>.Default);
+            var newData = CloneAndSortBy(data, x => x.Id, System.Collections.Generic.Comparer<int>.Default);
+            var table = new SampleTable(newData);
+            memory = new MemoryDatabase(
+                table,
+                memory.TestTable
+            
+            );
+        }
+
         public void ReplaceAll(System.Collections.Generic.IList<Test> data)
         {
             var newData = CloneAndSortBy(data, x => x.Id, System.Collections.Generic.Comparer<int>.Default);
             var table = new TestTable(newData);
             memory = new MemoryDatabase(
+                memory.SampleTable,
                 table
             
             );
@@ -39,6 +77,7 @@ namespace Generated
             var newData = CloneAndSortBy(data, x => x.Id, System.Collections.Generic.Comparer<int>.Default);
             var table = new TestTable(newData);
             memory = new MemoryDatabase(
+                memory.SampleTable,
                 table
             
             );
@@ -50,6 +89,7 @@ namespace Generated
             var newData = CloneAndSortBy(data, x => x.Id, System.Collections.Generic.Comparer<int>.Default);
             var table = new TestTable(newData);
             memory = new MemoryDatabase(
+                memory.SampleTable,
                 table
             
             );

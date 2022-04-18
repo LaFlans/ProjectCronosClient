@@ -1,14 +1,16 @@
-﻿using MasterMemory;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using MasterMemory;
 using MessagePack;
 
-[MemoryTable("sample"), MessagePackObject(true)]
+[MemoryTable("m_sample"), MessagePackObject(true)]
 public class Sample
 {
-    [PrimaryKey] 
+    [PrimaryKey]
     public int Id { get; set; }
-
     public string Name { get; set; }
-
     public string Path { get; set; }
 
     public Sample(int Id, string Name, string path)

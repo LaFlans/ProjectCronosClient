@@ -4,7 +4,9 @@ using MasterMemory.Validation;
 using MasterMemory;
 using MessagePack;
 using System.Collections.Generic;
+using System.Collections;
 using System;
+using UnityEngine;
 using Generated.Tables;
 
 namespace Generated
@@ -13,6 +15,12 @@ namespace Generated
    {
         public DatabaseBuilder() : this(null) { }
         public DatabaseBuilder(MessagePack.IFormatterResolver resolver) : base(resolver) { }
+
+        public DatabaseBuilder Append(System.Collections.Generic.IEnumerable<Sample> dataSource)
+        {
+            AppendCore(dataSource, x => x.Id, System.Collections.Generic.Comparer<int>.Default);
+            return this;
+        }
 
         public DatabaseBuilder Append(System.Collections.Generic.IEnumerable<Test> dataSource)
         {
