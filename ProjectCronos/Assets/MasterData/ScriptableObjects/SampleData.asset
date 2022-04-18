@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e52a5feda094c2f45b9319ff2133a80c, type: 3}
+  m_Name: SampleData
+  m_EditorClassIdentifier: 
+  data:
+  - id: 0
+    name: "\u304B"
+    path: Assets/Resources_moved/Prefabs/PlayerInput.prefab
+  - id: 1
+    name: "\u304D"
+    path: Assets/Resources_moved/Prefabs/PlayerInput.prefab
+  - id: 2
+    name: "\u304F"
+    path: Assets/Resources_moved/Prefabs/PlayerInput.prefab
+  - id: 3
+    name: tewaetwe
+    path: aaaaaaaaaa
+  - id: 4
+    name: "\u3066\u3059\u3068"
+    path: "\u3042\u3042\u3042\u3042\uFF20"
+  - id: 5
+    name: "\u3066\u3059\u3068"
+    path: "\u3042\u3042\u3042\u3042\uFF20"
+  - id: 6
+    name: "\u3066\u3059\u3068"
+    path: "\u3042\u3042\u3042\u3042\uFF20"
+  - id: 7
+    name: "\u3066\u3059\u3068"
+    path: "\u3042\u3042\u3042\u3042\uFF20"
+  - id: 8
+    name: "\u3066\u3059\u3068"
+    path: "\u3042\u3042\u3042\u3042\uFF20"
+  - id: 9
+    name: "\u3066\u3059\u3068"
+    path: "\u3042\u3042\u3042\u3042\uFF20"
+  - id: 10
+    name: "\u3066\u3059\u3068"
+    path: "\u3042\u3042\u3042\u3042\uFF20"

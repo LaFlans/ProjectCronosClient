@@ -1,27 +1,24 @@
-﻿using MasterMemory;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using MasterMemory;
 using MessagePack;
 
-[MemoryTable("test"), MessagePackObject(true)]
+[MemoryTable("m_test"), MessagePackObject(true)]
 public class Test
 {
-    [PrimaryKey] public int Id { get; set; }
-
+    [PrimaryKey] 
+    public int Id { get; set; }
     public string Name { get; set; }
-
-    public int hp { get; set; }
-    public float attack { get; set; }
-
-    public Test(int Id, string Name)
-    {
-        this.Id = Id;
-        this.Name = Name;
-    }
+    public int Hp { get; set; }
+    public float Attack { get; set; }
 
     public Test(int Id, string Name, int hp, float attack)
     {
         this.Id = Id;
         this.Name = Name;
-        this.hp = hp;
-        this.attack = attack;
+        this.Hp = hp;
+        this.Attack = attack;
     }
 }

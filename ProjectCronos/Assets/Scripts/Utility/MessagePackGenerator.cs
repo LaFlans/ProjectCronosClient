@@ -5,7 +5,7 @@ using UnityEngine;
 public class MessagePackGenerator
 {
     [MenuItem("MessagePack/CodeGenerate")]
-    private static void GenerateMessagePack()
+    public static void GenerateMessagePack()
     {
         ExecuteMessagePackCodeGenerator();
     }

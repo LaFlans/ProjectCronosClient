@@ -4,7 +4,9 @@ using MasterMemory.Validation;
 using MasterMemory;
 using MessagePack;
 using System.Collections.Generic;
+using System.Collections;
 using System;
+using UnityEngine;
 using Generated.Tables;
 
 namespace Generated
@@ -44,9 +46,10 @@ namespace Generated
 
         static MasterMemoryResolverGetFormatterHelper()
         {
-            lookup = new global::System.Collections.Generic.Dictionary<Type, int>(1)
+            lookup = new global::System.Collections.Generic.Dictionary<Type, int>(2)
             {
-                {typeof(Test[]), 0 },
+                {typeof(Sample[]), 0 },
+                {typeof(Test[]), 1 },
             };
         }
 
@@ -57,7 +60,8 @@ namespace Generated
 
             switch (key)
             {
-                case 0: return new MessagePack.Formatters.ArrayFormatter<Test>();
+                case 0: return new MessagePack.Formatters.ArrayFormatter<Sample>();
+                case 1: return new MessagePack.Formatters.ArrayFormatter<Test>();
                 default: return null;
             }
         }
