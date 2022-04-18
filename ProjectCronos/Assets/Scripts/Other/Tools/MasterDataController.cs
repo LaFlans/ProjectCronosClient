@@ -20,6 +20,7 @@ namespace ProjectCronos
     /// </summary>
     internal class MasterDataController : EditorWindow
     {
+#if UNITY_EDITOR
         List<MasterDataScriptableObject> objects = new List<MasterDataScriptableObject>();
         List<string> options;
         int index = 0;
@@ -158,5 +159,6 @@ namespace ProjectCronos
 
             AssetDatabase.Refresh();
         }
+#endif
     }
 }
