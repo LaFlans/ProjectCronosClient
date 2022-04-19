@@ -25,11 +25,50 @@ namespace Generated
             return memory;
         }
 
+        public void ReplaceAll(System.Collections.Generic.IList<Dictionary> data)
+        {
+            var newData = CloneAndSortBy(data, x => x.Key, System.StringComparer.Ordinal);
+            var table = new DictionaryTable(newData);
+            memory = new MemoryDatabase(
+                table,
+                memory.SampleTable,
+                memory.TestTable
+            
+            );
+        }
+
+        public void RemoveDictionary(string[] keys)
+        {
+            var data = RemoveCore(memory.DictionaryTable.GetRawDataUnsafe(), keys, x => x.Key, System.StringComparer.Ordinal);
+            var newData = CloneAndSortBy(data, x => x.Key, System.StringComparer.Ordinal);
+            var table = new DictionaryTable(newData);
+            memory = new MemoryDatabase(
+                table,
+                memory.SampleTable,
+                memory.TestTable
+            
+            );
+        }
+
+        public void Diff(Dictionary[] addOrReplaceData)
+        {
+            var data = DiffCore(memory.DictionaryTable.GetRawDataUnsafe(), addOrReplaceData, x => x.Key, System.StringComparer.Ordinal);
+            var newData = CloneAndSortBy(data, x => x.Key, System.StringComparer.Ordinal);
+            var table = new DictionaryTable(newData);
+            memory = new MemoryDatabase(
+                table,
+                memory.SampleTable,
+                memory.TestTable
+            
+            );
+        }
+
         public void ReplaceAll(System.Collections.Generic.IList<Sample> data)
         {
             var newData = CloneAndSortBy(data, x => x.Id, System.Collections.Generic.Comparer<int>.Default);
             var table = new SampleTable(newData);
             memory = new MemoryDatabase(
+                memory.DictionaryTable,
                 table,
                 memory.TestTable
             
@@ -42,6 +81,7 @@ namespace Generated
             var newData = CloneAndSortBy(data, x => x.Id, System.Collections.Generic.Comparer<int>.Default);
             var table = new SampleTable(newData);
             memory = new MemoryDatabase(
+                memory.DictionaryTable,
                 table,
                 memory.TestTable
             
@@ -54,6 +94,7 @@ namespace Generated
             var newData = CloneAndSortBy(data, x => x.Id, System.Collections.Generic.Comparer<int>.Default);
             var table = new SampleTable(newData);
             memory = new MemoryDatabase(
+                memory.DictionaryTable,
                 table,
                 memory.TestTable
             
@@ -65,6 +106,7 @@ namespace Generated
             var newData = CloneAndSortBy(data, x => x.Id, System.Collections.Generic.Comparer<int>.Default);
             var table = new TestTable(newData);
             memory = new MemoryDatabase(
+                memory.DictionaryTable,
                 memory.SampleTable,
                 table
             
@@ -77,6 +119,7 @@ namespace Generated
             var newData = CloneAndSortBy(data, x => x.Id, System.Collections.Generic.Comparer<int>.Default);
             var table = new TestTable(newData);
             memory = new MemoryDatabase(
+                memory.DictionaryTable,
                 memory.SampleTable,
                 table
             
@@ -89,6 +132,7 @@ namespace Generated
             var newData = CloneAndSortBy(data, x => x.Id, System.Collections.Generic.Comparer<int>.Default);
             var table = new TestTable(newData);
             memory = new MemoryDatabase(
+                memory.DictionaryTable,
                 memory.SampleTable,
                 table
             

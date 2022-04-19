@@ -46,10 +46,11 @@ namespace Generated
 
         static MasterMemoryResolverGetFormatterHelper()
         {
-            lookup = new global::System.Collections.Generic.Dictionary<Type, int>(2)
+            lookup = new global::System.Collections.Generic.Dictionary<Type, int>(3)
             {
-                {typeof(Sample[]), 0 },
-                {typeof(Test[]), 1 },
+                {typeof(Dictionary[]), 0 },
+                {typeof(Sample[]), 1 },
+                {typeof(Test[]), 2 },
             };
         }
 
@@ -60,8 +61,9 @@ namespace Generated
 
             switch (key)
             {
-                case 0: return new MessagePack.Formatters.ArrayFormatter<Sample>();
-                case 1: return new MessagePack.Formatters.ArrayFormatter<Test>();
+                case 0: return new MessagePack.Formatters.ArrayFormatter<Dictionary>();
+                case 1: return new MessagePack.Formatters.ArrayFormatter<Sample>();
+                case 2: return new MessagePack.Formatters.ArrayFormatter<Test>();
                 default: return null;
             }
         }

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Linq;
 using System;
 
 namespace ProjectCronos
@@ -29,11 +30,12 @@ namespace ProjectCronos
             canvasGroup.alpha = 0;
 
             // メッセージ設定
-            titleText.text = "終了確認";
-            messageText.text = "ゲームを終了しますか？";
-            positiveButtonMessageText.text = "はい";
-            negativeButtonMessageText.text = "いいえ";
 
+            titleText.text = MasterDataManager.Instance.GetDic("ApplicationPopupQuitTitle");
+            messageText.text = MasterDataManager.Instance.GetDic("ApplicationPopupQuitMessage");
+            positiveButtonMessageText.text = MasterDataManager.Instance.GetDic("ApplicationPopupQuitYesButtonMessage");
+            negativeButtonMessageText.text = MasterDataManager.Instance.GetDic("ApplicationPopupQuitNoButtonMessage");
+            
             // アクション設定
             buttonActions = new Action[(int)EnumCollection.Popup.POPUP_SELECT_STATUS.MAXMUM];
             buttonActions[(int)EnumCollection.Popup.POPUP_SELECT_STATUS.POSITIVE] = OnClickPositiveButton;

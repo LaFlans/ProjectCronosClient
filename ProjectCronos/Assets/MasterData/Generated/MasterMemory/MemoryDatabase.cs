@@ -13,14 +13,17 @@ namespace Generated
 {
    public sealed class MemoryDatabase : MemoryDatabaseBase
    {
+        public DictionaryTable DictionaryTable { get; private set; }
         public SampleTable SampleTable { get; private set; }
         public TestTable TestTable { get; private set; }
 
         public MemoryDatabase(
+            DictionaryTable DictionaryTable,
             SampleTable SampleTable,
             TestTable TestTable
         )
         {
+            this.DictionaryTable = DictionaryTable;
             this.SampleTable = SampleTable;
             this.TestTable = TestTable;
         }
@@ -44,6 +47,7 @@ namespace Generated
 
         void InitSequential(Dictionary<string, (int offset, int count)> header, System.ReadOnlyMemory<byte> databaseBinary, MessagePack.MessagePackSerializerOptions options, int maxDegreeOfParallelism)
         {
+            this.DictionaryTable = ExtractTableData<Dictionary, DictionaryTable>(header, databaseBinary, options, xs => new DictionaryTable(xs));
             this.SampleTable = ExtractTableData<Sample, SampleTable>(header, databaseBinary, options, xs => new SampleTable(xs));
             this.TestTable = ExtractTableData<Test, TestTable>(header, databaseBinary, options, xs => new TestTable(xs));
         }
@@ -52,6 +56,7 @@ namespace Generated
         {
             var extracts = new Action[]
             {
+                () => this.DictionaryTable = ExtractTableData<Dictionary, DictionaryTable>(header, databaseBinary, options, xs => new DictionaryTable(xs)),
                 () => this.SampleTable = ExtractTableData<Sample, SampleTable>(header, databaseBinary, options, xs => new SampleTable(xs)),
                 () => this.TestTable = ExtractTableData<Test, TestTable>(header, databaseBinary, options, xs => new TestTable(xs)),
             };
@@ -70,6 +75,7 @@ namespace Generated
         public DatabaseBuilder ToDatabaseBuilder()
         {
             var builder = new DatabaseBuilder();
+            builder.Append(this.DictionaryTable.GetRawDataUnsafe());
             builder.Append(this.SampleTable.GetRawDataUnsafe());
             builder.Append(this.TestTable.GetRawDataUnsafe());
             return builder;
@@ -78,6 +84,7 @@ namespace Generated
         public DatabaseBuilder ToDatabaseBuilder(MessagePack.IFormatterResolver resolver)
         {
             var builder = new DatabaseBuilder(resolver);
+            builder.Append(this.DictionaryTable.GetRawDataUnsafe());
             builder.Append(this.SampleTable.GetRawDataUnsafe());
             builder.Append(this.TestTable.GetRawDataUnsafe());
             return builder;
@@ -90,10 +97,13 @@ namespace Generated
             var result = new ValidateResult();
             var database = new ValidationDatabase(new object[]
             {
+                DictionaryTable,
                 SampleTable,
                 TestTable,
             });
 
+            ((ITableUniqueValidate)DictionaryTable).ValidateUnique(result);
+            ValidateTable(DictionaryTable.All, database, "Key", DictionaryTable.PrimaryKeySelector, result);
             ((ITableUniqueValidate)SampleTable).ValidateUnique(result);
             ValidateTable(SampleTable.All, database, "Id", SampleTable.PrimaryKeySelector, result);
             ((ITableUniqueValidate)TestTable).ValidateUnique(result);
@@ -110,6 +120,8 @@ namespace Generated
         {
             switch (tableName)
             {
+                case "m_dictionary":
+                    return db.DictionaryTable;
                 case "m_sample":
                     return db.SampleTable;
                 case "m_test":
@@ -127,6 +139,7 @@ namespace Generated
             if (metaTable != null) return metaTable;
 
             var dict = new Dictionary<string, MasterMemory.Meta.MetaTable>();
+            dict.Add("m_dictionary", Generated.Tables.DictionaryTable.CreateMetaTable());
             dict.Add("m_sample", Generated.Tables.SampleTable.CreateMetaTable());
             dict.Add("m_test", Generated.Tables.TestTable.CreateMetaTable());
 
