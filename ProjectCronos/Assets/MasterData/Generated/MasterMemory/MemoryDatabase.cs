@@ -15,16 +15,19 @@ namespace Generated
    {
         public DictionaryTable DictionaryTable { get; private set; }
         public SampleTable SampleTable { get; private set; }
+        public SoundTable SoundTable { get; private set; }
         public TestTable TestTable { get; private set; }
 
         public MemoryDatabase(
             DictionaryTable DictionaryTable,
             SampleTable SampleTable,
+            SoundTable SoundTable,
             TestTable TestTable
         )
         {
             this.DictionaryTable = DictionaryTable;
             this.SampleTable = SampleTable;
+            this.SoundTable = SoundTable;
             this.TestTable = TestTable;
         }
 
@@ -49,6 +52,7 @@ namespace Generated
         {
             this.DictionaryTable = ExtractTableData<Dictionary, DictionaryTable>(header, databaseBinary, options, xs => new DictionaryTable(xs));
             this.SampleTable = ExtractTableData<Sample, SampleTable>(header, databaseBinary, options, xs => new SampleTable(xs));
+            this.SoundTable = ExtractTableData<Sound, SoundTable>(header, databaseBinary, options, xs => new SoundTable(xs));
             this.TestTable = ExtractTableData<Test, TestTable>(header, databaseBinary, options, xs => new TestTable(xs));
         }
 
@@ -58,6 +62,7 @@ namespace Generated
             {
                 () => this.DictionaryTable = ExtractTableData<Dictionary, DictionaryTable>(header, databaseBinary, options, xs => new DictionaryTable(xs)),
                 () => this.SampleTable = ExtractTableData<Sample, SampleTable>(header, databaseBinary, options, xs => new SampleTable(xs)),
+                () => this.SoundTable = ExtractTableData<Sound, SoundTable>(header, databaseBinary, options, xs => new SoundTable(xs)),
                 () => this.TestTable = ExtractTableData<Test, TestTable>(header, databaseBinary, options, xs => new TestTable(xs)),
             };
             
@@ -77,6 +82,7 @@ namespace Generated
             var builder = new DatabaseBuilder();
             builder.Append(this.DictionaryTable.GetRawDataUnsafe());
             builder.Append(this.SampleTable.GetRawDataUnsafe());
+            builder.Append(this.SoundTable.GetRawDataUnsafe());
             builder.Append(this.TestTable.GetRawDataUnsafe());
             return builder;
         }
@@ -86,6 +92,7 @@ namespace Generated
             var builder = new DatabaseBuilder(resolver);
             builder.Append(this.DictionaryTable.GetRawDataUnsafe());
             builder.Append(this.SampleTable.GetRawDataUnsafe());
+            builder.Append(this.SoundTable.GetRawDataUnsafe());
             builder.Append(this.TestTable.GetRawDataUnsafe());
             return builder;
         }
@@ -99,6 +106,7 @@ namespace Generated
             {
                 DictionaryTable,
                 SampleTable,
+                SoundTable,
                 TestTable,
             });
 
@@ -106,6 +114,8 @@ namespace Generated
             ValidateTable(DictionaryTable.All, database, "Key", DictionaryTable.PrimaryKeySelector, result);
             ((ITableUniqueValidate)SampleTable).ValidateUnique(result);
             ValidateTable(SampleTable.All, database, "Id", SampleTable.PrimaryKeySelector, result);
+            ((ITableUniqueValidate)SoundTable).ValidateUnique(result);
+            ValidateTable(SoundTable.All, database, "Key", SoundTable.PrimaryKeySelector, result);
             ((ITableUniqueValidate)TestTable).ValidateUnique(result);
             ValidateTable(TestTable.All, database, "Id", TestTable.PrimaryKeySelector, result);
 
@@ -124,6 +134,8 @@ namespace Generated
                     return db.DictionaryTable;
                 case "m_sample":
                     return db.SampleTable;
+                case "m_sound":
+                    return db.SoundTable;
                 case "m_test":
                     return db.TestTable;
                 
@@ -141,6 +153,7 @@ namespace Generated
             var dict = new Dictionary<string, MasterMemory.Meta.MetaTable>();
             dict.Add("m_dictionary", Generated.Tables.DictionaryTable.CreateMetaTable());
             dict.Add("m_sample", Generated.Tables.SampleTable.CreateMetaTable());
+            dict.Add("m_sound", Generated.Tables.SoundTable.CreateMetaTable());
             dict.Add("m_test", Generated.Tables.TestTable.CreateMetaTable());
 
             metaTable = new MasterMemory.Meta.MetaDatabase(dict);

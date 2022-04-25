@@ -145,6 +145,11 @@ namespace ProjectCronos
         /// </summary>
         void Update()
         {
+            if(Input.GetKeyDown(KeyCode.S))
+            {
+                SoundManager.Instance.Play("Button37");
+            }
+
             if (jumpState == EnumCollection.Player.PLAYER_JUMP_STATE.JUMP && isGround)
             {
                 jumpState = EnumCollection.Player.PLAYER_JUMP_STATE.IDOL;

@@ -17,14 +17,14 @@ namespace ProjectCronos
         /// </summary>
         void FirstLaunch()
         {
-            // AddressableManagerは最優先で生成
+            // AddressableManagerとMasterDataManagerは最優先で生成
             this.gameObject.AddComponent<AddressableManager>();
+            this.gameObject.AddComponent<MasterDataManager>();
 
             // 常に存在するべき物を生成
             new GameObject("InputManager").AddComponent<InputManager>();
-            this.gameObject.AddComponent<SoundManager>();
+            new GameObject("SoundManager").AddComponent<SoundManager>();
             this.gameObject.AddComponent<PopupManager>();
-            this.gameObject.AddComponent<MasterDataManager>();
 #if UNITY_EDITOR
             this.gameObject.AddComponent<ProductDebug>();
 #endif

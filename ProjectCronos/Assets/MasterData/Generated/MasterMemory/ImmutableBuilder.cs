@@ -32,6 +32,7 @@ namespace Generated
             memory = new MemoryDatabase(
                 table,
                 memory.SampleTable,
+                memory.SoundTable,
                 memory.TestTable
             
             );
@@ -45,6 +46,7 @@ namespace Generated
             memory = new MemoryDatabase(
                 table,
                 memory.SampleTable,
+                memory.SoundTable,
                 memory.TestTable
             
             );
@@ -58,6 +60,7 @@ namespace Generated
             memory = new MemoryDatabase(
                 table,
                 memory.SampleTable,
+                memory.SoundTable,
                 memory.TestTable
             
             );
@@ -70,6 +73,7 @@ namespace Generated
             memory = new MemoryDatabase(
                 memory.DictionaryTable,
                 table,
+                memory.SoundTable,
                 memory.TestTable
             
             );
@@ -83,6 +87,7 @@ namespace Generated
             memory = new MemoryDatabase(
                 memory.DictionaryTable,
                 table,
+                memory.SoundTable,
                 memory.TestTable
             
             );
@@ -96,6 +101,48 @@ namespace Generated
             memory = new MemoryDatabase(
                 memory.DictionaryTable,
                 table,
+                memory.SoundTable,
+                memory.TestTable
+            
+            );
+        }
+
+        public void ReplaceAll(System.Collections.Generic.IList<Sound> data)
+        {
+            var newData = CloneAndSortBy(data, x => x.Key, System.StringComparer.Ordinal);
+            var table = new SoundTable(newData);
+            memory = new MemoryDatabase(
+                memory.DictionaryTable,
+                memory.SampleTable,
+                table,
+                memory.TestTable
+            
+            );
+        }
+
+        public void RemoveSound(string[] keys)
+        {
+            var data = RemoveCore(memory.SoundTable.GetRawDataUnsafe(), keys, x => x.Key, System.StringComparer.Ordinal);
+            var newData = CloneAndSortBy(data, x => x.Key, System.StringComparer.Ordinal);
+            var table = new SoundTable(newData);
+            memory = new MemoryDatabase(
+                memory.DictionaryTable,
+                memory.SampleTable,
+                table,
+                memory.TestTable
+            
+            );
+        }
+
+        public void Diff(Sound[] addOrReplaceData)
+        {
+            var data = DiffCore(memory.SoundTable.GetRawDataUnsafe(), addOrReplaceData, x => x.Key, System.StringComparer.Ordinal);
+            var newData = CloneAndSortBy(data, x => x.Key, System.StringComparer.Ordinal);
+            var table = new SoundTable(newData);
+            memory = new MemoryDatabase(
+                memory.DictionaryTable,
+                memory.SampleTable,
+                table,
                 memory.TestTable
             
             );
@@ -108,6 +155,7 @@ namespace Generated
             memory = new MemoryDatabase(
                 memory.DictionaryTable,
                 memory.SampleTable,
+                memory.SoundTable,
                 table
             
             );
@@ -121,6 +169,7 @@ namespace Generated
             memory = new MemoryDatabase(
                 memory.DictionaryTable,
                 memory.SampleTable,
+                memory.SoundTable,
                 table
             
             );
@@ -134,6 +183,7 @@ namespace Generated
             memory = new MemoryDatabase(
                 memory.DictionaryTable,
                 memory.SampleTable,
+                memory.SoundTable,
                 table
             
             );

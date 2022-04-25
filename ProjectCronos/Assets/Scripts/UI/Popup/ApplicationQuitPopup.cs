@@ -30,7 +30,6 @@ namespace ProjectCronos
             canvasGroup.alpha = 0;
 
             // メッセージ設定
-
             titleText.text = MasterDataManager.Instance.GetDic("ApplicationPopupQuitTitle");
             messageText.text = MasterDataManager.Instance.GetDic("ApplicationPopupQuitMessage");
             positiveButtonMessageText.text = MasterDataManager.Instance.GetDic("ApplicationPopupQuitYesButtonMessage");
@@ -52,6 +51,7 @@ namespace ProjectCronos
             {
                 isOpenAnimation = true;
                 canvasGroup.alpha = 1;
+                SoundManager.Instance.Play("Button30");
 
                 // アニメーション開始
                 GetComponent<Animator>().SetTrigger("Open");

@@ -9,10 +9,22 @@ namespace ProjectCronos
 {
     class AddressableManager : ISingleton<AddressableManager>
     {
+        //class Param<T>
+        //{
+        //    public Dictionary<string, AsyncOperationHandle<T>> param;
+        //}
+
+        //Dictionary<Type, Param<Type>> testLoaded;
+
         /// <summary>
         /// 読み込み済みパス
         /// </summary>
         Dictionary<string, AsyncOperationHandle<GameObject>> loaded;
+
+        /// <summary>
+        /// 読み込み済みAudioClipパス
+        /// </summary>
+        Dictionary<string, AsyncOperationHandle<AudioClip>> clipLoaded;
 
         /// <summary>
         /// 初期化
@@ -21,6 +33,8 @@ namespace ProjectCronos
         protected override bool Initialize()
         {
             loaded = new Dictionary<string, AsyncOperationHandle<GameObject>>();
+            clipLoaded = new Dictionary<string, AsyncOperationHandle<AudioClip>>();
+
             return true;
         }
 
@@ -40,6 +54,104 @@ namespace ProjectCronos
                             if (callback != null)
                             {
                                 callback.Invoke();
+                            }
+                        }
+                    }
+                };
+            }
+            else
+            {
+                Debug.LogError($"path:{path}は既に読み込まれているよ！");
+            }
+        }
+
+        public async void LoadClip(string path, Action callback = null)
+        {
+            if (!clipLoaded.ContainsKey(path))
+            {
+                var handle = Addressables.LoadAssetAsync<AudioClip>(path);
+                await handle.Task;
+                handle.Completed += op =>
+                {
+                    if (op.Status == AsyncOperationStatus.Succeeded)
+                    {
+                        if (!clipLoaded.ContainsKey(path))
+                        {
+                            clipLoaded.Add(path, op);
+                            if (callback != null)
+                            {
+                                callback.Invoke();
+                            }
+                        }
+                    }
+                };
+            }
+            else
+            {
+                Debug.LogError($"path:{path}のクリップは既に読み込まれているよ！");
+            }
+        }
+
+        public AudioClip GetLoadedClip(string path)
+        {
+            if (clipLoaded.ContainsKey(path))
+            {
+                return clipLoaded[path].Result;
+            }
+
+            LoadClip(path);
+            return null;
+        }
+
+        public async void Load<T>(string path, Action callback = null)
+        {
+            if (!loaded.ContainsKey(path))
+            {
+                var handle = Addressables.LoadAssetAsync<T>(path);
+                await handle.Task;
+                handle.Completed += op =>
+                {
+                    if (op.Status == AsyncOperationStatus.Succeeded)
+                    {
+                        if (!loaded.ContainsKey(path))
+                        {
+                            //loaded.Add(path, op);
+                            if (callback != null)
+                            {
+                                callback.Invoke();
+                            }
+                        }
+                    }
+                };
+            }
+            else
+            {
+                Debug.LogError($"path:{path}は既に読み込まれているよ！");
+            }
+        }
+
+        public async void LoadInstance(string path, Action<GameObject> callback = null, Transform parent = null)
+        {
+            if (!loaded.ContainsKey(path))
+            {
+                var handle = Addressables.LoadAssetAsync<GameObject>(path);
+                await handle.Task;
+                handle.Completed += op =>
+                {
+                    if (op.Status == AsyncOperationStatus.Succeeded)
+                    {
+                        if (!loaded.ContainsKey(path))
+                        {
+                            loaded.Add(path, op);
+                            if (callback != null)
+                            {
+                                if (parent != null)
+                                {
+                                    callback.Invoke(Instantiate(loaded[path].Result, parent));
+                                    return;
+                                }
+
+                                callback.Invoke(Instantiate(loaded[path].Result));
                             }
                         }
                     }
@@ -113,6 +225,17 @@ namespace ProjectCronos
                 }
 
                 loaded.Clear();
+            }
+
+            // 読み込んだAddressbleAudioClipオブジェクトを解放
+            if (clipLoaded != null)
+            {
+                foreach (var obj in clipLoaded.Values)
+                {
+                    Addressables.Release(obj);
+                }
+
+                clipLoaded.Clear();
             }
         }
     }

@@ -47,6 +47,10 @@ MonoBehaviour:
     m_Address: Assets/MasterData/Generated/master-data.bytes
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 92dcf76321193934a81f91d8fdde099e
+    m_Address: Assets/Prefabs/SoundPlayer.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 935c614e6cbfb024884f0f3e5a7850c3, type: 2}
   m_SchemaSet:

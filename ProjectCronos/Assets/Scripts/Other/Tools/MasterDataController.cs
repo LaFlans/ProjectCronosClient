@@ -156,6 +156,7 @@ namespace ProjectCronos
             }
 
             Debug.Log($"Write byte[] to: {resourcesDir + filename}");
+            Debug.Log("Complete!");
 
             AssetDatabase.Refresh();
         }

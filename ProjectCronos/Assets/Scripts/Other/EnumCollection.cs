@@ -4,7 +4,7 @@
     /// Enumの定義を集めた物
     /// </summary>
     namespace EnumCollection
-    {   
+    {
         namespace Input
         {
             public enum INPUT_STATUS
@@ -128,6 +128,31 @@
                 /// 着地
                 /// </summary>
                 LANDING,
+                /// <summary>
+                /// 要素数
+                /// </summary>
+                MAXMUM,
+            }
+        }
+
+        /// <summary>
+        /// プレイヤー関連
+        /// </summary>
+        namespace Sound
+        {
+            /// <summary>
+            /// サウンドの種類
+            /// </summary>
+            public enum SOUND_TYPE
+            {
+                /// <summary>
+                /// BGM
+                /// </summary>
+                BGM,
+                /// <summary>
+                /// SE
+                /// </summary>
+                SE,
                 /// <summary>
                 /// 要素数
                 /// </summary>

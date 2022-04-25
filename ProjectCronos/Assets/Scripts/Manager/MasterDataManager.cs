@@ -27,6 +27,18 @@ namespace ProjectCronos
         }
 
         /// <summary>
+        /// マスタデータに登録されているサウンドデータの読み込み
+        /// 基本的にSoundPlayerしか使用しない
+        /// </summary>
+        public void LoadSoundData()
+        {
+            foreach(var item in DB.SoundTable.All)
+            {
+                AddressableManager.instance.LoadClip(item.Path);
+            }
+        }
+
+        /// <summary>
         /// 文言取得
         /// </summary>
         /// <param name="Key">キーとなる文字列</param>

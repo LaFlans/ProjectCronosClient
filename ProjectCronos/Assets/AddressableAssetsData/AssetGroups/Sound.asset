@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Sound
+  m_EditorClassIdentifier: 
+  m_GroupName: Sound
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 129af39cbfe382146ba504e272d4fe57
+  m_SerializeEntries:
+  - m_GUID: 5f542cabe7eb76d49ab67268097cfd78
+    m_Address: Assets/ProjectCronosAssets/Sounds/SE/SlashSE.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f5fde279da8cffb4fa17ce9ac07039e8
+    m_Address: Assets/ProjectCronosAssets/Sounds/SE/kurage/button/button30.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 7d9c9aeeb98aeee479733a2b1d3bcb79
+    m_Address: Assets/ProjectCronosAssets/Sounds/SE/kurage/button/button47.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 9ff99a11d4f71d4498d82558abd7cac1
+    m_Address: Assets/ProjectCronosAssets/Sounds/SE/kurage/button/button55.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: bafed41d46d69cf44b44c7d96a359075
+    m_Address: Assets/ProjectCronosAssets/Sounds/SE/kurage/button/button37.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 16979f2d001024f41aa3065a85020c00
+    m_Address: Assets/ProjectCronosAssets/Sounds/SE/kurage/button/button38.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 935c614e6cbfb024884f0f3e5a7850c3, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 0d1987ca9d50d744684929b804a41e91, type: 2}
+    - {fileID: 11400000, guid: 1924aed5738e0da4a814c2ddfc1641fc, type: 2}
