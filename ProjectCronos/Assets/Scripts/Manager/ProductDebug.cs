@@ -6,6 +6,8 @@ namespace ProjectCronos
 {
     class ProductDebug : ISingleton<ProductDebug>
     {
+        bool isUse = true;
+
         GameObject graphy;
         string path = "Assets/Resources_moved/Prefabs/Graphy.prefab";
 
@@ -15,11 +17,14 @@ namespace ProjectCronos
         /// <returns>初期化に成功したかどうか</returns>
         public override async Task<bool> Initialize()
         {
-           await AddressableManager.instance.LoadInstance(path,
-               (obj) =>
-               {
-                    graphy = obj;
-               });
+            if (isUse)
+            {
+                await AddressableManager.instance.LoadInstance(path,
+                    (obj) =>
+                    {
+                        graphy = obj;
+                    });
+            }
 
             return true;
         }

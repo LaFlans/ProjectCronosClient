@@ -23,8 +23,12 @@ namespace ProjectCronos
         {
             loadStatus = EnumCollection.Scene.SCENE_LOAD_STATUS.LOADING;
 
+            // ローディングシーンを読み込む
+            // FIXME: もっといい感じのロード処理にする(ローディングシーンは常に存在する形がよさそう？)
+            SceneLoader.LoadScene("LoadingScene");
+
             // マネージャーシーンを読み込む
-            ManagerSceneLoader.LoadManagerScene();
+            SceneLoader.LoadScene("ManagerScene");
 
             // マネージャーシーンの読み込みが終わるまで待つ
             while (!ManagerScene.isLaunch)
@@ -33,6 +37,9 @@ namespace ProjectCronos
             }
 
             SoundManager.Instance.Play("BGM1");
+
+            // ローディングシーンをアンロード
+            SceneLoader.UnloadScene("LoadingScene");
 
             loadStatus = EnumCollection.Scene.SCENE_LOAD_STATUS.COMPLETE;
         }
