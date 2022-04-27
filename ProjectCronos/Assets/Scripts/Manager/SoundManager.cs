@@ -1,18 +1,24 @@
 ﻿using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ProjectCronos
 {
     public class SoundManager : ISingleton<SoundManager>
     {
         SoundPlayer player;
+        Stack<string> soundKeys;
 
         /// <summary>
         /// 初期化
         /// </summary>
         /// <returns>初期化に成功したかどうか</returns>
-        protected override bool Initialize()
+        public override async Task<bool> Initialize()
         {
-            AddressableManager.instance.LoadInstance(
+            soundKeys = new Stack<string>();
+
+            await AddressableManager.instance.LoadInstance(
                 "Assets/Prefabs/SoundPlayer.prefab",
                 (obj) =>
                 {
@@ -21,7 +27,18 @@ namespace ProjectCronos
                 },
                 this.transform);
 
+            // マスタデータに登録されているサウンドデータを読み込む
+            await MasterDataManager.instance.LoadSoundData();
+
             return true;
+        }
+
+        void Update()
+        {
+            if (soundKeys.Count > 0)
+            {
+                Play(soundKeys.Pop());
+            }
         }
 
         /// <summary>
@@ -30,7 +47,14 @@ namespace ProjectCronos
         /// <param name="key">再生したいサウンドリソースのキー</param>
         public void Play(string key)
         {
-            player?.Play(key);
+            //　プレイヤーがnullだったらスタックしておく
+            if (player == null)
+            {
+                soundKeys.Push(key);
+                return;
+            }
+
+            player.Play(key);
         }
     }
 }

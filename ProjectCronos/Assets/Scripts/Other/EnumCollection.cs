@@ -5,6 +5,9 @@
     /// </summary>
     namespace EnumCollection
     {
+        /// <summary>
+        /// 入力関連
+        /// </summary>
         namespace Input
         {
             public enum INPUT_STATUS
@@ -47,6 +50,29 @@
                 /// メインとなるシーン
                 /// </summary>
                 MAIN,
+                /// <summary>
+                /// 最大数
+                /// </summary>
+                MAXMUM,
+            }
+
+            /// <summary>
+            /// シーンの読み込み状態
+            /// </summary>
+            public enum SCENE_LOAD_STATUS
+            {
+                /// <summary>
+                /// 待機状態(読み込み前)
+                /// </summary>
+                WAITING,
+                /// <summary>
+                /// 読み込み中
+                /// </summary>
+                LOADING,
+                /// <summary>
+                /// 読み込み完了
+                /// </summary>
+                COMPLETE,
                 /// <summary>
                 /// 最大数
                 /// </summary>
@@ -136,7 +162,7 @@
         }
 
         /// <summary>
-        /// プレイヤー関連
+        /// サウンド関連
         /// </summary>
         namespace Sound
         {

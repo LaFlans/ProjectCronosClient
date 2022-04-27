@@ -11,7 +11,7 @@ namespace ProjectCronos
     {
         const int SOURCE_BGM_NUM = 2;
         const int SOURCE_SE_NUM = 8;
-        float masterVolume = 1.0f;
+        float masterVolume = 0.01f;
 
         List<SoundSource> bgmSources;
         List<SoundSource> seSources;
@@ -51,9 +51,6 @@ namespace ProjectCronos
 
             // サウンドソースのボリューム設定
             SetSourceVolume();
-
-            // マスタデータに登録されているサウンドデータを読み込む
-            MasterDataManager.instance.LoadSoundData();
 
             return true;
         }

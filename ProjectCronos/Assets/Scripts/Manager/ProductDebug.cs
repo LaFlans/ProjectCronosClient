@@ -1,19 +1,26 @@
 ﻿using UnityEngine;
 using System;
+using System.Threading.Tasks;
 
 namespace ProjectCronos
 {
     class ProductDebug : ISingleton<ProductDebug>
     {
         GameObject graphy;
+        string path = "Assets/Resources_moved/Prefabs/Graphy.prefab";
 
         /// <summary>
         /// 初期化
         /// </summary>
         /// <returns>初期化に成功したかどうか</returns>
-        protected override bool Initialize()
+        public override async Task<bool> Initialize()
         {
-            Utility.CreateObject("Assets/Resources_moved/Prefabs/Graphy.prefab");
+           await AddressableManager.instance.LoadInstance(path,
+               (obj) =>
+               {
+                    graphy = obj;
+               });
+
             return true;
         }
     }

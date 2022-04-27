@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Threading.Tasks;
 
 namespace ProjectCronos
 {
@@ -9,14 +10,14 @@ namespace ProjectCronos
         string playerInputPath = "Assets/Resources_moved/Prefabs/PlayerInput.prefab";
         PlayerInput pInput;
 
-        protected override bool Initialize()
+        public override async Task<bool> Initialize()
         {
-            AddressableManager.Instance.Load(
-                playerInputPath,
-                () =>
-                {
-                    //AddressableManager.Instance.InstantiateLoadedObject(playerInputPath, this.transform);
-                });
+            //AddressableManager.Instance.Load(
+            //    playerInputPath,
+            //    () =>
+            //    {
+            //        //AddressableManager.Instance.InstantiateLoadedObject(playerInputPath, this.transform);
+            //    });
 
             return true;
         }

@@ -8,16 +8,10 @@ namespace ProjectCronos
     {
         private static bool Loaded { get; set; }
 
-        private void Awake()
-        {
-            var sceneName = "ManagerScene";
-            if (!Loaded && !Utility.IsAlreadyLoadScene(sceneName))
-            {
-                Loaded = true;
-                SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
-            }
-        }
-
+        /// <summary>
+        /// マネージャーシーンを読み込む
+        /// 既に読み込まれている場合は特に何もしない
+        /// </summary>
         public static void LoadManagerScene()
         {
             var sceneName = "ManagerScene";

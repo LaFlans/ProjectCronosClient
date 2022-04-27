@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace ProjectCronos
@@ -13,7 +15,6 @@ namespace ProjectCronos
         void Awake()
         {
             instance = GetComponent<T>();
-            Initialize();
         }
 
         /// <summary>
@@ -21,7 +22,7 @@ namespace ProjectCronos
         /// 派生クラスではStart()を使用しないようにする為
         /// </summary>
         /// <returns>初期化に成功したかどうか</returns>
-        protected abstract bool Initialize();
+        public abstract Task<bool> Initialize();
 
         public static T Instance
         {

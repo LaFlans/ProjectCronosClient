@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using System.Threading.Tasks;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
@@ -54,7 +55,7 @@ namespace ProjectCronos
         /// 初期化
         /// </summary>
         /// <returns>初期化に成功したかどうか</returns>
-        protected override bool Initialize()
+        public override async Task<bool> Initialize()
         {
             // 表示対処のキャンパスを設定
             if (parentCanvas == null)
@@ -65,17 +66,12 @@ namespace ProjectCronos
             popupParams = new Stack<Param>();
 
             // ポップアッププレハブの事前ロード
-            PreLoad();
-
-            return true;
-        }
-
-        void PreLoad()
-        {
             for (int i = 0; i < (int)EnumCollection.Popup.POPUP_TYPE.MAXMUM; i++)
             {
-                AddressableManager.Instance.Load(GetPopupPath((EnumCollection.Popup.POPUP_TYPE)i));
+                await AddressableManager.Instance.Load(GetPopupPath((EnumCollection.Popup.POPUP_TYPE)i));
             }
+
+            return true;
         }
 
         /// <summary>
