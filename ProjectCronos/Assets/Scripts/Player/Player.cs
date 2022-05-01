@@ -96,7 +96,6 @@ namespace ProjectCronos
         bool isControl;
 
         EnumCollection.Player.PLAYER_JUMP_STATE jumpState = EnumCollection.Player.PLAYER_JUMP_STATE.IDOL;
-
         /// <summary>
         /// 初期化
         /// </summary>
@@ -108,14 +107,31 @@ namespace ProjectCronos
             anim = this.GetComponent<Animator>();
 
             // 状態設定
-            isControl = true;
             jumpState = EnumCollection.Player.PLAYER_JUMP_STATE.IDOL;
         }
 
-
+        /// <summary>
+        /// 事前読み込み
+        /// マネージャー系生成後に呼ばれる
+        /// </summary>
+        /// <returns></returns>
         public async UniTask PreLoadAsync()
         {
             await AddressableManager.Instance.Load("Assets/Resources_moved/Prefabs/SummonEffect.prefab");
+
+            //　事前読み込み完了時操作可能状態にする
+            isControl = true;
+
+            // 移動
+            InputManager.Instance.inputActions.Player.Move.started += OnMove;
+            InputManager.Instance.inputActions.Player.Move.performed += OnMove;
+            InputManager.Instance.inputActions.Player.Move.canceled += OnMove;
+
+            // ジャンプ
+            InputManager.Instance.inputActions.Player.Jump.performed += OnJump;
+
+            // 攻撃
+            InputManager.Instance.inputActions.Player.Attack.performed += OnAttack;
         }
 
         /// <summary>
@@ -147,30 +163,19 @@ namespace ProjectCronos
         /// </summary>
         void Update()
         {
-            if (isControl)
+            if (isControl && InputManager.Instance.GetInputStatus() == EnumCollection.Input.INPUT_STATUS.PLAYER)
             {
-                if (Input.GetKeyDown(KeyCode.S))
-                {
-                    SoundManager.Instance.Play("Button37");
-                }
-
                 if (jumpState == EnumCollection.Player.PLAYER_JUMP_STATE.JUMP && isGround)
                 {
                     jumpState = EnumCollection.Player.PLAYER_JUMP_STATE.IDOL;
                     rigid.velocity = Vector3.zero;
                 }
-
-                Attack();
-                JumpStart();
             }
         }
 
-        void Attack()
+        void OnAttack(InputAction.CallbackContext context)
         {
-            if (Gamepad.current.buttonWest.wasPressedThisFrame)
-            {
-                anim.SetTrigger("Attack");
-            }
+            anim.SetTrigger("Attack");
         }
 
         /// <summary>
@@ -202,7 +207,7 @@ namespace ProjectCronos
         /// </summary>
         void FixedUpdate()
         {
-            if(isControl)
+            if (isControl && InputManager.Instance.GetInputStatus() == EnumCollection.Input.INPUT_STATUS.PLAYER)
             {
                 if (isJump)
                 {
@@ -236,10 +241,9 @@ namespace ProjectCronos
         /// <summary>
         /// ジャンプ開始処理
         /// </summary>
-        void JumpStart()
+        void OnJump(InputAction.CallbackContext context)
         {
-            if (Gamepad.current.buttonSouth.wasPressedThisFrame && 
-                isGround && 
+            if (isGround && 
                 jumpState == EnumCollection.Player.PLAYER_JUMP_STATE.IDOL)
             {
                 jumpState = EnumCollection.Player.PLAYER_JUMP_STATE.START;

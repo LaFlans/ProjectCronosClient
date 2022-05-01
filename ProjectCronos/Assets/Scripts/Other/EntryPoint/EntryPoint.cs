@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using UnityEngine.InputSystem;
 
 namespace ProjectCronos
 {
@@ -16,9 +17,12 @@ namespace ProjectCronos
         [SerializeField]
         Player player;
 
+        bool isShowQuitPopup;
+
         async void Start()
         {
             loadStatus = EnumCollection.Scene.SCENE_LOAD_STATUS.WAITING;
+            isShowQuitPopup = false;
 
             if (!await Initialize())
             {
@@ -47,6 +51,8 @@ namespace ProjectCronos
             await PreLoadAsset();
 
             SoundManager.Instance.Play("BGM2");
+            InputManager.Instance.SetInputStatus(EnumCollection.Input.INPUT_STATUS.PLAYER);
+            InputManager.Instance.inputActions.UI.Escape.performed += OnApplicationQuitConfirm;
 
             // ローディングシーンをアンロード
             SceneLoader.UnloadScene("LoadingScene");
@@ -64,6 +70,22 @@ namespace ProjectCronos
         {
             // 事前読み込み
             await player.PreLoadAsync();
+        }
+
+        /// <summary>
+        /// アプリケーション終了確認
+        /// </summary>
+        /// <param name="context"></param>
+        void OnApplicationQuitConfirm(InputAction.CallbackContext context)
+        {
+            if (!isShowQuitPopup)
+            {
+                isShowQuitPopup = true;
+                var obj = PopupManager.Instance.GetPopupObject(
+                    EnumCollection.Popup.POPUP_TYPE.QUIT_APPLICATION);
+
+                obj.GetComponent<PopupBase>().Setup(() => { isShowQuitPopup = false; });
+            }
         }
     }
 }

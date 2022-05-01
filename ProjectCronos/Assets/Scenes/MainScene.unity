@@ -1348,7 +1348,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 506688254}
-  m_LocalRotation: {x: 0.029783031, y: 0.0011356156, z: 0.000033837106, w: -0.99955577}
+  m_LocalRotation: {x: 0.029783031, y: 0.0011355812, z: 0.00003383608, w: -0.99955577}
   m_LocalPosition: {x: 0, y: 27.08, z: -89.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1982,7 +1982,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.4789762, y: 1}
+    m_SensorSize: {x: 0.99451554, y: 1}
     Iso: 200
     ShutterSpeed: 0.005
     Aperture: 16
@@ -2005,7 +2005,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 941220833}
-  m_LocalRotation: {x: -0.029782971, y: -0.0011356156, z: -0.000033837037, w: 0.99955577}
+  m_LocalRotation: {x: -0.02978298, y: -0.0011355812, z: -0.000033836022, w: 0.99955577}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3210,7 +3210,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.4789762, y: 1}
+    m_SensorSize: {x: 0.99451554, y: 1}
     Iso: 200
     ShutterSpeed: 0.005
     Aperture: 16
@@ -3322,7 +3322,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerIndex: -1
-  XYAxis: {fileID: 4529480231784362115, guid: 30353694078e3fb4fa517d12609d2a4b, type: 3}
+  XYAxis: {fileID: 4529480231784362115, guid: 7fd9ecde862212742b5bd0ea8eca3f80, type: 3}
   ZAxis: {fileID: 0}
 --- !u!1 &1499594755
 GameObject:
@@ -4362,7 +4362,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.4789762, y: 1}
+    m_SensorSize: {x: 0.99451554, y: 1}
     Iso: 200
     ShutterSpeed: 0.005
     Aperture: 16
@@ -4385,7 +4385,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1877808188}
-  m_LocalRotation: {x: -0.029782971, y: -0.0011356156, z: -0.000033837037, w: 0.99955577}
+  m_LocalRotation: {x: -0.029782997, y: -0.0011356156, z: -0.000033837063, w: 0.99955577}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4648,100 +4648,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2010742011}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &2072850093
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 919132149443807949}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 7fd9ecde862212742b5bd0ea8eca3f80, type: 3}
-  m_NotificationBehavior: 2
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2072850095}
-        m_TargetAssemblyTypeName: ProjectCronos.Player, Assembly-CSharp
-        m_MethodName: OnMove
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 65d57a86-423c-41a0-bde1-5a9543f9b016
-    m_ActionName: Player/Move
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 8b61e69d-ba52-4373-ac13-cbc75fdd0a93
-    m_ActionName: Player/Look
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 18b2d3ae-fa5b-4057-b9ea-a858484365e0
-    m_ActionName: Player/Fire
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: a08a93f1-f363-4fda-b800-9084dfaf7acc
-    m_ActionName: UI/Navigate
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: b1592ccd-e23a-44dc-b001-3f09d316e084
-    m_ActionName: UI/Submit
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 40c083bb-3567-4e24-9803-5f3a558041ea
-    m_ActionName: UI/Cancel
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 64178041-a75f-4534-bb3a-694c5ab3ecf0
-    m_ActionName: UI/Point
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 5636d0cb-1b8d-4383-b70a-2c9af6689c83
-    m_ActionName: UI/Click
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: aa6e0ea7-c3eb-40d2-80eb-a70806a44a5e
-    m_ActionName: UI/ScrollWheel
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: ea4af760-684d-4bb7-8814-dfee092e33f5
-    m_ActionName: UI/MiddleClick
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: bacc325b-0965-4576-8c4f-eef95882bd44
-    m_ActionName: UI/RightClick
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 2ae3768f-2678-4c5a-a5c6-eb350c6dbc03
-    m_ActionName: UI/TrackedDevicePosition
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: f0652a4e-9343-48b5-982c-9eedc14e00f7
-    m_ActionName: UI/TrackedDeviceOrientation
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
 --- !u!114 &2072850094
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4862,7 +4768,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.4789762, y: 1}
+    m_SensorSize: {x: 0.99451554, y: 1}
     Iso: 200
     ShutterSpeed: 0.005
     Aperture: 16
@@ -4885,7 +4791,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2139317805}
-  m_LocalRotation: {x: -0.029782971, y: -0.0011356156, z: -0.000033837037, w: 0.99955577}
+  m_LocalRotation: {x: -0.02978298, y: -0.0011355812, z: -0.000033836022, w: 0.99955577}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5759,29 +5665,15 @@ GameObject:
   - component: {fileID: 5866666021627152909}
   - component: {fileID: 2072850098}
   - component: {fileID: 2072850097}
-  - component: {fileID: 2072850093}
   - component: {fileID: 2072850094}
   - component: {fileID: 2072850095}
-  - component: {fileID: 919132149443807950}
   m_Layer: 0
   m_Name: boxman
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &919132149443807950
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 919132149443807949}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc53597787a53694aa7f30ca186a3f33, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &941824561885039820
 GameObject:
   m_ObjectHideFlags: 0

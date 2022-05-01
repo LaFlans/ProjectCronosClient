@@ -11,7 +11,7 @@ namespace ProjectCronos
     {
         const int SOURCE_BGM_NUM = 2;
         const int SOURCE_SE_NUM = 8;
-        float masterVolume = 0.01f;
+        float masterVolume = 0.1f;
 
         List<SoundSource> bgmSources;
         List<SoundSource> seSources;

@@ -36,29 +36,44 @@ namespace ProjectCronos
             buttons[(int)EnumCollection.Popup.POPUP_SELECT_STATUS.POSITIVE].onClick.AddListener(OnClickPositiveButton);
             buttons[(int)EnumCollection.Popup.POPUP_SELECT_STATUS.NEGATIVE].onClick.AddListener(OnClickNegativeButton);
             buttons[(int)EnumCollection.Popup.POPUP_SELECT_STATUS.OTHER].onClick.AddListener(OnClickOtherButton);
+
+            //　入力設定
+            InputManager.instance.inputActions.UI.Submit.performed += OnSubmit;
+            InputManager.instance.inputActions.UI.Left.performed += OnLeft;
+            InputManager.instance.inputActions.UI.Right.performed += OnRight;
         }
 
-        private void Update()
+        /// <summary>
+        /// 左選択
+        /// </summary>
+        /// <param name="context"></param>
+        void OnLeft(InputAction.CallbackContext context)
         {
-            // 左操作
-            if (Gamepad.current.dpad.left.wasPressedThisFrame)
-            {
-                UpdateSelectButtonStatusLeft();
-                UpdateSelectButtonView();
-            }
+            SoundManager.Instance.Play("Button47");
 
-            // 右操作
-            if (Gamepad.current.dpad.right.wasPressedThisFrame)
-            {
-                UpdateSelectButtonStatusRight();
-                UpdateSelectButtonView();
-            }
+            UpdateSelectButtonStatusLeft();
+            UpdateSelectButtonView();
+        }
 
-            // 決定キー
-            if (Gamepad.current.buttonNorth.wasPressedThisFrame)
-            {
-                buttons[(int)selectStatus].onClick.Invoke();
-            }
+        /// <summary>
+        /// 右選択
+        /// </summary>
+        /// <param name="context"></param>
+        void OnRight(InputAction.CallbackContext context)
+        {
+            SoundManager.Instance.Play("Button47");
+
+            UpdateSelectButtonStatusRight();
+            UpdateSelectButtonView();
+        }
+
+        /// <summary>
+        /// 決定処理
+        /// </summary>
+        /// <param name="context"></param>
+        void OnSubmit(InputAction.CallbackContext context)
+        {
+            buttons[(int)selectStatus].onClick.Invoke();
         }
 
         /// <summary>
@@ -172,6 +187,8 @@ namespace ProjectCronos
         {
             if (buttonActions[(int)EnumCollection.Popup.POPUP_SELECT_STATUS.POSITIVE] != null)
             {
+                SoundManager.Instance.Play("Button38");
+
                 buttonActions[(int)EnumCollection.Popup.POPUP_SELECT_STATUS.POSITIVE].Invoke();
             }
         }
@@ -180,6 +197,8 @@ namespace ProjectCronos
         {
             if (buttonActions[(int)EnumCollection.Popup.POPUP_SELECT_STATUS.NEGATIVE] != null)
             {
+                SoundManager.Instance.Play("Button37");
+
                 buttonActions[(int)EnumCollection.Popup.POPUP_SELECT_STATUS.NEGATIVE].Invoke();
             }
         }
@@ -188,6 +207,8 @@ namespace ProjectCronos
         {
             if (buttonActions[(int)EnumCollection.Popup.POPUP_SELECT_STATUS.OTHER] != null)
             {
+                SoundManager.Instance.Play("Button37");
+
                 buttonActions[(int)EnumCollection.Popup.POPUP_SELECT_STATUS.OTHER].Invoke();
             }
         }
