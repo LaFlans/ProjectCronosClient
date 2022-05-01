@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -31,7 +31,7 @@ namespace ProjectCronos
         /// 初期化
         /// </summary>
         /// <returns>初期化に成功したかどうか</returns>
-        public override async Task<bool> Initialize()
+        public override async UniTask<bool> Initialize()
         {
             loaded = new Dictionary<string, AsyncOperationHandle<GameObject>>();
             clipLoaded = new Dictionary<string, AsyncOperationHandle<AudioClip>>();
@@ -39,7 +39,7 @@ namespace ProjectCronos
             return true;
         }
 
-        public async Task Load(string path, Action callback = null)
+        public async UniTask Load(string path, Action callback = null)
         {
             if (!loaded.ContainsKey(path))
             {
@@ -66,7 +66,7 @@ namespace ProjectCronos
             }
         }
 
-        public async Task LoadClip(string path, Action callback = null)
+        public async UniTask LoadClip(string path, Action callback = null)
         {
             if (!clipLoaded.ContainsKey(path))
             {
@@ -132,7 +132,7 @@ namespace ProjectCronos
             }
         }
 
-        public async Task LoadInstance(string path, Action<GameObject> callback = null, Transform parent = null)
+        public async UniTask LoadInstance(string path, Action<GameObject> callback = null, Transform parent = null)
         {
             if (!loaded.ContainsKey(path))
             {

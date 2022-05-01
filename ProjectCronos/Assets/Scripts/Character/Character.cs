@@ -30,7 +30,7 @@ namespace ProjectCronos
         /// <summary>
         /// 初期化
         /// </summary>
-        public virtual void Initialize() 
+        public virtual async void Initialize() 
         {
             status = gameObject.GetComponent<Status>();
         }

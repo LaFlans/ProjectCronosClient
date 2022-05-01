@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Threading;
+using Cysharp.Threading.Tasks;
 
 namespace ProjectCronos
 {
@@ -11,15 +13,20 @@ namespace ProjectCronos
     {
         EnumCollection.Scene.SCENE_LOAD_STATUS loadStatus;
 
-        void Start()
+        [SerializeField]
+        Player player;
+
+        async void Start()
         {
             loadStatus = EnumCollection.Scene.SCENE_LOAD_STATUS.WAITING;
 
-            // 初期化処理
-            StartCoroutine(Initialize());
+            if (!await Initialize())
+            {
+                Debug.Log("シーンの読み込みに失敗したよ…");
+            }
         }
 
-        IEnumerator Initialize()
+        async UniTask<bool> Initialize()
         {
             loadStatus = EnumCollection.Scene.SCENE_LOAD_STATUS.LOADING;
 
@@ -33,15 +40,30 @@ namespace ProjectCronos
             // マネージャーシーンの読み込みが終わるまで待つ
             while (!ManagerScene.isLaunch)
             {
-                yield return null;
+                await UniTask.Yield();
             }
 
-            SoundManager.Instance.Play("BGM1");
+            //　シーンの事前読み込み
+            await PreLoadAsset();
+
+            SoundManager.Instance.Play("BGM2");
 
             // ローディングシーンをアンロード
             SceneLoader.UnloadScene("LoadingScene");
 
             loadStatus = EnumCollection.Scene.SCENE_LOAD_STATUS.COMPLETE;
+
+            return true;
+        }
+
+        /// <summary>
+        /// 事前に読み込んでおきたいアセットをここで読み込む
+        /// </summary>
+        /// <returns>UniTask</returns>
+        async UniTask PreLoadAsset()
+        {
+            // 事前読み込み
+            await player.PreLoadAsync();
         }
     }
 }

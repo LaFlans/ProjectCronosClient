@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
@@ -55,7 +55,7 @@ namespace ProjectCronos
         /// 初期化
         /// </summary>
         /// <returns>初期化に成功したかどうか</returns>
-        public override async Task<bool> Initialize()
+        public override async UniTask<bool> Initialize()
         {
             // 表示対処のキャンパスを設定
             if (parentCanvas == null)

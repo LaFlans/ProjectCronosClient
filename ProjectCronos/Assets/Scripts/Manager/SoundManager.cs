@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 
 namespace ProjectCronos
 {
@@ -14,7 +14,7 @@ namespace ProjectCronos
         /// 初期化
         /// </summary>
         /// <returns>初期化に成功したかどうか</returns>
-        public override async Task<bool> Initialize()
+        public override async UniTask<bool> Initialize()
         {
             soundKeys = new Stack<string>();
 

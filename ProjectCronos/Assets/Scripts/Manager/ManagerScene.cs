@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 
 
 namespace ProjectCronos
@@ -21,7 +21,7 @@ namespace ProjectCronos
         /// <summary>
         /// 起動時処理
         /// </summary>
-        async void FirstLaunch()
+        public async void FirstLaunch()
         {
             // AddressableManagerとMasterDataManagerは最優先で生成
             this.gameObject.AddComponent<AddressableManager>();
@@ -35,7 +35,7 @@ namespace ProjectCronos
             this.gameObject.AddComponent<ProductDebug>();
 #endif
 
-            List<Task<bool>> task = new List<Task<bool>>();
+            List<UniTask<bool>> task = new List<UniTask<bool>>();
 
             task.Add(AddressableManager.instance.Initialize());
             task.Add(MasterDataManager.instance.Initialize());
@@ -55,7 +55,6 @@ namespace ProjectCronos
                 }
             }
 
-            Debug.Log("マネージャーシーンの初期化が終わったよ！");
             isLaunch = true;
         }
     }

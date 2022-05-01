@@ -39,7 +39,7 @@ namespace ProjectCronos
         /// </summary>
         public void DisableCollider()
         {
-            if(col.enabled) col.enabled = false;
+            if (col.enabled) col.enabled = false;
         }
 
         void OnTriggerEnter(Collider col)

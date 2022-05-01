@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Linq;
+using Cysharp.Threading.Tasks;
 
 namespace ProjectCronos
 {
@@ -99,7 +100,7 @@ namespace ProjectCronos
         /// <summary>
         /// 初期化
         /// </summary>
-        public override void Initialize()
+        public override async void Initialize()
         {
             base.Initialize();
 
@@ -109,11 +110,12 @@ namespace ProjectCronos
             // 状態設定
             isControl = true;
             jumpState = EnumCollection.Player.PLAYER_JUMP_STATE.IDOL;
+        }
 
-            //MasterDownloader.DownloadMasterData();
-            //TestTable temp = MasterDownloader.DB.TestTableTable.FindById(1);
 
-            //var testData = MasterDownloader.DB.TestTableTable;
+        public async UniTask PreLoadAsync()
+        {
+            await AddressableManager.Instance.Load("Assets/Resources_moved/Prefabs/SummonEffect.prefab");
         }
 
         /// <summary>
@@ -145,19 +147,22 @@ namespace ProjectCronos
         /// </summary>
         void Update()
         {
-            if(Input.GetKeyDown(KeyCode.S))
+            if (isControl)
             {
-                SoundManager.Instance.Play("Button37");
-            }
+                if (Input.GetKeyDown(KeyCode.S))
+                {
+                    SoundManager.Instance.Play("Button37");
+                }
 
-            if (jumpState == EnumCollection.Player.PLAYER_JUMP_STATE.JUMP && isGround)
-            {
-                jumpState = EnumCollection.Player.PLAYER_JUMP_STATE.IDOL;
-                rigid.velocity = Vector3.zero;
-            }
+                if (jumpState == EnumCollection.Player.PLAYER_JUMP_STATE.JUMP && isGround)
+                {
+                    jumpState = EnumCollection.Player.PLAYER_JUMP_STATE.IDOL;
+                    rigid.velocity = Vector3.zero;
+                }
 
-            Attack();
-            //JumpStart();
+                Attack();
+                JumpStart();
+            }
         }
 
         void Attack()
@@ -173,7 +178,7 @@ namespace ProjectCronos
         /// </summary>
         void AnimEventAttackFirst()
         {
-            Utility.CreateObject("Assets/Resources_moved/Prefabs/SummonEffect.prefab", spawnPos[0]);
+            Instantiate(AddressableManager.Instance.GetLoadedObject("Assets/Resources_moved/Prefabs/SummonEffect.prefab"), spawnPos[0]);
         }
 
         /// <summary>
@@ -181,7 +186,7 @@ namespace ProjectCronos
         /// </summary>
         void AnimEventAttackSecond()
         {
-            Utility.CreateObject("Assets/Resources_moved/Prefabs/SummonEffect.prefab", spawnPos[1]);
+            Instantiate(AddressableManager.Instance.GetLoadedObject("Assets/Resources_moved/Prefabs/SummonEffect.prefab"), spawnPos[1]);
         }
 
         /// <summary>
@@ -189,7 +194,7 @@ namespace ProjectCronos
         /// </summary>
         void AnimEventAttackThird()
         {
-            Utility.CreateObject("Assets/Resources_moved/Prefabs/SummonEffect.prefab", spawnPos[2]);
+            Instantiate(AddressableManager.Instance.GetLoadedObject("Assets/Resources_moved/Prefabs/SummonEffect.prefab"), spawnPos[2]);
         }
 
         /// <summary>
@@ -197,14 +202,17 @@ namespace ProjectCronos
         /// </summary>
         void FixedUpdate()
         {
-            if (isJump)
+            if(isControl)
             {
-                isJump = false;
-                jumpState = EnumCollection.Player.PLAYER_JUMP_STATE.JUMP;
-                rigid.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
-            }
+                if (isJump)
+                {
+                    isJump = false;
+                    jumpState = EnumCollection.Player.PLAYER_JUMP_STATE.JUMP;
+                    rigid.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
+                }
 
-            Move();
+                Move();
+            }
         }
 
         /// <summary>

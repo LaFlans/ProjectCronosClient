@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System;
-using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 
 namespace ProjectCronos
 {
@@ -15,7 +15,7 @@ namespace ProjectCronos
         /// 初期化
         /// </summary>
         /// <returns>初期化に成功したかどうか</returns>
-        public override async Task<bool> Initialize()
+        public override async UniTask<bool> Initialize()
         {
             if (isUse)
             {

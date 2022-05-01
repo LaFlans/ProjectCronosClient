@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using Generated;
-using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using MessagePack.Resolvers;
 using MessagePack;
 
@@ -16,7 +16,7 @@ namespace ProjectCronos
 
         string masterDataPath = "Assets/MasterData/Generated/master-data.bytes";
 
-        public override async Task<bool> Initialize()
+        public override async UniTask<bool> Initialize()
         {
             Addressables.LoadAsset<TextAsset>(masterDataPath)
                         .Completed += op =>
@@ -31,7 +31,7 @@ namespace ProjectCronos
         /// マスタデータに登録されているサウンドデータの読み込み
         /// 基本的にSoundPlayerしか使用しない
         /// </summary>
-        public async Task LoadSoundData()
+        public async UniTask LoadSoundData()
         {
             foreach (var item in DB.SoundTable.All)
             {

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace ProjectCronos
@@ -22,7 +22,7 @@ namespace ProjectCronos
         /// 派生クラスではStart()を使用しないようにする為
         /// </summary>
         /// <returns>初期化に成功したかどうか</returns>
-        public abstract Task<bool> Initialize();
+        public abstract UniTask<bool> Initialize();
 
         public static T Instance
         {
