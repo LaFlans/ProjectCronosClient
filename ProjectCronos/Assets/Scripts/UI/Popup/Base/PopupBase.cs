@@ -17,7 +17,7 @@ namespace ProjectCronos
         Image[] selectImages;
 
         [SerializeField]
-        protected Action[] buttonActions;
+        protected Action[] buttonActions = new Action[(int)EnumCollection.Popup.POPUP_SELECT_STATUS.MAXMUM];
 
         /// <summary>
         /// ポップアップを閉じた時のコールバック
@@ -164,7 +164,7 @@ namespace ProjectCronos
         void UpdateSelectButtonView()
         {
             // 一旦すべての選択中画像非表示
-            foreach(var image in selectImages)
+            foreach (var image in selectImages)
             {
                 image.enabled = false;
             }
@@ -222,6 +222,16 @@ namespace ProjectCronos
             {
                 closeAction.Invoke();
             }
+
+            // ボタンイベント削除
+            buttons[(int)EnumCollection.Popup.POPUP_SELECT_STATUS.POSITIVE].onClick.RemoveAllListeners();
+            buttons[(int)EnumCollection.Popup.POPUP_SELECT_STATUS.NEGATIVE].onClick.RemoveAllListeners();
+            buttons[(int)EnumCollection.Popup.POPUP_SELECT_STATUS.OTHER].onClick.RemoveAllListeners();
+
+            //　入力設定
+            InputManager.instance.inputActions.UI.Submit.performed -= OnSubmit;
+            InputManager.instance.inputActions.UI.Left.performed -= OnLeft;
+            InputManager.instance.inputActions.UI.Right.performed -= OnRight;
 
             PopupManager.Instance.PopPopup();
             Destroy(this.gameObject);

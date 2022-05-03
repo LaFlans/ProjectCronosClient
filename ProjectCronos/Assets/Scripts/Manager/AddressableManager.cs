@@ -169,23 +169,6 @@ namespace ProjectCronos
         {
             if (loaded.ContainsKey(path))
             {
-                return loaded[path].Result;
-            }
-
-            Load(path);
-            Debug.LogError("事前に読み込むようにしてね！");
-            return null;
-        }
-
-        public GameObject InstantiateLoadedObject(string path, Transform parent = null)
-        {
-            if (loaded.ContainsKey(path))
-            {
-                if (parent != null)
-                {
-                    return Instantiate(loaded[path].Result, parent);
-                }
-
                 return Instantiate(loaded[path].Result);
             }
 

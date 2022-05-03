@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Events;
 using Cysharp.Threading.Tasks;
 
 namespace ProjectCronos
@@ -11,6 +12,9 @@ namespace ProjectCronos
         EnumCollection.Input.INPUT_STATUS status;
         public InputActions inputActions;
 
+        // 入力切替時のイベント
+        UnityEvent SwitchInputStatusEvent;
+
         public override async UniTask<bool> Initialize()
         {
             // 最初は操作不能状態にする
@@ -18,6 +22,11 @@ namespace ProjectCronos
 
             inputActions = new InputActions();
             inputActions.Enable();
+
+            if (SwitchInputStatusEvent == null)
+            {
+                SwitchInputStatusEvent = new UnityEvent();
+            }
 
             return true;
         }
@@ -30,7 +39,7 @@ namespace ProjectCronos
         {
             this.status = status;
 
-            switch(status)
+            switch (status)
             {
                 case EnumCollection.Input.INPUT_STATUS.UNCONTROLLABLE:
                     inputActions.Player.Disable();
@@ -43,6 +52,12 @@ namespace ProjectCronos
                     inputActions.Player.Disable();
                     break;
             }
+
+            // 入力状態切り替えイベントが登録されていたら発火
+            if (SwitchInputStatusEvent != null)
+            {
+                SwitchInputStatusEvent.Invoke();
+            }
         }
 
         /// <summary>
@@ -52,6 +67,26 @@ namespace ProjectCronos
         public EnumCollection.Input.INPUT_STATUS GetInputStatus()
         {
             return status;
+        }
+
+        /// <summary>
+        /// 指定の状態と一致するか
+        /// </summary>
+        /// <param name="status">指定の状態</param>
+        /// <returns>一致する場合、trueを返す</returns>
+        public bool IsMatchInputStatus(EnumCollection.Input.INPUT_STATUS status)
+        {
+            return this.status == status;
+        }
+
+        /// <summary>
+        /// 入力状態が切り替わった際のイベント登録
+        /// 現在は戻り値は対応していません
+        /// </summary>
+        /// <param name="action">登録したいイベント</param>
+        public void RegistSwitchInputStatusEvent(Action action)
+        {
+            SwitchInputStatusEvent.AddListener(() => { action(); });
         }
     }
 }

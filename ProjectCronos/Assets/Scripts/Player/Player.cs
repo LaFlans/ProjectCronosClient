@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
 using System.Linq;
 using Cysharp.Threading.Tasks;
+using Cinemachine;
 
 namespace ProjectCronos
 {
@@ -96,6 +98,10 @@ namespace ProjectCronos
         bool isControl;
 
         EnumCollection.Player.PLAYER_JUMP_STATE jumpState = EnumCollection.Player.PLAYER_JUMP_STATE.IDOL;
+
+        [SerializeField]
+        GameObject freeLookCamera;
+
         /// <summary>
         /// 初期化
         /// </summary>
@@ -122,6 +128,13 @@ namespace ProjectCronos
             //　事前読み込み完了時操作可能状態にする
             isControl = true;
 
+            // 入力イベント設定
+            SetInputAction();
+        }
+
+
+        void SetInputAction()
+        {
             // 移動
             InputManager.Instance.inputActions.Player.Move.started += OnMove;
             InputManager.Instance.inputActions.Player.Move.performed += OnMove;
@@ -132,6 +145,32 @@ namespace ProjectCronos
 
             // 攻撃
             InputManager.Instance.inputActions.Player.Attack.performed += OnAttack;
+
+            // プレイヤー操作不能時にFreeLookカメラを操作できないようにする処理を登録
+            // FIXME: providerのenableを切り替える暫定対応の為、InputActionsの有効無効に影響されるようにする
+            InputManager.Instance.RegistSwitchInputStatusEvent(
+                () => 
+                {
+                    if (freeLookCamera != null)
+                    {
+                        freeLookCamera.GetComponent<CinemachineInputProvider>().enabled = InputManager.Instance.IsMatchInputStatus(EnumCollection.Input.INPUT_STATUS.PLAYER);
+                    }
+                });
+
+        }
+
+        void RemoveInputAction()
+        {
+            // 移動
+            InputManager.Instance.inputActions.Player.Move.started -= OnMove;
+            InputManager.Instance.inputActions.Player.Move.performed -= OnMove;
+            InputManager.Instance.inputActions.Player.Move.canceled -= OnMove;
+
+            // ジャンプ
+            InputManager.Instance.inputActions.Player.Jump.performed -= OnJump;
+
+            // 攻撃
+            InputManager.Instance.inputActions.Player.Attack.performed -= OnAttack;
         }
 
         /// <summary>
@@ -155,6 +194,9 @@ namespace ProjectCronos
         /// </summary>
         public override void Death()
         {
+            // 入力イベントを外す
+            RemoveInputAction();
+
             base.Death();
         }
 
@@ -163,7 +205,7 @@ namespace ProjectCronos
         /// </summary>
         void Update()
         {
-            if (isControl && InputManager.Instance.GetInputStatus() == EnumCollection.Input.INPUT_STATUS.PLAYER)
+            if (isControl && InputManager.Instance.IsMatchInputStatus(EnumCollection.Input.INPUT_STATUS.PLAYER))
             {
                 if (jumpState == EnumCollection.Player.PLAYER_JUMP_STATE.JUMP && isGround)
                 {
@@ -183,7 +225,10 @@ namespace ProjectCronos
         /// </summary>
         void AnimEventAttackFirst()
         {
-            Instantiate(AddressableManager.Instance.GetLoadedObject("Assets/Resources_moved/Prefabs/SummonEffect.prefab"), spawnPos[0]);
+            GameObject obj = AddressableManager.Instance.GetLoadedObject("Assets/Resources_moved/Prefabs/SummonEffect.prefab");
+            obj.transform.position = spawnPos[0].position;
+            obj.transform.rotation = spawnPos[0].rotation;
+            obj.transform.localScale = spawnPos[0].localScale;
         }
 
         /// <summary>
@@ -191,7 +236,10 @@ namespace ProjectCronos
         /// </summary>
         void AnimEventAttackSecond()
         {
-            Instantiate(AddressableManager.Instance.GetLoadedObject("Assets/Resources_moved/Prefabs/SummonEffect.prefab"), spawnPos[1]);
+            GameObject obj = AddressableManager.Instance.GetLoadedObject("Assets/Resources_moved/Prefabs/SummonEffect.prefab");
+            obj.transform.position = spawnPos[1].position;
+            obj.transform.rotation = spawnPos[1].rotation;
+            obj.transform.localScale = spawnPos[1].localScale;
         }
 
         /// <summary>
@@ -199,7 +247,10 @@ namespace ProjectCronos
         /// </summary>
         void AnimEventAttackThird()
         {
-            Instantiate(AddressableManager.Instance.GetLoadedObject("Assets/Resources_moved/Prefabs/SummonEffect.prefab"), spawnPos[2]);
+            GameObject obj = AddressableManager.Instance.GetLoadedObject("Assets/Resources_moved/Prefabs/SummonEffect.prefab");
+            obj.transform.position = spawnPos[2].position;
+            obj.transform.rotation = spawnPos[2].rotation;
+            obj.transform.localScale = spawnPos[2].localScale;
         }
 
         /// <summary>
@@ -207,7 +258,7 @@ namespace ProjectCronos
         /// </summary>
         void FixedUpdate()
         {
-            if (isControl && InputManager.Instance.GetInputStatus() == EnumCollection.Input.INPUT_STATUS.PLAYER)
+            if (isControl && InputManager.Instance.IsMatchInputStatus(EnumCollection.Input.INPUT_STATUS.PLAYER))
             {
                 if (isJump)
                 {

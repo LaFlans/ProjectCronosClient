@@ -82,8 +82,8 @@ namespace ProjectCronos
         {
             popupParams.Push(param);
 
-            // ポッポアップをスタックした時、プレイヤー操作可能状態だった場合、UI操作可能状態にする
-            if (InputManager.instance.GetInputStatus() == EnumCollection.Input.INPUT_STATUS.PLAYER)
+            // ポップアップを表示した時、プレイヤー操作可能状態だった場合、UI操作可能状態にする
+            if (InputManager.instance.IsMatchInputStatus(EnumCollection.Input.INPUT_STATUS.PLAYER))
             {
                 InputManager.instance.SetInputStatus(EnumCollection.Input.INPUT_STATUS.UI);
             }
@@ -96,7 +96,7 @@ namespace ProjectCronos
         {
             popupParams.Pop();
 
-            if (popupParams.Count == 0 && InputManager.instance.GetInputStatus() == EnumCollection.Input.INPUT_STATUS.UI)
+            if (popupParams.Count == 0 && InputManager.instance.IsMatchInputStatus(EnumCollection.Input.INPUT_STATUS.UI))
             {
                 InputManager.instance.SetInputStatus(EnumCollection.Input.INPUT_STATUS.PLAYER);
             }

@@ -34,7 +34,7 @@ namespace ProjectCronos
             messageText.text = MasterDataManager.Instance.GetDic("ApplicationPopupQuitMessage");
             positiveButtonMessageText.text = MasterDataManager.Instance.GetDic("ApplicationPopupQuitYesButtonMessage");
             negativeButtonMessageText.text = MasterDataManager.Instance.GetDic("ApplicationPopupQuitNoButtonMessage");
-            
+
             // アクション設定
             buttonActions = new Action[(int)EnumCollection.Popup.POPUP_SELECT_STATUS.MAXMUM];
             buttonActions[(int)EnumCollection.Popup.POPUP_SELECT_STATUS.POSITIVE] = OnClickPositiveButton;
