@@ -14,9 +14,9 @@ namespace ProjectCronos
         [Serializable]
         public class SampleData
         {
-            public string name;
             [HideInInspector]
             public int id;
+            public string name;
             public string path;
             public SampleData(int id, string name, string path)
             {
@@ -112,7 +112,8 @@ namespace ProjectCronos
             {
                 for (int i = dbData.Count; i < data.Count; i++)
                 {
-                    messages.Add($"+<color={colorCodeRed}>ID:{data[i].id} NAME:{data[i].name} PATH:{data[i].path}</color>");
+                    // FIXME: IDはインスペクタ側から追加すると前のIDのまま生成してしまうので、一旦無理やりIDを設定
+                    messages.Add($"+<color={colorCodeRed}>ID:{i} NAME:{data[i].name} PATH:{data[i].path}</color>");
                 }
             }
 

@@ -118,13 +118,12 @@ namespace ProjectCronos
                     diffDataScrollPosition = EditorGUILayout.BeginScrollView(diffDataScrollPosition);
 
                     var messages = new List<string>();
-                    foreach(var obj in objects)
+                    foreach (var obj in objects)
                     {
                         messages = obj.GetMasterDataDiffDebugMessage(isShowBeforeDiff, isShowAllData);
 
                         if (messages.Count() > 0)
                         {
-
                             //　仕切り線
                             GUILayout.Box("", GUILayout.ExpandWidth(true), GUILayout.Height(2));
 
