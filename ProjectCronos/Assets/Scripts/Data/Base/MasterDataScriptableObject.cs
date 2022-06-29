@@ -11,9 +11,9 @@ using UnityEngine;
 
 public abstract class MasterDataScriptableObject : ScriptableObject
 {
-    public const string colorCodeYellow = "#ffff00";
-    public const string colorCodeRed = "#ff0000";
-    public const string colorCodeBlue = "#0000ff";
+    public const string colorCodeYellow = "#FFF100";
+    public const string colorCodeRed = "#FF4B00";
+    public const string colorCodeBlue = "#005AFF";
 
     public abstract void Save(DatabaseBuilder builder);
 
@@ -26,9 +26,11 @@ public abstract class MasterDataScriptableObject : ScriptableObject
     /// マスタデータの変更差分のみをデバックとしてメッセージで取得
     /// </summary>
     /// <param name="isShowBefore">変更前の値も表示するか</param>
-    public abstract List<string> GetMasterDataDiffDebugMessage(bool isShowBefore);
+    /// <param name="isShowAllData">変更のない値も表示するか</param>
+    public abstract List<string> GetMasterDataDiffDebugMessage(bool isShowBefore, bool isShowAllData);
 
     protected static MemoryDatabase db;
+    protected string dataTitle = String.Empty;
 
     protected void Load()
     {

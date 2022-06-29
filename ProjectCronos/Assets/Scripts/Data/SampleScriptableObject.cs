@@ -32,6 +32,9 @@ namespace ProjectCronos
 
         void OnEnable()
         {
+            // データのタイトル設定
+            dataTitle = "<b>SampleMasterData</b>";
+
             Load();
 
             // DBのデータ更新
@@ -54,10 +57,10 @@ namespace ProjectCronos
             builder.Append(temp);
         }
 
-        public override List<string> GetMasterDataDiffDebugMessage(bool isShowBefore)
+        public override List<string> GetMasterDataDiffDebugMessage(bool isShowBefore, bool isShowAllData)
         {
             List<string> messages = new List<string>();
-            messages.Add("SoundMasterData");
+            messages.Add(dataTitle);
 
             var sb = new StringBuilder();
 
@@ -66,19 +69,29 @@ namespace ProjectCronos
                 // 存在している要素で比較して表示
                 if (data.Count > item.Index)
                 {
+                    // すべてのデータを表示しない設定の時、変更差分がない場合、何もしない
+                    if (!isShowAllData)
+                    {
+                        if (item.Value.Name == data[item.Index].name &&
+                            item.Value.Path == data[item.Index].path)
+                        {
+                            continue;
+                        }
+                    }
+
                     sb.Clear();
 
                     if (isShowBefore)
                     {
                         sb.Append($"ID:{item.Value.Id} ");
-                        sb.Append(item.Value.Name == data[item.Index].name ? $"NAME:{data[item.Index].name} " : $"NAME:{item.Value.Name}→<color={colorCodeYellow}>{data[item.Index].name}</color> ");
-                        sb.Append(item.Value.Path == data[item.Index].path ? $"PATH:{data[item.Index].path} " : $"PATH:{item.Value.Path}→<color={colorCodeYellow}>{data[item.Index].path}</color> ");
+                        sb.Append("NAME:" + (item.Value.Name == data[item.Index].name ? $"{data[item.Index].name} " : $"{item.Value.Name}→<color={colorCodeYellow}>{data[item.Index].name}</color> "));
+                        sb.Append("PATH:" + (item.Value.Path == data[item.Index].path ? $"{data[item.Index].path} " : $"{item.Value.Path}→<color={colorCodeYellow}>{data[item.Index].path}</color> "));
                     }
                     else
                     {
                         sb.Append($"ID:{item.Value.Id} ");
-                        sb.Append(item.Value.Name == data[item.Index].name? $"NAME:{data[item.Index].name} " : $"NAME:<color={colorCodeYellow}>{data[item.Index].name}</color> ");
-                        sb.Append(item.Value.Path == data[item.Index].path ? $"PATH:{data[item.Index].path} " : $"PATH:<color={colorCodeYellow}>{data[item.Index].path}</color> ");
+                        sb.Append("NAME:" + (item.Value.Name == data[item.Index].name? $"{data[item.Index].name} " : $"<color={colorCodeYellow}>{data[item.Index].name}</color> "));
+                        sb.Append("PATH:" + (item.Value.Path == data[item.Index].path ? $"{data[item.Index].path} " : $"<color={colorCodeYellow}>{data[item.Index].path}</color> "));
                     }
 
                     messages.Add(sb.ToString());
@@ -87,7 +100,7 @@ namespace ProjectCronos
                 }
 
                 // ScriptableObject側の要素が少ない場合、青で表示
-                messages.Add($"<color={colorCodeBlue}>ID:{item.Value.Id} NAME:{item.Value.Name} PATH:{item.Value.Path}</color>");
+                messages.Add($"-<color={colorCodeBlue}>ID:{item.Value.Id} NAME:{item.Value.Name} PATH:{item.Value.Path}</color>");
             }
 
             // ScriptableObject側の要素が多い場合、赤で表示
@@ -95,7 +108,7 @@ namespace ProjectCronos
             {
                 for (int i = dbData.Count; i < data.Count; i++)
                 {
-                    messages.Add($"<color={colorCodeRed}>ID:{data[i].id} NAME:{data[i].name} PATH:{data[i].path}</color>");
+                    messages.Add($"+<color={colorCodeRed}>ID:{data[i].id} NAME:{data[i].name} PATH:{data[i].path}</color>");
                 }
             }
 
@@ -105,7 +118,7 @@ namespace ProjectCronos
         public override List<string> GetMasterDataDebugMessage()
         {
             List<string> debugMessage = new List<string>();
-            debugMessage.Add("SampleMasterData");
+            debugMessage.Add(dataTitle);
 
             foreach (var item in data)
             {

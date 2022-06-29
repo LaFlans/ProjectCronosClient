@@ -21,7 +21,16 @@ namespace ProjectCronos
         List<MasterDataScriptableObject> objects = new List<MasterDataScriptableObject>();
         List<string> options;
         int index = 0;
+
+        /// <summary>
+        /// DBの変更前の差分を表示するかどうか
+        /// </summary>
         bool isShowBeforeDiff = false;
+
+        /// <summary>
+        /// DBの変更差分の変更されていないデータも表示するかどうか
+        /// </summary>
+        bool isShowAllData = false;
 
         [MenuItem("Cronos/MasterDataController")]
         static void Open()
@@ -83,15 +92,25 @@ namespace ProjectCronos
                 using (new EditorGUILayout.VerticalScope("BOX"))
                 {
                     GUILayout.Label("<b>変更差分</b>", style);
-                    isShowBeforeDiff = GUILayout.Toggle(isShowBeforeDiff, "変更前の差分を表示するか");
+
+                    //　チェックボックス関連
+                    using (new EditorGUILayout.HorizontalScope())
+                    {
+                        isShowBeforeDiff = GUILayout.Toggle(isShowBeforeDiff, "変更前の差分を表示するか");
+                        isShowAllData = GUILayout.Toggle(isShowAllData, "変更していないデータも表示するか");
+                    }
+
                     var messages = new List<string>();
                     foreach(var obj in objects)
                     {
-                        messages = obj.GetMasterDataDiffDebugMessage(isShowBeforeDiff);
+                        messages = obj.GetMasterDataDiffDebugMessage(isShowBeforeDiff, isShowAllData);
                         foreach(var message in messages)
                         {
                             GUILayout.Label(message, style);
                         }
+
+                        //　仕切り線
+                        GUILayout.Box("", GUILayout.ExpandWidth(true), GUILayout.Height(2));
                     }
                 }
 
