@@ -19,10 +19,13 @@ using System.Text;using UnityEngine;using System;using System.Linq;using Gen
             dbData = db.DictionaryTable.All.ToList();
             data.Clear();            foreach (var item in dbData)            {                data.Add(new DictionaryData(item.Key, item.Message));            }        }        public override void Save(DatabaseBuilder builder)        {            List<Dictionary> temp = new List<Dictionary>();            foreach (var item in data.Select((v, i) => new { Value = v, Index = i }))            {                temp.Add(new Dictionary(item.Value.key, item.Value.message));            }            builder.Append(temp);        }
 
-        public override List<string> GetMasterDataDiffDebugMessage(bool isShowBefore, bool isShowAllData)
+        public override List<string> GetMasterDataDiffDebugMessage(bool isShowBefore, bool isShowAllData, out bool existsDiff)
         {
             List<string> messages = new List<string>();
             var sb = new StringBuilder();
+
+            // 差分存在チェック初期化
+            existsDiff = false;
 
             foreach (var item in dbData.Select((v, i) => new { Value = v, Index = i }))
             {
@@ -38,6 +41,9 @@ using System.Text;using UnityEngine;using System;using System.Linq;using Gen
                             continue;
                         }
                     }
+
+                    // 差分存在チェック
+                    if (!existsDiff) existsDiff = true;
 
                     sb.Clear();
 
@@ -57,6 +63,9 @@ using System.Text;using UnityEngine;using System;using System.Linq;using Gen
                     continue;
                 }
 
+                // 差分存在チェック
+                if (!existsDiff) existsDiff = true;
+
                 // ScriptableObject側の要素が少ない場合、青で表示
                 messages.Add($"-<color={colorCodeBlue}>KEY:{item.Value.Key} MESSAGE:{item.Value.Message}</color>");
             }
@@ -64,6 +73,9 @@ using System.Text;using UnityEngine;using System;using System.Linq;using Gen
             // ScriptableObject側の要素が多い場合、赤で表示
             if (dbData.Count < data.Count)
             {
+                // 差分存在チェック
+                if (!existsDiff) existsDiff = true;
+
                 for (int i = dbData.Count; i < data.Count; i++)
                 {
                     messages.Add($"+<color={colorCodeRed}>KEY:{data[i].key} MESSAGE:{data[i].message}</color>");

@@ -99,10 +99,13 @@ namespace ProjectCronos
             builder.Append(temp);
         }
 
-        public override List<string> GetMasterDataDiffDebugMessage(bool isShowBefore, bool isShowAllData)
+        public override List<string> GetMasterDataDiffDebugMessage(bool isShowBefore, bool isShowAllData, out bool existsDiff)
         {
             List<string> messages = new List<string>();
             var sb = new StringBuilder();
+
+            // 差分存在チェック初期化
+            existsDiff = false;
 
             foreach (var item in dbData.Select((v, i) => new { Value = v, Index = i }))
             {
@@ -119,6 +122,9 @@ namespace ProjectCronos
                             continue;
                         }
                     }
+
+                    // 差分存在チェック
+                    if (!existsDiff) existsDiff = true;
 
                     sb.Clear();
 
@@ -142,6 +148,9 @@ namespace ProjectCronos
                     continue;
                 }
 
+                // 差分存在チェック
+                if (!existsDiff) existsDiff = true;
+
                 // ScriptableObject側の要素が少ない場合、青で表示
                 messages.Add($"-<color={colorCodeBlue}>ID:{item.Value.Id} NAME:{item.Value.Name} HP:{item.Value.Hp} ATTACK:{item.Value.Attack}</color>");
             }
@@ -149,6 +158,9 @@ namespace ProjectCronos
             // ScriptableObject側の要素が多い場合、赤で表示
             if (dbData.Count < data.Count)
             {
+                // 差分存在チェック
+                if (!existsDiff) existsDiff = true;
+
                 for (int i = dbData.Count; i < data.Count; i++)
                 {
                     // FIXME: IDはインスペクタ側から追加すると前のIDのまま生成してしまうので、一旦無理やりIDを設定

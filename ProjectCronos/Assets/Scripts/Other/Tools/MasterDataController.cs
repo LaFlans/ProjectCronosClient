@@ -47,6 +47,11 @@ namespace ProjectCronos
         /// </summary>
         bool isShowAllData = false;
 
+        /// <summary>
+        /// 差分が存在するか
+        /// </summary>
+        bool existsDiff = false;
+
         [MenuItem("Cronos/MasterDataController")]
         static void Open()
         {
@@ -58,6 +63,7 @@ namespace ProjectCronos
         {
             var style = new GUIStyle(EditorStyles.label);
             style.richText = true;
+
             using (new EditorGUILayout.VerticalScope("BOX"))
             {
                 GUILayout.Label("<b>コード生成</b>", style);
@@ -112,7 +118,7 @@ namespace ProjectCronos
                     }
 
                     // ScriptableObjectの値をバイナリにセーブ
-                    if (GUILayout.Button("Save"))
+                    if(GUILayout.Button(existsDiff ? "Save*" : "Save"))
                     {
                         LoadScriptableObject();
                         SaveMasterData();
@@ -130,13 +136,19 @@ namespace ProjectCronos
                         isShowAllData = GUILayout.Toggle(isShowAllData, "変更していないデータも表示するか");
                     }
 
+                    // FIXME: 強引な方法で差分があるかどうか判定しているのでもっと良い実装が見つかり次第対応
+                    existsDiff = false;
+
                     // ここからスクロールエリア
                     diffDataScrollPosition = EditorGUILayout.BeginScrollView(diffDataScrollPosition);
 
                     var messages = new List<string>();
                     foreach (var obj in objects)
                     {
-                        messages = obj.GetMasterDataDiffDebugMessage(isShowBeforeDiff, isShowAllData);
+                        messages = obj.GetMasterDataDiffDebugMessage(isShowBeforeDiff, isShowAllData, out var result);
+
+                        // FIXME: 強引な方法で差分があるかどうか判定しているのでもっと良い実装が見つかり次第対応
+                        if (result) existsDiff = true;
 
                         if (messages.Count() > 0)
                         {
@@ -159,10 +171,10 @@ namespace ProjectCronos
                     // スクロールエリア終了
                     EditorGUILayout.EndScrollView();
                 }
-
+                
                 using (new EditorGUILayout.VerticalScope("BOX"))
                 {
-                    GUILayout.Label("<b>現在DBに保存されているバイナリデータ</b>", style);
+                    GUILayout.Label("<b>現在DBに保存されているデータ</b>", style);
                     using (new EditorGUILayout.HorizontalScope())
                     {
                         index = EditorGUILayout.Popup("表示するデータ", index, objects.Select(o => o.GetType().Name).ToArray());

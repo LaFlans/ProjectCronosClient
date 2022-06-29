@@ -29,7 +29,8 @@ public abstract class MasterDataScriptableObject : ScriptableObject
     /// </summary>
     /// <param name="isShowBefore">変更前の値も表示するか</param>
     /// <param name="isShowAllData">変更のない値も表示するか</param>
-    public abstract List<string> GetMasterDataDiffDebugMessage(bool isShowBefore, bool isShowAllData);
+    /// <param name="existsDiff">差分が存在するか</param>
+    public abstract List<string> GetMasterDataDiffDebugMessage(bool isShowBefore, bool isShowAllData, out bool existsDiff);
 
     /// <summary>
     /// DBのデータの中身をデバックとしてメッセージで取得
