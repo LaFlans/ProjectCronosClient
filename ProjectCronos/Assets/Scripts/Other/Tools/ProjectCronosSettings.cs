@@ -30,6 +30,8 @@ namespace ProjectCronos
         private string specularMapShaderIdentifer;
         [SerializeField]
         private string substanceTexturesPath;
+        [SerializeField]
+        private int generateMaterialMax;
 
         internal static ProjectCronosSettings GetSettings()
         {
@@ -49,6 +51,7 @@ namespace ProjectCronos
                 settings.specularMapShaderIdentifer = "_SpecularMap";
 
                 settings.substanceTexturesPath = "Assets/ProjectCronosAssets/Textures";
+                settings.generateMaterialMax = 10;
                 AssetDatabase.CreateAsset(settings, settingsPath);
                 AssetDatabase.SaveAssets();
             }
@@ -69,7 +72,7 @@ namespace ProjectCronos
         {
             var provider = new SettingsProvider("Project/CustomIMGUISettings", SettingsScope.Project)
             {
-                label = "MaterialCreator",
+                label = "MaterialGenerator",
                 guiHandler = (searchContext) =>
                 {
                     var settings = ProjectCronosSettings.GetSerializedSettings();
@@ -81,6 +84,11 @@ namespace ProjectCronos
                             var fullPath = EditorUtility.OpenFolderPanel("フォルダを選択してください", Application.dataPath, string.Empty);
                             settings.FindProperty("substanceTexturesPath").stringValue = FileUtil.GetProjectRelativePath(fullPath);
                         }
+                    }
+
+                    using (new EditorGUILayout.HorizontalScope("HelpBox"))
+                    {
+                        EditorGUILayout.PropertyField(settings.FindProperty("generateMaterialMax"), new GUIContent("GenerateMaterialMax"), GUILayout.Height(19));
                     }
 
                     GUILayout.Label("ColorIdentifer");

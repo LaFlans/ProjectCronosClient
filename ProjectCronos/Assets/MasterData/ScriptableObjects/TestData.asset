@@ -15,14 +15,14 @@ MonoBehaviour:
   filter: teateq
   data:
   - id: 0
-    name: "\u3042"
-    hp: 10
-    attack: 1
+    name: "\u30C6\u30B9\u30C8\uFF11"
+    hp: 1111
+    attack: 100
   - id: 1
-    name: "\u3044"
+    name: "\u30C6\u30B9\u30C8\uFF12"
     hp: 20
     attack: 2
   - id: 2
-    name: "\u3046"
+    name: "\u30C6\u30B9\u30C8\uFF13"
     hp: 50
-    attack: 10
+    attack: 1110990

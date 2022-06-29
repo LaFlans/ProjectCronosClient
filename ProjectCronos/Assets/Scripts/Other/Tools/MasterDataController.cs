@@ -118,7 +118,7 @@ namespace ProjectCronos
                     }
 
                     // ScriptableObjectの値をバイナリにセーブ
-                    if(GUILayout.Button(existsDiff ? "Save*" : "Save"))
+                    if (GUILayout.Button(existsDiff ? "Save*" : "Save"))
                     {
                         LoadScriptableObject();
                         SaveMasterData();
@@ -275,6 +275,13 @@ namespace ProjectCronos
             var resourcesDir = $"{Application.dataPath}/MasterData/Generated";
             Directory.CreateDirectory(resourcesDir);
             var filename = "/master-data.bytes";
+
+            // 既に作られている場合は、削除
+            // FIXME: Gitで差分を出すために削除しているので、本来は削除しないのが正しい気がする
+            if (File.Exists(filename))
+            {
+                File.Delete(filename);
+            }
 
             using (var fs = new FileStream(resourcesDir + filename, FileMode.Create))
             {

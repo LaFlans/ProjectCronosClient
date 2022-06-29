@@ -76,18 +76,20 @@ namespace ProjectCronos
                 // 存在している要素で比較して表示
                 if (data.Count > item.Index)
                 {
-                    // すべてのデータを表示しない設定の時、変更差分がない場合、何もしない
-                    if (!isShowAllData)
+                    if (item.Value.Name == data[item.Index].name &&
+                        item.Value.Path == data[item.Index].path)
                     {
-                        if (item.Value.Name == data[item.Index].name &&
-                            item.Value.Path == data[item.Index].path)
+                        // すべてのデータを表示しない設定の時、変更差分がない場合、何もしない
+                        if (!isShowAllData)
                         {
                             continue;
                         }
                     }
-
-                    // 差分存在チェック
-                    if (!existsDiff) existsDiff = true;
+                    else
+                    {
+                        // 差分存在チェック
+                        if (!existsDiff) existsDiff = true;
+                    }
 
                     sb.Clear();
 

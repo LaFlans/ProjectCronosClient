@@ -22,4 +22,5 @@ MonoBehaviour:
   normalMapShaderIdentifer: _NormalMap
   emissiveMapShaderIdentifer: _EmissiveColorMap
   specularMapShaderIdentifer: _SpecularColorMap
-  substanceTexturesPath: Assets/ProjectCronosAssets/Textures
+  substanceTexturesPath: Assets
+  generateMaterialMax: 10

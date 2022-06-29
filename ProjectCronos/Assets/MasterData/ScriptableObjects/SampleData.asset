@@ -13,15 +13,12 @@ MonoBehaviour:
   m_Name: SampleData
   m_EditorClassIdentifier: 
   data:
-  - name: "\u304B"
-    id: 0
+  - id: 0
+    name: "\u304B"
     path: Assets/Resources_moved/Prefabs/PlayerInput.prefab
-  - name: "\u304D"
-    id: 1
+  - id: 1
+    name: "\u304D"
     path: Assets/Resources_moved/Prefabs/PlayerInput.prefab
-  - name: "\u304F"
-    id: 2
+  - id: 2
+    name: "\u304F"
     path: Assets/Resources_moved/Prefabs/PlayerInput.prefab
-  - name: tewaetwe
-    id: 3
-    path: aaaaaaaaaa

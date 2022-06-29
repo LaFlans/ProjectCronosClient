@@ -18,6 +18,11 @@ namespace ProjectCronos
         private string[] folderNames;
         private List<string> textureNames = new List<string>();
 
+        private bool isShowGenerateLog = false;
+        private bool isForce = false;
+
+        Material selectMat;
+
         class TextureIdentifer
         {
             public string materialValue;
@@ -31,11 +36,11 @@ namespace ProjectCronos
 
         private List<TextureIdentifer> textureIdentifers = new List<TextureIdentifer>();
 
-        [MenuItem("Tools/MaterialCreator")]
+        [MenuItem("Tools/MaterialGenerator")]
         static void Open()
         {
             var window = GetWindow<MaterialCreator>();
-            window.titleContent = new GUIContent("MaterialCreator");
+            window.titleContent = new GUIContent("MaterialGenerator");
         }
 
         private void OnGUI()
@@ -63,6 +68,9 @@ namespace ProjectCronos
                     folderNames = folderPaths.Select(s => Path.GetFileName(s)).ToArray();
                     index = EditorGUILayout.Popup("指定フォルダ", index, folderNames);
 
+                    // アタッチされたゲームオブジェクト
+                    selectMat = (Material)EditorGUILayout.ObjectField("Material", selectMat, typeof(Material), true);
+
                     if (GUILayout.Button("CreateMaterial"))
                     {
                         // テクスチャ識別子設定
@@ -74,12 +82,13 @@ namespace ProjectCronos
                         textureIdentifers.Add(new TextureIdentifer(obj.FindProperty("specularMapTextureIdentifer").stringValue, obj.FindProperty("specularMapShaderIdentifer").stringValue));
 
                         // マテリアル生成
-                        CreateMaterial();
+                        GenerateMaterial(obj.FindProperty("generateMaterialMax").intValue);
                     }
                 }
                 else
                 {
                     GUILayout.Label("ProjectSettingsにて、正しいフォルダパスを設定してください");
+                    index = 0;
                 }
             }
 
@@ -90,10 +99,13 @@ namespace ProjectCronos
                 {
                     SettingsService.OpenProjectSettings("Project/CustomIMGUISettings");
                 }
+
+                isShowGenerateLog = GUILayout.Toggle(isShowGenerateLog, "ログを表示");
+                isForce = GUILayout.Toggle(isForce, "強制的に上書きして生成するか");
             }
         }
 
-        void CreateMaterial()
+        void GenerateMaterial(int generateMaterialMax)
         {
             textureNames.Clear();
 
@@ -124,6 +136,13 @@ namespace ProjectCronos
                     }
                 }
 
+                // 生成しなければいけないマテリアルの数が設定されている最大を超えた場合、警告をして何も行わない
+                if (textureNames.Count > generateMaterialMax)
+                {
+                    Debug.LogError("生成できるマテリアル最大数を超えているので生成できません。テクスチャを整理してからもう一度試してください。");
+                    return;
+                }
+
                 // マテリアル生成
                 string matPath = string.Empty;
                 Material mat = null;
@@ -131,10 +150,31 @@ namespace ProjectCronos
                 {
                     matPath = folderPaths[index] + "/" + name + ".mat";
 
-                    if (!File.Exists(matPath))
+                    // 指定のマテリアルが存在しないもしくは強制的に生成する状態の時
+                    if (!File.Exists(matPath) || isForce)
                     {
-                        Debug.Log($"{matPath}は存在していないので生成します");
-                        AssetDatabase.CopyAsset(defaultMaterialPath, matPath);
+                        if (isShowGenerateLog)
+                        {
+                            if (isForce)
+                            {
+                                Debug.Log($"{matPath}は既に存在していますが、強制的に上書き生成します");
+                            }
+                            else
+                            {
+                                Debug.Log($"{matPath}は存在していないので生成します");
+                            }
+                        }
+
+                        // マテリアルをコピーして生成
+                        // マテリアルが指定されていない場合、デフォルトのマテリアルを使用する
+                        AssetDatabase.CopyAsset(selectMat == null ? defaultMaterialPath : AssetDatabase.GetAssetPath(selectMat), matPath);
+                    }
+                    else
+                    {
+                        if (isShowGenerateLog)
+                        {
+                            Debug.Log($"{matPath}は既に存在しているので、テクスチャのみ更新します");
+                        }
                     }
 
                     mat = AssetDatabase.LoadAssetAtPath<Material>(matPath);
@@ -151,6 +191,8 @@ namespace ProjectCronos
                         }
                     }
                 }
+
+                var tex = AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/ProjectCronosAssets/Textures/Test/Test_20220206_Accessory_Normal.png");
 
                 AssetDatabase.SaveAssets();
             }

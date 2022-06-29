@@ -1,13 +1,38 @@
-using System.Collections;using System.Collections.Generic;
-using System.Text;using UnityEngine;using System;using System.Linq;using Generated;namespace ProjectCronos{    [CreateAssetMenu(menuName = "MasterData/Create DictionaryData", fileName = "DictionaryData")]    internal class DictionaryScriptableObject : MasterDataScriptableObject    {        [Serializable]        public class DictionaryData        {
-            public string key;            public string message;            public DictionaryData(string key, string message)            {
-                this.key = key;                this.message = message;            }        }
-        [SerializeField]        private List<DictionaryData> data = new List<DictionaryData>();
+using System.Collections;
+using System.Collections.Generic;
+using System.Text;
+using UnityEngine;
+using System;
+using System.Linq;
+using Generated;
+
+namespace ProjectCronos
+{
+    [CreateAssetMenu(menuName = "MasterData/Create DictionaryData", fileName = "DictionaryData")]
+    internal class DictionaryScriptableObject : MasterDataScriptableObject
+    {
+        [Serializable]
+        public class DictionaryData
+        {
+            public string key;
+            public string message;
+            public DictionaryData(string key, string message)
+            {
+                this.key = key;
+                this.message = message;
+            }
+        }
+
+        [SerializeField]
+        private List<DictionaryData> data = new List<DictionaryData>();
         private List<Dictionary> dbData = new List<Dictionary>();
-        void OnEnable()        {
+
+        void OnEnable()
+        {
             // データのタイトル設定
             dataTitle = "<b>DictionaryMasterData</b>";
-            UpdateDBCache();
+
+            UpdateDBCache();
         }
 
         public override void UpdateDBCache()
@@ -17,7 +42,23 @@ using System.Text;using UnityEngine;using System;using System.Linq;using Gen
 
             // DBのデータ更新
             dbData = db.DictionaryTable.All.ToList();
-            data.Clear();            foreach (var item in dbData)            {                data.Add(new DictionaryData(item.Key, item.Message));            }        }        public override void Save(DatabaseBuilder builder)        {            List<Dictionary> temp = new List<Dictionary>();            foreach (var item in data.Select((v, i) => new { Value = v, Index = i }))            {                temp.Add(new Dictionary(item.Value.key, item.Value.message));            }            builder.Append(temp);        }
+
+            data.Clear();
+            foreach (var item in dbData)
+            {
+                data.Add(new DictionaryData(item.Key, item.Message));
+            }
+        }
+
+        public override void Save(DatabaseBuilder builder)
+        {
+            List<Dictionary> temp = new List<Dictionary>();
+            foreach (var item in data.Select((v, i) => new { Value = v, Index = i }))
+            {
+                temp.Add(new Dictionary(item.Value.key, item.Value.message));
+            }
+            builder.Append(temp);
+        }
 
         public override List<string> GetMasterDataDiffDebugMessage(bool isShowBefore, bool isShowAllData, out bool existsDiff)
         {
@@ -32,18 +73,20 @@ using System.Text;using UnityEngine;using System;using System.Linq;using Gen
                 // 存在している要素で比較して表示
                 if (data.Count > item.Index)
                 {
-                    // すべてのデータを表示しない設定の時、変更差分がない場合、何もしない
-                    if (!isShowAllData)
+                    if (item.Value.Key == data[item.Index].key &&
+                        item.Value.Message == data[item.Index].message)
                     {
-                        if (item.Value.Key == data[item.Index].key &&
-                            item.Value.Message == data[item.Index].message)
+                        // すべてのデータを表示しない設定の時、変更差分がない場合、何もしない
+                        if (!isShowAllData)
                         {
                             continue;
                         }
                     }
-
-                    // 差分存在チェック
-                    if (!existsDiff) existsDiff = true;
+                    else
+                    {
+                        // 差分存在チェック
+                        if (!existsDiff) existsDiff = true;
+                    }
 
                     sb.Clear();
 
@@ -83,4 +126,16 @@ using System.Text;using UnityEngine;using System;using System.Linq;using Gen
             }
 
             return messages;
-        }        public override List<string> GetMasterDataDebugMessage()        {            List<string> debugMessage = new List<string>();            foreach (var item in dbData)            {                debugMessage.Add($"KEY:{item.Key} MESSAGE:{item.Message}");            }            return debugMessage;        }    }}
+        }
+
+        public override List<string> GetMasterDataDebugMessage()
+        {
+            List<string> debugMessage = new List<string>();
+            foreach (var item in dbData)
+            {
+                debugMessage.Add($"KEY:{item.Key} MESSAGE:{item.Message}");
+            }
+            return debugMessage;
+        }
+    }
+}
