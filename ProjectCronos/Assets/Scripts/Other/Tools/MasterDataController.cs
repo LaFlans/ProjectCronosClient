@@ -33,6 +33,11 @@ namespace ProjectCronos
         private Vector2 dataBaseScrollPosition = Vector2.zero;
 
         /// <summary>
+        /// ScriptableObject関連のコマンドを表示するかどうか
+        /// </summary>
+        bool isShowScriptableObjectExtraCommand = false;
+
+        /// <summary>
         /// DBの変更前の差分を表示するかどうか
         /// </summary>
         bool isShowBeforeDiff = false;
@@ -77,29 +82,40 @@ namespace ProjectCronos
                 using (new EditorGUILayout.VerticalScope("BOX"))
                 {
                     GUILayout.Label("<b>ScriptableObject</b>", style);
-                    using (new EditorGUILayout.HorizontalScope())
+                    isShowScriptableObjectExtraCommand = GUILayout.Toggle(isShowScriptableObjectExtraCommand, "ExtraCommandを表示するか");
+
+                    if (isShowScriptableObjectExtraCommand)
                     {
-                        // ScriptableObjectを再読み込み
-                        if (GUILayout.Button("ReLoadScriptableObject"))
+                        using (new EditorGUILayout.HorizontalScope())
                         {
-                            LoadScriptableObject();
-                        }
+                            // ScriptableObjectを更新
+                            if (GUILayout.Button("Update"))
+                            {
+                                UpdateScriptableObject();
+                            }
 
-                        // ScriptableObjectを初期化
-                        if (GUILayout.Button("Clear"))
-                        {
-                            objects.Clear();
+                            // ScriptableObjectを再読み込み
+                            if (GUILayout.Button("ReLoad"))
+                            {
+                                LoadScriptableObject();
+                            }
 
-                            // objectがない状態でそのまま進むのはダメなので抜ける
-                            return;
-                        }
+                            // ScriptableObjectを初期化
+                            if (GUILayout.Button("Clear"))
+                            {
+                                objects.Clear();
 
-                        // ScriptableObjectの値をバイナリにセーブ
-                        if (GUILayout.Button("Save"))
-                        {
-                            LoadScriptableObject();
-                            SaveMasterData();
+                                // objectがない状態でそのまま進むのはダメなので抜ける
+                                return;
+                            }
                         }
+                    }
+
+                    // ScriptableObjectの値をバイナリにセーブ
+                    if (GUILayout.Button("Save"))
+                    {
+                        LoadScriptableObject();
+                        SaveMasterData();
                     }
                 }
 
@@ -184,6 +200,15 @@ namespace ProjectCronos
             }
         }
 
+        void UpdateScriptableObject()
+        {
+            // ScriptableObjectのDBキャッシュ更新
+            foreach (var obj in objects)
+            {
+                obj.UpdateDBCache();
+            }
+        }
+
         void LoadScriptableObject()
         {
             // オブジェクトの中身初期化
@@ -250,10 +275,7 @@ namespace ProjectCronos
             AssetDatabase.Refresh();
 
             // ScriptableObjectのDBキャッシュ更新
-            foreach(var obj in objects)
-            {
-                obj.UpdateDBCache();
-            }
+            UpdateScriptableObject();
         }
 #endif
     }
