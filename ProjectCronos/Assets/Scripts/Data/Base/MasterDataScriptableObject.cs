@@ -11,14 +11,28 @@ using UnityEngine;
 
 public abstract class MasterDataScriptableObject : ScriptableObject
 {
+    public const string colorCodeYellow = "#ffff00";
+    public const string colorCodeRed = "#ff0000";
+    public const string colorCodeBlue = "#0000ff";
+
     public abstract void Save(DatabaseBuilder builder);
+
+    /// <summary>
+    /// DBのデータの中身をデバックとしてメッセージで取得
+    /// </summary>
     public abstract List<string> GetMasterDataDebugMessage();
+
+    /// <summary>
+    /// マスタデータの変更差分のみをデバックとしてメッセージで取得
+    /// </summary>
+    /// <param name="isShowBefore">変更前の値も表示するか</param>
+    public abstract List<string> GetMasterDataDiffDebugMessage(bool isShowBefore);
 
     protected static MemoryDatabase db;
 
     protected void Load()
     {
-        // MessagePack��Resolver��ݒ�
+        // MessagePackのResolverを設定
         try
         {
             StaticCompositeResolver.Instance.Register

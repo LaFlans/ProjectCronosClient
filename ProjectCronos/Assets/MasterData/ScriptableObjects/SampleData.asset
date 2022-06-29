@@ -13,36 +13,15 @@ MonoBehaviour:
   m_Name: SampleData
   m_EditorClassIdentifier: 
   data:
-  - id: 0
-    name: "\u304B"
+  - name: "\u304B"
+    id: 0
     path: Assets/Resources_moved/Prefabs/PlayerInput.prefab
-  - id: 1
-    name: "\u304D"
+  - name: "\u304D"
+    id: 1
     path: Assets/Resources_moved/Prefabs/PlayerInput.prefab
-  - id: 2
-    name: "\u304F"
+  - name: "\u304F"
+    id: 2
     path: Assets/Resources_moved/Prefabs/PlayerInput.prefab
-  - id: 3
-    name: tewaetwe
+  - name: tewaetwe
+    id: 3
     path: aaaaaaaaaa
-  - id: 4
-    name: "\u3066\u3059\u3068"
-    path: "\u3042\u3042\u3042\u3042\uFF20"
-  - id: 5
-    name: "\u3066\u3059\u3068"
-    path: "\u3042\u3042\u3042\u3042\uFF20"
-  - id: 6
-    name: "\u3066\u3059\u3068"
-    path: "\u3042\u3042\u3042\u3042\uFF20"
-  - id: 7
-    name: "\u3066\u3059\u3068"
-    path: "\u3042\u3042\u3042\u3042\uFF20"
-  - id: 8
-    name: "\u3066\u3059\u3068"
-    path: "\u3042\u3042\u3042\u3042\uFF20"
-  - id: 9
-    name: "\u3066\u3059\u3068"
-    path: "\u3042\u3042\u3042\u3042\uFF20"
-  - id: 10
-    name: "\u3066\u3059\u3068"
-    path: "\u3042\u3042\u3042\u3042\uFF20"

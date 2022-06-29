@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data:
   - key: ApplicationPopupQuitMessage
-    message: "QUIT\uFF1F"
+    message: "\u30B2\u30FC\u30E0\u3092\u7D42\u4E86\u3057\u307E\u3059\u304B\uFF1F"
   - key: ApplicationPopupQuitNoButtonMessage
-    message: NO
+    message: "\u3044\u3044\u3048"
   - key: ApplicationPopupQuitTitle
-    message: "\u30BF\u30A4\u30C8\u30EB"
+    message: "\u7D42\u4E86\u78BA\u8A8D"
   - key: ApplicationPopupQuitYesButtonMessage
-    message: YES
+    message: "\u306F\u3044"

@@ -1,16 +1,13 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEditor;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System;
 using System.Data;
-using System.Reflection;
 using System.Linq;
 using Generated;
 using MessagePack.Resolvers;
 using MessagePack;
-using UnityEditor.IMGUI.Controls;
 
 
 namespace ProjectCronos
@@ -24,11 +21,12 @@ namespace ProjectCronos
         List<MasterDataScriptableObject> objects = new List<MasterDataScriptableObject>();
         List<string> options;
         int index = 0;
+        bool isShowBeforeDiff = false;
 
         [MenuItem("Cronos/MasterDataController")]
         static void Open()
         {
-            var window  = GetWindow<MasterDataController>();
+            var window = GetWindow<MasterDataController>();
             window.titleContent = new GUIContent("MasterDataController");
         }
 
@@ -36,62 +34,81 @@ namespace ProjectCronos
         {
             var style = new GUIStyle(EditorStyles.label);
             style.richText = true;
-            GUILayout.Label("<b><size=25>コード生成</size></b>", style);
-            using (new GUILayout.HorizontalScope())
+            using (new EditorGUILayout.VerticalScope("BOX"))
             {
-                //　MasterMemoryのコードを生成
-                if (GUILayout.Button("MasterMemoryCodeGenerate"))
+                GUILayout.Label("<b>コード生成</b>", style);
+                using (new GUILayout.HorizontalScope())
                 {
-                    MasterMemoryGenerator.GenerateMasterMemory();
-                }
+                    // MasterMemoryのコードを生成
+                    if (GUILayout.Button("MasterMemoryCodeGenerate"))
+                    {
+                        MasterMemoryGenerator.GenerateMasterMemory();
+                    }
 
-                //　メッセージパックのコード生成
-                if (GUILayout.Button("MessagePackCodeGenerate"))
-                {
-                    MessagePackGenerator.GenerateMessagePack();
+                    // メッセージパックのコード生成
+                    if (GUILayout.Button("MessagePackCodeGenerate"))
+                    {
+                        MessagePackGenerator.GenerateMessagePack();
+                    }
                 }
             }
 
-            GUILayout.Label("<b><size=25>ScriptableObject</size></b>", style);
             if (objects.Count() > 0)
             {
-                using (new EditorGUILayout.HorizontalScope())
+                using (new EditorGUILayout.VerticalScope("BOX"))
                 {
-                    //　ScriptableObjectを再読み込み
-                    if (GUILayout.Button("ReLoadScriptableObject"))
+                    GUILayout.Label("<b>ScriptableObject</b>", style);
+                    using (new EditorGUILayout.HorizontalScope())
                     {
-                        LoadScriptableObject();
-                    }
+                        // ScriptableObjectを再読み込み
+                        if (GUILayout.Button("ReLoadScriptableObject"))
+                        {
+                            LoadScriptableObject();
+                        }
 
-                    //　ScriptableObjectを初期化
-                    if (GUILayout.Button("Clear"))
+                        // ScriptableObjectを初期化
+                        if (GUILayout.Button("Clear"))
+                        {
+                            objects.Clear();
+                        }
+                        // ScriptableObjectの値をバイナリにセーブ
+                        if (GUILayout.Button("Save"))
+                        {
+                            LoadScriptableObject();
+                            SaveMasterData();
+                        }
+                    }
+                }
+
+                using (new EditorGUILayout.VerticalScope("BOX"))
+                {
+                    GUILayout.Label("<b>変更差分</b>", style);
+                    isShowBeforeDiff = GUILayout.Toggle(isShowBeforeDiff, "変更前の差分を表示するか");
+                    var messages = new List<string>();
+                    foreach(var obj in objects)
                     {
-                        objects.Clear();
+                        messages = obj.GetMasterDataDiffDebugMessage(isShowBeforeDiff);
+                        foreach(var message in messages)
+                        {
+                            GUILayout.Label(message, style);
+                        }
                     }
                 }
 
-                //　ScriptableObjectの値をバイナリにセーブ
-                if (GUILayout.Button("Save"))
+                using (new EditorGUILayout.VerticalScope("BOX"))
                 {
-                    LoadScriptableObject();
-                    SaveMasterData();
-                }
-
-                foreach(var obj in objects)
-                {
-
-                }
-
-                index = EditorGUILayout.Popup("表示するデータ", index, objects.Select(o => o.GetType().Name).ToArray());
-                var messages = objects[index].GetMasterDataDebugMessage();
-                foreach (var message in messages)
-                {
-                    GUILayout.Label(message, style);
+                    GUILayout.Label("<b>現在DBに保存されているバイナリデータ</b>", style);
+                    index = EditorGUILayout.Popup("表示するデータ", index, objects.Select(o => o.GetType().Name).ToArray());
+                    var messages = objects[index].GetMasterDataDebugMessage();
+                    foreach (var message in messages)
+                    {
+                        GUILayout.Label(message, style);
+                    }
                 }
             }
             else
             {
-                //　ScriptableObjectを読み込む
+                // ScriptableObjectを読み込む
                 if (GUILayout.Button("LoadScriptableObject"))
                 {
                     LoadScriptableObject();
@@ -107,12 +124,13 @@ namespace ProjectCronos
             var assets = AssetDatabase.FindAssets(
                             "t:" + typeof(MasterDataScriptableObject).Name)
                             .Select(
-                                guid => {
+                                guid =>
+                                {
                                     var path = AssetDatabase.GUIDToAssetPath(guid);
                                     return AssetDatabase.LoadAssetAtPath<MasterDataScriptableObject>(path);
-                                        });
+                                });
 
-            foreach(var asset in assets)
+            foreach (var asset in assets)
             {
                 objects.Add(asset);
             }
