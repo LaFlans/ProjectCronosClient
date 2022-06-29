@@ -34,6 +34,12 @@ namespace ProjectCronos
             // データのタイトル設定
             dataTitle = "<b>SoundMasterData</b>";
 
+            UpdateDBCache();
+        }
+
+        public override void UpdateDBCache()
+        {
+            // DB読み込み
             Load();
 
             // DBのデータ更新
@@ -59,8 +65,6 @@ namespace ProjectCronos
         public override List<string> GetMasterDataDiffDebugMessage(bool isShowBefore, bool isShowAllData)
         {
             List<string> messages = new List<string>();
-            messages.Add(dataTitle);
-
             var sb = new StringBuilder();
 
             foreach (var item in dbData.Select((v, i) => new { Value = v, Index = i }))
@@ -72,6 +76,7 @@ namespace ProjectCronos
                     if (!isShowAllData)
                     {
                         if (item.Value.Key == data[item.Index].key &&
+                            item.Value.Type == (int)data[item.Index].type &&
                             item.Value.Path == data[item.Index].path)
                         {
                             continue;
@@ -83,11 +88,13 @@ namespace ProjectCronos
                     if (isShowBefore)
                     {
                         sb.Append("KEY:" + (item.Value.Key == data[item.Index].key ? $"{data[item.Index].key} " : $"{item.Value.Key}→<color={colorCodeYellow}>{data[item.Index].key}</color> "));
+                        sb.Append("TYPE:" + (item.Value.Type == (int)data[item.Index].type ? $"{data[item.Index].type.ToString()} " : $"{((EnumCollection.Sound.SOUND_TYPE)item.Value.Type).ToString()}→<color={colorCodeYellow}>{data[item.Index].type.ToString()}</color> "));
                         sb.Append("PATH:" + (item.Value.Path == data[item.Index].path ? $"{data[item.Index].path} " : $"{item.Value.Path}→<color={colorCodeYellow}>{data[item.Index].path}</color> "));
                     }
                     else
                     {
                         sb.Append("KEY:" + (item.Value.Key == data[item.Index].key ? $"{data[item.Index].key} " : $"<color={colorCodeYellow}>{data[item.Index].key}</color> "));
+                        sb.Append("TYPE:" + (item.Value.Type == (int)data[item.Index].type ? $"{data[item.Index].type.ToString()} " : $"<color={colorCodeYellow}>{data[item.Index].type.ToString()}</color> "));
                         sb.Append("PATH:" + (item.Value.Path == data[item.Index].path ? $"{data[item.Index].path} " : $"<color={colorCodeYellow}>{data[item.Index].path}</color> "));
                     }
 
@@ -97,7 +104,7 @@ namespace ProjectCronos
                 }
 
                 // ScriptableObject側の要素が少ない場合、青で表示
-                messages.Add($"-<color={colorCodeBlue}>KEY:{item.Value.Key} PATH:{item.Value.Path}</color>");
+                messages.Add($"-<color={colorCodeBlue}>KEY:{item.Value.Key} TYPE:{item.Value.Type.ToString()} PATH:{item.Value.Path}</color>");
             }
 
             // ScriptableObject側の要素が多い場合、赤で表示
@@ -105,7 +112,7 @@ namespace ProjectCronos
             {
                 for (int i = dbData.Count; i < data.Count; i++)
                 {
-                    messages.Add($"+<color={colorCodeRed}>KEY:{data[i].key} PATH:{data[i].path}</color>");
+                    messages.Add($"+<color={colorCodeRed}>KEY:{data[i].key} TYPE:{data[i].type.ToString()} PATH:{data[i].path}</color>");
                 }
             }
 
@@ -115,11 +122,9 @@ namespace ProjectCronos
         public override List<string> GetMasterDataDebugMessage()
         {
             List<string> debugMessage = new List<string>();
-            debugMessage.Add(dataTitle);
-
-            foreach (var item in data)
+            foreach (var item in dbData)
             {
-                debugMessage.Add($"KEY:{item.key} TYPE:{item.type.ToString()} MESSAGE:{item.path}");
+                debugMessage.Add($"KEY:{item.Key} TYPE:{((EnumCollection.Sound.SOUND_TYPE)item.Type).ToString()} MESSAGE:{item.Path}");
             }
             return debugMessage;
         }

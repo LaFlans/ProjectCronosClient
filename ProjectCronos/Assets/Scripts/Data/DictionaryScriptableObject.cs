@@ -7,7 +7,13 @@ using System.Text;using UnityEngine;using System;using System.Linq;using Gen
         void OnEnable()        {
             // データのタイトル設定
             dataTitle = "<b>DictionaryMasterData</b>";
-            Load();
+            UpdateDBCache();
+        }
+
+        public override void UpdateDBCache()
+        {
+            // DB読み込み
+            Load();
 
             // DBのデータ更新
             dbData = db.DictionaryTable.All.ToList();
@@ -16,8 +22,6 @@ using System.Text;using UnityEngine;using System;using System.Linq;using Gen
         public override List<string> GetMasterDataDiffDebugMessage(bool isShowBefore, bool isShowAllData)
         {
             List<string> messages = new List<string>();
-            messages.Add(dataTitle);
-
             var sb = new StringBuilder();
 
             foreach (var item in dbData.Select((v, i) => new { Value = v, Index = i }))
@@ -40,12 +44,12 @@ using System.Text;using UnityEngine;using System;using System.Linq;using Gen
                     if (isShowBefore)
                     {
                         sb.Append("KEY:" + (item.Value.Key == data[item.Index].key ? $"{data[item.Index].key} " : $"KEY:{item.Value.Key}→<color={colorCodeYellow}>{data[item.Index].key}</color> "));
-                        sb.Append("MESSAGE:" + (item.Value.Message == data[item.Index].message ? $"{data[item.Index].message} " : $"MESSAGE:{item.Value.Message}→<color={colorCodeYellow}>{data[item.Index].message}</color> "));
+                        sb.Append("MESSAGE:" + (item.Value.Message == data[item.Index].message ? $"{data[item.Index].message} " : $"{item.Value.Message}→<color={colorCodeYellow}>{data[item.Index].message}</color> "));
                     }
                     else
                     {
                         sb.Append("KEY:" + (item.Value.Key == data[item.Index].key ? $"{data[item.Index].key} " : $"<color={colorCodeYellow}>{data[item.Index].key}</color> "));
-                        sb.Append("MESSAGE:" + (item.Value.Message == data[item.Index].message ? $"{data[item.Index].message} " : $"MESSAGE:<color={colorCodeYellow}>{data[item.Index].message}</color> "));
+                        sb.Append("MESSAGE:" + (item.Value.Message == data[item.Index].message ? $"{data[item.Index].message} " : $"<color={colorCodeYellow}>{data[item.Index].message}</color> "));
                     }
 
                     messages.Add(sb.ToString());
@@ -67,4 +71,4 @@ using System.Text;using UnityEngine;using System;using System.Linq;using Gen
             }
 
             return messages;
-        }        public override List<string> GetMasterDataDebugMessage()        {            List<string> debugMessage = new List<string>();            debugMessage.Add(dataTitle);            foreach (var item in data)            {                debugMessage.Add($"KEY:{item.key} MESSAGE:{item.message}");            }            return debugMessage;        }    }}
+        }        public override List<string> GetMasterDataDebugMessage()        {            List<string> debugMessage = new List<string>();            foreach (var item in dbData)            {                debugMessage.Add($"KEY:{item.Key} MESSAGE:{item.Message}");            }            return debugMessage;        }    }}

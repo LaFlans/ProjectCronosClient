@@ -53,8 +53,7 @@ namespace ProjectCronos
             // データのタイトル設定
             dataTitle = "<b>TestMasterData</b>";
 
-            Load();
-            UpdateData();
+            UpdateDBCache();
         }
 
         //void OnValidate()
@@ -69,8 +68,11 @@ namespace ProjectCronos
         //    UpdateData();
         //}
 
-        void UpdateData()
+        public override void UpdateDBCache()
         {
+            // DB読み込み
+            Load();
+
             // DBのデータ更新
             dbData = db.TestTable.All.ToList();
 
@@ -100,8 +102,6 @@ namespace ProjectCronos
         public override List<string> GetMasterDataDiffDebugMessage(bool isShowBefore, bool isShowAllData)
         {
             List<string> messages = new List<string>();
-            messages.Add(dataTitle);
-
             var sb = new StringBuilder();
 
             foreach (var item in dbData.Select((v, i) => new { Value = v, Index = i }))
@@ -161,8 +161,6 @@ namespace ProjectCronos
         public override List<string> GetMasterDataDebugMessage()
         {
             List<string> messages = new List<string>();
-            messages.Add(dataTitle);
-
             foreach (var item in dbData)
             {
                 messages.Add($"ID:{item.Id} NAME:{item.Name} HP:{item.Hp} ATTACK:{item.Attack}");

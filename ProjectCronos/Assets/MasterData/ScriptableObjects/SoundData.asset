@@ -26,7 +26,7 @@ MonoBehaviour:
     type: 1
     path: Assets/ProjectCronosAssets/Sounds/SE/kurage/button/button37.mp3
   - key: Button38
-    type: 1
+    type: 0
     path: Assets/ProjectCronosAssets/Sounds/SE/kurage/button/button38.mp3
   - key: Button47
     type: 1

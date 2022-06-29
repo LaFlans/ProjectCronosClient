@@ -17,10 +17,12 @@ public abstract class MasterDataScriptableObject : ScriptableObject
 
     public abstract void Save(DatabaseBuilder builder);
 
+
     /// <summary>
-    /// DBのデータの中身をデバックとしてメッセージで取得
+    /// データのタイトル取得
     /// </summary>
-    public abstract List<string> GetMasterDataDebugMessage();
+    /// <returns></returns>
+    public string GetMasterDataTitle() => dataTitle;
 
     /// <summary>
     /// マスタデータの変更差分のみをデバックとしてメッセージで取得
@@ -28,6 +30,16 @@ public abstract class MasterDataScriptableObject : ScriptableObject
     /// <param name="isShowBefore">変更前の値も表示するか</param>
     /// <param name="isShowAllData">変更のない値も表示するか</param>
     public abstract List<string> GetMasterDataDiffDebugMessage(bool isShowBefore, bool isShowAllData);
+
+    /// <summary>
+    /// DBのデータの中身をデバックとしてメッセージで取得
+    /// </summary>
+    public abstract List<string> GetMasterDataDebugMessage();
+
+    /// <summary>
+    /// DBキャッシュ更新処理
+    /// </summary>
+    public abstract void UpdateDBCache();
 
     protected static MemoryDatabase db;
     protected string dataTitle = String.Empty;

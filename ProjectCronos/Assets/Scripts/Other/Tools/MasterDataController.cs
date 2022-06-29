@@ -23,6 +23,16 @@ namespace ProjectCronos
         int index = 0;
 
         /// <summary>
+        /// 差分データ表示スクロールポジションキャッシュ
+        /// </summary>
+        private Vector2 diffDataScrollPosition = Vector2.zero;
+
+        /// <summary>
+        /// DBデータ表示スクロールポジションキャッシュ
+        /// </summary>
+        private Vector2 dataBaseScrollPosition = Vector2.zero;
+
+        /// <summary>
         /// DBの変更前の差分を表示するかどうか
         /// </summary>
         bool isShowBeforeDiff = false;
@@ -79,7 +89,11 @@ namespace ProjectCronos
                         if (GUILayout.Button("Clear"))
                         {
                             objects.Clear();
+
+                            // objectがない状態でそのまま進むのはダメなので抜ける
+                            return;
                         }
+
                         // ScriptableObjectの値をバイナリにセーブ
                         if (GUILayout.Button("Save"))
                         {
@@ -100,29 +114,65 @@ namespace ProjectCronos
                         isShowAllData = GUILayout.Toggle(isShowAllData, "変更していないデータも表示するか");
                     }
 
+                    // ここからスクロールエリア
+                    diffDataScrollPosition = EditorGUILayout.BeginScrollView(diffDataScrollPosition);
+
                     var messages = new List<string>();
                     foreach(var obj in objects)
                     {
                         messages = obj.GetMasterDataDiffDebugMessage(isShowBeforeDiff, isShowAllData);
-                        foreach(var message in messages)
-                        {
-                            GUILayout.Label(message, style);
-                        }
 
-                        //　仕切り線
-                        GUILayout.Box("", GUILayout.ExpandWidth(true), GUILayout.Height(2));
+                        if (messages.Count() > 0)
+                        {
+
+                            //　仕切り線
+                            GUILayout.Box("", GUILayout.ExpandWidth(true), GUILayout.Height(2));
+
+                            // データタイトル表示
+                            GUILayout.Label(obj.GetMasterDataTitle(), style);
+
+                            foreach (var message in messages)
+                            {
+                                GUILayout.Label(message, style);
+                            }
+
+                            //　仕切り線
+                            GUILayout.Box("", GUILayout.ExpandWidth(true), GUILayout.Height(2));
+                        }
                     }
+
+                    // スクロールエリア終了
+                    EditorGUILayout.EndScrollView();
                 }
 
                 using (new EditorGUILayout.VerticalScope("BOX"))
                 {
                     GUILayout.Label("<b>現在DBに保存されているバイナリデータ</b>", style);
-                    index = EditorGUILayout.Popup("表示するデータ", index, objects.Select(o => o.GetType().Name).ToArray());
+                    using (new EditorGUILayout.HorizontalScope())
+                    {
+                        index = EditorGUILayout.Popup("表示するデータ", index, objects.Select(o => o.GetType().Name).ToArray());
+
+                        // 選択しているScriptableObjectを開く
+                        if (GUILayout.Button("開く", GUILayout.Width(50)))
+                        {
+                            Selection.activeObject = objects[index];
+                        }
+                    }
+
+                    // データタイトル表示
+                    GUILayout.Label(objects[index].GetMasterDataTitle(), style);
+
+                    // ここからスクロールエリア
+                    dataBaseScrollPosition = EditorGUILayout.BeginScrollView(dataBaseScrollPosition);
+
                     var messages = objects[index].GetMasterDataDebugMessage();
                     foreach (var message in messages)
                     {
                         GUILayout.Label(message, style);
                     }
+
+                    // スクロールエリア終了
+                    EditorGUILayout.EndScrollView();
                 }
             }
             else
@@ -153,6 +203,9 @@ namespace ProjectCronos
             {
                 objects.Add(asset);
             }
+
+            // indexも初期化
+            index = 0;
         }
 
         void SaveMasterData()
@@ -196,6 +249,12 @@ namespace ProjectCronos
             Debug.Log("Complete!");
 
             AssetDatabase.Refresh();
+
+            // ScriptableObjectのDBキャッシュ更新
+            foreach(var obj in objects)
+            {
+                obj.UpdateDBCache();
+            }
         }
 #endif
     }
