@@ -88,7 +88,7 @@ namespace ProjectCronos
                 using (new EditorGUILayout.VerticalScope("BOX"))
                 {
                     GUILayout.Label("<b>ScriptableObject</b>", style);
-                    isShowScriptableObjectExtraCommand = GUILayout.Toggle(isShowScriptableObjectExtraCommand, "ExtraCommandを表示するか");
+                    isShowScriptableObjectExtraCommand = GUILayout.Toggle(isShowScriptableObjectExtraCommand, "ExtraCommandを表示");
 
                     if (isShowScriptableObjectExtraCommand)
                     {
@@ -132,8 +132,8 @@ namespace ProjectCronos
                     //　チェックボックス関連
                     using (new EditorGUILayout.HorizontalScope())
                     {
-                        isShowBeforeDiff = GUILayout.Toggle(isShowBeforeDiff, "変更前の差分を表示するか");
-                        isShowAllData = GUILayout.Toggle(isShowAllData, "変更していないデータも表示するか");
+                        isShowBeforeDiff = GUILayout.Toggle(isShowBeforeDiff, "変更前の差分を表示");
+                        isShowAllData = GUILayout.Toggle(isShowAllData, "変更していないデータも表示");
                     }
 
                     // FIXME: 強引な方法で差分があるかどうか判定しているのでもっと良い実装が見つかり次第対応

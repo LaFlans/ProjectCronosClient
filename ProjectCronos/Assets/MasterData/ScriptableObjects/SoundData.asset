@@ -19,21 +19,3 @@ MonoBehaviour:
   - key: BGM2
     type: 0
     path: Assets/ProjectCronosAssets/Sounds/BGM/RengokuTeien/Noir_Memory.mp3
-  - key: Button30
-    type: 1
-    path: Assets/ProjectCronosAssets/Sounds/SE/kurage/button/button30.mp3
-  - key: Button37
-    type: 1
-    path: Assets/ProjectCronosAssets/Sounds/SE/kurage/button/button37.mp3
-  - key: Button38
-    type: 1
-    path: Assets/ProjectCronosAssets/Sounds/SE/kurage/button/button38.mp3
-  - key: Button47
-    type: 1
-    path: Assets/ProjectCronosAssets/Sounds/SE/kurage/button/button47.mp3
-  - key: Button55
-    type: 1
-    path: Assets/ProjectCronosAssets/Sounds/SE/kurage/button/button55.mp3
-  - key: Slash
-    type: 1
-    path: Assets/ProjectCronosAssets/Sounds/SE/SlashSE.mp3

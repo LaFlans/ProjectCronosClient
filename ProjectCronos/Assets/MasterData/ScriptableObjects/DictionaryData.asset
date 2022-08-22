@@ -21,3 +21,5 @@ MonoBehaviour:
     message: "\u7D42\u4E86\u78BA\u8A8D"
   - key: ApplicationPopupQuitYesButtonMessage
     message: "\u306F\u3044"
+  - key: ApplicationPopupQuitYesButtonMessage2
+    message: YES
