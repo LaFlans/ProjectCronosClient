@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
@@ -35,9 +35,12 @@ namespace ProjectCronos
 
         void Update()
         {
-            if (soundKeys.Count > 0)
+            if (soundKeys != null)
             {
-                Play(soundKeys.Pop());
+                if (soundKeys.Count > 0)
+                {
+                    Play(soundKeys.Pop());
+                }
             }
         }
 
