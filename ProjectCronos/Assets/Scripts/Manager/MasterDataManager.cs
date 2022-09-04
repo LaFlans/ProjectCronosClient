@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -18,7 +18,7 @@ namespace ProjectCronos
 
         public override async UniTask<bool> Initialize()
         {
-            Addressables.LoadAsset<TextAsset>(masterDataPath)
+            Addressables.LoadAssetAsync<TextAsset>(masterDataPath)
                         .Completed += op =>
                         {
                             _db = new MemoryDatabase(op.Result.bytes);

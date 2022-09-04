@@ -25,7 +25,7 @@ MonoBehaviour:
         m_Id: With3Levels
     supportVolumetrics: 1
     supportVolumetricClouds: 0
-    supportLightLayers: 0
+    supportLightLayers: 1
     supportDistortion: 1
     supportTransparentBackface: 1
     supportTransparentDepthPrepass: 1
@@ -49,6 +49,7 @@ MonoBehaviour:
     supportTerrainHole: 0
     supportProbeVolume: 0
     probeVolumeMemoryBudget: 1024
+    supportProbeVolumeStreaming: 0
     probeVolumeSHBands: 1
     supportRayTracing: 0
     supportedRayTracingMode: 3
@@ -90,6 +91,7 @@ MonoBehaviour:
         useDynamicViewportRescale: 1
       cachedPunctualLightShadowAtlas: 2048
       cachedAreaLightShadowAtlas: 1024
+      allowDirectionalMixedCachedShadows: 0
       shadowResolutionDirectional:
         m_Values: 00010000000200000004000000080000
         m_SchemaId:

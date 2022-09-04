@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Threading;
@@ -50,7 +50,8 @@ namespace ProjectCronos
             //　シーンの事前読み込み
             await PreLoadAsset();
 
-            SoundManager.Instance.Play("BGM2");
+            //SoundManager.Instance.Play("BGM2");
+
             InputManager.Instance.SetInputStatus(EnumCollection.Input.INPUT_STATUS.PLAYER);
             InputManager.Instance.inputActions.UI.Escape.performed += OnApplicationQuitConfirm;
 

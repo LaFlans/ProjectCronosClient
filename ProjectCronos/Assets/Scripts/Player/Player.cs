@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
 using System.Linq;
@@ -48,17 +48,17 @@ namespace ProjectCronos
         /// </summary>
         Vector3 inputVec;
 
-        /// <summary>
-        /// 本
-        /// </summary>
-        [SerializeField]
-        Book book;
+        ///// <summary>
+        ///// 本
+        ///// </summary>
+        //[SerializeField]
+        //Book book;
 
-        /// <summary>
-        /// 目標となるオブジェクト
-        /// </summary>
-        [SerializeField]
-        TargetObject targetObj;
+        ///// <summary>
+        ///// 目標となるオブジェクト
+        ///// </summary>
+        //[SerializeField]
+        //TargetObject targetObj;
 
         [SerializeField]
         Transform[] spawnPos;
@@ -102,6 +102,8 @@ namespace ProjectCronos
         [SerializeField]
         GameObject freeLookCamera;
 
+        string demonHandPrefabPath = "Assets/Resources_moved/Prefabs/DemonHand.prefab";
+
         /// <summary>
         /// 初期化
         /// </summary>
@@ -123,7 +125,7 @@ namespace ProjectCronos
         /// <returns></returns>
         public async UniTask PreLoadAsync()
         {
-            await AddressableManager.Instance.Load("Assets/Resources_moved/Prefabs/SummonEffect.prefab");
+            await AddressableManager.Instance.Load(demonHandPrefabPath);
 
             //　事前読み込み完了時操作可能状態にする
             isControl = true;
@@ -225,7 +227,7 @@ namespace ProjectCronos
         /// </summary>
         void AnimEventAttackFirst()
         {
-            GameObject obj = AddressableManager.Instance.GetLoadedObject("Assets/Resources_moved/Prefabs/SummonEffect.prefab");
+            GameObject obj = AddressableManager.Instance.GetLoadedObject(demonHandPrefabPath);
             obj.transform.position = spawnPos[0].position;
             obj.transform.rotation = spawnPos[0].rotation;
             obj.transform.localScale = spawnPos[0].localScale;
@@ -236,7 +238,7 @@ namespace ProjectCronos
         /// </summary>
         void AnimEventAttackSecond()
         {
-            GameObject obj = AddressableManager.Instance.GetLoadedObject("Assets/Resources_moved/Prefabs/SummonEffect.prefab");
+            GameObject obj = AddressableManager.Instance.GetLoadedObject(demonHandPrefabPath);
             obj.transform.position = spawnPos[1].position;
             obj.transform.rotation = spawnPos[1].rotation;
             obj.transform.localScale = spawnPos[1].localScale;
@@ -247,7 +249,7 @@ namespace ProjectCronos
         /// </summary>
         void AnimEventAttackThird()
         {
-            GameObject obj = AddressableManager.Instance.GetLoadedObject("Assets/Resources_moved/Prefabs/SummonEffect.prefab");
+            GameObject obj = AddressableManager.Instance.GetLoadedObject(demonHandPrefabPath);
             obj.transform.position = spawnPos[2].position;
             obj.transform.rotation = spawnPos[2].rotation;
             obj.transform.localScale = spawnPos[2].localScale;
@@ -322,74 +324,74 @@ namespace ProjectCronos
             }
         }
 
-        /// <summary>
-        /// 弾を撃つ
-        /// </summary>
-        void Shot()
-        {
-            bulletFreqTime -= Time.deltaTime;
+        ///// <summary>
+        ///// 弾を撃つ
+        ///// </summary>
+        //void Shot()
+        //{
+        //    bulletFreqTime -= Time.deltaTime;
 
-            if (Gamepad.current.rightTrigger.ReadValue() > 0.1f)
-            {
-                if (bulletFreqTime < 0)
-                {
-                    // HACK: 設計から後で修正する必要あり
-                    book.Shot(targetObj.IsTargetEnemy() ? targetObj.transform.position : Camera.main.transform.forward * 1000);
-                    bulletFreqTime = bulletFreq;
-                }
-            }
-        }
+        //    if (Gamepad.current.rightTrigger.ReadValue() > 0.1f)
+        //    {
+        //        if (bulletFreqTime < 0)
+        //        {
+        //            // HACK: 設計から後で修正する必要あり
+        //            book.Shot(targetObj.IsTargetEnemy() ? targetObj.transform.position : Camera.main.transform.forward * 1000);
+        //            bulletFreqTime = bulletFreq;
+        //        }
+        //    }
+        //}
 
-        /// <summary>
-        /// ターゲットロックオン
-        /// </summary>
-        void RockonTarget()
-        {
-            if (Gamepad.current.rightStickButton.wasPressedThisFrame)
-            {
-                // ターゲットがいる場合、プレイヤーにターゲットを戻す
-                if (targetObj.IsTargetEnemy())
-                {
-                    Debug.Log("ロックオン解除");
-                    targetObj.SetTarget(head);
-                    return;
-                }
+        ///// <summary>
+        ///// ターゲットロックオン
+        ///// </summary>
+        //void RockonTarget()
+        //{
+        //    if (Gamepad.current.rightStickButton.wasPressedThisFrame)
+        //    {
+        //        // ターゲットがいる場合、プレイヤーにターゲットを戻す
+        //        if (targetObj.IsTargetEnemy())
+        //        {
+        //            Debug.Log("ロックオン解除");
+        //            targetObj.SetTarget(head);
+        //            return;
+        //        }
 
-                // いなければ付近の一番近い敵を探してロックオン処理を行う
-                RockOn();
-            }
-        }
+        //        // いなければ付近の一番近い敵を探してロックオン処理を行う
+        //        RockOn();
+        //    }
+        //}
 
-        /// <summary>
-        /// ロックオン処理
-        /// </summary>
-        public void RockOn()
-        {
-            var enemys = Physics.SphereCastAll(
-                this.transform.position, searchRange, this.transform.forward, 0.01f)
-                .Where(h => h.transform.gameObject.tag == "Enemy")
-                .Select(h => h.transform.gameObject)
-                .ToList();
+        ///// <summary>
+        ///// ロックオン処理
+        ///// </summary>
+        //public void RockOn()
+        //{
+        //    var enemys = Physics.SphereCastAll(
+        //        this.transform.position, searchRange, this.transform.forward, 0.01f)
+        //        .Where(h => h.transform.gameObject.tag == "Enemy")
+        //        .Select(h => h.transform.gameObject)
+        //        .ToList();
 
-            if (enemys.Count > 0)
-            {
-                float minDistance = searchRange;
-                foreach (var obj in enemys)
-                {
-                    float dist = Vector3.Distance(this.transform.position, obj.transform.position);
-                    if (dist < minDistance)
-                    {
-                        minDistance = dist;
+        //    if (enemys.Count > 0)
+        //    {
+        //        float minDistance = searchRange;
+        //        foreach (var obj in enemys)
+        //        {
+        //            float dist = Vector3.Distance(this.transform.position, obj.transform.position);
+        //            if (dist < minDistance)
+        //            {
+        //                minDistance = dist;
 
-                        targetObj.GetComponent<TargetObject>().SetTarget(obj);
-                    }
-                }
-            }
-            else
-            {
-                targetObj.SetTarget(head);
-            }
-        }
+        //                targetObj.GetComponent<TargetObject>().SetTarget(obj);
+        //            }
+        //        }
+        //    }
+        //    else
+        //    {
+        //        targetObj.SetTarget(head);
+        //    }
+        //}
 
         /// <summary>
         /// 移動
