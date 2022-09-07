@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,6 +9,9 @@ namespace ProjectCronos
         [SerializeField] GameObject target;
         Material mat;
         Animator anim;
+
+        [SerializeField] GameObject frontCrest;
+        [SerializeField] GameObject backCrest;
 
         void Start()
         {

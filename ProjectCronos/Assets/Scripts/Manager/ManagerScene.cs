@@ -40,7 +40,7 @@ namespace ProjectCronos
             task.Add(AddressableManager.instance.Initialize());
             task.Add(MasterDataManager.instance.Initialize());
             task.Add(InputManager.instance.Initialize());
-            task.Add(SoundManager.instance.Initialize());
+            //task.Add(SoundManager.instance.Initialize());
             task.Add(PopupManager.instance.Initialize());
 #if UNITY_EDITOR
             task.Add(ProductDebug.instance.Initialize());

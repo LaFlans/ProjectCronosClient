@@ -1,12 +1,16 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace ProjectCronos
 {
     [RequireComponent(typeof(EnemyStatus))]
     public class Enemy : Character, IEnemy
     {
+        public GameObject target;
+        private NavMeshAgent agent;
+
         /// <summary>
         /// 初期化
         /// </summary>
@@ -14,6 +18,13 @@ namespace ProjectCronos
         {
             base.Initialize();
             //Debug.Log("敵初期化");
+
+            agent = GetComponent<NavMeshAgent>();      
+        }
+
+        void Update()
+        {
+            agent.SetDestination(target.transform.position);
         }
 
         /// <summary>

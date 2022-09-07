@@ -18,11 +18,13 @@ namespace ProjectCronos
 
         public override async UniTask<bool> Initialize()
         {
-            Addressables.LoadAssetAsync<TextAsset>(masterDataPath)
-                        .Completed += op =>
-                        {
-                            _db = new MemoryDatabase(op.Result.bytes);
-                        };
+            var handle = Addressables.LoadAssetAsync<TextAsset>(masterDataPath);
+            await handle.Task;
+
+            handle.Completed += op =>
+            {
+                _db = new MemoryDatabase(op.Result.bytes);
+            };
 
             return true;
         }
