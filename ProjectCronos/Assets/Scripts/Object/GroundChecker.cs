@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -7,12 +7,8 @@ namespace ProjectCronos
 {
     public class GroundChecker : MonoBehaviour
     {
+        [SerializeField]
         private Player player;
-
-        void Start()
-        {
-            player = this.gameObject.transform.parent.gameObject.GetComponent<Player>();
-        }
 
         void OnTriggerEnter(Collider col)
         {

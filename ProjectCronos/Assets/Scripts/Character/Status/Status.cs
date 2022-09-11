@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,7 +13,7 @@ namespace ProjectCronos
         /// HPを表示するバー
         /// </summary>
         [SerializeField]
-        HpBar hpBar;
+        IHpBar hpBar;
 
         /// <summary>
         /// 最大体力
@@ -114,7 +114,7 @@ namespace ProjectCronos
         {
             if (hpBar != null)
             {
-                hpBar.UpdateHpText(currntHp, maxHp);
+                hpBar.Apply(currntHp, maxHp);
             }
         }
     }

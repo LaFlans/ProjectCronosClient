@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,7 +9,6 @@ namespace ProjectCronos
     /// </summary>
     public class EnemyInfo : MonoBehaviour
     {
-        [SerializeField]
         string enemyName;
 
         [SerializeField]

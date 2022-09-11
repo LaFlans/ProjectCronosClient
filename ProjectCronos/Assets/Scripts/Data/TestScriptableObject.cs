@@ -32,6 +32,7 @@ namespace ProjectCronos
                 this.attack = attack;
             }
         }
+
         [SerializeField]
         private List<TestData> data = new List<TestData>();
         private List<Test> dbData = new List<Test>();

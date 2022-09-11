@@ -8,5 +8,6 @@ namespace ProjectCronos
 {
     class Bifrons : Enemy
     {
+        
     }
 }
