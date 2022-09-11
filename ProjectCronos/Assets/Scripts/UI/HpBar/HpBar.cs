@@ -8,12 +8,6 @@ namespace ProjectCronos
     public abstract class IHpBar : MonoBehaviour
     {
         /// <summary>
-        /// HP表示テキスト
-        /// </summary>
-        [SerializeField]
-        protected TextMeshPro hpText;
-
-        /// <summary>
         /// HPバーの親トランスフォーム
         /// </summary>
         [SerializeField]
@@ -27,6 +21,11 @@ namespace ProjectCronos
         /// <summary>
         /// 更新処理
         /// </summary>
-        public abstract void Apply(int value, int hpMax);
+        public abstract void Apply(int value, int hpMax, EnumCollection.UI.HP_BAR_SHOW_STATUS status);
+
+        /// <summary>
+        /// 表示切替処理
+        /// </summary>
+        public abstract void SetShow(bool isShow);
     }
 }

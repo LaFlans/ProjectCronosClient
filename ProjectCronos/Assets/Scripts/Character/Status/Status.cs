@@ -13,7 +13,7 @@ namespace ProjectCronos
         /// HPを表示するバー
         /// </summary>
         [SerializeField]
-        IHpBar hpBar;
+        protected IHpBar hpBar;
 
         /// <summary>
         /// 最大体力
@@ -85,7 +85,7 @@ namespace ProjectCronos
         {
             maxHp = 10;
             currntHp = maxHp;
-            UpdateHpText();
+            ApplyHpText();
         }
 
         /// <summary>
@@ -99,10 +99,11 @@ namespace ProjectCronos
 
             if (currntHp <= 0)
             {
+                hpBar.SetShow(false);
                 return true;
             }
 
-            UpdateHpText();
+            ApplyHpText();
 
             return false;
         }
@@ -110,11 +111,11 @@ namespace ProjectCronos
         /// <summary>
         /// HP表示更新
         /// </summary>
-        void UpdateHpText()
+        public virtual void ApplyHpText()
         {
             if (hpBar != null)
             {
-                hpBar.Apply(currntHp, maxHp);
+                hpBar.Apply(currntHp, maxHp, EnumCollection.UI.HP_BAR_SHOW_STATUS.ALL_HP);
             }
         }
     }
