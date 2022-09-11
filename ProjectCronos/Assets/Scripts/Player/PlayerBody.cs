@@ -2,13 +2,13 @@ using UnityEngine;
 
 namespace ProjectCronos
 {
-    public class EnemyBody : MonoBehaviour
+    public class PlayerBody : MonoBehaviour
     {
         /// <summary>
         /// 親
         /// </summary>
-        Enemy enemy;
-        
+        Player player;
+
         /// <summary>
         /// ダメージ倍率
         /// </summary>
@@ -17,7 +17,7 @@ namespace ProjectCronos
 
         void Start()
         {
-            enemy = this.transform.parent.GetComponent<Enemy>();
+            player = this.transform.parent.GetComponent<Player>();
         }
 
         /// <summary>
@@ -25,7 +25,7 @@ namespace ProjectCronos
         /// </summary>
         public void Damage(int value)
         {
-            enemy.Damage(value * damageRate);
+            player.Damage(value * damageRate);
         }
     }
 }

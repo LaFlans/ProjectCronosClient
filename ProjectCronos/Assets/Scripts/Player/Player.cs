@@ -77,6 +77,12 @@ namespace ProjectCronos
         GameObject head;
 
         /// <summary>
+        /// プレイヤーの中心の位置を示すオブジェクト
+        /// </summary>
+        [SerializeField]
+        GameObject center;
+
+        /// <summary>
         /// ジャンプしたか
         /// </summary>
         bool isJump = false;
@@ -134,6 +140,14 @@ namespace ProjectCronos
             SetInputAction();
         }
 
+        /// <summary>
+        /// プレイヤーの中心のトランスフォームを渡す
+        /// </summary>
+        /// <returns>プレイヤーの中心のトランスフォーム</returns>
+        public Transform GetCenterPos()
+        {
+            return center.transform;
+        }
 
         void SetInputAction()
         {
@@ -159,6 +173,8 @@ namespace ProjectCronos
                     }
                 });
 
+            // テスト
+            InputManager.Instance.inputActions.Player.Test.performed += OnTest;
         }
 
         void RemoveInputAction()
@@ -173,6 +189,16 @@ namespace ProjectCronos
 
             // 攻撃
             InputManager.Instance.inputActions.Player.Attack.performed -= OnAttack;
+
+            // テスト
+            InputManager.Instance.inputActions.Player.Test.performed -= OnTest;
+        }
+
+        void OnTest(InputAction.CallbackContext context)
+        {
+            // プレイヤーにダメージを与えるテスト
+            UnityEngine.Debug.Log("ダメージテスト");
+            Damage(1);
         }
 
         /// <summary>

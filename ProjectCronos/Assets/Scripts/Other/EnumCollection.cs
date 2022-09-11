@@ -1,4 +1,4 @@
-﻿namespace ProjectCronos
+namespace ProjectCronos
 {
     /// <summary>
     /// Enumの定義を集めた物
@@ -24,6 +24,28 @@
                 /// プレイヤー側の操作可能
                 /// </summary>
                 PLAYER,
+                /// <summary>
+                /// 要素数
+                /// </summary>
+                MAXMUM,
+            }
+        }
+
+        /// <summary>
+        /// UI関連
+        /// </summary>
+        namespace UI
+        {
+            public enum HP_BAR_SHOW_STATUS
+            {
+                /// <summary>
+                /// 残りHPのみ表示
+                /// </summary>
+                CURRENT_HP_ONLY,
+                /// <summary>
+                /// HP関連すべて表示
+                /// </summary>
+                ALL_HP,
                 /// <summary>
                 /// 要素数
                 /// </summary>
@@ -154,6 +176,31 @@
                 /// 着地
                 /// </summary>
                 LANDING,
+                /// <summary>
+                /// 要素数
+                /// </summary>
+                MAXMUM,
+            }
+        }
+
+        /// <summary>
+        /// 攻撃(武器・魔法)関連
+        /// </summary>
+        namespace Attack
+        {
+            /// <summary>
+            /// 攻撃の種類
+            /// </summary>
+            public enum ATTACK_TYPE
+            {
+                /// <summary>
+                /// プレイヤーの攻撃
+                /// </summary>
+                PLAYER,
+                /// <summary>
+                /// 敵の攻撃
+                /// </summary>
+                ENEMY,
                 /// <summary>
                 /// 要素数
                 /// </summary>
