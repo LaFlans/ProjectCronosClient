@@ -16,6 +16,9 @@ namespace ProjectCronos
         [SerializeField]
         int moveSpeed = 10;
 
+        [SerializeField]
+        int attackMoveDelayRate = 10;
+
         /// <summary>
         /// 回転速度
         /// </summary>
@@ -425,9 +428,16 @@ namespace ProjectCronos
         void Move()
         {
             var vec = GetDirection();
-            var speed = moveSpeed;
 
-            rigid.velocity = new Vector3(vec.x * speed, rigid.velocity.y, vec.z * speed);
+            // アニメーション中は移動速度を落とす
+            if (anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
+            {
+                rigid.velocity = new Vector3(vec.x * moveSpeed / attackMoveDelayRate, rigid.velocity.y, vec.z * moveSpeed / attackMoveDelayRate);
+            }
+            else
+            {
+                rigid.velocity = new Vector3(vec.x * moveSpeed, rigid.velocity.y, vec.z * moveSpeed);
+            }
 
             anim.SetFloat("Speed", vec.magnitude);
 
