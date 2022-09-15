@@ -36,6 +36,8 @@ namespace ProjectCronos
             loaded = new Dictionary<string, AsyncOperationHandle<GameObject>>();
             clipLoaded = new Dictionary<string, AsyncOperationHandle<AudioClip>>();
 
+            Debug.Log("AddressableManager初期化");
+
             return true;
         }
 

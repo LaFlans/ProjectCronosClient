@@ -71,6 +71,8 @@ namespace ProjectCronos
                 await AddressableManager.Instance.Load(GetPopupPath((EnumCollection.Popup.POPUP_TYPE)i));
             }
 
+            Debug.Log("PopupManager初期化");
+
             return true;
         }
 

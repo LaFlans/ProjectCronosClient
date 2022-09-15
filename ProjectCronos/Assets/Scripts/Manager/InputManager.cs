@@ -28,6 +28,8 @@ namespace ProjectCronos
                 SwitchInputStatusEvent = new UnityEvent();
             }
 
+            Debug.Log("InputManager初期化");
+
             return true;
         }
 

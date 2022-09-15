@@ -32,6 +32,9 @@ namespace ProjectCronos
                 Debug.Log("シーンの読み込みに失敗したよ…");
             }
 
+            // BGMの再生
+            SoundManager.Instance.Play("WorkBGM");
+
             // プレイヤーの初期化
             player.Initialize();
 
@@ -58,8 +61,6 @@ namespace ProjectCronos
 
             //　シーンの事前読み込み
             await PreLoadAsset();
-
-            //SoundManager.Instance.Play("BGM2");
 
             InputManager.Instance.SetInputStatus(EnumCollection.Input.INPUT_STATUS.PLAYER);
             InputManager.Instance.inputActions.UI.Escape.performed += OnApplicationQuitConfirm;

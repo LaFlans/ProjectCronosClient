@@ -26,6 +26,8 @@ namespace ProjectCronos
                 _db = new MemoryDatabase(op.Result.bytes);
             };
 
+            Debug.Log("MasterDataManager初期化");
+
             return true;
         }
 
@@ -35,6 +37,12 @@ namespace ProjectCronos
         /// </summary>
         public async UniTask LoadSoundData()
         {
+            if (DB == null)
+            {
+                Debug.Log("DBがnullだよ！");
+                return;
+            }
+
             foreach (var item in DB.SoundTable.All)
             {
                 await AddressableManager.instance.LoadClip(item.Path);
@@ -44,11 +52,19 @@ namespace ProjectCronos
         /// <summary>
         /// 文言取得
         /// </summary>
-        /// <param name="Key">キーとなる文字列</param>
+        /// <param name="key">キーとなる文字列</param>
         /// <returns>設定されている文字列</returns>
-        public string GetDic(string Key)
+        public string GetDic(string key)
         {
-            return DB.DictionaryTable.FindByKey(Key).Message;
+            if (DB == null)
+            {
+                Debug.Log("DBがnullだよ！");
+                return $"{key}は存在していません";
+            }
+
+            Debug.Log("DBがnullじゃないよ！");
+
+            return DB.DictionaryTable.FindByKey(key).Message;
         }
     }
 }

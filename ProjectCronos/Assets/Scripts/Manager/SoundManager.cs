@@ -27,9 +27,6 @@ namespace ProjectCronos
                 },
                 this.transform);
 
-            // マスタデータに登録されているサウンドデータを読み込む
-            await MasterDataManager.instance.LoadSoundData();
-
             return true;
         }
 

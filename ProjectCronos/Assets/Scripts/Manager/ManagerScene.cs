@@ -35,17 +35,16 @@ namespace ProjectCronos
             this.gameObject.AddComponent<ProductDebug>();
 #endif
 
+            // マネージャーを初期化
             List<UniTask<bool>> task = new List<UniTask<bool>>();
-
             task.Add(AddressableManager.instance.Initialize());
             task.Add(MasterDataManager.instance.Initialize());
             task.Add(InputManager.instance.Initialize());
-            //task.Add(SoundManager.instance.Initialize());
+            task.Add(SoundManager.instance.Initialize());
             task.Add(PopupManager.instance.Initialize());
 #if UNITY_EDITOR
             task.Add(ProductDebug.instance.Initialize());
 #endif
-
             foreach (var item in task)
             {
                 if (!await item)
@@ -54,6 +53,12 @@ namespace ProjectCronos
                     break;
                 }
             }
+
+            // その他データ読み込み
+            // マスタデータに登録されているサウンドデータを読み込む
+            await MasterDataManager.instance.LoadSoundData();
+
+            Debug.Log("Soundデータの読み込み");
 
             isLaunch = true;
         }

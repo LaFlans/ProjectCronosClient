@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System;
 using Cysharp.Threading.Tasks;
 
@@ -25,6 +25,8 @@ namespace ProjectCronos
                         graphy = obj;
                     });
             }
+
+            Debug.Log("DebugManager初期化");
 
             return true;
         }

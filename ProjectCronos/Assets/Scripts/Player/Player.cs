@@ -223,6 +223,8 @@ namespace ProjectCronos
         public override void Damage(int value)
         {
             base.Damage(value);
+
+            SoundManager.Instance.Play("Damage1");
         }
 
         /// <summary>
@@ -301,6 +303,8 @@ namespace ProjectCronos
                     isJump = false;
                     jumpState = EnumCollection.Player.PLAYER_JUMP_STATE.JUMP;
                     rigid.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
+
+                    SoundManager.Instance.Play("TakeoffPlayer");
                 }
 
                 Move();
@@ -314,6 +318,8 @@ namespace ProjectCronos
         {
             isGround = true;
             anim.SetBool("IsGround", true);
+
+            SoundManager.Instance.Play("LandingPlayer");
         }
 
         /// <summary>
