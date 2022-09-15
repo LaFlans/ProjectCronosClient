@@ -17,6 +17,9 @@ namespace ProjectCronos
         [SerializeField]
         Player player;
 
+        [SerializeField]
+        EnemyController enemyController;
+
         bool isShowQuitPopup;
 
         async void Start()
@@ -28,6 +31,12 @@ namespace ProjectCronos
             {
                 Debug.Log("シーンの読み込みに失敗したよ…");
             }
+
+            // プレイヤーの初期化
+            player.Initialize();
+
+            // 敵の初期化
+            enemyController.Initialize();
         }
 
         async UniTask<bool> Initialize()
