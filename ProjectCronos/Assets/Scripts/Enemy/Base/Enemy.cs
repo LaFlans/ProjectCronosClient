@@ -28,6 +28,7 @@ namespace ProjectCronos
 
         bool isAiStateRunning = false;
         bool isWait = false;
+        bool isInit;
 
         /// <summary>
         /// ターゲットとの距離
@@ -47,6 +48,8 @@ namespace ProjectCronos
         /// </summary>
         public override async void Initialize()
         {
+            isInit = false;
+            
             target = GameObject.Find("Player").GetComponent<Player>().GetCenterPos();
 
             base.Initialize();
@@ -57,8 +60,14 @@ namespace ProjectCronos
             state = ENEMY_AI_STATE.IDLE;
 
             await Load();
+
+            isInit = true;
         }
 
+        /// <summary>
+        /// 読み込む必要があるものを読み込む
+        /// </summary>
+        /// <returns></returns>
         protected virtual async UniTask Load()
         {
         }
@@ -68,7 +77,10 @@ namespace ProjectCronos
             //　デバック用
             stateDebugText.text = state.ToString();
 
-            ApplyAi();
+            if (isInit)
+            {
+                ApplyAi();
+            }
         }
 
         void ApplyAi()
