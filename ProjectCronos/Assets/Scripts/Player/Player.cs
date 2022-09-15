@@ -95,6 +95,9 @@ namespace ProjectCronos
         /// </summary>
         bool isGround = false;
 
+        [SerializeField]
+        GroundChecker groundChecker;
+
         /// <summary>
         /// ジャンプ力
         /// </summary>
@@ -122,6 +125,8 @@ namespace ProjectCronos
 
             rigid = this.GetComponent<Rigidbody>();
             anim = this.GetComponent<Animator>();
+
+            groundChecker.Initialized(OnLanding, OnTakeoff);
 
             // 状態設定
             jumpState = EnumCollection.Player.PLAYER_JUMP_STATE.IDOL;
