@@ -16,7 +16,6 @@ namespace ProjectCronos
         /// </summary>
         void Start()
         {
-            Initialize();
         }
 
         /// <summary>
