@@ -47,6 +47,8 @@ namespace ProjectCronos
             {
                 await AddressableManager.instance.LoadClip(item.Path);
             }
+
+            Debug.Log("Soundデータの読み込み");
         }
 
         /// <summary>
@@ -58,11 +60,8 @@ namespace ProjectCronos
         {
             if (DB == null)
             {
-                Debug.Log("DBがnullだよ！");
                 return $"{key}は存在していません";
             }
-
-            Debug.Log("DBがnullじゃないよ！");
 
             return DB.DictionaryTable.FindByKey(key).Message;
         }

@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine.InputSystem;
 
@@ -33,7 +30,7 @@ namespace ProjectCronos
             }
 
             // BGMの再生
-            SoundManager.Instance.Play("WorkBGM");
+            //SoundManager.Instance.Play("WorkBGM");
 
             // プレイヤーの初期化
             player.Initialize();
@@ -47,7 +44,6 @@ namespace ProjectCronos
             loadStatus = EnumCollection.Scene.SCENE_LOAD_STATUS.LOADING;
 
             // ローディングシーンを読み込む
-            // FIXME: もっといい感じのロード処理にする(ローディングシーンは常に存在する形がよさそう？)
             SceneLoader.LoadScene("LoadingScene");
 
             // マネージャーシーンを読み込む

@@ -130,6 +130,9 @@ namespace ProjectCronos
 
             // 状態設定
             jumpState = EnumCollection.Player.PLAYER_JUMP_STATE.IDOL;
+
+            //　事前読み込み完了時操作可能状態にする
+            isControl = true;
         }
 
         /// <summary>
@@ -140,9 +143,6 @@ namespace ProjectCronos
         public async UniTask PreLoadAsync()
         {
             await AddressableManager.Instance.Load(demonHandPrefabPath);
-
-            //　事前読み込み完了時操作可能状態にする
-            isControl = true;
 
             // 入力イベント設定
             SetInputAction();

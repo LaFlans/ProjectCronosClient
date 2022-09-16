@@ -58,8 +58,6 @@ namespace ProjectCronos
             // マスタデータに登録されているサウンドデータを読み込む
             await MasterDataManager.instance.LoadSoundData();
 
-            Debug.Log("Soundデータの読み込み");
-
             isLaunch = true;
         }
     }

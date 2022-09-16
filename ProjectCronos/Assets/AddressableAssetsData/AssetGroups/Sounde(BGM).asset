@@ -32,6 +32,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cfc7da00797839543b88c6d8f0992991
+    m_Address: "Assets/ProjectCronosAssets/Sounds/BGM/WorkBGM/\u4E88\u611F\u306E\u3074\u3093\u307D\u3093\u805E\u3053\u3048\u305F\u3089.mp3"
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 935c614e6cbfb024884f0f3e5a7850c3, type: 2}
   m_SchemaSet:
