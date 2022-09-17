@@ -2,10 +2,9 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-
 namespace ProjectCronos
 {
-    class ProjectCronosSettings : ScriptableObject
+    public class ProjectCronosSettings : ScriptableObject
     {
         public const string settingsPath = "Assets/Editor/Settings.asset";
         [SerializeField]
@@ -32,8 +31,10 @@ namespace ProjectCronos
         private string substanceTexturesPath;
         [SerializeField]
         private int generateMaterialMax;
+        [SerializeField]
+        public bool IsMuteSound;
 
-        internal static ProjectCronosSettings GetSettings()
+        static ProjectCronosSettings GetSettings()
         {
             var settings = AssetDatabase.LoadAssetAtPath<ProjectCronosSettings>(settingsPath);
             if (settings == null)
@@ -49,9 +50,9 @@ namespace ProjectCronos
                 settings.normalMapShaderIdentifer = "_NormalMap";
                 settings.emissiveMapShaderIdentifer = "_EmissiveMap";
                 settings.specularMapShaderIdentifer = "_SpecularMap";
-
                 settings.substanceTexturesPath = "Assets/ProjectCronosAssets/Textures";
                 settings.generateMaterialMax = 10;
+                settings.IsMuteSound = false;
                 AssetDatabase.CreateAsset(settings, settingsPath);
                 AssetDatabase.SaveAssets();
             }

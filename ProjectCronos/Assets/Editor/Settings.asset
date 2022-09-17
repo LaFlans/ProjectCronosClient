@@ -24,3 +24,4 @@ MonoBehaviour:
   specularMapShaderIdentifer: _SpecularColorMap
   substanceTexturesPath: Assets/ProjectCronosAssets/Textures/Character
   generateMaterialMax: 20
+  IsMuteSound: 1
