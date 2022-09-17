@@ -10,7 +10,6 @@ namespace ProjectCronos
     internal class MaterialCreator : EditorWindow
     {
 #if UNITY_EDITOR
-        private const string settingsPath = "Assets/Editor/Settings.asset";
         private const string defaultMaterialPath = "Assets/ProjectCronosAssets/Materials/Default/DefaultMat.mat";
         private static string[] extensions = { ".png" };
         private int index = 0;
@@ -45,13 +44,7 @@ namespace ProjectCronos
 
         private void OnGUI()
         {
-            var settings = AssetDatabase.LoadAllAssetsAtPath(settingsPath).FirstOrDefault();
-            if (settings == null)
-            {
-                ProjectCronosSettings.GetSettings();
-            }
-
-            var obj = new SerializedObject(settings);
+            var obj = ProjectCronosSettings.GetSerializedSettings();
             var prop = obj.FindProperty("substanceTexturesPath");
             if (prop.stringValue == string.Empty)
             {
