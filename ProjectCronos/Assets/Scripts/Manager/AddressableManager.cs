@@ -64,7 +64,7 @@ namespace ProjectCronos
             }
             else
             {
-                Debug.LogError($"path:{path}は既に読み込まれているよ！");
+                Debug.Log($"path:{path}は既に読み込まれているよ！");
             }
         }
 
