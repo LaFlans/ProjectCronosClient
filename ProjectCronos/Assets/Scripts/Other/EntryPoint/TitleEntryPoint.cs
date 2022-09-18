@@ -12,13 +12,22 @@ namespace ProjectCronos
         /// <returns>UniTask</returns>
         public override async UniTask<bool> Initialize()
         {
+            // 現在シーンの設定
+            ManagerScene.SetCurrentScene(EnumCollection.Scene.SCENE_TYPE.TITLE);
+
+            // 入力イベント設定
             InputManager.Instance.SetInputStatus(EnumCollection.Input.INPUT_STATUS.UI);
             InputManager.Instance.inputActions.UI.Submit.performed += OnClickSubmit;
 
-            // BGMの再生
+            // BGMの再生設定
             SoundManager.Instance.Play("WorkBGM1");
 
             return true;
+        }
+
+        void OnDestroy()
+        {
+            InputManager.Instance.inputActions.UI.Submit.performed -= OnClickSubmit;
         }
 
         /// <summary>
@@ -35,19 +44,8 @@ namespace ProjectCronos
         /// <param name="context"></param>
         void OnClickSubmit(InputAction.CallbackContext context)
         {
-            Debug.Log("次のシーンを読み込むよ");
-
-            // ローディングシーンを読み込む
-            SceneLoader.LoadScene("LoadingScene");
-
-            // 次のシーンを読み込む
-            SceneLoader.LoadScene("MainScene");
-
-            // 現在のシーンをアンロード
-            SceneLoader.UnloadScene("TitleScene");
-
-            // ローディングシーンをアンロード
-            SceneLoader.UnloadScene("LoadingScene");
+            // メインシーンへ遷移を行う
+            SceneLoader.TransitionScene(EnumCollection.Scene.SCENE_TYPE.MAIN);
         }
     }
 }

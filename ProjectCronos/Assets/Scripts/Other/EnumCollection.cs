@@ -1,3 +1,5 @@
+using System.ComponentModel;
+
 namespace ProjectCronos
 {
     /// <summary>
@@ -67,11 +69,18 @@ namespace ProjectCronos
                 /// <summary>
                 /// タイトルシーン
                 /// </summary>
+                [Description("TitleScene")]
                 TITLE,
                 /// <summary>
                 /// メインとなるシーン
                 /// </summary>
+                [Description("MainScene")]
                 MAIN,
+                /// <summary>
+                /// ローディングシーン
+                /// </summary>
+                [Description("LoadingScene")]
+                LOADING,
                 /// <summary>
                 /// 最大数
                 /// </summary>
@@ -120,6 +129,10 @@ namespace ProjectCronos
                 /// アプリケーション終了確認ポップアップ
                 /// </summary>
                 QUIT_APPLICATION,
+                /// <summary>
+                /// タイトル遷移確認ポップアップ
+                /// </summary>
+                TRANSITION_TITLE_CONFIRM,
                 /// <summary>
                 /// 要素数
                 /// </summary>

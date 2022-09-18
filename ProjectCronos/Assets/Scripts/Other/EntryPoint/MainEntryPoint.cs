@@ -12,7 +12,7 @@ namespace ProjectCronos
         [SerializeField]
         EnemyController enemyController;
 
-        bool isShowQuitPopup;
+        bool isShowPopup;
 
         /// <summary>
         /// シーンの初期化
@@ -20,7 +20,10 @@ namespace ProjectCronos
         /// <returns>UniTask</returns>
         public override async UniTask<bool> Initialize()
         {
-            isShowQuitPopup = false;
+            // 現在シーンの設定
+            ManagerScene.SetCurrentScene(EnumCollection.Scene.SCENE_TYPE.MAIN);
+
+            isShowPopup = false;
 
             // BGMの再生
             SoundManager.Instance.Play("WorkBGM2");
@@ -31,10 +34,16 @@ namespace ProjectCronos
             // 敵の初期化
             enemyController.Initialize();
 
+            // 入力イベント設定
             InputManager.Instance.SetInputStatus(EnumCollection.Input.INPUT_STATUS.PLAYER);
-            InputManager.Instance.inputActions.UI.Escape.performed += OnApplicationQuitConfirm;
+            InputManager.Instance.inputActions.UI.Escape.performed += OnTransitionTitleConfirm;
 
             return true;
+        }
+
+        void OnDestroy()
+        {
+            InputManager.Instance.inputActions.UI.Escape.performed -= OnTransitionTitleConfirm;
         }
 
         /// <summary>
@@ -53,13 +62,35 @@ namespace ProjectCronos
         /// <param name="context"></param>
         void OnApplicationQuitConfirm(InputAction.CallbackContext context)
         {
-            if (!isShowQuitPopup)
+            if (!isShowPopup)
             {
-                isShowQuitPopup = true;
                 var obj = PopupManager.Instance.GetPopupObject(
                     EnumCollection.Popup.POPUP_TYPE.QUIT_APPLICATION);
 
-                obj.GetComponent<PopupBase>().Setup(() => { isShowQuitPopup = false; });
+                if (obj != null)
+                {
+                    isShowPopup = true;
+                    obj.GetComponent<PopupBase>().Setup(() => { isShowPopup = false; });
+                }
+            }
+        }
+
+        /// <summary>
+        /// タイトル遷移確認
+        /// </summary>
+        /// <param name="context"></param>
+        void OnTransitionTitleConfirm(InputAction.CallbackContext context)
+        {
+            if (!isShowPopup)
+            {
+                var obj = PopupManager.Instance.GetPopupObject(
+                    EnumCollection.Popup.POPUP_TYPE.TRANSITION_TITLE_CONFIRM);
+
+                if (obj != null)
+                {
+                    isShowPopup = true;
+                    obj.GetComponent<PopupBase>().Setup(() => { isShowPopup = false; });
+                }
             }
         }
     }

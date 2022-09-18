@@ -202,6 +202,12 @@ namespace ProjectCronos
             InputManager.Instance.inputActions.Player.Test.performed -= OnTest;
         }
 
+        void OnDestroy()
+        {
+            // 入力イベントを外す
+            RemoveInputAction();
+        }
+
         void OnTest(InputAction.CallbackContext context)
         {
             // プレイヤーにダメージを与えるテスト

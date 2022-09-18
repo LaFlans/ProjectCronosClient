@@ -15,7 +15,7 @@ namespace ProjectCronos
 
             // ローディングシーンを読み込む
             // FIXME: もっといい感じのロード処理にする(ローディングシーンは常に存在する形がよさそう？)
-            SceneLoader.LoadScene("LoadingScene");
+            SceneLoader.LoadScene(EnumExtension.GetDescriptionFromValue(EnumCollection.Scene.SCENE_TYPE.LOADING));
 
             if (!Utility.IsAlreadyLoadScene("ManagerScene"))
             {
@@ -32,7 +32,7 @@ namespace ProjectCronos
             await Initialize();
 
             // ローディングシーンをアンロード
-            SceneLoader.UnloadScene("LoadingScene");
+            SceneLoader.UnloadScene(EnumExtension.GetDescriptionFromValue(EnumCollection.Scene.SCENE_TYPE.LOADING));
 
             loadStatus = EnumCollection.Scene.SCENE_LOAD_STATUS.COMPLETE;
         }

@@ -21,5 +21,11 @@ MonoBehaviour:
     message: "\u7D42\u4E86\u78BA\u8A8D"
   - key: ApplicationPopupQuitYesButtonMessage
     message: "\u306F\u3044"
-  - key: ApplicationPopupQuitYesButtonMessage2
-    message: YES
+  - key: TransitionTitleConfirmPopupButtonNoMessage
+    message: "\u3044\u3044\u3048"
+  - key: TransitionTitleConfirmPopupButtonYesMessage
+    message: "\u306F\u3044"
+  - key: TransitionTitleConfirmPopupMessage
+    message: "\u30BF\u30A4\u30C8\u30EB\u306B\u623B\u308A\u307E\u3059\u304B\uFF1F"
+  - key: TransitionTitleConfirmPopupTitle
+    message: "\u78BA\u8A8D"

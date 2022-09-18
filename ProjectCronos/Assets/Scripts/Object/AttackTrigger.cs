@@ -68,14 +68,20 @@ namespace ProjectCronos
             }
             else
             {
-                //　移動できない間は、向きだけ更新
-                this.transform.LookAt(target.transform);
+                if (target != null)
+                {
+                    //　移動できない間は、向きだけ更新
+                    this.transform.LookAt(target.transform);
+                }
             }
         }
 
         void SetVec()
         {
-            this.vec = Vector3.Normalize(target.transform.position - this.transform.position);
+            if (target != null)
+            {
+                this.vec = Vector3.Normalize(target.transform.position - this.transform.position);
+            }
         }
 
         /// <summary>

@@ -12,10 +12,13 @@ namespace ProjectCronos
         Action onTakeOff;
         Collider col;
 
-        private void Start()
+        void Start()
         {
-            col = GetComponent<Collider>();
-            col.enabled = false;
+            if (col == null)
+            {
+                col = GetComponent<Collider>();
+                col.enabled = false;
+            }
         }
 
         /// <summary>
@@ -27,6 +30,12 @@ namespace ProjectCronos
         {
             this.onLanding = onLanding;
             this.onTakeOff = onTakeOff;
+
+            if (col == null)
+            {
+                col = GetComponent<Collider>();
+                col.enabled = false;
+            }
 
             col.enabled = true;
         }

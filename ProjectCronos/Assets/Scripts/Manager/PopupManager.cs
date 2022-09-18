@@ -26,11 +26,22 @@ namespace ProjectCronos
 
         /// <summary>
         /// ポップアッププレハブ取得
+        /// 表示するキャンバスの親オブジェクトがない場合、nullを返す
         /// </summary>
         /// <param name="type">ポップアップの種類</param>
         /// <returns>読み込まれたプレハブオブジェクト</returns>
         public GameObject GetPopupObject(EnumCollection.Popup.POPUP_TYPE type)
         {
+            if (parentCanvas == null)
+            {
+                parentCanvas = GameObject.Find("PopupParent");
+                if (parentCanvas == null)
+                {
+                    //　一度探して該当するオブジェクトがない場合、何もしない
+                    return null;
+                }
+            }
+
             var obj = Instantiate(AddressableManager.Instance.GetLoadedObject(GetPopupPath(type)), parentCanvas.transform);
             PushPopup(new Param(obj));
             return obj;
@@ -45,6 +56,8 @@ namespace ProjectCronos
                     return "Assets/Resources_moved/Prefabs/Popup/DefaultPopup.prefab";
                 case EnumCollection.Popup.POPUP_TYPE.QUIT_APPLICATION:
                     return "Assets/Resources_moved/Prefabs/Popup/ApplicationQuitPopup.prefab";
+                case EnumCollection.Popup.POPUP_TYPE.TRANSITION_TITLE_CONFIRM:
+                    return "Assets/Resources_moved/Prefabs/Popup/TransitionTitleConfirmPopup.prefab";
                 default:
                     // デフォルトのポップアップのパスを返す
                     return "Assets/Resources_moved/Prefabs/Popup/DefaultPopup.prefab";  

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -434,6 +434,7 @@ namespace ProjectCronos
 
             yield return null;
         }
+
         //　目的地(target)と目的地までの時間(time)
         public static IEnumerator ToTargetLookPos(GameObject obj, Vector3 target, float time)
         {

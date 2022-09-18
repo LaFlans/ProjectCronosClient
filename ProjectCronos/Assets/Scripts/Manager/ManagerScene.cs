@@ -1,16 +1,20 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Controls;
-using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
-
 
 namespace ProjectCronos
 {
     class ManagerScene : MonoBehaviour
     {
+        /// <summary>
+        /// 一度でも起動したか
+        /// </summary>
         public static bool isLaunch;
+
+        /// <summary>
+        /// 現在のシーン
+        /// </summary>
+        static EnumCollection.Scene.SCENE_TYPE currentScene;
 
         void Awake()
         {
@@ -59,6 +63,24 @@ namespace ProjectCronos
             await MasterDataManager.instance.LoadSoundData();
 
             isLaunch = true;
+        }
+
+        /// <summary>
+        /// 現在のシーンを設定
+        /// </summary>
+        /// <param name="scene">設定するシーン</param>
+        public static void SetCurrentScene(EnumCollection.Scene.SCENE_TYPE scene)
+        {
+            currentScene = scene;
+        }
+
+        /// <summary>
+        /// 現在のシーンを返す
+        /// </summary>
+        /// <returns>現在のシーン</returns>
+        public static EnumCollection.Scene.SCENE_TYPE GetCurrentScene()
+        {
+            return currentScene;
         }
     }
 }

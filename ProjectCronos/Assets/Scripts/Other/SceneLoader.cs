@@ -32,5 +32,30 @@ namespace ProjectCronos
                 SceneManager.UnloadSceneAsync(sceneName);
             }
         }
+
+        /// <summary>
+        /// 指定のシーンに遷移
+        /// </summary>
+        /// <param name="scene">遷移したいシーン</param>
+        public static void TransitionScene(EnumCollection.Scene.SCENE_TYPE scene)
+        {
+            var loadingScene = EnumExtension.GetDescriptionFromValue(EnumCollection.Scene.SCENE_TYPE.LOADING);
+            var currentScene = EnumExtension.GetDescriptionFromValue(ManagerScene.GetCurrentScene());
+            var nextScene = EnumExtension.GetDescriptionFromValue(scene);
+
+            Debug.Log($"{currentScene}から{nextScene}に遷移するよ！");
+
+            // ローディングシーンを読み込む
+            LoadScene(loadingScene);
+
+            // 遷移先のシーンを読み込む
+            LoadScene(nextScene);
+
+            // 現在のシーンをアンロード
+            UnloadScene(currentScene);
+
+            // ローディングシーンをアンロード
+            UnloadScene(loadingScene);
+        }
     }
 }

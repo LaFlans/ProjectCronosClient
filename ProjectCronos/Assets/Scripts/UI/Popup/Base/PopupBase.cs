@@ -43,6 +43,14 @@ namespace ProjectCronos
             InputManager.instance.inputActions.UI.Right.performed += OnRight;
         }
 
+        void OnDestroy()
+        {
+            //　入力設定
+            InputManager.instance.inputActions.UI.Submit.performed -= OnSubmit;
+            InputManager.instance.inputActions.UI.Left.performed -= OnLeft;
+            InputManager.instance.inputActions.UI.Right.performed -= OnRight;
+        }
+
         /// <summary>
         /// 左選択
         /// </summary>
