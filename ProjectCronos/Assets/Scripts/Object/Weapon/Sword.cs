@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -49,6 +49,12 @@ namespace ProjectCronos
                 col.gameObject.GetComponent<EnemyBody>().Damage(1);
                 Vector3 hitPos = col.ClosestPointOnBounds(this.transform.position);
                 Utility.CreateObject("Prefabs/DamageEffect1", hitPos, 1.0f);
+            }
+
+            if (col.gameObject.tag == "AttackObject")
+            {
+                Debug.Log("敵の攻撃物を破壊したよ！");
+                Destroy(col.gameObject);
             }
         }
     }

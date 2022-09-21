@@ -1,6 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Cysharp.Threading.Tasks;
 
 namespace ProjectCronos
 {
@@ -29,9 +28,11 @@ namespace ProjectCronos
         /// <summary>
         /// 初期化
         /// </summary>
-        public virtual async void Initialize() 
+        public virtual async UniTask<bool> Initialize() 
         {
             status = gameObject.GetComponent<Status>();
+
+            return true;
         }
 
         /// <summary>

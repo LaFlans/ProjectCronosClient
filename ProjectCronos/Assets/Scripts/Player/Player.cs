@@ -119,9 +119,9 @@ namespace ProjectCronos
         /// <summary>
         /// 初期化
         /// </summary>
-        public override async void Initialize()
+        public override async UniTask<bool> Initialize()
         {
-            base.Initialize();
+            await base.Initialize();
 
             rigid = this.GetComponent<Rigidbody>();
             anim = this.GetComponent<Animator>();
@@ -133,6 +133,8 @@ namespace ProjectCronos
 
             //　事前読み込み完了時操作可能状態にする
             isControl = true;
+
+            return true;
         }
 
         /// <summary>

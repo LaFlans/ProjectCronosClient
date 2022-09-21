@@ -32,6 +32,7 @@ namespace ProjectCronos
 
         protected override async UniTask Load()
         {
+            Debug.Log("敵のデータ読み込み");
             await AddressableManager.Instance.Load(fireSkeltonPrefabPath);
         }
 

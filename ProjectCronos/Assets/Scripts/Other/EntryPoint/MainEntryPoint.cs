@@ -29,7 +29,7 @@ namespace ProjectCronos
             SoundManager.Instance.Play("WorkBGM2");
 
             // プレイヤーの初期化
-            player.Initialize();
+            await player.Initialize();
 
             // 敵の初期化
             enemyController.Initialize();

@@ -83,7 +83,7 @@ namespace ProjectCronos
 
         void SetVec()
         {
-            if (target != null)
+            if (target != null && this != null)
             {
                 this.vec = Vector3.Normalize(target.transform.position - this.transform.position);
             }

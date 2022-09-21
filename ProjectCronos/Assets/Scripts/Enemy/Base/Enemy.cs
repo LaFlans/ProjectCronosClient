@@ -43,17 +43,24 @@ namespace ProjectCronos
         [SerializeField]
         TextMeshPro stateDebugText;
 
+        // 攻撃範囲
+        [SerializeField]
+        int attackDist = 10;
+
+        // 索敵範囲
+        [SerializeField]
+        int searchDist = 15;
+
         /// <summary>
         /// 初期化
         /// </summary>
-        public override async void Initialize()
+        public override async UniTask<bool> Initialize()
         {
             isInit = false;
             
             target = GameObject.Find("Player").GetComponent<Player>().GetCenterPos();
 
-            base.Initialize();
-            //Debug.Log("敵初期化");
+            await base.Initialize();
 
             agent = GetComponent<NavMeshAgent>();
 
@@ -61,7 +68,10 @@ namespace ProjectCronos
 
             await Load();
 
+            Debug.Log("敵の初期化完了！");
             isInit = true;
+
+            return true;
         }
 
         /// <summary>
@@ -150,17 +160,17 @@ namespace ProjectCronos
                 // そもそもターゲットがいなかったら待機
                 nextState = ENEMY_AI_STATE.IDLE;
             }
-            else if (targetDistance < 6)
+            else if (targetDistance < attackDist)
             {
                 // 攻撃範囲内の場合、攻撃
                 nextState = ENEMY_AI_STATE.ATTACK;
             }
-            else if (6 <= targetDistance && targetDistance < 12)
+            else if (attackDist <= targetDistance && targetDistance < searchDist)
             {
                 // 索敵範囲内で攻撃範囲外の場合、移動
                 nextState = ENEMY_AI_STATE.MOVE;
             }
-            else if (12 <= targetDistance)
+            else if (searchDist <= targetDistance)
             {
                 //　一定以上離れたら待機
                 nextState = ENEMY_AI_STATE.IDLE;

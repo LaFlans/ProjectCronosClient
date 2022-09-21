@@ -9,11 +9,11 @@ namespace ProjectCronos
         [SerializeField]
         Enemy[] enemies;
 
-        public void Initialize()
+        public async void Initialize()
         {
             foreach (var enemy in enemies)
             {
-                enemy.Initialize();
+                await enemy.Initialize();
             }
         }
     }
