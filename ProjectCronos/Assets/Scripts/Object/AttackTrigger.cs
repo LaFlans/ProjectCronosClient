@@ -38,6 +38,11 @@ namespace ProjectCronos
         bool isHitDestory = false;
 
         /// <summary>
+        /// 生きているかどうか
+        /// </summary>
+        bool isAlive = true;
+
+        /// <summary>
         /// 開始処理
         /// </summary>
         void Start()

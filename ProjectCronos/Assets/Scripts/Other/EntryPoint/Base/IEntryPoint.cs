@@ -25,6 +25,12 @@ namespace ProjectCronos
                 await GameInitialize();
             }
 
+            // タイムスケール設定
+            TimeManager.Instance.ApplyTimeScale();
+
+            // ダミー読み込み
+            await DummyLoad();
+
             // 事前読み込み
             await PreLoadAsset();
 
@@ -35,6 +41,17 @@ namespace ProjectCronos
             SceneLoader.UnloadScene(EnumExtension.GetDescriptionFromValue(EnumCollection.Scene.SCENE_TYPE.LOADING));
 
             loadStatus = EnumCollection.Scene.SCENE_LOAD_STATUS.COMPLETE;
+        }
+
+        /// <summary>
+        /// ダミーロード処理
+        /// シーンの準備等のためにダミーで遅延させる
+        /// </summary>
+        /// <returns></returns>
+        async UniTask DummyLoad()
+        {
+            // シーン準備のため、最低でも一定秒数ダミーロードを行う
+            await UniTask.Delay(TimeSpan.FromSeconds(1f));
         }
 
         /// <summary>

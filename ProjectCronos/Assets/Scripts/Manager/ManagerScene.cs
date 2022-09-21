@@ -35,6 +35,7 @@ namespace ProjectCronos
             new GameObject("InputManager").AddComponent<InputManager>();
             new GameObject("SoundManager").AddComponent<SoundManager>();
             this.gameObject.AddComponent<PopupManager>();
+            this.gameObject.AddComponent<TimeManager>();
 #if UNITY_EDITOR
             this.gameObject.AddComponent<ProductDebug>();
 #endif
@@ -46,6 +47,8 @@ namespace ProjectCronos
             task.Add(InputManager.instance.Initialize());
             task.Add(SoundManager.instance.Initialize());
             task.Add(PopupManager.instance.Initialize());
+            task.Add(TimeManager.instance.Initialize());
+
 #if UNITY_EDITOR
             task.Add(ProductDebug.instance.Initialize());
 #endif

@@ -27,6 +27,8 @@ namespace ProjectCronos
 
         public override void Setup(Action callback)
         {
+            base.Setup(callback);
+
             canvasGroup.alpha = 0;
 
             // メッセージ設定
@@ -54,7 +56,7 @@ namespace ProjectCronos
                 SoundManager.Instance.Play("Button30");
 
                 // アニメーション開始
-                GetComponent<Animator>().SetTrigger("Open");
+                anim.SetTrigger("Open");
             }
         }
 

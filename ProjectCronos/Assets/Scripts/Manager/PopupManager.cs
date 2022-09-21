@@ -49,7 +49,6 @@ namespace ProjectCronos
 
         string GetPopupPath(EnumCollection.Popup.POPUP_TYPE type)
         {
-            // TODO: 今はアプリケーション終了時のプレハブパスを返しているのでデフォルトのポップアップを作って差し替える
             switch(type)
             {
                 case EnumCollection.Popup.POPUP_TYPE.DEFAULT:
@@ -101,6 +100,7 @@ namespace ProjectCronos
             if (InputManager.instance.IsMatchInputStatus(EnumCollection.Input.INPUT_STATUS.PLAYER))
             {
                 InputManager.instance.SetInputStatus(EnumCollection.Input.INPUT_STATUS.UI);
+                TimeManager.instance.StopTime();
             }
         }
 
@@ -114,6 +114,7 @@ namespace ProjectCronos
             if (popupParams.Count == 0 && InputManager.instance.IsMatchInputStatus(EnumCollection.Input.INPUT_STATUS.UI))
             {
                 InputManager.instance.SetInputStatus(EnumCollection.Input.INPUT_STATUS.PLAYER);
+                TimeManager.instance.ApplyTimeScale();
             }
         }
 

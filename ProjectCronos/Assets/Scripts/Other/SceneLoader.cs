@@ -45,17 +45,11 @@ namespace ProjectCronos
 
             Debug.Log($"{currentScene}から{nextScene}に遷移するよ！");
 
-            // ローディングシーンを読み込む
-            LoadScene(loadingScene);
-
             // 遷移先のシーンを読み込む
             LoadScene(nextScene);
 
             // 現在のシーンをアンロード
             UnloadScene(currentScene);
-
-            // ローディングシーンをアンロード
-            UnloadScene(loadingScene);
         }
     }
 }

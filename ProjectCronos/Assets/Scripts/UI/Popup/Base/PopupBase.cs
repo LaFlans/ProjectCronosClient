@@ -26,6 +26,8 @@ namespace ProjectCronos
 
         protected EnumCollection.Popup.POPUP_SELECT_STATUS selectStatus;
 
+        protected Animator anim;
+
         void Start()
         {
             // デフォルトはノーに合わせる
@@ -181,7 +183,13 @@ namespace ProjectCronos
             selectImages[(int)selectStatus].enabled = true;
         }
 
-        public abstract void Setup(Action callback);
+        public virtual void Setup(Action callback)
+        {
+            // アニメーター設定
+            // ポップアップのアニメーションは非スケール時間対象
+            anim = GetComponent<Animator>();
+            anim.updateMode = AnimatorUpdateMode.UnscaledTime;
+        }
 
         public void ButtonSetup()
         {

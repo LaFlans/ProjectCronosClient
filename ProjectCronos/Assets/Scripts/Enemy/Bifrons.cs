@@ -16,6 +16,8 @@ namespace ProjectCronos
         [SerializeField]
         List<Transform> spawnPos = null;
 
+        List<AttackTrigger> attackTriggers = null;
+
         /// <summary>
         /// 攻撃のインターバル
         /// </summary>
@@ -25,8 +27,6 @@ namespace ProjectCronos
         /// 攻撃できるか
         /// </summary>
         bool isAttack = true;
-
-
 
         string fireSkeltonPrefabPath = "Assets/Prefabs/FireSkelton.prefab";
 

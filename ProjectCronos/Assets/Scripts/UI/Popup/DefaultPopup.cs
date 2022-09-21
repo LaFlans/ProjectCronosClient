@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using TMPro;
 using System;
 
@@ -27,6 +27,8 @@ namespace ProjectCronos
 
         public override void Setup(Action callback)
         {
+            base.Setup(callback);
+
             canvasGroup.alpha = 0;
 
             // メッセージ設定
@@ -57,7 +59,7 @@ namespace ProjectCronos
                 canvasGroup.alpha = 1;
 
                 // アニメーション開始
-                GetComponent<Animator>().SetTrigger("Open");
+                anim.SetTrigger("Open");
             }
         }
 
