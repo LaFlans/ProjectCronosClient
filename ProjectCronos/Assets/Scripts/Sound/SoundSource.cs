@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -33,6 +33,17 @@ namespace ProjectCronos
             }
 
             source.Play();
+        }
+
+        /// <summary>
+        /// 停止
+        /// </summary>
+        public void Stop()
+        {
+            if (source.isPlaying)
+            {
+                source.Stop();
+            }
         }
 
         /// <summary>
