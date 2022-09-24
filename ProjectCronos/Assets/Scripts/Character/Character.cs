@@ -8,7 +8,7 @@ namespace ProjectCronos
     /// </summary>
     public class Character : MonoBehaviour
     {
-        Status status = null;
+        protected Status status = null;
 
         /// <summary>
         /// 開始処理
@@ -30,8 +30,6 @@ namespace ProjectCronos
         /// </summary>
         public virtual async UniTask<bool> Initialize() 
         {
-            status = gameObject.GetComponent<Status>();
-
             return true;
         }
 
@@ -48,10 +46,12 @@ namespace ProjectCronos
         /// </summary>
         public virtual void Damage(int value) 
         {
-            // 一旦適当な値入れとく
-            if (status.Damage(value))
+            if (status != null)
             {
-                Death();
+                if (status.Damage(value))
+                {
+                    Death();
+                }
             }
         }
 

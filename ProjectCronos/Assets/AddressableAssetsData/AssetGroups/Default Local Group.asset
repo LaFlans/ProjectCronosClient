@@ -59,11 +59,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 24be7b1155ab1ff47a4a6bf16edfbb49
-    m_Address: Assets/Prefabs/Enemys/Bifrons.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c86a3710c20eec64aaeef4137c381f58
     m_Address: Assets/Prefabs/FireSkelton.prefab
     m_ReadOnly: 0

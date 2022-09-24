@@ -56,16 +56,6 @@ namespace ProjectCronos
         int searchDist = 15;
 
         /// <summary>
-        /// 敵のタイムスケールが更新された時のイベント
-        /// </summary>
-        Action enemyTimeScaleApplyEvent;
-
-        /// <summary>
-        /// ステータス情報
-        /// </summary>
-        protected EnemyStatus status;
-
-        /// <summary>
         /// 行動することができるか
         /// </summary>
         bool isAct;
@@ -82,9 +72,7 @@ namespace ProjectCronos
 
         protected virtual void OnEnemyTimeScaleApply()
         {
-            Debug.Log($"敵の移動速度が更新されたよ{TimeManager.Instance.GetEnemyTimeScale()}");
             agent.speed = moveSpeed * TimeManager.Instance.GetEnemyTimeScale();
-
             isAct = TimeManager.Instance.GetEnemyTimeScale() > 0;
         }
 
@@ -103,7 +91,6 @@ namespace ProjectCronos
 
             state = ENEMY_AI_STATE.IDLE;
 
-            enemyTimeScaleApplyEvent = OnEnemyTimeScaleApply;
             TimeManager.Instance.RegisterEnemyTimeScaleApplyAction(OnEnemyTimeScaleApply);
 
             await Load();

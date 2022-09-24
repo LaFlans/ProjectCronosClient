@@ -13,6 +13,7 @@ namespace ProjectCronos
         const float DEFAULT_TIME_SCALE = 1.0f;
         const float DEFAULT_PLAYER_TIME_SCALE = 1.0f;
         const float DEFAULT_ENEMY_TIME_SCALE = 1.0f;
+        const float DEFAULT_OBJECT_TIME_SCALE = 1.0f;
 
         /// <summary>
         /// ゲーム全体のタイムスケール
@@ -34,6 +35,16 @@ namespace ProjectCronos
         /// </summary>
         Action enemyTimeScaleApplyAction;
 
+        /// <summary>
+        /// オブジェクト(プレイヤーの攻撃など)のタイムスケール
+        /// </summary>
+        float objectTimeScale;
+
+        /// <summary>
+        /// オブジェクト(プレイヤーの攻撃など)のタイムスケール変化した時のイベント
+        /// </summary>
+        Action objectTimeScaleApplyAction;
+
         public override async UniTask<bool> Initialize()
         {
             InitTimeScale();
@@ -52,6 +63,7 @@ namespace ProjectCronos
             timeScale = DEFAULT_TIME_SCALE;
             playerTimeScale = DEFAULT_PLAYER_TIME_SCALE;
             enemyTimeScale = DEFAULT_ENEMY_TIME_SCALE;
+            objectTimeScale = DEFAULT_OBJECT_TIME_SCALE;
         }
 
         /// <summary>
@@ -100,7 +112,7 @@ namespace ProjectCronos
         /// <summary>
         /// 敵のタイムスケール変更時のイベントを登録
         /// </summary>
-        /// <param name="eventHandler"></param>
+        /// <param name="action"></param>
         public void RegisterEnemyTimeScaleApplyAction(Action action)
         {
             enemyTimeScaleApplyAction += action;
@@ -109,10 +121,45 @@ namespace ProjectCronos
         /// <summary>
         /// 敵のタイムスケール変更時のイベントを削除
         /// </summary>
-        /// <param name="eventHandler"></param>
+        /// <param name="action"></param>
         public void UnregisterEnemyTimeScaleApplyAction(Action action)
         {
             enemyTimeScaleApplyAction -= action;
+        }
+
+        /// <summary>
+        /// オブジェクト(プレイヤーの攻撃など)のタイムスケールを適用
+        /// </summary>
+        /// <param name="value">値</param>
+        public void ApplyObjectTimeScale(float value)
+        {
+            objectTimeScale = value;
+
+            // オブジェクトのタイムスケール変更時処理を行う
+            objectTimeScaleApplyAction?.Invoke();
+
+            if (objectTimeScaleApplyAction == null)
+            {
+                Debug.Log("オブジェクトのタイムスケール変更時イベントは登録されていないよ");
+            }
+        }
+
+        /// <summary>
+        /// オブジェクト(プレイヤーの攻撃など)のタイムスケール変更時のイベントを登録
+        /// </summary>
+        /// <param name="action"></param>
+        public void RegisterObjectTimeScaleApplyAction(Action action)
+        {
+            objectTimeScaleApplyAction += action;
+        }
+
+        /// <summary>
+        /// オブジェクト(プレイヤーの攻撃など)のタイムスケール変更時のイベントを削除
+        /// </summary>
+        /// <param name="action"></param>
+        public void UnregisterObjectTimeScaleApplyAction(Action action)
+        {
+            objectTimeScaleApplyAction -= action;
         }
 
         /// <summary>
@@ -131,6 +178,15 @@ namespace ProjectCronos
         public float GetEnemyTimeScale()
         {
             return enemyTimeScale;
+        }
+
+        /// <summary>
+        /// 現在設定されているオブジェクト(プレイヤーの攻撃等)のタイムスケールの値を取得
+        /// </summary>
+        /// <returns>オブジェクト(プレイヤーの攻撃等)のタイムスケールの値</returns>
+        public float GetObjectTimeScale()
+        {
+            return objectTimeScale;
         }
     }
 }

@@ -227,7 +227,8 @@ namespace ProjectCronos
             // 時間停止テスト
             UnityEngine.Debug.Log("時間停止テスト");
             isTimeStopWorld = !isTimeStopWorld;
-            TimeManager.Instance.ApplyEnemyTimeScale(isTimeStopWorld ? 1.0f : 0.0f);
+            TimeManager.Instance.ApplyEnemyTimeScale(isTimeStopWorld ? 0.0f : 1.0f);
+            TimeManager.Instance.ApplyObjectTimeScale(isTimeStopWorld ? 0.0f : 1.0f);
         }
 
         /// <summary>
