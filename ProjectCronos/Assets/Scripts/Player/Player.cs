@@ -109,6 +109,11 @@ namespace ProjectCronos
         /// </summary>
         bool isControl;
 
+        /// <summary>
+        /// 時間停止中かどうか
+        /// </summary>
+        bool isTimeStopWorld;
+
         EnumCollection.Player.PLAYER_JUMP_STATE jumpState = EnumCollection.Player.PLAYER_JUMP_STATE.IDOL;
 
         [SerializeField]
@@ -130,6 +135,9 @@ namespace ProjectCronos
 
             // 状態設定
             jumpState = EnumCollection.Player.PLAYER_JUMP_STATE.IDOL;
+
+            // 時間停止状態設定
+            isTimeStopWorld = false;
 
             //　事前読み込み完了時操作可能状態にする
             isControl = true;
@@ -212,9 +220,14 @@ namespace ProjectCronos
 
         void OnTest(InputAction.CallbackContext context)
         {
-            // プレイヤーにダメージを与えるテスト
-            UnityEngine.Debug.Log("ダメージテスト");
-            Damage(1);
+            //// プレイヤーにダメージを与えるテスト
+            //UnityEngine.Debug.Log("ダメージテスト");
+            //Damage(1);
+
+            // 時間停止テスト
+            UnityEngine.Debug.Log("時間停止テスト");
+            isTimeStopWorld = !isTimeStopWorld;
+            TimeManager.Instance.ApplyEnemyTimeScale(isTimeStopWorld ? 1.0f : 0.0f);
         }
 
         /// <summary>

@@ -44,7 +44,7 @@ namespace ProjectCronos
 
         void OnTriggerEnter(Collider col)
         {
-            if (col.gameObject.tag == "Enemy")
+            if (col.gameObject.tag == "EnemyBody")
             {
                 col.gameObject.GetComponent<EnemyBody>().Damage(1);
                 Vector3 hitPos = col.ClosestPointOnBounds(this.transform.position);

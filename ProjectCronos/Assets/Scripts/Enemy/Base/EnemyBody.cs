@@ -17,7 +17,7 @@ namespace ProjectCronos
 
         void Start()
         {
-            enemy = this.transform.parent.GetComponent<Enemy>();
+            enemy = this.transform.parent.parent.GetComponent<Enemy>();
         }
 
         /// <summary>

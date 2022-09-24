@@ -36,6 +36,8 @@ namespace ProjectCronos
         float targetDistance;
 
         protected Transform target;
+
+        [SerializeField]
         NavMeshAgent agent;
         protected Vector3 targetDir;
 
@@ -44,12 +46,47 @@ namespace ProjectCronos
         TextMeshPro stateDebugText;
 
         // 攻撃範囲
+        /// FIXME: ステータスのほうに持っていく
         [SerializeField]
         int attackDist = 10;
 
         // 索敵範囲
+        /// FIXME: ステータスのほうに持っていく
         [SerializeField]
         int searchDist = 15;
+
+        /// <summary>
+        /// 敵のタイムスケールが更新された時のイベント
+        /// </summary>
+        Action enemyTimeScaleApplyEvent;
+
+        /// <summary>
+        /// ステータス情報
+        /// </summary>
+        protected EnemyStatus status;
+
+        /// <summary>
+        /// 行動することができるか
+        /// </summary>
+        bool isAct;
+
+        /// <summary>
+        /// 移動速度
+        /// FIXME: ステータスのほうに持っていく
+        /// </summary>
+        [SerializeField]
+        float moveSpeed = 2;
+
+        [SerializeField]
+        protected Transform bodyTransform;
+
+        protected virtual void OnEnemyTimeScaleApply()
+        {
+            Debug.Log($"敵の移動速度が更新されたよ{TimeManager.Instance.GetEnemyTimeScale()}");
+            agent.speed = moveSpeed * TimeManager.Instance.GetEnemyTimeScale();
+
+            isAct = TimeManager.Instance.GetEnemyTimeScale() > 0;
+        }
 
         /// <summary>
         /// 初期化
@@ -57,22 +94,27 @@ namespace ProjectCronos
         public override async UniTask<bool> Initialize()
         {
             isInit = false;
+
+            status = this.GetComponent<EnemyStatus>();
             
-            target = GameObject.Find("Player").GetComponent<Player>().GetCenterPos();
+            target = GameObject.FindWithTag("Player").GetComponent<Player>().GetCenterPos();
 
             await base.Initialize();
 
-            agent = GetComponent<NavMeshAgent>();
-
             state = ENEMY_AI_STATE.IDLE;
 
+            enemyTimeScaleApplyEvent = OnEnemyTimeScaleApply;
+            TimeManager.Instance.RegisterEnemyTimeScaleApplyAction(OnEnemyTimeScaleApply);
+
             await Load();
+
+            isAct = true;
 
             Debug.Log("敵の初期化完了！");
             isInit = true;
 
             return true;
-        }
+        }       
 
         /// <summary>
         /// 読み込む必要があるものを読み込む
@@ -87,7 +129,7 @@ namespace ProjectCronos
             //　デバック用
             stateDebugText.text = state.ToString();
 
-            if (isInit)
+            if (isInit && isAct)
             {
                 ApplyAi();
             }
@@ -138,7 +180,7 @@ namespace ProjectCronos
             if (target != null)
             {
                 //　ターゲットまでの方向と距離を計算
-                targetDir = target.position - this.transform.position;
+                targetDir = target.position - bodyTransform.position;
                 targetDistance = targetDir.magnitude;
             }
         }
@@ -209,14 +251,14 @@ namespace ProjectCronos
 
         protected virtual void Idle()
         {
-            agent.SetDestination(this.transform.position);
+            agent.SetDestination(bodyTransform.position);
         }
 
         void LookTarget()
         {
             // その方向に向けて旋回する(120度/秒)
             Quaternion targetRotation = Quaternion.LookRotation(targetDir);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 120f * Time.deltaTime);
+            bodyTransform.rotation = Quaternion.RotateTowards(bodyTransform.rotation, targetRotation, 120f * Time.deltaTime);
         }
 
         /// <summary>
@@ -242,11 +284,9 @@ namespace ProjectCronos
         /// </summary>
         public override void Death()
         {
-            base.Death();
+            TimeManager.Instance.UnregisterEnemyTimeScaleApplyAction(OnEnemyTimeScaleApply);
 
-            //Debug.Log("敵死亡");
-            // 自身を破壊
-            Destroy(this.gameObject);
+            base.Death();
         }
     }
 }

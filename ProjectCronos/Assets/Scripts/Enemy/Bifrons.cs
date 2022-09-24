@@ -16,7 +16,8 @@ namespace ProjectCronos
         [SerializeField]
         List<Transform> spawnPos = null;
 
-        List<AttackTrigger> attackTriggers = null;
+        [SerializeField]
+        Transform attackObjParent;
 
         /// <summary>
         /// 攻撃のインターバル
@@ -34,6 +35,18 @@ namespace ProjectCronos
         {
             Debug.Log("敵のデータ読み込み");
             await AddressableManager.Instance.Load(fireSkeltonPrefabPath);
+        }
+
+        protected override void OnEnemyTimeScaleApply()
+        {
+            base.OnEnemyTimeScaleApply();
+
+            //攻撃オブジェクトの速度を調整
+            bool result = TimeManager.Instance.GetEnemyTimeScale() > 0;
+            for (int i = 0; i < attackObjParent.childCount; i++)
+            {
+                attackObjParent.GetChild(i).GetComponent<AttackTrigger>().SetIsAct(result);
+            }
         }
 
         protected override async void Attack()
@@ -55,11 +68,13 @@ namespace ProjectCronos
                 }
 
                 var pos = spawnPos[UnityEngine.Random.Range(0, spawnPos.Count)];
-
-                GameObject obj = AddressableManager.Instance.GetLoadedObject(fireSkeltonPrefabPath);
-                obj.transform.position = pos.position;
-
-                obj.GetComponent<AttackTrigger>().Init(target.gameObject, 10, EnumCollection.Attack.ATTACK_TYPE.ENEMY, true);
+                if (pos != null)
+                {
+                    GameObject obj = AddressableManager.Instance.GetLoadedObject(fireSkeltonPrefabPath);
+                    obj.transform.position = pos.position;
+                    obj.transform.SetParent(attackObjParent);
+                    obj.GetComponent<AttackTrigger>().Init(target.gameObject, 10, EnumCollection.Attack.ATTACK_TYPE.ENEMY, true);
+                }
 
                 await AttackInterval();
             }

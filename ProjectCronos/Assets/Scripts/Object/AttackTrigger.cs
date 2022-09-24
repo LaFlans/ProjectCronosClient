@@ -9,10 +9,26 @@ namespace ProjectCronos
     /// </summary>
     public class AttackTrigger : MonoBehaviour
     {
+        /// <summary>
+        /// デフォルトの移動速度
+        /// </summary>
         [SerializeField]
-        float speed = 10;
-        Vector3 vec = Vector3.zero;
+        float defaultMoveSpeed = 10;
 
+        /// <summary>
+        /// 計算で使用する速度
+        /// </summary>
+        [SerializeField]
+        float moveSpeed;
+
+        /// <summary>
+        /// 移動ベクトル
+        /// </summary>
+        Vector3 moveVec = Vector3.zero;
+
+        /// <summary>
+        /// 追尾対象
+        /// </summary>
         GameObject target;
 
         /// <summary>
@@ -20,6 +36,9 @@ namespace ProjectCronos
         /// </summary>
         bool isMove = false;
 
+        /// <summary>
+        /// 遅延時間
+        /// </summary>
         float delayTime = 1.0f;
 
         /// <summary>
@@ -42,6 +61,13 @@ namespace ProjectCronos
         /// </summary>
         bool isAlive = true;
 
+        bool isAct;
+
+        public void SetIsAct(bool result)
+        {
+            isAct = result;
+        }
+
         /// <summary>
         /// 開始処理
         /// </summary>
@@ -52,6 +78,9 @@ namespace ProjectCronos
             {
                 Debug.Log("当たり判定コンポーネントが設定されていません");
             }
+
+            isAct = true;
+            moveSpeed = defaultMoveSpeed;
         }
 
         public async void Init(GameObject target, float lifeTime, EnumCollection.Attack.ATTACK_TYPE type, bool isDestory = false)
@@ -67,9 +96,15 @@ namespace ProjectCronos
 
         void FixedUpdate()
         {
+            if (!isAct)
+            {
+                // 行動できない状態の場合、何もしない
+                return;
+            }
+
             if (isMove)
             {
-                this.transform.position += vec * speed;
+                this.transform.position += moveVec * moveSpeed * Time.deltaTime;
             }
             else
             {
@@ -85,12 +120,12 @@ namespace ProjectCronos
         {
             if (target != null && this != null)
             {
-                this.vec = Vector3.Normalize(target.transform.position - this.transform.position);
+                this.moveVec = Vector3.Normalize(target.transform.position - this.transform.position);
             }
         }
 
         /// <summary>
-        /// AIの思考インターバル
+        /// 移動遅延
         /// </summary>
         async UniTask MoveDelay()
         {
@@ -136,7 +171,7 @@ namespace ProjectCronos
             switch (attackType)
             {
                 case EnumCollection.Attack.ATTACK_TYPE.PLAYER:
-                    if (col.gameObject.tag == "Enemy")
+                    if (col.gameObject.tag == "EnemyBody")
                     {
                         col.gameObject.GetComponent<EnemyBody>().Damage(1);
                         Vector3 hitPos = col.ClosestPointOnBounds(this.transform.position);
@@ -150,7 +185,7 @@ namespace ProjectCronos
 
                     break;
                 case EnumCollection.Attack.ATTACK_TYPE.ENEMY:
-                    if (col.gameObject.tag == "Player")
+                    if (col.gameObject.tag == "PlayerBody")
                     {
                         col.gameObject.GetComponent<PlayerBody>().Damage(1);
                         Vector3 hitPos = col.ClosestPointOnBounds(this.transform.position);
