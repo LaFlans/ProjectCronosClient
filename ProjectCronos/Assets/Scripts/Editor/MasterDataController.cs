@@ -249,14 +249,14 @@ namespace ProjectCronos
             // MessagePackのResolverを設定
             try
             {
-                StaticCompositeResolver.Instance.Register
-                (
+                StaticCompositeResolver.Instance.Register(
                     new IFormatterResolver[]
                     {
-                    MasterMemoryResolver.Instance,
-                    GeneratedResolver.Instance,
-                    StandardResolver.Instance,
+                        MasterMemoryResolver.Instance,
+                        GeneratedResolver.Instance,
+                        StandardResolver.Instance,
                     });
+
                 var options = MessagePackSerializerOptions.Standard.WithResolver(StaticCompositeResolver.Instance);
                 MessagePackSerializer.DefaultOptions = options;
             }

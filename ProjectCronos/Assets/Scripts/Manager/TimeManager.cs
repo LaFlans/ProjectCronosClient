@@ -64,6 +64,8 @@ namespace ProjectCronos
             playerTimeScale = DEFAULT_PLAYER_TIME_SCALE;
             enemyTimeScale = DEFAULT_ENEMY_TIME_SCALE;
             objectTimeScale = DEFAULT_OBJECT_TIME_SCALE;
+
+            ApplyTimeScale();
         }
 
         /// <summary>
@@ -115,6 +117,7 @@ namespace ProjectCronos
         /// <param name="action"></param>
         public void RegisterEnemyTimeScaleApplyAction(Action action)
         {
+            Debug.Log("敵のタイムスケール変更時イベントを登録するよ！");
             enemyTimeScaleApplyAction += action;
         }
 
@@ -124,6 +127,7 @@ namespace ProjectCronos
         /// <param name="action"></param>
         public void UnregisterEnemyTimeScaleApplyAction(Action action)
         {
+            Debug.Log("敵のタイムスケール変更時イベントを削除するよ！");
             enemyTimeScaleApplyAction -= action;
         }
 

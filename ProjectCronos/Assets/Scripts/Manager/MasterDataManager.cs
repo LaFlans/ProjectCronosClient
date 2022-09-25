@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using Generated;
@@ -15,6 +16,21 @@ namespace ProjectCronos
         public static MemoryDatabase DB => _db;
 
         string masterDataPath = "Assets/MasterData/Generated/master-data.bytes";
+
+        // MessagePack の初期化処理
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+        private static void InitializeMessagePack()
+        {
+            StaticCompositeResolver.Instance.Register
+            (
+                MasterMemoryResolver.Instance,
+                GeneratedResolver.Instance,
+                StandardResolver.Instance
+            );
+
+            var options = MessagePackSerializerOptions.Standard.WithResolver(StaticCompositeResolver.Instance);
+            MessagePackSerializer.DefaultOptions = options;
+        }
 
         public override async UniTask<bool> Initialize()
         {

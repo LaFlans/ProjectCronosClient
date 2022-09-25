@@ -10,13 +10,6 @@ namespace ProjectCronos
 {
     class AddressableManager : ISingleton<AddressableManager>
     {
-        //class Param<T>
-        //{
-        //    public Dictionary<string, AsyncOperationHandle<T>> param;
-        //}
-
-        //Dictionary<Type, Param<Type>> testLoaded;
-
         /// <summary>
         /// 読み込み済みパス
         /// </summary>

@@ -214,6 +214,8 @@ namespace ProjectCronos
 
         void OnDestroy()
         {
+            Debug.Log("プレイヤーのオブジェクト破壊");
+
             // 入力イベントを外す
             RemoveInputAction();
         }

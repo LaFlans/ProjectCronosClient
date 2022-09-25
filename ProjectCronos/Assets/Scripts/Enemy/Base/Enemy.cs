@@ -70,8 +70,12 @@ namespace ProjectCronos
         [SerializeField]
         protected Transform bodyTransform;
 
+        Action EnemyTimeScaleApplyEvent;
+
         protected virtual void OnEnemyTimeScaleApply()
         {
+            Debug.Log("敵のタイムスケール変更時イベントを行うよ");
+
             agent.speed = moveSpeed * TimeManager.Instance.GetEnemyTimeScale();
             isAct = TimeManager.Instance.GetEnemyTimeScale() > 0;
         }
@@ -91,7 +95,8 @@ namespace ProjectCronos
 
             state = ENEMY_AI_STATE.IDLE;
 
-            TimeManager.Instance.RegisterEnemyTimeScaleApplyAction(OnEnemyTimeScaleApply);
+            EnemyTimeScaleApplyEvent = OnEnemyTimeScaleApply;
+            TimeManager.Instance.RegisterEnemyTimeScaleApplyAction(EnemyTimeScaleApplyEvent);
 
             await Load();
 
@@ -271,9 +276,16 @@ namespace ProjectCronos
         /// </summary>
         public override void Death()
         {
-            TimeManager.Instance.UnregisterEnemyTimeScaleApplyAction(OnEnemyTimeScaleApply);
+            Debug.Log("敵死亡");
+            TimeManager.Instance.UnregisterEnemyTimeScaleApplyAction(EnemyTimeScaleApplyEvent);
 
             base.Death();
+        }
+
+        void OnDestroy()
+        {
+            Debug.Log("敵死亡");
+            TimeManager.Instance.UnregisterEnemyTimeScaleApplyAction(EnemyTimeScaleApplyEvent);
         }
     }
 }

@@ -11,12 +11,12 @@ using System.Collections.Generic;using UnityEngine;
             }        }        /// <summary>        /// SE再生        /// </summary>        /// <param name="path">対象のリソースのAddressableパス</param>        void PlaySE(string path)        {            var clip = AddressableManager.instance.GetLoadedClip(path);            //　nullチェック            if (clip == null)            {                Debug.Log("再生しようとしているクリップがnullだよ…");                return;            }            foreach (var item in seSources)            {                if (!item.IsPlaying())                {                    item.Play(clip);                    break;                }            }        }        /// <summary>        /// サウンドソースのボリューム設定        /// </summary>        void SetSourceVolume()        {
             var volume = masterVolume;
 
-#if UNITY_EDITOR
-            var settings = ProjectCronosSettings.GetSerializedSettings();
-            var result = settings.FindProperty("IsMuteSound").boolValue;
-            if (result)
-            {
-                volume = 0.0f;
-            }
-#endif
+//#if UNITY_EDITOR
+//            var settings = ProjectCronosSettings.GetSerializedSettings();
+//            var result = settings.FindProperty("IsMuteSound").boolValue;
+//            if (result)
+//            {
+//                volume = 0.0f;
+//            }
+//#endif
             foreach (var item in bgmSources)            {                item.SetVolume(volume);            }            foreach (var item in seSources)            {                item.SetVolume(volume);            }        }    }}
