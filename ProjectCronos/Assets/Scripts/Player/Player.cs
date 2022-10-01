@@ -51,18 +51,6 @@ namespace ProjectCronos
         /// </summary>
         Vector3 inputVec;
 
-        ///// <summary>
-        ///// 本
-        ///// </summary>
-        //[SerializeField]
-        //Book book;
-
-        ///// <summary>
-        ///// 目標となるオブジェクト
-        ///// </summary>
-        //[SerializeField]
-        //TargetObject targetObj;
-
         [SerializeField]
         Transform[] spawnPos;
 
