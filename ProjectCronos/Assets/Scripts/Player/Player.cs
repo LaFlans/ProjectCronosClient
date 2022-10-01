@@ -104,10 +104,15 @@ namespace ProjectCronos
 
         EnumCollection.Player.PLAYER_JUMP_STATE jumpState = EnumCollection.Player.PLAYER_JUMP_STATE.IDOL;
 
-        [SerializeField]
-        GameObject freeLookCamera;
-
         string demonHandPrefabPath = "Assets/Resources_moved/Prefabs/DemonHand.prefab";
+
+        [SerializeField]
+        CinemachineTargetGroup targetGroup;
+
+        /// <summary>
+        /// プレイヤー用カメラ
+        /// </summary>
+        PlayerCamera playerCamera;
 
         /// <summary>
         /// 初期化
@@ -119,7 +124,15 @@ namespace ProjectCronos
             rigid = this.GetComponent<Rigidbody>();
             anim = this.GetComponent<Animator>();
 
+            // ステータス設定
+            status = this.GetComponent<PlayerStatus>();
+
+            //　地面判定設定
             groundChecker.Initialized(OnLanding, OnTakeoff);
+
+            // カメラ設定
+            playerCamera = this.GetComponent<PlayerCamera>();
+            playerCamera.Initialize(this.transform);
 
             // 状態設定
             jumpState = EnumCollection.Player.PLAYER_JUMP_STATE.IDOL;
@@ -173,11 +186,11 @@ namespace ProjectCronos
             InputManager.Instance.RegistSwitchInputStatusEvent(
                 () => 
                 {
-                    if (freeLookCamera != null)
-                    {
-                        freeLookCamera.GetComponent<CinemachineInputProvider>().enabled = InputManager.Instance.IsMatchInputStatus(EnumCollection.Input.INPUT_STATUS.PLAYER);
-                    }
+                    playerCamera.EnableFreeLookCamera();
                 });
+
+            // ロックオン
+            InputManager.Instance.inputActions.Player.RockOn.performed += OnRockon;
 
             // テスト
             InputManager.Instance.inputActions.Player.Test.performed += OnTest;
@@ -195,6 +208,9 @@ namespace ProjectCronos
 
             // 攻撃
             InputManager.Instance.inputActions.Player.Attack.performed -= OnAttack;
+
+            // ロックオン
+            InputManager.Instance.inputActions.Player.RockOn.performed -= OnRockon;
 
             // テスト
             InputManager.Instance.inputActions.Player.Test.performed -= OnTest;
@@ -394,56 +410,100 @@ namespace ProjectCronos
         //    }
         //}
 
-        ///// <summary>
-        ///// ターゲットロックオン
-        ///// </summary>
-        //void RockonTarget()
-        //{
-        //    if (Gamepad.current.rightStickButton.wasPressedThisFrame)
-        //    {
-        //        // ターゲットがいる場合、プレイヤーにターゲットを戻す
-        //        if (targetObj.IsTargetEnemy())
-        //        {
-        //            Debug.Log("ロックオン解除");
-        //            targetObj.SetTarget(head);
-        //            return;
-        //        }
+        /// <summary>
+        /// ターゲットロックオン
+        /// </summary>
+        void OnRockon(InputAction.CallbackContext context)
+        {
+            if (playerCamera.IsRockOn())
+            {
+                playerCamera.CancelRockOn();
+            }
+            else
+            {
+                // 敵を探す
+                var enemys = Physics.SphereCastAll(
+                    transform.position, searchRange, transform.forward, 0.01f, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore)
+                    .Where(h => h.transform.gameObject.tag == "Enemy")
+                    .Select(h => h.transform.gameObject)
+                    .ToList();
 
-        //        // いなければ付近の一番近い敵を探してロックオン処理を行う
-        //        RockOn();
-        //    }
-        //}
+                if (enemys.Count > 0)
+                {
+                    float minDistance = 0;
+                    Transform targetEnemy = null;
+                    foreach (var enemy in enemys)
+                    {
+                        float dist = Vector3.Distance(transform.position, enemy.transform.position);
+                        if (dist < minDistance || minDistance == 0)
+                        {
+                            minDistance = dist;
+                            targetEnemy = enemy.transform;
+                        }
+                    }
+
+                    // ロックオンを行う
+                    playerCamera.RockOn(targetEnemy);
+                }
+            }
+        }
 
         ///// <summary>
         ///// ロックオン処理
         ///// </summary>
-        //public void RockOn()
+        //void SetTarget()
         //{
-        //    var enemys = Physics.SphereCastAll(
-        //        this.transform.position, searchRange, this.transform.forward, 0.01f)
-        //        .Where(h => h.transform.gameObject.tag == "Enemy")
-        //        .Select(h => h.transform.gameObject)
-        //        .ToList();
-
-        //    if (enemys.Count > 0)
+        //    if (targetGroup.m_Targets.Count() > 1)
         //    {
-        //        float minDistance = searchRange;
-        //        foreach (var obj in enemys)
+        //        // 既に敵をロックオン中なので、解除する
+        //        // ターゲットを全解除
+        //        foreach (var target in targetGroup.m_Targets)
         //        {
-        //            float dist = Vector3.Distance(this.transform.position, obj.transform.position);
-        //            if (dist < minDistance)
-        //            {
-        //                minDistance = dist;
-
-        //                targetObj.GetComponent<TargetObject>().SetTarget(obj);
-        //            }
+        //            targetGroup.RemoveMember(target.target);
         //        }
+
+        //        //　プレイヤーの頭を対象に追加
+        //        targetGroup.AddMember(head.transform, 1, 1);
         //    }
         //    else
         //    {
-        //        targetObj.SetTarget(head);
+        //        // 敵を探す
+        //        var enemys = Physics.SphereCastAll(
+        //            transform.position, searchRange, transform.forward, 0.01f, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore)
+        //            .Where(h => h.transform.gameObject.tag == "Enemy")
+        //            .Select(h => h.transform.gameObject)
+        //            .ToList();
+
+        //        if (enemys.Count > 0)
+        //        {
+        //            Debug.Log("敵をロックオンしたよ！");
+        //            float minDistance = searchRange;
+        //            Transform targetEnemy = null;
+        //            foreach (var enemy in enemys)
+        //            {
+        //                float dist = Vector3.Distance(this.transform.position, enemy.transform.position);
+        //                if (dist < minDistance)
+        //                {
+        //                    minDistance = dist;
+        //                    targetEnemy = enemy.GetComponent<EnemyInfo>().GetHeadPos();
+        //                }
+        //            }
+
+        //            //　プレイヤーの頭を対象に追加
+        //            targetGroup.AddMember(targetEnemy, 1, 1);
+        //            rockOnCamera.Priority = 15;
+        //        }
         //    }
         //}
+
+        private void OnDrawGizmos()
+        {
+            var isHitAll = Physics.SphereCastAll(transform.position, searchRange, transform.forward, 0.01f);
+            foreach (var hit in isHitAll)
+            {
+                Gizmos.DrawWireSphere(transform.position + transform.forward * (hit.distance), searchRange);
+            }
+        }
 
         /// <summary>
         /// 移動
