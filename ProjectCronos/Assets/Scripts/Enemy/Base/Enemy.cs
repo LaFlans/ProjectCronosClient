@@ -6,7 +6,7 @@ using TMPro;
 
 namespace ProjectCronos
 {
-    [RequireComponent(typeof(EnemyStatus))]
+    [RequireComponent(typeof(EnemyStatus), typeof(EnemyInfo))]
     public class Enemy : Character, IEnemy
     {
         public enum ENEMY_AI_STATE
@@ -284,7 +284,6 @@ namespace ProjectCronos
 
         void OnDestroy()
         {
-            Debug.Log("敵死亡");
             TimeManager.Instance.UnregisterEnemyTimeScaleApplyAction(EnemyTimeScaleApplyEvent);
         }
     }

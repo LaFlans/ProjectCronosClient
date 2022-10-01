@@ -20,9 +20,13 @@ namespace ProjectCronos
         [SerializeField]
         Transform underPos;
 
+        public Transform GetHeadPos()
+        {
+            return headPos;
+        }
+
         public Transform GetCenterPos()
         {
-            Debug.Log("transformを返したよ");
             return centerPos.transform;
         }
     }
