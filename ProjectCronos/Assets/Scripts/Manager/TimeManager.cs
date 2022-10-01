@@ -81,7 +81,7 @@ namespace ProjectCronos
         /// </summary>
         public void ApplyTimeScale()
         {
-            Time.timeScale = timeScale;
+            Time.timeScale = DEFAULT_TIME_SCALE;
         }
 
         /// <summary>
@@ -127,7 +127,6 @@ namespace ProjectCronos
         /// <param name="action"></param>
         public void UnregisterEnemyTimeScaleApplyAction(Action action)
         {
-            Debug.Log("敵のタイムスケール変更時イベントを削除するよ！");
             enemyTimeScaleApplyAction -= action;
         }
 
