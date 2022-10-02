@@ -16,6 +16,9 @@ namespace ProjectCronos
         [SerializeField]
         int moveSpeed = 10;
 
+        /// <summary>
+        /// 攻撃中の移動速度低下倍率
+        /// </summary>
         [SerializeField]
         int attackMoveDelayRate = 10;
 
@@ -97,11 +100,6 @@ namespace ProjectCronos
         /// </summary>
         bool isControl;
 
-        /// <summary>
-        /// 時間停止中かどうか
-        /// </summary>
-        bool isTimeStopWorld;
-
         EnumCollection.Player.PLAYER_JUMP_STATE jumpState = EnumCollection.Player.PLAYER_JUMP_STATE.IDOL;
 
         string demonHandPrefabPath = "Assets/Resources_moved/Prefabs/DemonHand.prefab";
@@ -110,6 +108,11 @@ namespace ProjectCronos
         /// プレイヤー用カメラ
         /// </summary>
         PlayerCamera playerCamera;
+
+        /// <summary>
+        /// プレイヤーのスキル
+        /// </summary>
+        PlayerSkill playerSkill;
 
         /// <summary>
         /// 初期化
@@ -134,8 +137,12 @@ namespace ProjectCronos
             // 状態設定
             jumpState = EnumCollection.Player.PLAYER_JUMP_STATE.IDOL;
 
-            // 時間停止状態設定
-            isTimeStopWorld = false;
+            // プレイヤースキル初期化
+            playerSkill = this.GetComponent<PlayerSkill>();
+            playerSkill.Initialize();
+
+            // 入力イベント設定
+            SetInputAction();
 
             //　事前読み込み完了時操作可能状態にする
             isControl = true;
@@ -151,9 +158,6 @@ namespace ProjectCronos
         public async UniTask PreLoadAsync()
         {
             await AddressableManager.Instance.Load(demonHandPrefabPath);
-
-            // 入力イベント設定
-            SetInputAction();
         }
 
         /// <summary>
@@ -191,6 +195,9 @@ namespace ProjectCronos
 
             // テスト
             InputManager.Instance.inputActions.Player.Test.performed += OnTest;
+
+            // 第一のスキル
+            InputManager.Instance.inputActions.Player.FirstSkill.performed += playerSkill.OnActiveFirstSkill;
         }
 
         void RemoveInputAction()
@@ -211,6 +218,9 @@ namespace ProjectCronos
 
             // テスト
             InputManager.Instance.inputActions.Player.Test.performed -= OnTest;
+
+            // 第一のスキル
+            InputManager.Instance.inputActions.Player.FirstSkill.performed -= playerSkill.OnActiveFirstSkill;
         }
 
         void OnDestroy()
@@ -226,12 +236,6 @@ namespace ProjectCronos
             //// プレイヤーにダメージを与えるテスト
             //UnityEngine.Debug.Log("ダメージテスト");
             //Damage(1);
-
-            // 時間停止テスト
-            UnityEngine.Debug.Log("時間停止テスト");
-            isTimeStopWorld = !isTimeStopWorld;
-            TimeManager.Instance.ApplyEnemyTimeScale(isTimeStopWorld ? 0.0f : 1.0f);
-            TimeManager.Instance.ApplyObjectTimeScale(isTimeStopWorld ? 0.0f : 1.0f);
         }
 
         /// <summary>

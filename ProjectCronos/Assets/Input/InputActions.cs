@@ -89,6 +89,15 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""FirstSkill"",
+                    ""type"": ""Button"",
+                    ""id"": ""496bc039-dcdc-43b7-947c-87d01cc33d02"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -375,6 +384,28 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""RockOn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ef53831b-2dff-4cef-8262-34ae05c17da1"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""FirstSkill"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""27d9d2a6-5f6e-4b07-86ed-6f9a586d377e"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""FirstSkill"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1073,6 +1104,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         m_Player_Test = m_Player.FindAction("Test", throwIfNotFound: true);
         m_Player_RockOn = m_Player.FindAction("RockOn", throwIfNotFound: true);
+        m_Player_FirstSkill = m_Player.FindAction("FirstSkill", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1154,6 +1186,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Attack;
     private readonly InputAction m_Player_Test;
     private readonly InputAction m_Player_RockOn;
+    private readonly InputAction m_Player_FirstSkill;
     public struct PlayerActions
     {
         private @InputActions m_Wrapper;
@@ -1165,6 +1198,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
         public InputAction @Test => m_Wrapper.m_Player_Test;
         public InputAction @RockOn => m_Wrapper.m_Player_RockOn;
+        public InputAction @FirstSkill => m_Wrapper.m_Player_FirstSkill;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1195,6 +1229,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @RockOn.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRockOn;
                 @RockOn.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRockOn;
                 @RockOn.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRockOn;
+                @FirstSkill.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFirstSkill;
+                @FirstSkill.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFirstSkill;
+                @FirstSkill.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFirstSkill;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1220,6 +1257,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @RockOn.started += instance.OnRockOn;
                 @RockOn.performed += instance.OnRockOn;
                 @RockOn.canceled += instance.OnRockOn;
+                @FirstSkill.started += instance.OnFirstSkill;
+                @FirstSkill.performed += instance.OnFirstSkill;
+                @FirstSkill.canceled += instance.OnFirstSkill;
             }
         }
     }
@@ -1407,6 +1447,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         void OnAttack(InputAction.CallbackContext context);
         void OnTest(InputAction.CallbackContext context);
         void OnRockOn(InputAction.CallbackContext context);
+        void OnFirstSkill(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

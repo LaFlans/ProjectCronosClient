@@ -219,6 +219,18 @@ namespace ProjectCronos
                 /// </summary>
                 MAXMUM,
             }
+
+            public enum SKILL_TYPE
+            {
+                /// <summary>
+                /// 時間停止(アガレス)
+                /// </summary>
+                TIME_STOP,
+                /// <summary>
+                /// 要素数
+                /// </summary>
+                MAXMUM,
+            }
         }
 
         /// <summary>
