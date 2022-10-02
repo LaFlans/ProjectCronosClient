@@ -15,10 +15,20 @@ namespace ProjectCronos
         EnumCollection.Attack.SKILL_TYPE firstSkillType;
 
         /// <summary>
+        /// プレイヤーのステータス情報
+        /// </summary>
+        PlayerStatus status;
+
+        /// <summary>
         /// 時間停止中かどうか
         /// </summary>
         bool isTimeStopWorld;
 
+        float timeStopTimer;
+
+        /// <summary>
+        /// ボリューム設定
+        /// </summary>
         [SerializeField]
         Volume volume;
 
@@ -27,12 +37,32 @@ namespace ProjectCronos
         /// </summary>
         GrayScale grayScale;
 
+        private void Update()
+        {
+            if (isTimeStopWorld)
+            {
+                timeStopTimer += Time.deltaTime;
+                if (timeStopTimer > 1)
+                {
+                    timeStopTimer = 0;
+                    if (status.DamageMp(200))
+                    {
+                        //　MPが足りなくなった場合、スキルを停止する
+                        TimeStop();
+                    }
+                }
+            }
+        }
+
         public void Initialize()
         {
             firstSkillType = EnumCollection.Attack.SKILL_TYPE.TIME_STOP;
 
             // 時間停止状態設定
             isTimeStopWorld = false;
+
+            // ステータス情報設定
+            status = this.GetComponent<PlayerStatus>();
 
             volume.profile.TryGet(out grayScale);
             if(grayScale == null)
@@ -57,7 +87,7 @@ namespace ProjectCronos
         void TimeStop()
         {
             // 時間停止テスト
-            UnityEngine.Debug.Log("時間停止テスト");
+            Debug.Log("時間停止テスト");
             isTimeStopWorld = !isTimeStopWorld;
             TimeManager.Instance.ApplyEnemyTimeScale(isTimeStopWorld ? 0.0f : 1.0f);
             TimeManager.Instance.ApplyObjectTimeScale(isTimeStopWorld ? 0.0f : 1.0f);

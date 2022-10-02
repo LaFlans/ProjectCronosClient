@@ -3,22 +3,27 @@ using TMPro;
 
 namespace ProjectCronos
 {
-    internal class HpBar3d : IStatusBar
+    internal class MpBar : IStatusBar
     {
         /// <summary>
         /// 表示テキスト
         /// </summary>
         [SerializeField]
-        protected TextMeshPro viewText = null;
+        protected TextMeshProUGUI viewText = null;
 
         /// <summary>
         /// 初期化
         /// </summary>
         public override void Initialize()
         {
-
+            // 親のスケールを初期化
+            parent.transform.localScale = Vector3.one;
         }
 
+        /// <summary>
+        /// 表示設定
+        /// </summary>
+        /// <param name="isShow">表示するかどうか</param>
         public override void SetShow(bool isShow)
         {
             this.gameObject.SetActive(isShow);
@@ -29,13 +34,6 @@ namespace ProjectCronos
         /// </summary>
         public override void Apply(int current, int max, EnumCollection.UI.BAR_SHOW_STATUS status)
         {
-            if (current <= 0)
-            {
-                // HPが0以下の場合、表示しないようにする
-                parent.gameObject.SetActive(false);
-                return;
-            }
-
             // テキスト更新
             ApplyText(current, max, status);
 

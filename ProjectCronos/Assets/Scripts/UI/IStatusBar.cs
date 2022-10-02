@@ -5,10 +5,10 @@ using TMPro;
 
 namespace ProjectCronos
 {
-    public abstract class IHpBar : MonoBehaviour
+    public abstract class IStatusBar : MonoBehaviour
     {
         /// <summary>
-        /// HPバーの親トランスフォーム
+        /// バーの親トランスフォーム
         /// </summary>
         [SerializeField]
         protected Transform parent = null;
@@ -21,7 +21,7 @@ namespace ProjectCronos
         /// <summary>
         /// 更新処理
         /// </summary>
-        public abstract void Apply(int value, int hpMax, EnumCollection.UI.HP_BAR_SHOW_STATUS status);
+        public abstract void Apply(int current, int max, EnumCollection.UI.BAR_SHOW_STATUS status);
 
         /// <summary>
         /// 表示切替処理

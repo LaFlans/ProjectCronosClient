@@ -9,11 +9,20 @@ namespace ProjectCronos
     /// </summary>
     public class Status : MonoBehaviour
     {
+        const float AUTO_HEAL_SECONDS = 1;
+        float autoHealSeconds;
+
         /// <summary>
         /// HPを表示するバー
         /// </summary>
         [SerializeField]
-        protected IHpBar hpBar;
+        protected IStatusBar hpBar;
+
+        /// <summary>
+        /// MPを表示するバー
+        /// </summary>
+        [SerializeField]
+        protected IStatusBar mpBar;
 
         /// <summary>
         /// 最大体力
@@ -25,7 +34,31 @@ namespace ProjectCronos
         /// 残り体力
         /// </summary>
         [SerializeField]
-        public int currntHp { get; set; }
+        public int currentHp { get; set; }
+
+        /// <summary>
+        /// 時間で回復するHPの割合
+        /// </summary>
+        [SerializeField]
+        public int timeHpHealPerSeconds;
+
+        /// <summary>
+        /// 最大MP
+        /// </summary>
+        [SerializeField]
+        public int maxMp { get; set; }
+
+        /// <summary>
+        /// 残りMP
+        /// </summary>
+        [SerializeField]
+        public int currentMp { get; set; }
+
+        /// <summary>
+        /// 時間で回復するMPの割合
+        /// </summary>
+        [SerializeField]
+        public int timeMpHealPerSeconds;
 
         /// <summary>
         /// 移動速度
@@ -79,25 +112,90 @@ namespace ProjectCronos
         }
 
         /// <summary>
+        /// 更新処理
+        /// </summary>
+        void Update()
+        {
+            // 時間自動回復処理
+            TimeAutoHeal();
+        }
+
+        /// <summary>
+        /// 時間自動回復
+        /// </summary>
+        void TimeAutoHeal()
+        {
+            autoHealSeconds += Time.deltaTime;
+            if (autoHealSeconds > AUTO_HEAL_SECONDS)
+            {
+                autoHealSeconds = 0;
+                Heal();
+            }
+        }
+
+        /// <summary>
+        /// 回復処理
+        /// </summary>
+        void Heal()
+        {
+            AutoHealHp();
+            AutoHealMp();
+        }
+
+        /// <summary>
+        /// HP自動回復処理
+        /// </summary>
+        void AutoHealHp()
+        {
+            if (hpBar != null)
+            {
+                var val = (int)(maxHp * (timeHpHealPerSeconds / 100.0f));
+                Debug.Log($"{timeHpHealPerSeconds}%のHP自動回復(回復した値:{val})");
+                HealHp(val);
+            }
+        }
+
+        /// <summary>
+        /// MP自動回復処理
+        /// </summary>
+        void AutoHealMp()
+        {
+            if (mpBar != null)
+            {
+                var val = (int)(maxMp * (timeMpHealPerSeconds / 100.0f));
+                Debug.Log($"{timeMpHealPerSeconds}%のMP自動回復(回復した値:{val})");
+                HealMp(val);
+            }
+        }
+
+        /// <summary>
         /// 初期化
         /// </summary>
         public virtual void Initialize()
         {
+            //　HP周りの設定
             maxHp = 10;
-            currntHp = maxHp;
+            currentHp = maxHp;
+            timeHpHealPerSeconds = 10;
             ApplyHpText();
+
+            // MP回りの設定
+            maxMp = 1000;
+            timeMpHealPerSeconds = 10;
+            currentMp = maxMp;
+            ApplyMpText();
         }
 
         /// <summary>
-        /// 被弾時処理(HPが０の場合、trueを返す)
+        /// HPダメージ処理(HPが０の場合、trueを返す)
         /// </summary>
         /// <param name="value">ダメージの値</param>
         /// <returns>HPが無くなった場合true</returns>
-        public bool Damage(int value)
+        public bool DamageHp(int value)
         {
-            currntHp -= value;
+            currentHp -= value;
 
-            if (currntHp <= 0)
+            if (currentHp <= 0)
             {
                 hpBar.SetShow(false);
                 return true;
@@ -109,13 +207,76 @@ namespace ProjectCronos
         }
 
         /// <summary>
+        /// MPダメージ処理
+        /// </summary>
+        /// <param name="value">ダメージの値</param>
+        /// <returns>MPが足りない場合、減らさずにtrueを返す</returns>
+        public bool DamageMp(int value)
+        {
+            if (currentMp < value)
+            {
+                return true;
+            }
+
+            currentMp -= value;
+
+            if (currentMp <= 0)
+            {
+                currentMp = 0;
+            }
+
+            ApplyMpText();
+
+            return false;
+        }
+
+        /// <summary>
+        /// HP回復処理
+        /// </summary>
+        public void HealHp(int value)
+        {
+            currentHp += value;
+            if (currentHp > maxHp)
+            {
+                currentHp = maxHp;
+            }
+
+            ApplyHpText();
+        }
+
+        /// <summary>
+        /// MP回復処理
+        /// </summary>
+        public void HealMp(int value)
+        {
+            currentMp += value;
+            if (currentMp > maxMp)
+            {
+                currentMp = maxMp;
+            }
+
+            ApplyMpText();
+        }
+
+        /// <summary>
         /// HP表示更新
         /// </summary>
         public virtual void ApplyHpText()
         {
             if (hpBar != null)
             {
-                hpBar.Apply(currntHp, maxHp, EnumCollection.UI.HP_BAR_SHOW_STATUS.ALL_HP);
+                hpBar.Apply(currentHp, maxHp, EnumCollection.UI.BAR_SHOW_STATUS.ALL);
+            }
+        }
+
+        /// <summary>
+        /// MP表示更新
+        /// </summary>
+        public virtual void ApplyMpText()
+        {
+            if (mpBar != null)
+            {
+                mpBar.Apply(currentMp, maxMp, EnumCollection.UI.BAR_SHOW_STATUS.ALL);
             }
         }
     }

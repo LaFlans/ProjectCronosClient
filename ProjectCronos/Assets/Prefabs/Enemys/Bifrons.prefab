@@ -1389,6 +1389,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hpBar: {fileID: 6187348991346759861}
+  mpBar: {fileID: 0}
+  timeHpHealPerSeconds: 0
+  timeMpHealPerSeconds: 0
 --- !u!114 &1624982840834471610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2251,7 +2254,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 238755654539863912}
-  hpText: {fileID: 1540687248886844275}
+  viewText: {fileID: 1540687248886844275}
 --- !u!1 &9104456472945599785
 GameObject:
   m_ObjectHideFlags: 0

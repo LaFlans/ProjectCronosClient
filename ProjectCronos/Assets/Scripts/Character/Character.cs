@@ -48,7 +48,7 @@ namespace ProjectCronos
         {
             if (status != null)
             {
-                if (status.Damage(value))
+                if (status.DamageHp(value))
                 {
                     Death();
                 }

@@ -38,16 +38,16 @@ namespace ProjectCronos
         /// </summary>
         namespace UI
         {
-            public enum HP_BAR_SHOW_STATUS
+            public enum BAR_SHOW_STATUS
             {
                 /// <summary>
-                /// 残りHPのみ表示
+                /// 残りの値のみ表示
                 /// </summary>
-                CURRENT_HP_ONLY,
+                CURRENT_ONLY,
                 /// <summary>
-                /// HP関連すべて表示
+                /// すべて表示
                 /// </summary>
-                ALL_HP,
+                ALL,
                 /// <summary>
                 /// 要素数
                 /// </summary>

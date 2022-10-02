@@ -16,7 +16,7 @@ namespace ProjectCronos
         {
             if (hpBar != null)
             {
-                hpBar.Apply(currntHp, maxHp, EnumCollection.UI.HP_BAR_SHOW_STATUS.ALL_HP);
+                hpBar.Apply(currentHp, maxHp, EnumCollection.UI.BAR_SHOW_STATUS.ALL);
             }
         }
     }

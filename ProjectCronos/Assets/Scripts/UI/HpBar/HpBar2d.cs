@@ -3,13 +3,13 @@ using TMPro;
 
 namespace ProjectCronos
 {
-    internal class HpBar2d : IHpBar
+    internal class HpBar2d : IStatusBar
     {
         /// <summary>
-        /// HP表示テキスト
+        /// 表示テキスト
         /// </summary>
         [SerializeField]
-        protected TextMeshProUGUI hpText = null;
+        protected TextMeshProUGUI viewText = null;
 
         /// <summary>
         /// 初期化
@@ -28,9 +28,9 @@ namespace ProjectCronos
         /// <summary>
         /// 更新
         /// </summary>
-        public override void Apply(int value, int hpMax, EnumCollection.UI.HP_BAR_SHOW_STATUS status)
+        public override void Apply(int current, int max, EnumCollection.UI.BAR_SHOW_STATUS status)
         {
-            if (value <= 0)
+            if (current <= 0)
             {
                 // HPが0以下の場合、表示しないようにする
                 parent.gameObject.SetActive(false);
@@ -38,23 +38,23 @@ namespace ProjectCronos
             }
 
             // テキスト更新
-            ApplyHpText(value, hpMax, status);
+            ApplyText(current, max, status);
 
             // バー表示対応
             var scale = parent.transform.localScale;
-            scale.x = (float)value / (float)hpMax;
+            scale.x = (float)current / (float)max;
             parent.transform.localScale = scale;
         }
 
-        void ApplyHpText(int value, int hpMax, EnumCollection.UI.HP_BAR_SHOW_STATUS status)
+        void ApplyText(int current, int max, EnumCollection.UI.BAR_SHOW_STATUS status)
         {
             switch (status)
             {
-                case EnumCollection.UI.HP_BAR_SHOW_STATUS.CURRENT_HP_ONLY:
-                    hpText.text = value.ToString();
+                case EnumCollection.UI.BAR_SHOW_STATUS.CURRENT_ONLY:
+                    viewText.text = current.ToString();
                     break;
-                case EnumCollection.UI.HP_BAR_SHOW_STATUS.ALL_HP:
-                    hpText.text = $"{value}/{hpMax}";
+                case EnumCollection.UI.BAR_SHOW_STATUS.ALL:
+                    viewText.text = $"{current}/{max}";
                     break;
             }
         }
