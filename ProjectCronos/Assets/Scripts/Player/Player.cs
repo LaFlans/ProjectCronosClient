@@ -106,9 +106,6 @@ namespace ProjectCronos
 
         string demonHandPrefabPath = "Assets/Resources_moved/Prefabs/DemonHand.prefab";
 
-        [SerializeField]
-        CinemachineTargetGroup targetGroup;
-
         /// <summary>
         /// プレイヤー用カメラ
         /// </summary>
