@@ -1,5 +1,6 @@
 using UnityEngine;
 using Cinemachine;
+using UnityEngine.UI;
 
 namespace ProjectCronos
 {
@@ -19,6 +20,12 @@ namespace ProjectCronos
         /// </summary>
         [SerializeField]
         CinemachineVirtualCamera rockOnCamera;
+
+        /// <summary>
+        /// ロックオン中に表示されるUI
+        /// </summary>
+        [SerializeField]
+        RawImage rockOnImage;
 
         /// <summary>
         /// ロックオンカメラの高さ
@@ -54,6 +61,7 @@ namespace ProjectCronos
         public void Initialize(Transform playerTransform)
         {
             isRockOn = false;
+            rockOnImage.enabled = false;
             this.playerTransform = playerTransform;
             SetPriority();
         }
@@ -79,6 +87,7 @@ namespace ProjectCronos
         {
             Debug.Log("ロックオンをするよ");
             targetTransform = target;
+            rockOnImage.enabled = true;
             rockOnCamera.transform.position = freeLookCamera.transform.position;
             SetPriority(rockOnPriority: 15);
             isRockOn = true;
@@ -90,6 +99,7 @@ namespace ProjectCronos
         public void CancelRockOn()
         {
             Debug.Log("ロックオンを解除したよ");
+            rockOnImage.enabled = false;
             SetPriority(rockOnPriority: 5);
             isRockOn = false;
         }
