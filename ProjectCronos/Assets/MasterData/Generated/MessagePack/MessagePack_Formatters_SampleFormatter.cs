@@ -6,9 +6,9 @@
 #pragma warning disable 612
 #pragma warning disable 414
 #pragma warning disable 168
+#pragma warning disable CS1591 // document public APIs
 
 #pragma warning disable SA1129 // Do not use default value type constructor
-#pragma warning disable SA1200 // Using directives should be placed correctly
 #pragma warning disable SA1309 // Field names should not begin with underscore
 #pragma warning disable SA1312 // Variable names should begin with lower-case letter
 #pragma warning disable SA1403 // File may only contain a single namespace
@@ -16,9 +16,6 @@
 
 namespace MessagePack.Formatters
 {
-    using global::System.Buffers;
-    using global::MessagePack;
-
     public sealed class SampleFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::Sample>
     {
         // Id
@@ -41,9 +38,9 @@ namespace MessagePack.Formatters
             writer.WriteRaw(GetSpan_Id());
             writer.Write(value.Id);
             writer.WriteRaw(GetSpan_Name());
-            formatterResolver.GetFormatterWithVerify<string>().Serialize(ref writer, value.Name, options);
+            global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<string>(formatterResolver).Serialize(ref writer, value.Name, options);
             writer.WriteRaw(GetSpan_Path());
-            formatterResolver.GetFormatterWithVerify<string>().Serialize(ref writer, value.Path, options);
+            global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<string>(formatterResolver).Serialize(ref writer, value.Path, options);
         }
 
         public global::Sample Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
@@ -79,10 +76,10 @@ namespace MessagePack.Formatters
                         {
                             default: goto FAIL;
                             case 1701667150UL:
-                                __Name__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(ref reader, options);
+                                __Name__ = global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<string>(formatterResolver).Deserialize(ref reader, options);
                                 continue;
                             case 1752457552UL:
-                                __Path__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(ref reader, options);
+                                __Path__ = global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<string>(formatterResolver).Deserialize(ref reader, options);
                                 continue;
                         }
 
@@ -94,4 +91,16 @@ namespace MessagePack.Formatters
             return ____result;
         }
     }
+
 }
+
+#pragma warning restore 168
+#pragma warning restore 414
+#pragma warning restore 618
+#pragma warning restore 612
+
+#pragma warning restore SA1129 // Do not use default value type constructor
+#pragma warning restore SA1309 // Field names should not begin with underscore
+#pragma warning restore SA1312 // Variable names should begin with lower-case letter
+#pragma warning restore SA1403 // File may only contain a single namespace
+#pragma warning restore SA1649 // File name should match first type name

@@ -4,9 +4,7 @@ using MasterMemory.Validation;
 using MasterMemory;
 using MessagePack;
 using System.Collections.Generic;
-using System.Collections;
 using System;
-using UnityEngine;
 
 namespace Generated.Tables
 {
@@ -92,6 +90,7 @@ namespace Generated.Tables
                     new MasterMemory.Meta.MetaProperty(typeof(Test).GetProperty("Name")),
                     new MasterMemory.Meta.MetaProperty(typeof(Test).GetProperty("Hp")),
                     new MasterMemory.Meta.MetaProperty(typeof(Test).GetProperty("Attack")),
+                    new MasterMemory.Meta.MetaProperty(typeof(Test).GetProperty("Deffence")),
                 },
                 new MasterMemory.Meta.MetaIndex[]{
                     new MasterMemory.Meta.MetaIndex(new System.Reflection.PropertyInfo[] {

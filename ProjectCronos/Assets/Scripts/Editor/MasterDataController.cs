@@ -64,25 +64,6 @@ namespace ProjectCronos
             var style = new GUIStyle(EditorStyles.label);
             style.richText = true;
 
-            using (new EditorGUILayout.VerticalScope("BOX"))
-            {
-                GUILayout.Label("<b>コード生成</b>", style);
-                using (new GUILayout.HorizontalScope())
-                {
-                    // MasterMemoryのコードを生成
-                    if (GUILayout.Button("MasterMemoryCodeGenerate"))
-                    {
-                        MasterMemoryGenerator.GenerateMasterMemory();
-                    }
-
-                    // メッセージパックのコード生成
-                    if (GUILayout.Button("MessagePackCodeGenerate"))
-                    {
-                        MessagePackGenerator.GenerateMessagePack();
-                    }
-                }
-            }
-
             if (objects.Count() > 0)
             {
                 using (new EditorGUILayout.VerticalScope("BOX"))

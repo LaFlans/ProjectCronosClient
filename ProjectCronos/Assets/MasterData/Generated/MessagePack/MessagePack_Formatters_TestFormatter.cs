@@ -6,9 +6,9 @@
 #pragma warning disable 612
 #pragma warning disable 414
 #pragma warning disable 168
+#pragma warning disable CS1591 // document public APIs
 
 #pragma warning disable SA1129 // Do not use default value type constructor
-#pragma warning disable SA1200 // Using directives should be placed correctly
 #pragma warning disable SA1309 // Field names should not begin with underscore
 #pragma warning disable SA1312 // Variable names should begin with lower-case letter
 #pragma warning disable SA1403 // File may only contain a single namespace
@@ -16,9 +16,6 @@
 
 namespace MessagePack.Formatters
 {
-    using global::System.Buffers;
-    using global::MessagePack;
-
     public sealed class TestFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::Test>
     {
         // Id
@@ -29,6 +26,8 @@ namespace MessagePack.Formatters
         private static global::System.ReadOnlySpan<byte> GetSpan_Hp() => new byte[1 + 2] { 162, 72, 112 };
         // Attack
         private static global::System.ReadOnlySpan<byte> GetSpan_Attack() => new byte[1 + 6] { 166, 65, 116, 116, 97, 99, 107 };
+        // Deffence
+        private static global::System.ReadOnlySpan<byte> GetSpan_Deffence() => new byte[1 + 8] { 168, 68, 101, 102, 102, 101, 110, 99, 101 };
 
         public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::Test value, global::MessagePack.MessagePackSerializerOptions options)
         {
@@ -39,15 +38,17 @@ namespace MessagePack.Formatters
             }
 
             var formatterResolver = options.Resolver;
-            writer.WriteMapHeader(4);
+            writer.WriteMapHeader(5);
             writer.WriteRaw(GetSpan_Id());
             writer.Write(value.Id);
             writer.WriteRaw(GetSpan_Name());
-            formatterResolver.GetFormatterWithVerify<string>().Serialize(ref writer, value.Name, options);
+            global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<string>(formatterResolver).Serialize(ref writer, value.Name, options);
             writer.WriteRaw(GetSpan_Hp());
             writer.Write(value.Hp);
             writer.WriteRaw(GetSpan_Attack());
             writer.Write(value.Attack);
+            writer.WriteRaw(GetSpan_Deffence());
+            writer.Write(value.Deffence);
         }
 
         public global::Test Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
@@ -64,6 +65,7 @@ namespace MessagePack.Formatters
             var __Name__ = default(string);
             var __Hp__ = default(int);
             var __Attack__ = default(float);
+            var __Deffence__ = default(float);
 
             for (int i = 0; i < length; i++)
             {
@@ -88,20 +90,37 @@ namespace MessagePack.Formatters
                     case 4:
                         if (global::MessagePack.Internal.AutomataKeyGen.GetKey(ref stringKey) != 1701667150UL) { goto FAIL; }
 
-                        __Name__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(ref reader, options);
+                        __Name__ = global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<string>(formatterResolver).Deserialize(ref reader, options);
                         continue;
                     case 6:
                         if (global::MessagePack.Internal.AutomataKeyGen.GetKey(ref stringKey) != 118074580956225UL) { goto FAIL; }
 
                         __Attack__ = reader.ReadSingle();
                         continue;
+                    case 8:
+                        if (global::MessagePack.Internal.AutomataKeyGen.GetKey(ref stringKey) != 7305804402313815364UL) { goto FAIL; }
+
+                        __Deffence__ = reader.ReadSingle();
+                        continue;
 
                 }
             }
 
-            var ____result = new global::Test(__Id__, __Name__, __Hp__, __Attack__);
+            var ____result = new global::Test(__Id__, __Name__, __Hp__, __Attack__, __Deffence__);
             reader.Depth--;
             return ____result;
         }
     }
+
 }
+
+#pragma warning restore 168
+#pragma warning restore 414
+#pragma warning restore 618
+#pragma warning restore 612
+
+#pragma warning restore SA1129 // Do not use default value type constructor
+#pragma warning restore SA1309 // Field names should not begin with underscore
+#pragma warning restore SA1312 // Variable names should begin with lower-case letter
+#pragma warning restore SA1403 // File may only contain a single namespace
+#pragma warning restore SA1649 // File name should match first type name

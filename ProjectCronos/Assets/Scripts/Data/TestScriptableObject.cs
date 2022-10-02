@@ -23,13 +23,15 @@ namespace ProjectCronos
             public string name;
             public int hp;
             public float attack;
+            public float defense;
 
-            public TestData(int id, string name, int hp, float attack)
+            public TestData(int id, string name, int hp, float attack, float defense)
             {
                 this.id = id;
                 this.name = name;
                 this.hp = hp;
                 this.attack = attack;
+                this.defense = defense;
             }
         }
 
@@ -80,7 +82,7 @@ namespace ProjectCronos
             data.Clear();
             foreach (var item in dbData)
             {
-                data.Add(new TestData(item.Id, item.Name, item.Hp, item.Attack));
+                data.Add(new TestData(item.Id, item.Name, item.Hp, item.Attack,item.Deffence));
             }
 
             //filterData = data.Where(x => x.name.Contains(filter)).ToList();
@@ -95,7 +97,7 @@ namespace ProjectCronos
             List<Test> temp = new List<Test>();
             foreach (var item in data.Select((v, i) => new { Value = v, Index = i }))
             {
-                temp.Add(new Test(item.Index, item.Value.name, item.Value.hp, item.Value.attack));
+                temp.Add(new Test(item.Index, item.Value.name, item.Value.hp, item.Value.attack, item.Value.defense));
             }
             builder.Append(temp);
         }
