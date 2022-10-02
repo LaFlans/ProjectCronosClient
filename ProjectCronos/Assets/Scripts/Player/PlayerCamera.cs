@@ -79,6 +79,7 @@ namespace ProjectCronos
         {
             Debug.Log("ロックオンをするよ");
             targetTransform = target;
+            rockOnCamera.transform.position = freeLookCamera.transform.position;
             SetPriority(rockOnPriority: 15);
             isRockOn = true;
         }
