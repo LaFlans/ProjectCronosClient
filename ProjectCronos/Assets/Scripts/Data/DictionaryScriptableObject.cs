@@ -31,8 +31,6 @@ namespace ProjectCronos
         {
             // データのタイトル設定
             dataTitle = "<b>DictionaryMasterData</b>";
-
-            UpdateDBCache();
         }
 
         public override void UpdateDBCache()

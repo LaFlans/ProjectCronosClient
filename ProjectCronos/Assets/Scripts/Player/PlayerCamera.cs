@@ -85,7 +85,7 @@ namespace ProjectCronos
         /// </summary>
         public void RockOn(Transform target)
         {
-            Debug.Log("ロックオンをするよ");
+            //Debug.Log("ロックオンをするよ");
             targetTransform = target;
             rockOnImage.enabled = true;
             rockOnCamera.transform.position = freeLookCamera.transform.position;

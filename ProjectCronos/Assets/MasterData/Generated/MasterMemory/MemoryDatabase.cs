@@ -12,18 +12,24 @@ namespace Generated
    public sealed class MemoryDatabase : MemoryDatabaseBase
    {
         public DictionaryTable DictionaryTable { get; private set; }
+        public EnemyDataTable EnemyDataTable { get; private set; }
+        public PlayerDataTable PlayerDataTable { get; private set; }
         public SampleTable SampleTable { get; private set; }
         public SoundTable SoundTable { get; private set; }
         public TestTable TestTable { get; private set; }
 
         public MemoryDatabase(
             DictionaryTable DictionaryTable,
+            EnemyDataTable EnemyDataTable,
+            PlayerDataTable PlayerDataTable,
             SampleTable SampleTable,
             SoundTable SoundTable,
             TestTable TestTable
         )
         {
             this.DictionaryTable = DictionaryTable;
+            this.EnemyDataTable = EnemyDataTable;
+            this.PlayerDataTable = PlayerDataTable;
             this.SampleTable = SampleTable;
             this.SoundTable = SoundTable;
             this.TestTable = TestTable;
@@ -49,6 +55,8 @@ namespace Generated
         void InitSequential(Dictionary<string, (int offset, int count)> header, System.ReadOnlyMemory<byte> databaseBinary, MessagePack.MessagePackSerializerOptions options, int maxDegreeOfParallelism)
         {
             this.DictionaryTable = ExtractTableData<Dictionary, DictionaryTable>(header, databaseBinary, options, xs => new DictionaryTable(xs));
+            this.EnemyDataTable = ExtractTableData<EnemyData, EnemyDataTable>(header, databaseBinary, options, xs => new EnemyDataTable(xs));
+            this.PlayerDataTable = ExtractTableData<PlayerData, PlayerDataTable>(header, databaseBinary, options, xs => new PlayerDataTable(xs));
             this.SampleTable = ExtractTableData<Sample, SampleTable>(header, databaseBinary, options, xs => new SampleTable(xs));
             this.SoundTable = ExtractTableData<Sound, SoundTable>(header, databaseBinary, options, xs => new SoundTable(xs));
             this.TestTable = ExtractTableData<Test, TestTable>(header, databaseBinary, options, xs => new TestTable(xs));
@@ -59,6 +67,8 @@ namespace Generated
             var extracts = new Action[]
             {
                 () => this.DictionaryTable = ExtractTableData<Dictionary, DictionaryTable>(header, databaseBinary, options, xs => new DictionaryTable(xs)),
+                () => this.EnemyDataTable = ExtractTableData<EnemyData, EnemyDataTable>(header, databaseBinary, options, xs => new EnemyDataTable(xs)),
+                () => this.PlayerDataTable = ExtractTableData<PlayerData, PlayerDataTable>(header, databaseBinary, options, xs => new PlayerDataTable(xs)),
                 () => this.SampleTable = ExtractTableData<Sample, SampleTable>(header, databaseBinary, options, xs => new SampleTable(xs)),
                 () => this.SoundTable = ExtractTableData<Sound, SoundTable>(header, databaseBinary, options, xs => new SoundTable(xs)),
                 () => this.TestTable = ExtractTableData<Test, TestTable>(header, databaseBinary, options, xs => new TestTable(xs)),
@@ -79,6 +89,8 @@ namespace Generated
         {
             var builder = new DatabaseBuilder();
             builder.Append(this.DictionaryTable.GetRawDataUnsafe());
+            builder.Append(this.EnemyDataTable.GetRawDataUnsafe());
+            builder.Append(this.PlayerDataTable.GetRawDataUnsafe());
             builder.Append(this.SampleTable.GetRawDataUnsafe());
             builder.Append(this.SoundTable.GetRawDataUnsafe());
             builder.Append(this.TestTable.GetRawDataUnsafe());
@@ -89,6 +101,8 @@ namespace Generated
         {
             var builder = new DatabaseBuilder(resolver);
             builder.Append(this.DictionaryTable.GetRawDataUnsafe());
+            builder.Append(this.EnemyDataTable.GetRawDataUnsafe());
+            builder.Append(this.PlayerDataTable.GetRawDataUnsafe());
             builder.Append(this.SampleTable.GetRawDataUnsafe());
             builder.Append(this.SoundTable.GetRawDataUnsafe());
             builder.Append(this.TestTable.GetRawDataUnsafe());
@@ -103,6 +117,8 @@ namespace Generated
             var database = new ValidationDatabase(new object[]
             {
                 DictionaryTable,
+                EnemyDataTable,
+                PlayerDataTable,
                 SampleTable,
                 SoundTable,
                 TestTable,
@@ -110,6 +126,10 @@ namespace Generated
 
             ((ITableUniqueValidate)DictionaryTable).ValidateUnique(result);
             ValidateTable(DictionaryTable.All, database, "Key", DictionaryTable.PrimaryKeySelector, result);
+            ((ITableUniqueValidate)EnemyDataTable).ValidateUnique(result);
+            ValidateTable(EnemyDataTable.All, database, "Key", EnemyDataTable.PrimaryKeySelector, result);
+            ((ITableUniqueValidate)PlayerDataTable).ValidateUnique(result);
+            ValidateTable(PlayerDataTable.All, database, "Key", PlayerDataTable.PrimaryKeySelector, result);
             ((ITableUniqueValidate)SampleTable).ValidateUnique(result);
             ValidateTable(SampleTable.All, database, "Id", SampleTable.PrimaryKeySelector, result);
             ((ITableUniqueValidate)SoundTable).ValidateUnique(result);
@@ -130,6 +150,10 @@ namespace Generated
             {
                 case "m_dictionary":
                     return db.DictionaryTable;
+                case "m_enemy_data":
+                    return db.EnemyDataTable;
+                case "m_player_data":
+                    return db.PlayerDataTable;
                 case "m_sample":
                     return db.SampleTable;
                 case "m_sound":
@@ -150,6 +174,8 @@ namespace Generated
 
             var dict = new Dictionary<string, MasterMemory.Meta.MetaTable>();
             dict.Add("m_dictionary", Generated.Tables.DictionaryTable.CreateMetaTable());
+            dict.Add("m_enemy_data", Generated.Tables.EnemyDataTable.CreateMetaTable());
+            dict.Add("m_player_data", Generated.Tables.PlayerDataTable.CreateMetaTable());
             dict.Add("m_sample", Generated.Tables.SampleTable.CreateMetaTable());
             dict.Add("m_sound", Generated.Tables.SoundTable.CreateMetaTable());
             dict.Add("m_test", Generated.Tables.TestTable.CreateMetaTable());

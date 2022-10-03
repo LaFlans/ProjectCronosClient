@@ -153,7 +153,7 @@ MonoBehaviour:
   target: {fileID: 5527037612526824550}
   frontCrest: {fileID: 1943193419346421429}
   backCrest: {fileID: 7921522706343037999}
-  col: {fileID: 3034228218639018843}
+  attackTrigger: {fileID: 1398614752927530952}
 --- !u!1 &3670480024687493469
 GameObject:
   m_ObjectHideFlags: 0
@@ -1074,15 +1074,15 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e88d225d99217d49b8418b3b5b6bf04, type: 3}
---- !u!114 &3034228218639018843 stripped
+--- !u!114 &1398614752927530952 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3654683767359268379, guid: 1e88d225d99217d49b8418b3b5b6bf04, type: 3}
+  m_CorrespondingSourceObject: {fileID: 849866747673162376, guid: 1e88d225d99217d49b8418b3b5b6bf04, type: 3}
   m_PrefabInstance: {fileID: 1775462758169709888}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce91d1833053cfd4594245774f89e8b4, type: 3}
+  m_Script: {fileID: 11500000, guid: e065049c48bf6e54d9e53d93152159c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &5185943075764188892 stripped

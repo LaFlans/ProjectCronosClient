@@ -44,12 +44,14 @@ namespace Generated
 
         static MasterMemoryResolverGetFormatterHelper()
         {
-            lookup = new global::System.Collections.Generic.Dictionary<Type, int>(4)
+            lookup = new global::System.Collections.Generic.Dictionary<Type, int>(6)
             {
                 {typeof(Dictionary[]), 0 },
-                {typeof(Sample[]), 1 },
-                {typeof(Sound[]), 2 },
-                {typeof(Test[]), 3 },
+                {typeof(EnemyData[]), 1 },
+                {typeof(PlayerData[]), 2 },
+                {typeof(Sample[]), 3 },
+                {typeof(Sound[]), 4 },
+                {typeof(Test[]), 5 },
             };
         }
 
@@ -61,9 +63,11 @@ namespace Generated
             switch (key)
             {
                 case 0: return new MessagePack.Formatters.ArrayFormatter<Dictionary>();
-                case 1: return new MessagePack.Formatters.ArrayFormatter<Sample>();
-                case 2: return new MessagePack.Formatters.ArrayFormatter<Sound>();
-                case 3: return new MessagePack.Formatters.ArrayFormatter<Test>();
+                case 1: return new MessagePack.Formatters.ArrayFormatter<EnemyData>();
+                case 2: return new MessagePack.Formatters.ArrayFormatter<PlayerData>();
+                case 3: return new MessagePack.Formatters.ArrayFormatter<Sample>();
+                case 4: return new MessagePack.Formatters.ArrayFormatter<Sound>();
+                case 5: return new MessagePack.Formatters.ArrayFormatter<Test>();
                 default: return null;
             }
         }

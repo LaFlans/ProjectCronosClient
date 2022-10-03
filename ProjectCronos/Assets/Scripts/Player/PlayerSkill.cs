@@ -65,7 +65,7 @@ namespace ProjectCronos
             status = this.GetComponent<PlayerStatus>();
 
             volume.profile.TryGet(out grayScale);
-            if(grayScale == null)
+            if (grayScale == null)
             {
                 Debug.Log("時間停止中のポストエフェクトがせっていされていないよ！");
             }
@@ -87,7 +87,7 @@ namespace ProjectCronos
         void TimeStop()
         {
             // 時間停止テスト
-            Debug.Log("時間停止テスト");
+            //Debug.Log("時間停止テスト");
             isTimeStopWorld = !isTimeStopWorld;
             TimeManager.Instance.ApplyEnemyTimeScale(isTimeStopWorld ? 0.0f : 1.0f);
             TimeManager.Instance.ApplyObjectTimeScale(isTimeStopWorld ? 0.0f : 1.0f);

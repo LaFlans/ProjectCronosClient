@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ProjectCronos
 {
-    public class SummonHole : MonoBehaviour
+    public class DemonHand : MonoBehaviour
     {
         [SerializeField] GameObject target;
         Material mat;
@@ -22,10 +22,9 @@ namespace ProjectCronos
 
         /// <summary>
         /// 当たり判定
-        /// FIXME: AttackTriggerにまとめる
         /// </summary>
         [SerializeField]
-        Sword col;
+        AttackTrigger attackTrigger;
 
         /// <summary>
         /// オブジェクト(プレイヤーの攻撃等)のタイムスケールの値更新時イベント
@@ -61,12 +60,21 @@ namespace ProjectCronos
             tempSpeed = anim.speed;
             target.GetComponent<DefaultAnimationEvent>().Init(
                 finishAction: AnimationFinishEvent,
-                extension1Action:EnableCollider,
-                extension2Action:DisableCollider);
+                extension1Action: EnableCollider,
+                extension2Action: DisableCollider);
 
             // オブジェクトのタイムスケールの値更新時イベント設定
             TimeManager.Instance.RegisterObjectTimeScaleApplyAction(OnObjectTimeScaleApply);
             InitAct();
+        }
+
+        /// <summary>
+        /// 初期化
+        /// </summary>
+        /// <param name="attack">攻撃力</param>
+        public void Initialize(int attack)
+        {
+            attackTrigger.Init(EnumCollection.Attack.ATTACK_TYPE.PLAYER, attack);
         }
 
         void SummonMatInit()
@@ -78,12 +86,12 @@ namespace ProjectCronos
 
         void EnableCollider()
         {
-            col.EnableCollider();
+            attackTrigger.EnableCollider();
         }
 
         void DisableCollider()
         {
-            col.DisableCollider();
+            attackTrigger.DisableCollider();
         }
 
         /// <summary>

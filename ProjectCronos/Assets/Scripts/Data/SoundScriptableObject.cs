@@ -33,8 +33,6 @@ namespace ProjectCronos
         {
             // データのタイトル設定
             dataTitle = "<b>SoundMasterData</b>";
-
-            UpdateDBCache();
         }
 
         public override void UpdateDBCache()

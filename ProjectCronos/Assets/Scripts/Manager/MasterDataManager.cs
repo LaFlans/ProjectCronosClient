@@ -17,7 +17,6 @@ namespace ProjectCronos
 
         string masterDataPath = "Assets/MasterData/Generated/master-data.bytes";
 
-        // MessagePack の初期化処理
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         private static void InitializeMessagePack()
         {

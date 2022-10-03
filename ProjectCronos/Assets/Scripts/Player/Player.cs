@@ -11,12 +11,6 @@ namespace ProjectCronos
     public class Player : Character
     {
         /// <summary>
-        /// 移動速度
-        /// </summary>
-        [SerializeField]
-        int moveSpeed = 10;
-
-        /// <summary>
         /// 攻撃中の移動速度低下倍率
         /// </summary>
         [SerializeField]
@@ -90,12 +84,6 @@ namespace ProjectCronos
         GroundChecker groundChecker;
 
         /// <summary>
-        /// ジャンプ力
-        /// </summary>
-        [SerializeField]
-        float jumpPower = 10.0f;
-
-        /// <summary>
         /// 操作可能かどうか
         /// </summary>
         bool isControl;
@@ -115,6 +103,11 @@ namespace ProjectCronos
         PlayerSkill playerSkill;
 
         /// <summary>
+        /// プレイヤーステータス情報
+        /// </summary>
+        PlayerStatus playerStatus;
+
+        /// <summary>
         /// 初期化
         /// </summary>
         public override async UniTask<bool> Initialize()
@@ -126,6 +119,9 @@ namespace ProjectCronos
 
             // ステータス設定
             status = this.GetComponent<PlayerStatus>();
+            status.Initialize();
+            playerStatus = this.GetComponent<PlayerStatus>();
+            playerStatus.Initialize();
 
             //　地面判定設定
             groundChecker.Initialized(OnLanding, OnTakeoff);
@@ -296,10 +292,11 @@ namespace ProjectCronos
             obj.transform.position = spawnPos[0].position;
             obj.transform.rotation = spawnPos[0].rotation;
             obj.transform.localScale = spawnPos[0].localScale;
+            obj.GetComponent<DemonHand>().Initialize(status.attack);
         }
 
         /// <summary>
-        /// 第一段階攻撃アニメーションイベント
+        /// 第二段階攻撃アニメーションイベント
         /// </summary>
         void AnimEventAttackSecond()
         {
@@ -307,10 +304,11 @@ namespace ProjectCronos
             obj.transform.position = spawnPos[1].position;
             obj.transform.rotation = spawnPos[1].rotation;
             obj.transform.localScale = spawnPos[1].localScale;
+            obj.GetComponent<DemonHand>().Initialize(status.attack);
         }
 
         /// <summary>
-        /// 第一段階攻撃アニメーションイベント
+        /// 第三段階攻撃アニメーションイベント
         /// </summary>
         void AnimEventAttackThird()
         {
@@ -318,6 +316,7 @@ namespace ProjectCronos
             obj.transform.position = spawnPos[2].position;
             obj.transform.rotation = spawnPos[2].rotation;
             obj.transform.localScale = spawnPos[2].localScale;
+            obj.GetComponent<DemonHand>().Initialize(status.attack);
         }
 
         /// <summary>
@@ -331,7 +330,7 @@ namespace ProjectCronos
                 {
                     isJump = false;
                     jumpState = EnumCollection.Player.PLAYER_JUMP_STATE.JUMP;
-                    rigid.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
+                    rigid.AddForce(Vector3.up * playerStatus.jumpPower, ForceMode.Impulse);
 
                     SoundManager.Instance.Play("TakeoffPlayer");
                 }
@@ -516,11 +515,11 @@ namespace ProjectCronos
             // アニメーション中は移動速度を落とす
             if (anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
             {
-                rigid.velocity = new Vector3(vec.x * moveSpeed / attackMoveDelayRate, rigid.velocity.y, vec.z * moveSpeed / attackMoveDelayRate);
+                rigid.velocity = new Vector3(vec.x * status.moveSpeed / attackMoveDelayRate, rigid.velocity.y, vec.z * status.moveSpeed / attackMoveDelayRate);
             }
             else
             {
-                rigid.velocity = new Vector3(vec.x * moveSpeed, rigid.velocity.y, vec.z * moveSpeed);
+                rigid.velocity = new Vector3(vec.x * status.moveSpeed, rigid.velocity.y, vec.z * status.moveSpeed);
             }
 
             anim.SetFloat("Speed", vec.magnitude);

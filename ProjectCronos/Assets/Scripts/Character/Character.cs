@@ -11,21 +11,6 @@ namespace ProjectCronos
         protected Status status = null;
 
         /// <summary>
-        /// 開始処理
-        /// </summary>
-        void Start()
-        {
-        }
-
-        /// <summary>
-        /// 更新
-        /// </summary>
-        void Update()
-        {
-
-        }
-
-        /// <summary>
         /// 初期化
         /// </summary>
         public virtual async UniTask<bool> Initialize() 

@@ -52,6 +52,14 @@ namespace ProjectCronos
         /// </summary>
         bool existsDiff = false;
 
+        void OnEnable()
+        {
+            if (objects.Count > 0)
+            {
+                UpdateScriptableObject();
+            }
+        }
+
         [MenuItem("Cronos/MasterDataController")]
         static void Open()
         {

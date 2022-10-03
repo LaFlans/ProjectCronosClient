@@ -12,6 +12,9 @@ namespace ProjectCronos
         const float AUTO_HEAL_SECONDS = 1;
         float autoHealSeconds;
 
+        [SerializeField]
+        protected string statusKey;
+
         /// <summary>
         /// HPを表示するバー
         /// </summary>
@@ -27,97 +30,83 @@ namespace ProjectCronos
         /// <summary>
         /// 最大体力
         /// </summary>
-        [SerializeField]
         public int maxHp { get; set; }
 
         /// <summary>
         /// 残り体力
         /// </summary>
-        [SerializeField]
         public int currentHp { get; set; }
 
         /// <summary>
         /// 時間で回復するHPの割合
         /// </summary>
-        [SerializeField]
-        public int timeHpHealPerSeconds;
+        public int timeHpHealPerSeconds { get; set; }
 
         /// <summary>
         /// 最大MP
         /// </summary>
-        [SerializeField]
         public int maxMp { get; set; }
 
         /// <summary>
         /// 残りMP
         /// </summary>
-        [SerializeField]
         public int currentMp { get; set; }
 
         /// <summary>
         /// 時間で回復するMPの割合
         /// </summary>
-        [SerializeField]
-        public int timeMpHealPerSeconds;
+        public int timeMpHealPerSeconds { get; set; }
 
         /// <summary>
         /// 移動速度
         /// </summary>
-        [SerializeField]
-        public int moveSpeed { get; set; }
+        public float moveSpeed { get; set; }
 
         /// <summary>
         /// 攻撃力
         /// </summary>
-        [SerializeField]
         public int attack { get; set; }
 
         /// <summary>
         /// 魔法攻撃力
         /// </summary>
-        [SerializeField]
         public int magicAttack { get; set; }
 
         /// <summary>
         /// 防御力
         /// </summary>
-        [SerializeField]
         public int defence { get; set; }
 
         /// <summary>
         /// 魔法防御力
         /// </summary>
-        [SerializeField]
         public int magicDefence { get; set; }
 
         /// <summary>
         /// クリティカルが発生する確率(基本は0)
         /// </summary>
-        [SerializeField]
         public float criticalRate { get; set; }
 
         /// <summary>
         /// クリティカルが発生した時に攻撃力にかかる倍率
         /// </summary>
-        [SerializeField]
         public float criticalDamageRate { get; set; }
 
         /// <summary>
-        /// 開始処理
+        /// 初期化済みか
         /// </summary>
-        [SerializeField]
-        void Start()
-        {
-            Initialize();
-        }
+        protected bool isInit;
 
         /// <summary>
         /// 更新処理
         /// </summary>
         void Update()
         {
-            // 時間自動回復処理
-            TimeAutoHeal();
+            if (isInit)
+            {
+                // 時間自動回復処理
+                TimeAutoHeal();
+            }
         }
 
         /// <summary>
@@ -150,7 +139,7 @@ namespace ProjectCronos
             if (hpBar != null)
             {
                 var val = (int)(maxHp * (timeHpHealPerSeconds / 100.0f));
-                Debug.Log($"{timeHpHealPerSeconds}%のHP自動回復(回復した値:{val})");
+                //Debug.Log($"{timeHpHealPerSeconds}%のHP自動回復(回復した値:{val})");
                 HealHp(val);
             }
         }
@@ -163,7 +152,7 @@ namespace ProjectCronos
             if (mpBar != null)
             {
                 var val = (int)(maxMp * (timeMpHealPerSeconds / 100.0f));
-                Debug.Log($"{timeMpHealPerSeconds}%のMP自動回復(回復した値:{val})");
+                //Debug.Log($"{timeMpHealPerSeconds}%のMP自動回復(回復した値:{val})");
                 HealMp(val);
             }
         }
@@ -173,6 +162,8 @@ namespace ProjectCronos
         /// </summary>
         public virtual void Initialize()
         {
+            isInit = false;
+
             //　HP周りの設定
             maxHp = 10;
             currentHp = maxHp;
@@ -184,6 +175,8 @@ namespace ProjectCronos
             timeMpHealPerSeconds = 10;
             currentMp = maxMp;
             ApplyMpText();
+
+            isInit = true;
         }
 
         /// <summary>

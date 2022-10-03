@@ -17,7 +17,6 @@ public abstract class MasterDataScriptableObject : ScriptableObject
 
     public abstract void Save(DatabaseBuilder builder);
 
-
     /// <summary>
     /// データのタイトル取得
     /// </summary>

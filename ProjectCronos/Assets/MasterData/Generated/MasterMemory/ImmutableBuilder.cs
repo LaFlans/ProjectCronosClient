@@ -29,6 +29,8 @@ namespace Generated
             var table = new DictionaryTable(newData);
             memory = new MemoryDatabase(
                 table,
+                memory.EnemyDataTable,
+                memory.PlayerDataTable,
                 memory.SampleTable,
                 memory.SoundTable,
                 memory.TestTable
@@ -43,6 +45,8 @@ namespace Generated
             var table = new DictionaryTable(newData);
             memory = new MemoryDatabase(
                 table,
+                memory.EnemyDataTable,
+                memory.PlayerDataTable,
                 memory.SampleTable,
                 memory.SoundTable,
                 memory.TestTable
@@ -57,6 +61,102 @@ namespace Generated
             var table = new DictionaryTable(newData);
             memory = new MemoryDatabase(
                 table,
+                memory.EnemyDataTable,
+                memory.PlayerDataTable,
+                memory.SampleTable,
+                memory.SoundTable,
+                memory.TestTable
+            
+            );
+        }
+
+        public void ReplaceAll(System.Collections.Generic.IList<EnemyData> data)
+        {
+            var newData = CloneAndSortBy(data, x => x.Key, System.StringComparer.Ordinal);
+            var table = new EnemyDataTable(newData);
+            memory = new MemoryDatabase(
+                memory.DictionaryTable,
+                table,
+                memory.PlayerDataTable,
+                memory.SampleTable,
+                memory.SoundTable,
+                memory.TestTable
+            
+            );
+        }
+
+        public void RemoveEnemyData(string[] keys)
+        {
+            var data = RemoveCore(memory.EnemyDataTable.GetRawDataUnsafe(), keys, x => x.Key, System.StringComparer.Ordinal);
+            var newData = CloneAndSortBy(data, x => x.Key, System.StringComparer.Ordinal);
+            var table = new EnemyDataTable(newData);
+            memory = new MemoryDatabase(
+                memory.DictionaryTable,
+                table,
+                memory.PlayerDataTable,
+                memory.SampleTable,
+                memory.SoundTable,
+                memory.TestTable
+            
+            );
+        }
+
+        public void Diff(EnemyData[] addOrReplaceData)
+        {
+            var data = DiffCore(memory.EnemyDataTable.GetRawDataUnsafe(), addOrReplaceData, x => x.Key, System.StringComparer.Ordinal);
+            var newData = CloneAndSortBy(data, x => x.Key, System.StringComparer.Ordinal);
+            var table = new EnemyDataTable(newData);
+            memory = new MemoryDatabase(
+                memory.DictionaryTable,
+                table,
+                memory.PlayerDataTable,
+                memory.SampleTable,
+                memory.SoundTable,
+                memory.TestTable
+            
+            );
+        }
+
+        public void ReplaceAll(System.Collections.Generic.IList<PlayerData> data)
+        {
+            var newData = CloneAndSortBy(data, x => x.Key, System.StringComparer.Ordinal);
+            var table = new PlayerDataTable(newData);
+            memory = new MemoryDatabase(
+                memory.DictionaryTable,
+                memory.EnemyDataTable,
+                table,
+                memory.SampleTable,
+                memory.SoundTable,
+                memory.TestTable
+            
+            );
+        }
+
+        public void RemovePlayerData(string[] keys)
+        {
+            var data = RemoveCore(memory.PlayerDataTable.GetRawDataUnsafe(), keys, x => x.Key, System.StringComparer.Ordinal);
+            var newData = CloneAndSortBy(data, x => x.Key, System.StringComparer.Ordinal);
+            var table = new PlayerDataTable(newData);
+            memory = new MemoryDatabase(
+                memory.DictionaryTable,
+                memory.EnemyDataTable,
+                table,
+                memory.SampleTable,
+                memory.SoundTable,
+                memory.TestTable
+            
+            );
+        }
+
+        public void Diff(PlayerData[] addOrReplaceData)
+        {
+            var data = DiffCore(memory.PlayerDataTable.GetRawDataUnsafe(), addOrReplaceData, x => x.Key, System.StringComparer.Ordinal);
+            var newData = CloneAndSortBy(data, x => x.Key, System.StringComparer.Ordinal);
+            var table = new PlayerDataTable(newData);
+            memory = new MemoryDatabase(
+                memory.DictionaryTable,
+                memory.EnemyDataTable,
+                table,
                 memory.SampleTable,
                 memory.SoundTable,
                 memory.TestTable
@@ -70,6 +170,8 @@ namespace Generated
             var table = new SampleTable(newData);
             memory = new MemoryDatabase(
                 memory.DictionaryTable,
+                memory.EnemyDataTable,
+                memory.PlayerDataTable,
                 table,
                 memory.SoundTable,
                 memory.TestTable
@@ -84,6 +186,8 @@ namespace Generated
             var table = new SampleTable(newData);
             memory = new MemoryDatabase(
                 memory.DictionaryTable,
+                memory.EnemyDataTable,
+                memory.PlayerDataTable,
                 table,
                 memory.SoundTable,
                 memory.TestTable
@@ -98,6 +202,8 @@ namespace Generated
             var table = new SampleTable(newData);
             memory = new MemoryDatabase(
                 memory.DictionaryTable,
+                memory.EnemyDataTable,
+                memory.PlayerDataTable,
                 table,
                 memory.SoundTable,
                 memory.TestTable
@@ -111,6 +217,8 @@ namespace Generated
             var table = new SoundTable(newData);
             memory = new MemoryDatabase(
                 memory.DictionaryTable,
+                memory.EnemyDataTable,
+                memory.PlayerDataTable,
                 memory.SampleTable,
                 table,
                 memory.TestTable
@@ -125,6 +233,8 @@ namespace Generated
             var table = new SoundTable(newData);
             memory = new MemoryDatabase(
                 memory.DictionaryTable,
+                memory.EnemyDataTable,
+                memory.PlayerDataTable,
                 memory.SampleTable,
                 table,
                 memory.TestTable
@@ -139,6 +249,8 @@ namespace Generated
             var table = new SoundTable(newData);
             memory = new MemoryDatabase(
                 memory.DictionaryTable,
+                memory.EnemyDataTable,
+                memory.PlayerDataTable,
                 memory.SampleTable,
                 table,
                 memory.TestTable
@@ -152,6 +264,8 @@ namespace Generated
             var table = new TestTable(newData);
             memory = new MemoryDatabase(
                 memory.DictionaryTable,
+                memory.EnemyDataTable,
+                memory.PlayerDataTable,
                 memory.SampleTable,
                 memory.SoundTable,
                 table
@@ -166,6 +280,8 @@ namespace Generated
             var table = new TestTable(newData);
             memory = new MemoryDatabase(
                 memory.DictionaryTable,
+                memory.EnemyDataTable,
+                memory.PlayerDataTable,
                 memory.SampleTable,
                 memory.SoundTable,
                 table
@@ -180,6 +296,8 @@ namespace Generated
             var table = new TestTable(newData);
             memory = new MemoryDatabase(
                 memory.DictionaryTable,
+                memory.EnemyDataTable,
+                memory.PlayerDataTable,
                 memory.SampleTable,
                 memory.SoundTable,
                 table

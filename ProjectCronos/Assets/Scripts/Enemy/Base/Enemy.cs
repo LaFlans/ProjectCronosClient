@@ -88,6 +88,7 @@ namespace ProjectCronos
             isInit = false;
 
             status = this.GetComponent<EnemyStatus>();
+            status.Initialize();
             
             target = GameObject.FindWithTag("Player").GetComponent<Player>().GetCenterPos();
 

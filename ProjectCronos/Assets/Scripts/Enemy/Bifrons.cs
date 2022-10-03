@@ -32,7 +32,6 @@ namespace ProjectCronos
 
         protected override async UniTask Load()
         {
-            Debug.Log("敵のデータ読み込み");
             await AddressableManager.Instance.Load(fireSkeltonPrefabPath);
         }
 
@@ -72,7 +71,7 @@ namespace ProjectCronos
                     GameObject obj = AddressableManager.Instance.GetLoadedObject(fireSkeltonPrefabPath);
                     obj.transform.position = pos.position;
                     obj.transform.SetParent(attackObjParent);
-                    obj.GetComponent<AttackTrigger>().Init(target.gameObject, 10, EnumCollection.Attack.ATTACK_TYPE.ENEMY, true);
+                    obj.GetComponent<AttackTrigger>().Init(target.gameObject, 10, EnumCollection.Attack.ATTACK_TYPE.ENEMY, status.attack, true);
                 }
 
                 await AttackInterval();

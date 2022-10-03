@@ -34,8 +34,6 @@ namespace ProjectCronos
         {
             // データのタイトル設定
             dataTitle = "<b>SampleMasterData</b>";
-
-            UpdateDBCache();
         }
 
         public override void UpdateDBCache()

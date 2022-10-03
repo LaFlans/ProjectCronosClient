@@ -1,4 +1,4 @@
-﻿// Copyright (c) All contributors. All rights reserved.
+// Copyright (c) All contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -35,7 +35,7 @@ namespace MessagePack.Resolvers
         /// </param>
         public void Register(params IMessagePackFormatter[] formatters)
         {
-            if (this.freezed)
+            if (this.freezed )
             {
                 throw new InvalidOperationException("Register must call on startup(before use GetFormatter<T>).");
             }

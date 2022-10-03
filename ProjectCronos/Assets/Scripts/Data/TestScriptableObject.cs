@@ -55,21 +55,7 @@ namespace ProjectCronos
         {
             // データのタイトル設定
             dataTitle = "<b>TestMasterData</b>";
-
-            UpdateDBCache();
         }
-
-        //void OnValidate()
-        //{
-        //    Debug.Log("変更されました！");
-        //    if (filter == beforeFileter)
-        //    {
-        //        // フィルターが更新されていない場合、何もしない
-        //        return;
-        //    }
-
-        //    UpdateData();
-        //}
 
         public override void UpdateDBCache()
         {

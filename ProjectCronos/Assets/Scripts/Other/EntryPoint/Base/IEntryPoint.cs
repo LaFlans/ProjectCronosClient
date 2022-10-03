@@ -25,27 +25,17 @@ namespace ProjectCronos
                 await GameInitialize();
             }
 
-            Debug.Log("タイムスケール設定前");
-
             // タイムスケール設定
             TimeManager.Instance.InitTimeScale();
-
-            Debug.Log("タイムスケール設定後");
 
             // ダミー読み込み
             await DummyLoad();
 
-            Debug.Log("ダミーロード後");
-
             // 事前読み込み
             await PreLoadAsset();
 
-            Debug.Log("事前読み込み後");
-
             // シーン初期化
             await Initialize();
-
-            Debug.Log("シーン初期化後");
 
             // ローディングシーンをアンロード
             SceneLoader.UnloadScene(EnumExtension.GetDescriptionFromValue(EnumCollection.Scene.SCENE_TYPE.LOADING));

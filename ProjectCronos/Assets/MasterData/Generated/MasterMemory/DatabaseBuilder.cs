@@ -20,6 +20,18 @@ namespace Generated
             return this;
         }
 
+        public DatabaseBuilder Append(System.Collections.Generic.IEnumerable<EnemyData> dataSource)
+        {
+            AppendCore(dataSource, x => x.Key, System.StringComparer.Ordinal);
+            return this;
+        }
+
+        public DatabaseBuilder Append(System.Collections.Generic.IEnumerable<PlayerData> dataSource)
+        {
+            AppendCore(dataSource, x => x.Key, System.StringComparer.Ordinal);
+            return this;
+        }
+
         public DatabaseBuilder Append(System.Collections.Generic.IEnumerable<Sample> dataSource)
         {
             AppendCore(dataSource, x => x.Id, System.Collections.Generic.Comparer<int>.Default);

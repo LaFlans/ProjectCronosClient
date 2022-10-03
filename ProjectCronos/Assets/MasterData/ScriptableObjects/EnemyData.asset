@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad316f5e807df78448d51815372b792a, type: 3}
+  m_Name: EnemyData
+  m_EditorClassIdentifier: 
+  data:
+  - Key: Bifrons
+    Name: "\u30D3\u30D5\u30ED\u30F3\u30B9"
+    MaxHp: 900
+    TimeHpHealPerSeconds: 0
+    MaxMp: 0
+    TimeMpHealPerSeconds: 0
+    Attack: 155
+    MagicAttack: 100
+    Defense: 10
+    MagicDefense: 10
+    AiThinkingIntervalTime: 1
+    AttackDist: 5
+    SearchDist: 15
+    MoveSpeed: 2

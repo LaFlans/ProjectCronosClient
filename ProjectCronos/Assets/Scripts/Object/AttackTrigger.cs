@@ -56,12 +56,12 @@ namespace ProjectCronos
         /// </summary>
         bool isHitDestory = false;
 
-        /// <summary>
-        /// 生きているかどうか
-        /// </summary>
-        bool isAlive = true;
-
         bool isAct;
+
+        /// <summary>
+        /// 攻撃力
+        /// </summary>
+        int attack;
 
         public void SetIsAct(bool result)
         {
@@ -83,13 +83,21 @@ namespace ProjectCronos
             moveSpeed = defaultMoveSpeed;
         }
 
-        public async void Init(GameObject target, float lifeTime, EnumCollection.Attack.ATTACK_TYPE type, bool isDestory = false)
+        public async void Init(EnumCollection.Attack.ATTACK_TYPE type, int attack, bool isHitDestory = false)
+        {
+            attackType = type;
+            this.attack = attack;
+            this.isHitDestory = isHitDestory;
+        }
+
+        public async void Init(GameObject target, float lifeTime, EnumCollection.Attack.ATTACK_TYPE type, int attack, bool isHitDestory = false)
         {
             this.target = target;
             attackType = type;
-            Destroy(this.gameObject, lifeTime);
-            isHitDestory = isDestory;
-            this.transform.LookAt(target.transform);
+            Destroy(gameObject, lifeTime);
+            this.isHitDestory = isHitDestory;
+            transform.LookAt(target.transform);
+            this.attack = attack;
 
             await MoveDelay();
         }
@@ -173,7 +181,7 @@ namespace ProjectCronos
                 case EnumCollection.Attack.ATTACK_TYPE.PLAYER:
                     if (col.gameObject.tag == "EnemyBody")
                     {
-                        col.gameObject.GetComponent<EnemyBody>().Damage(1);
+                        col.gameObject.GetComponent<EnemyBody>().Damage(attack);
                         Vector3 hitPos = col.ClosestPointOnBounds(this.transform.position);
                         Utility.CreateObject("Prefabs/DamageEffect1", hitPos, 1.0f);
 
@@ -187,7 +195,7 @@ namespace ProjectCronos
                 case EnumCollection.Attack.ATTACK_TYPE.ENEMY:
                     if (col.gameObject.tag == "PlayerBody")
                     {
-                        col.gameObject.GetComponent<PlayerBody>().Damage(1);
+                        col.gameObject.GetComponent<PlayerBody>().Damage(attack);
                         Vector3 hitPos = col.ClosestPointOnBounds(this.transform.position);
                         Utility.CreateObject("Prefabs/DamageEffect1", hitPos, 1.0f);
 
@@ -204,7 +212,10 @@ namespace ProjectCronos
             {
                 Vector3 hitPos = col.ClosestPointOnBounds(this.transform.position);
                 Utility.CreateObject("Prefabs/DamageEffect1", hitPos, 1.0f);
-                Destroy(this.gameObject);
+                if (isHitDestory)
+                {
+                    Destroy(this.gameObject);
+                }
             }
         }
     }
