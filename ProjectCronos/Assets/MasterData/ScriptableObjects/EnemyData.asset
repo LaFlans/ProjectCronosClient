@@ -26,4 +26,4 @@ MonoBehaviour:
     AiThinkingIntervalTime: 1
     AttackDist: 5
     SearchDist: 15
-    MoveSpeed: 2
+    MoveSpeed: 30

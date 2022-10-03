@@ -20,12 +20,6 @@ namespace ProjectCronos
         public ENEMY_AI_STATE state;
         ENEMY_AI_STATE nextState;
 
-        /// <summary>
-        /// AI思考インターバル
-        /// </summary>
-        [SerializeField]
-        float aiIntervalTime = 1;
-
         bool isAiStateRunning = false;
         bool isWait = false;
         bool isInit;
@@ -45,38 +39,25 @@ namespace ProjectCronos
         [SerializeField]
         TextMeshPro stateDebugText;
 
-        // 攻撃範囲
-        /// FIXME: ステータスのほうに持っていく
-        [SerializeField]
-        int attackDist = 10;
-
-        // 索敵範囲
-        /// FIXME: ステータスのほうに持っていく
-        [SerializeField]
-        int searchDist = 15;
-
         /// <summary>
         /// 行動することができるか
         /// </summary>
         bool isAct;
-
-        /// <summary>
-        /// 移動速度
-        /// FIXME: ステータスのほうに持っていく
-        /// </summary>
-        [SerializeField]
-        float moveSpeed = 2;
 
         [SerializeField]
         protected Transform bodyTransform;
 
         Action EnemyTimeScaleApplyEvent;
 
+        /// <summary>
+        /// 敵のステータス情報
+        /// </summary>
+        EnemyStatus enemyStatus;
+
         protected virtual void OnEnemyTimeScaleApply()
         {
             Debug.Log("敵のタイムスケール変更時イベントを行うよ");
-
-            agent.speed = moveSpeed * TimeManager.Instance.GetEnemyTimeScale();
+            agent.speed = status.moveSpeed * TimeManager.Instance.GetEnemyTimeScale();
             isAct = TimeManager.Instance.GetEnemyTimeScale() > 0;
         }
 
@@ -89,8 +70,13 @@ namespace ProjectCronos
 
             status = this.GetComponent<EnemyStatus>();
             status.Initialize();
+            enemyStatus = this.GetComponent<EnemyStatus>();
+            enemyStatus.Initialize();
             
             target = GameObject.FindWithTag("Player").GetComponent<Player>().GetCenterPos();
+
+            // エージェントの移動速度初期化
+            agent.speed = status.moveSpeed;
 
             await base.Initialize();
 
@@ -195,17 +181,17 @@ namespace ProjectCronos
                 // そもそもターゲットがいなかったら待機
                 nextState = ENEMY_AI_STATE.IDLE;
             }
-            else if (targetDistance < attackDist)
+            else if (targetDistance < enemyStatus.attackDist)
             {
                 // 攻撃範囲内の場合、攻撃
                 nextState = ENEMY_AI_STATE.ATTACK;
             }
-            else if (attackDist <= targetDistance && targetDistance < searchDist)
+            else if (enemyStatus.attackDist <= targetDistance && targetDistance < enemyStatus.searchDist)
             {
                 // 索敵範囲内で攻撃範囲外の場合、移動
                 nextState = ENEMY_AI_STATE.MOVE;
             }
-            else if (searchDist <= targetDistance)
+            else if (enemyStatus.searchDist <= targetDistance)
             {
                 //　一定以上離れたら待機
                 nextState = ENEMY_AI_STATE.IDLE;
@@ -219,7 +205,7 @@ namespace ProjectCronos
         {
             isAiStateRunning = true;
 
-            await UniTask.Delay(TimeSpan.FromSeconds(aiIntervalTime));
+            await UniTask.Delay(TimeSpan.FromSeconds(enemyStatus.aiThinkingIntervalTime));
 
             isAiStateRunning = false;
         }

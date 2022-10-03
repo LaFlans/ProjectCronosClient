@@ -1364,12 +1364,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
-  aiIntervalTime: 1
   agent: {fileID: 1540687247611180030}
   stateDebugText: {fileID: 7021485962718114022}
-  attackDist: 5
-  searchDist: 15
-  moveSpeed: 2
   bodyTransform: {fileID: 1540687247611180031}
   spawnPos:
   - {fileID: 2076157153057698414}
