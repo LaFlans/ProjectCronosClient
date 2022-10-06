@@ -98,6 +98,15 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Dogde"",
+                    ""type"": ""Button"",
+                    ""id"": ""baf349ba-8cbe-476f-8c27-154d8c471ba7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -406,6 +415,17 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""FirstSkill"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""85d47083-66b0-41c3-879b-aa5379cc1f13"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Dogde"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1105,6 +1125,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         m_Player_Test = m_Player.FindAction("Test", throwIfNotFound: true);
         m_Player_RockOn = m_Player.FindAction("RockOn", throwIfNotFound: true);
         m_Player_FirstSkill = m_Player.FindAction("FirstSkill", throwIfNotFound: true);
+        m_Player_Dogde = m_Player.FindAction("Dogde", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1187,6 +1208,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Test;
     private readonly InputAction m_Player_RockOn;
     private readonly InputAction m_Player_FirstSkill;
+    private readonly InputAction m_Player_Dogde;
     public struct PlayerActions
     {
         private @InputActions m_Wrapper;
@@ -1199,6 +1221,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         public InputAction @Test => m_Wrapper.m_Player_Test;
         public InputAction @RockOn => m_Wrapper.m_Player_RockOn;
         public InputAction @FirstSkill => m_Wrapper.m_Player_FirstSkill;
+        public InputAction @Dogde => m_Wrapper.m_Player_Dogde;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1232,6 +1255,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @FirstSkill.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFirstSkill;
                 @FirstSkill.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFirstSkill;
                 @FirstSkill.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFirstSkill;
+                @Dogde.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDogde;
+                @Dogde.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDogde;
+                @Dogde.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDogde;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1260,6 +1286,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @FirstSkill.started += instance.OnFirstSkill;
                 @FirstSkill.performed += instance.OnFirstSkill;
                 @FirstSkill.canceled += instance.OnFirstSkill;
+                @Dogde.started += instance.OnDogde;
+                @Dogde.performed += instance.OnDogde;
+                @Dogde.canceled += instance.OnDogde;
             }
         }
     }
@@ -1448,6 +1477,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         void OnTest(InputAction.CallbackContext context);
         void OnRockOn(InputAction.CallbackContext context);
         void OnFirstSkill(InputAction.CallbackContext context);
+        void OnDogde(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
