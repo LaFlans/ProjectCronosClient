@@ -107,6 +107,11 @@ namespace ProjectCronos
         /// </summary>
         PlayerStatus playerStatus;
 
+        [SerializeField]
+        float dodgeRollPower = 5;
+
+        bool isDodge = false;
+
         /// <summary>
         /// 初期化
         /// </summary>
@@ -194,6 +199,9 @@ namespace ProjectCronos
 
             // 第一のスキル
             InputManager.Instance.inputActions.Player.FirstSkill.performed += playerSkill.OnActiveFirstSkill;
+
+            // 回避
+            InputManager.Instance.inputActions.Player.Dogde.performed += OnDogde;
         }
 
         void RemoveInputAction()
@@ -217,6 +225,9 @@ namespace ProjectCronos
 
             // 第一のスキル
             InputManager.Instance.inputActions.Player.FirstSkill.performed -= playerSkill.OnActiveFirstSkill;
+
+            // 回避
+            InputManager.Instance.inputActions.Player.Dogde.performed -= OnDogde;
         }
 
         void OnDestroy()
@@ -225,6 +236,20 @@ namespace ProjectCronos
 
             // 入力イベントを外す
             RemoveInputAction();
+        }
+
+        /// <summary>
+        /// 回避処理
+        /// </summary>
+        void OnDogde(InputAction.CallbackContext context)
+        {
+            if (!isDodge && isGround)
+            {
+                isDodge = true;
+                anim.SetTrigger("Dogde");
+                rigid.velocity = Vector3.zero;
+                rigid.AddForce(this.transform.forward * dodgeRollPower, ForceMode.Impulse);
+            }
         }
 
         void OnTest(InputAction.CallbackContext context)
@@ -320,6 +345,14 @@ namespace ProjectCronos
         }
 
         /// <summary>
+        /// 回避終了イベント
+        /// </summary>
+        void EventFinishDodge()
+        {
+            isDodge = false;
+        }
+
+        /// <summary>
         /// FixedUpdate
         /// </summary>
         void FixedUpdate()
@@ -335,7 +368,11 @@ namespace ProjectCronos
                     SoundManager.Instance.Play("TakeoffPlayer");
                 }
 
-                Move();
+                if (!isDodge)
+                {
+                    // 回避中は移動できない
+                    Move();
+                }
             }
         }
 
@@ -364,7 +401,7 @@ namespace ProjectCronos
         /// </summary>
         void OnJump(InputAction.CallbackContext context)
         {
-            if (isGround && 
+            if (isGround &&
                 jumpState == EnumCollection.Player.PLAYER_JUMP_STATE.IDOL)
             {
                 jumpState = EnumCollection.Player.PLAYER_JUMP_STATE.START;
