@@ -468,19 +468,19 @@ namespace ProjectCronos
                 if (enemys.Count > 0)
                 {
                     float minDistance = 0;
-                    Transform targetEnemy = null;
+                    GameObject targetEnemy = null;
                     foreach (var enemy in enemys)
                     {
                         float dist = Vector3.Distance(transform.position, enemy.transform.position);
                         if (dist < minDistance || minDistance == 0)
                         {
                             minDistance = dist;
-                            targetEnemy = enemy.transform;
+                            targetEnemy = enemy;
                         }
                     }
 
                     // ロックオンを行う
-                    playerCamera.RockOn(targetEnemy);
+                    playerCamera.RockOn(targetEnemy.transform.parent.GetComponent<EnemyInfo>().GetCenterPos());
                 }
             }
         }

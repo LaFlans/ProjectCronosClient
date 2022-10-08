@@ -231,6 +231,9 @@ namespace ProjectCronos
 
             // indexも初期化
             index = 0;
+
+            // Scriptableオブジェクトの更新
+            UpdateScriptableObject();
         }
 
         void SaveMasterData()
