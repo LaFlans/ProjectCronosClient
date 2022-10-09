@@ -6,7 +6,8 @@ namespace ProjectCronos
 {
     public class DemonHand : MonoBehaviour
     {
-        [SerializeField] GameObject target;
+        [SerializeField]
+        GameObject target;
         Material mat;
         Animator anim;
 
