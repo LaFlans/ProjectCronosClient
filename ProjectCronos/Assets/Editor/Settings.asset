@@ -22,6 +22,6 @@ MonoBehaviour:
   normalMapShaderIdentifer: _NormalMap
   emissiveMapShaderIdentifer: _EmissiveColorMap
   specularMapShaderIdentifer: _SpecularColorMap
-  substanceTexturesPath: Assets/ProjectCronosAssets/Textures/Character
+  substanceTexturesPath: Assets/ProjectCronosAssets/Textures/Monster/Raum
   generateMaterialMax: 20
   IsMuteSound: 1
