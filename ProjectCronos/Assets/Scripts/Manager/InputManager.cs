@@ -15,6 +15,10 @@ namespace ProjectCronos
         // 入力切替時のイベント
         UnityEvent SwitchInputStatusEvent;
 
+        /// <summary>
+        /// 初期化処理
+        /// </summary>
+        /// <returns>UniTask</returns>
         public override async UniTask<bool> Initialize()
         {
             // 最初は操作不能状態にする

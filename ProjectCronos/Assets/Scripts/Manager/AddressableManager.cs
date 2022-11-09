@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -34,6 +33,12 @@ namespace ProjectCronos
             return true;
         }
 
+        /// <summary>
+        /// 読み込み処理
+        /// </summary>
+        /// <param name="path">AddressableのPath</param>
+        /// <param name="callback">読み込み成功時に行うコールバック処理</param>
+        /// <returns></returns>
         public async UniTask Load(string path, Action callback = null)
         {
             if (!loaded.ContainsKey(path))
