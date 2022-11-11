@@ -1,12 +1,13 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.Events;
 using Cysharp.Threading.Tasks;
 
 namespace ProjectCronos
 {
+    /// <summary>
+    /// 入力関連管理クラス
+    /// </summary>
     internal class InputManager :ISingleton<InputManager>
     {
         EnumCollection.Input.INPUT_STATUS status;
@@ -26,6 +27,8 @@ namespace ProjectCronos
 
             inputActions = new InputActions();
             inputActions.Enable();
+            inputActions.UI.Enable();
+
 
             if (SwitchInputStatusEvent == null)
             {

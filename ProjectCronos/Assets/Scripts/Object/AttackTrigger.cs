@@ -1,6 +1,7 @@
 using UnityEngine;
 using Cysharp.Threading.Tasks;
 using System;
+using UnityEngine.VFX;
 
 namespace ProjectCronos
 {
@@ -62,6 +63,8 @@ namespace ProjectCronos
         /// 攻撃力
         /// </summary>
         int attack;
+
+        public VisualEffect effect;
 
         public void SetIsAct(bool result)
         {
@@ -129,6 +132,11 @@ namespace ProjectCronos
             if (target != null && this != null)
             {
                 this.moveVec = Vector3.Normalize(target.transform.position - this.transform.position);
+
+                //if (effect != null && effect.HasVector3("Velocity"))
+                //{
+                //    effect.SetVector3("Velocity", this.moveVec * 10);
+                //}
             }
         }
 

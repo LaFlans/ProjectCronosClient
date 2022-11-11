@@ -7,6 +7,9 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace ProjectCronos
 {
+    /// <summary>
+    /// AddressableAssetを管理するクラス
+    /// </summary>
     class AddressableManager : ISingleton<AddressableManager>
     {
         /// <summary>

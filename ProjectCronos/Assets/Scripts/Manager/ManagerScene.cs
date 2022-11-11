@@ -4,6 +4,9 @@ using Cysharp.Threading.Tasks;
 
 namespace ProjectCronos
 {
+    /// <summary>
+    /// すべてのマネージャーを管理するクラス
+    /// </summary>
     class ManagerScene : MonoBehaviour
     {
         /// <summary>
@@ -37,7 +40,7 @@ namespace ProjectCronos
             this.gameObject.AddComponent<PopupManager>();
             this.gameObject.AddComponent<TimeManager>();
 #if UNITY_EDITOR
-            this.gameObject.AddComponent<ProductDebug>();
+            this.gameObject.AddComponent<DebugManager>();
 #endif
 
             // マネージャーを初期化
@@ -50,7 +53,7 @@ namespace ProjectCronos
             task.Add(TimeManager.instance.Initialize());
 
 #if UNITY_EDITOR
-            task.Add(ProductDebug.instance.Initialize());
+            task.Add(DebugManager.instance.Initialize());
 #endif
             foreach (var item in task)
             {

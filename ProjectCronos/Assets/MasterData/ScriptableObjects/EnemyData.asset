@@ -15,11 +15,11 @@ MonoBehaviour:
   data:
   - Key: Bifrons
     Name: "\u30D3\u30D5\u30ED\u30F3\u30B9"
-    MaxHp: 900
+    MaxHp: 90000
     TimeHpHealPerSeconds: 0
     MaxMp: 0
     TimeMpHealPerSeconds: 0
-    Attack: 155
+    Attack: 15
     MagicAttack: 100
     Defense: 10
     MagicDefense: 10

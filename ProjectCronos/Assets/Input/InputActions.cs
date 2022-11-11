@@ -1050,6 +1050,67 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Debug"",
+            ""id"": ""cbad51bd-8a74-4ee1-9372-b74bea24cd24"",
+            ""actions"": [
+                {
+                    ""name"": ""ShowGraphy"",
+                    ""type"": ""Button"",
+                    ""id"": ""1f51163a-97ff-48bb-9dd2-89a92d0d827f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""One Modifier"",
+                    ""id"": ""3715d98a-c39c-499f-bd0e-ced64fe8fec6"",
+                    ""path"": ""OneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ShowGraphy"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""c064ce47-4ab8-4d4a-b2a5-5f0ecfef6222"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""ShowGraphy"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""binding"",
+                    ""id"": ""bc5b6419-0b9c-425d-8103-57d6c7e1cee1"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""ShowGraphy"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""98282808-d9a5-4e72-9f98-b465af2dcc5e"",
+                    ""path"": ""<Keyboard>/backslash"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""ShowGraphy"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -1141,6 +1202,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         m_UI_Escape = m_UI.FindAction("Escape", throwIfNotFound: true);
         m_UI_Left = m_UI.FindAction("Left", throwIfNotFound: true);
         m_UI_Right = m_UI.FindAction("Right", throwIfNotFound: true);
+        // Debug
+        m_Debug = asset.FindActionMap("Debug", throwIfNotFound: true);
+        m_Debug_ShowGraphy = m_Debug.FindAction("ShowGraphy", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1422,6 +1486,39 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         }
     }
     public UIActions @UI => new UIActions(this);
+
+    // Debug
+    private readonly InputActionMap m_Debug;
+    private IDebugActions m_DebugActionsCallbackInterface;
+    private readonly InputAction m_Debug_ShowGraphy;
+    public struct DebugActions
+    {
+        private @InputActions m_Wrapper;
+        public DebugActions(@InputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @ShowGraphy => m_Wrapper.m_Debug_ShowGraphy;
+        public InputActionMap Get() { return m_Wrapper.m_Debug; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(DebugActions set) { return set.Get(); }
+        public void SetCallbacks(IDebugActions instance)
+        {
+            if (m_Wrapper.m_DebugActionsCallbackInterface != null)
+            {
+                @ShowGraphy.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnShowGraphy;
+                @ShowGraphy.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnShowGraphy;
+                @ShowGraphy.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnShowGraphy;
+            }
+            m_Wrapper.m_DebugActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @ShowGraphy.started += instance.OnShowGraphy;
+                @ShowGraphy.performed += instance.OnShowGraphy;
+                @ShowGraphy.canceled += instance.OnShowGraphy;
+            }
+        }
+    }
+    public DebugActions @Debug => new DebugActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -1494,5 +1591,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         void OnEscape(InputAction.CallbackContext context);
         void OnLeft(InputAction.CallbackContext context);
         void OnRight(InputAction.CallbackContext context);
+    }
+    public interface IDebugActions
+    {
+        void OnShowGraphy(InputAction.CallbackContext context);
     }
 }
