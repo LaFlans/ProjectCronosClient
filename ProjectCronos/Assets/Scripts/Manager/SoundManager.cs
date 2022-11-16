@@ -5,7 +5,7 @@ using Cysharp.Threading.Tasks;
 
 namespace ProjectCronos
 {
-    public class SoundManager : ISingleton<SoundManager>
+    public class SoundManager : Singleton<SoundManager>
     {
         SoundPlayer player;
         Stack<string> soundKeys;

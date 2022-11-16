@@ -10,7 +10,7 @@ namespace ProjectCronos
     /// <summary>
     /// AddressableAssetを管理するクラス
     /// </summary>
-    class AddressableManager : ISingleton<AddressableManager>
+    class AddressableManager : Singleton<AddressableManager>
     {
         /// <summary>
         /// 読み込み済みパス

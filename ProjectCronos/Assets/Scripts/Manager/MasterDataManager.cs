@@ -10,7 +10,7 @@ using MessagePack;
 
 namespace ProjectCronos
 {
-    internal class MasterDataManager : ISingleton<MasterDataManager>
+    internal class MasterDataManager : Singleton<MasterDataManager>
     {
         private static MemoryDatabase _db;
         public static MemoryDatabase DB => _db;

@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace ProjectCronos
 {
-    public abstract class ISingleton<T> : MonoBehaviour
+    public abstract class Singleton<T> : MonoBehaviour
     {
         public static T instance;
 

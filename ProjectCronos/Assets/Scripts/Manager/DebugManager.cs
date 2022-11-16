@@ -7,7 +7,7 @@ namespace ProjectCronos
     /// <summary>
     /// デバック機能管理クラス
     /// </summary>
-    class DebugManager : ISingleton<DebugManager>
+    class DebugManager : Singleton<DebugManager>
     {
         bool isUseGraphy = true;
 

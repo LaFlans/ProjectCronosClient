@@ -8,7 +8,7 @@ namespace ProjectCronos
     /// <summary>
     /// 入力関連管理クラス
     /// </summary>
-    internal class InputManager :ISingleton<InputManager>
+    internal class InputManager :Singleton<InputManager>
     {
         EnumCollection.Input.INPUT_STATUS status;
         public InputActions inputActions;

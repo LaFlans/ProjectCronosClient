@@ -8,7 +8,7 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace ProjectCronos
 {
-    class PopupManager : ISingleton<PopupManager>
+    class PopupManager : Singleton<PopupManager>
     {
         public class Param
         {

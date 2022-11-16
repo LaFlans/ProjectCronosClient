@@ -7,7 +7,7 @@ using Cysharp.Threading.Tasks;
 
 namespace ProjectCronos
 {
-    internal class TimeManager : ISingleton<TimeManager>
+    internal class TimeManager : Singleton<TimeManager>
     {
         // FIXME: マスタで管理
         const float DEFAULT_TIME_SCALE = 1.0f;
