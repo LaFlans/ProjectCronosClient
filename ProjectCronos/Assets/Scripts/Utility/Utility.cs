@@ -539,5 +539,31 @@ namespace ProjectCronos
 #endif
         }
         #endregion
+
+        #region Time
+        private static DateTime UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, 0);
+
+
+        /// <summary>
+        /// DateTimeからUnixTimeへ変換
+        /// </summary>
+        /// <param name="dateTime">変換したいdateTime</param>
+        /// <returns>変換後のUnixTime</returns>
+        public static long GetUnixTime(DateTime dateTime)
+        {
+            return (long)(dateTime - UnixEpoch).TotalSeconds;
+        }
+
+        /// <summary>
+        /// UnixTimeからDateTimeへ変換
+        /// </summary>
+        /// <param name="unixTime">変換したいunixTime</param>
+        /// <returns>返還後のDateTime</returns>
+        public static DateTime GetDateTime(long unixTime)
+        {
+            return UnixEpoch.AddSeconds(unixTime);
+        }
+
+        #endregion
     }
 }
