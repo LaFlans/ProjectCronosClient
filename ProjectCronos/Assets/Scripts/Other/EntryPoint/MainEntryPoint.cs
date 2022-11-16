@@ -13,6 +13,10 @@ namespace ProjectCronos
         EnemyController enemyController;
 
         bool isShowPopup;
+        bool isGameOver;
+
+        [SerializeField]
+        GameOverUIEffect gameOverEffect;
 
         /// <summary>
         /// シーンの初期化
@@ -23,7 +27,11 @@ namespace ProjectCronos
             // 現在シーンの設定
             ManagerScene.SetCurrentScene(EnumCollection.Scene.SCENE_TYPE.MAIN);
 
+            // ゲーム状態を設定
+            ManagerScene.SetGameStatus(EnumCollection.Game.GAME_STATUS.GAME_PLAY);
+
             isShowPopup = false;
+            isGameOver = false;
 
             // BGMの再生
             SoundManager.Instance.Play("WorkBGM2");
@@ -39,6 +47,28 @@ namespace ProjectCronos
             InputManager.Instance.inputActions.UI.Escape.performed += OnTransitionTitleConfirm;
 
             return true;
+        }
+
+        void Update()
+        {
+            switch (ManagerScene.GetGameStatus())
+            {
+                case EnumCollection.Game.GAME_STATUS.GAME_PLAY:
+                    break;
+                case EnumCollection.Game.GAME_STATUS.GAME_CLEAR:
+                    break;
+                case EnumCollection.Game.GAME_STATUS.GAME_OVER:
+                    if (player == null && !isGameOver)
+                    {
+                        isGameOver = true;
+                        gameOverEffect.Apply(
+                            () =>
+                            {
+                                SceneLoader.TransitionScene(EnumCollection.Scene.SCENE_TYPE.TITLE);
+                            });
+                    }
+                    break;
+            }
         }
 
         void OnDestroy()

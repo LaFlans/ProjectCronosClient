@@ -186,7 +186,7 @@ namespace ProjectCronos
             // プレイヤー操作不能時にFreeLookカメラを操作できないようにする処理を登録
             // FIXME: providerのenableを切り替える暫定対応の為、InputActionsの有効無効に影響されるようにする
             InputManager.Instance.RegistSwitchInputStatusEvent(
-                () => 
+                () =>
                 {
                     playerCamera.EnableFreeLookCamera();
                 });
@@ -286,6 +286,8 @@ namespace ProjectCronos
             RemoveInputAction();
 
             base.Death();
+
+            ManagerScene.SetGameStatus(EnumCollection.Game.GAME_STATUS.GAME_OVER);
         }
 
         /// <summary>

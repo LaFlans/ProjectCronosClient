@@ -19,6 +19,11 @@ namespace ProjectCronos
         /// </summary>
         static EnumCollection.Scene.SCENE_TYPE currentScene;
 
+        /// <summary>
+        /// ゲーム状態
+        /// </summary>
+        static EnumCollection.Game.GAME_STATUS gameStatus;
+
         void Awake()
         {
             isLaunch = false;
@@ -39,6 +44,7 @@ namespace ProjectCronos
             new GameObject("SoundManager").AddComponent<SoundManager>();
             this.gameObject.AddComponent<PopupManager>();
             this.gameObject.AddComponent<TimeManager>();
+            this.gameObject.AddComponent<SaveManager>();
 #if UNITY_EDITOR
             this.gameObject.AddComponent<DebugManager>();
 #endif
@@ -51,6 +57,7 @@ namespace ProjectCronos
             task.Add(SoundManager.instance.Initialize());
             task.Add(PopupManager.instance.Initialize());
             task.Add(TimeManager.instance.Initialize());
+            task.Add(SaveManager.Instance.Initialize());
 
 #if UNITY_EDITOR
             task.Add(DebugManager.instance.Initialize());
@@ -87,6 +94,24 @@ namespace ProjectCronos
         public static EnumCollection.Scene.SCENE_TYPE GetCurrentScene()
         {
             return currentScene;
+        }
+
+        /// <summary>
+        /// ゲーム状態を設定
+        /// </summary>
+        /// <param name="scene">設定するゲーム状態</param>
+        public static void SetGameStatus(EnumCollection.Game.GAME_STATUS status)
+        {
+            gameStatus = status;
+        }
+
+        /// <summary>
+        /// 現在のゲーム状態を返す
+        /// </summary>
+        /// <returns>現在のゲーム状態</returns>
+        public static EnumCollection.Game.GAME_STATUS GetGameStatus()
+        {
+            return gameStatus;
         }
     }
 }

@@ -72,7 +72,7 @@ namespace ProjectCronos
             status.Initialize();
             enemyStatus = this.GetComponent<EnemyStatus>();
             enemyStatus.Initialize();
-            
+
             target = GameObject.FindWithTag("Player").GetComponent<Player>().GetCenterPos();
 
             // エージェントの移動速度初期化
@@ -93,7 +93,7 @@ namespace ProjectCronos
             isInit = true;
 
             return true;
-        }       
+        }
 
         /// <summary>
         /// 読み込む必要があるものを読み込む

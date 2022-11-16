@@ -107,6 +107,11 @@ namespace ProjectCronos
 
         void FixedUpdate()
         {
+            Move();
+        }
+
+        protected virtual void Move()
+        {
             if (!isAct)
             {
                 // 行動できない状態の場合、何もしない
@@ -150,7 +155,6 @@ namespace ProjectCronos
             await UniTask.Delay(TimeSpan.FromSeconds(delayTime));
 
             SetVec();
-
             isMove = true;
         }
 
@@ -176,6 +180,15 @@ namespace ProjectCronos
             }
         }
 
+        /// <summary>
+        /// 攻撃の種類を返す
+        /// </summary>
+        /// <returns>攻撃の種類(敵かプレイヤーか)</returns>
+        public EnumCollection.Attack.ATTACK_TYPE GetAttackType()
+        {
+            return attackType;
+        }
+
         void OnTriggerEnter(Collider col)
         {
             if (col == null)
@@ -196,6 +209,15 @@ namespace ProjectCronos
                         if (isHitDestory)
                         {
                             Destroy(this.gameObject);
+                        }
+                    }
+
+                    if (col.gameObject.tag == "AttackObject")
+                    {
+                        if (col.gameObject.GetComponent<AttackTrigger>().GetAttackType() == EnumCollection.Attack.ATTACK_TYPE.ENEMY)
+                        {
+                            Utility.CreateObject("Prefabs/DamageEffect1", col.gameObject.transform.position, 1.0f);
+                            Destroy(col.gameObject);
                         }
                     }
 

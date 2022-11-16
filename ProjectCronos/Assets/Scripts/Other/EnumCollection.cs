@@ -56,6 +56,32 @@ namespace ProjectCronos
         }
 
         /// <summary>
+        /// ゲーム関連
+        /// </summary>
+        namespace Game
+        {
+            public enum GAME_STATUS
+            {
+                /// <summary>
+                /// ゲームプレイ中
+                /// </summary>
+                GAME_PLAY,
+                /// <summary>
+                /// ゲームクリア
+                /// </summary>
+                GAME_CLEAR,
+                /// <summary>
+                /// ゲームオーバー
+                /// </summary>
+                GAME_OVER,
+                /// <summary>
+                /// 最大数
+                /// </summary>
+                MAXMUM,
+            }
+        }
+
+        /// <summary>
         /// シーン関連
         /// </summary>
         namespace Scene
