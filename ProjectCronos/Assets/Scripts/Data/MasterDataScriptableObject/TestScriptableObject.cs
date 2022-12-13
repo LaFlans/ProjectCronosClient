@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
+using UnityEditor;
+using UnityEditorInternal;
 using System;
 using System.Linq;
 using Generated;
@@ -11,10 +13,6 @@ namespace ProjectCronos
     [CreateAssetMenu(menuName = "MasterData/Create TestData", fileName = "TestData")]
     internal class TestScriptableObject : MasterDataScriptableObject
     {
-        public string filter = string.Empty;
-
-        private string beforeFileter = string.Empty;
-
         [Serializable]
         public class TestData
         {
@@ -40,13 +38,6 @@ namespace ProjectCronos
         private List<Test> dbData = new List<Test>();
 
         /// <summary>
-        /// フィルタ結果のデータ
-        /// </summary>
-        /// <typeparam name="TestData"></typeparam>
-        /// <returns></returns>
-        private List<TestData> filterData = new List<TestData>();
-
-        /// <summary>
         /// 表示用データ
         /// </summary>
         private List<TestData> viewData = new List<TestData>();
@@ -56,6 +47,14 @@ namespace ProjectCronos
             // データのタイトル設定
             dataTitle = "<b>TestMasterData</b>";
         }
+
+        //public override void OnInspectorGUI()
+        //{
+        //    serializedObject.Update();
+
+
+        //    serializedObject.ApplyModifiedProperties();
+        //}
 
         public override void UpdateDBCache()
         {
@@ -70,12 +69,6 @@ namespace ProjectCronos
             {
                 data.Add(new TestData(item.Id, item.Name, item.Hp, item.Attack,item.Deffence));
             }
-
-            //filterData = data.Where(x => x.name.Contains(filter)).ToList();
-
-            //viewData = filter == string.Empty ? data : filterData;
-
-            //beforeFileter = filter;
         }
 
         public override void Save(DatabaseBuilder builder)
