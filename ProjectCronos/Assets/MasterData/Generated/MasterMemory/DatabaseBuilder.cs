@@ -38,6 +38,12 @@ namespace Generated
             return this;
         }
 
+        public DatabaseBuilder Append(System.Collections.Generic.IEnumerable<SaveAreaData> dataSource)
+        {
+            AppendCore(dataSource, x => x.Id, System.Collections.Generic.Comparer<int>.Default);
+            return this;
+        }
+
         public DatabaseBuilder Append(System.Collections.Generic.IEnumerable<Sound> dataSource)
         {
             AppendCore(dataSource, x => x.Key, System.StringComparer.Ordinal);

@@ -29,6 +29,9 @@ namespace ProjectCronos
             inputActions.Enable();
             inputActions.UI.Enable();
 
+#if UNITY_EDITOR
+            inputActions.Debug.Enable();
+#endif
 
             if (SwitchInputStatusEvent == null)
             {

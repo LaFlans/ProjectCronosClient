@@ -9,7 +9,7 @@ using MessagePack;
 using UnityEditor;
 using UnityEngine;
 
-public abstract class MasterDataScriptableObject : ScriptableObject
+public abstract class MasterDataScriptableObject : Editor
 {
     public const string colorCodeYellow = "#FFF100";
     public const string colorCodeRed = "#FF4B00";

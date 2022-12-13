@@ -21,6 +21,12 @@ MonoBehaviour:
     message: "\u7D42\u4E86\u78BA\u8A8D"
   - key: ApplicationPopupQuitYesButtonMessage
     message: "\u306F\u3044"
+  - key: SaveAreaName1
+    message: "\u4EEE_\u4E00\u3064\u76EE\u306E\u30BB\u30FC\u30D6\u30DD\u30A4\u30F3\u30C8"
+  - key: SaveAreaName2
+    message: "\u4EEE_\u4E8C\u3064\u76EE\u306E\u30BB\u30FC\u30D6\u30DD\u30A4\u30F3\u30C8"
+  - key: SavePopupTitle
+    message: SAVE MENU
   - key: TransitionTitleConfirmPopupButtonNoMessage
     message: "\u3044\u3044\u3048"
   - key: TransitionTitleConfirmPopupButtonYesMessage

@@ -12,6 +12,12 @@ namespace ProjectCronos
         [SerializeField]
         EnemyController enemyController;
 
+        [SerializeField]
+        SaveAreaController saveAreaController;
+
+        [SerializeField]
+        ItemLogger itemLogger;
+
         bool isShowPopup;
         bool isGameOver;
 
@@ -30,6 +36,11 @@ namespace ProjectCronos
             // ゲーム状態を設定
             ManagerScene.SetGameStatus(EnumCollection.Game.GAME_STATUS.GAME_PLAY);
 
+            // プレイ時間周りの設定
+            // FIXME: ここは一旦1つ目のセーブデータを参照しているので後で修正
+            TimeManager.instance.SetPlayTimeFloat(SaveManager.instance.Load(0).playTime);
+            TimeManager.instance.StartMeasurePlayTime();
+
             isShowPopup = false;
             isGameOver = false;
 
@@ -41,6 +52,17 @@ namespace ProjectCronos
 
             // 敵の初期化
             enemyController.Initialize();
+
+            // セーブエリアの初期化
+            saveAreaController.Initialize();
+
+            // アイテムロガーの初期化
+            await itemLogger.Initialize();
+
+#if UNITY_EDITOR
+            // デバックメニューの初期化
+            this.GetComponent<DebugMenu>().Initialize();
+#endif
 
             // 入力イベント設定
             InputManager.Instance.SetInputStatus(EnumCollection.Input.INPUT_STATUS.PLAYER);
@@ -60,10 +82,15 @@ namespace ProjectCronos
                 case EnumCollection.Game.GAME_STATUS.GAME_OVER:
                     if (player == null && !isGameOver)
                     {
+                        // プレイ時間計測終了
+                        TimeManager.instance.FinishMeasurePlayTime();
+
                         isGameOver = true;
                         gameOverEffect.Apply(
                             () =>
                             {
+                                // FIXME: 死んだらタイトルに戻っているが、本来はロードをはさんでシーン再読み込みを行って
+                                //      　最後に保存したセーブポイントからスタートすべき
                                 SceneLoader.TransitionScene(EnumCollection.Scene.SCENE_TYPE.TITLE);
                             });
                     }

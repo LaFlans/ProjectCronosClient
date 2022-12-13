@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 namespace ProjectCronos
 {
@@ -9,10 +10,24 @@ namespace ProjectCronos
     /// </summary>
     public class PlayerStatus : Status
     {
+        [SerializeField]
+        ItemLogger itemLogger;
+
         /// <summary>
         /// ジャンプ力
         /// </summary>
         public float jumpPower { get; set; }
+
+        /// <summary>
+        /// 所持しているコイン数
+        /// </summary>
+        public int coinNum { get; set; }
+
+        /// <summary>
+        /// ステータス更新イベント
+        /// ステータス更新時に呼んでほしいAPIをここに追加していく
+        /// </summary>
+        Action statusUpdateEvent;
 
         public override void Initialize()
         {
@@ -42,7 +57,58 @@ namespace ProjectCronos
             moveSpeed = initData.MoveSpeed;
             jumpPower = initData.JumpPower;
 
+            // セーブデータの読み込み
+            // FIXME: 現在は決め打ちでデータを読み込んでいる
+            var saveData = SaveManager.instance.Load(0);
+            if (saveData != null)
+            {
+                if (saveData.playerSaveData != null)
+                {
+                    coinNum = saveData.playerSaveData.coinNum;
+                }
+            }
+            else
+            {
+                Debug.Log("セーブデータが読み込めませんでした");
+                coinNum = 0;
+            }
+
             isInit = true;
+        }
+
+        /// <summary>
+        /// コイン追加
+        /// </summary>
+        /// <param name="value">追加するコイン数</param>
+        public void AddCoin(int value)
+        {
+            coinNum += value;
+
+            // ステータス更新イベント処理
+            statusUpdateEvent?.Invoke();
+
+            // FIXME: ここは後でマスタ文言に差し替え
+            itemLogger.ShowItemLog($"{value}コイン入手しました");
+        }
+
+        /// <summary>
+        /// コインを消費
+        /// </summary>
+        /// <param name="value">消費するコイン数</param>
+        /// <returns>所持しているコインが足りずに消費に失敗したらfalse,消費に成功したらtrue</returns>
+        public bool SubCoin(int value)
+        {
+            if (coinNum < value)
+            {
+                return false;
+            }
+
+            coinNum -= value;
+
+            // ステータス更新イベント処理
+            statusUpdateEvent?.Invoke();
+
+            return true;
         }
 
         /// <summary>
@@ -54,6 +120,24 @@ namespace ProjectCronos
             {
                 hpBar.Apply(currentHp, maxHp, EnumCollection.UI.BAR_SHOW_STATUS.ALL);
             }
+        }
+
+        /// <summary>
+        /// ステータス更新イベント登録
+        /// </summary>
+        /// <param name="action">登録したいイベント</param>
+        public void ResisterStatusUpdateEvent(Action action)
+        {
+            statusUpdateEvent += action;
+        }
+
+        /// <summary>
+        /// ステータス更新イベント削除
+        /// </summary>
+        /// <param name="action">削除したいイベント</param>
+        public void UnresisterStatusUpdateEvent(Action action)
+        {
+            statusUpdateEvent -= action;
         }
     }
 }

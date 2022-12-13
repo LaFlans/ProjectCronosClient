@@ -14,17 +14,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data:
   - id: 0
-    name: "\u30B5\u30F3\u30D7\u30EB1"
-    path: Assets/Resources_moved/Prefabs/PlayerInput.prefab
+    name: 1
+    path: 100
   - id: 1
-    name: "\u30B5\u30F3\u30D7\u30EB2"
-    path: Assets/Resources_moved/Prefabs/PlayerInput.prefab
+    name: 2
+    path: 200
   - id: 2
-    name: "\u30B5\u30F3\u30D7\u30EB3"
-    path: Assets/Resources_moved/Prefabs/PlayerInput.prefab
+    name: 3
+    path: 300
   - id: 3
-    name: "\u30B5\u30F3\u30D7\u30EB4"
-    path: Assets/Resources_moved/Prefabs/PlayerInput.prefab
+    name: 4
+    path: 400
   - id: 4
-    name: "\u30B5\u30F3\u30D7\u30EB5"
-    path: Assets/Resources_moved/Prefabs/PlayerInput.prefab
+    name: 5
+    path: 500
+  - id: 4
+    name: 6
+    path: 500
+  - id: 4
+    name: 7
+    path: 500
+  - id: 4
+    name: 8
+    path: 500

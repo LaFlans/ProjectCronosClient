@@ -109,7 +109,7 @@ namespace ProjectCronos
                     // ScriptableObjectの値をバイナリにセーブ
                     if (GUILayout.Button(existsDiff ? "Save*" : "Save"))
                     {
-                        LoadScriptableObject();
+                        //LoadScriptableObject();
                         SaveMasterData();
                     }
                 }

@@ -29,6 +29,14 @@ namespace ProjectCronos
         /// </summary>
         float targetDistance;
 
+        /// <summary>
+        /// プレイヤー参照
+        /// </summary>
+        protected GameObject player;
+
+        /// <summary>
+        /// プレイヤーの位置
+        /// </summary>
         protected Transform target;
 
         [SerializeField]
@@ -73,7 +81,8 @@ namespace ProjectCronos
             enemyStatus = this.GetComponent<EnemyStatus>();
             enemyStatus.Initialize();
 
-            target = GameObject.FindWithTag("Player").GetComponent<Player>().GetCenterPos();
+            player = GameObject.FindWithTag("Player");
+            target = player.GetComponent<Player>().GetCenterPos();
 
             // エージェントの移動速度初期化
             agent.speed = status.moveSpeed;
@@ -265,6 +274,9 @@ namespace ProjectCronos
         {
             Debug.Log("敵死亡");
             TimeManager.Instance.UnregisterEnemyTimeScaleApplyAction(EnemyTimeScaleApplyEvent);
+
+            // ドロップ追加
+            player.GetComponent<PlayerStatus>().AddCoin(enemyStatus.dropCoin);
 
             base.Death();
         }

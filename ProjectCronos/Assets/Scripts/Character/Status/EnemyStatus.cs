@@ -29,6 +29,11 @@ namespace ProjectCronos
         /// </summary>
         public float searchDist { get; set; }
 
+        /// <summary>
+        //  倒れたときに落とすもの
+        /// </summary>
+        public int dropCoin { get; set; }
+
         public override void Initialize()
         {
             isInit = false;
@@ -57,6 +62,10 @@ namespace ProjectCronos
             attackDist = initData.AttackDist;
             searchDist = initData.SearchDist;
             moveSpeed = initData.MoveSpeed;
+
+            // ドロップ情報
+            // FIXME: 現在は決め打ちなのでマスタから設定できるようにする
+            dropCoin = 10;
 
             isInit = true;
         }

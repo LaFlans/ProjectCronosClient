@@ -107,6 +107,15 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Action"",
+                    ""type"": ""Button"",
+                    ""id"": ""279baa84-2e2f-4792-ba28-854c2ad26021"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -421,11 +430,33 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""85d47083-66b0-41c3-879b-aa5379cc1f13"",
-                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Dogde"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d1e39bb9-eb59-44d0-bcc7-e28b0ca9b572"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Action"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3ec7e814-6658-4728-80a3-2f77d3e3afbc"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Action"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -547,6 +578,42 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""name"": ""Right"",
                     ""type"": ""Button"",
                     ""id"": ""2e5026c5-2108-4c52-9160-11c182d07c29"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Up"",
+                    ""type"": ""Button"",
+                    ""id"": ""ebc29d98-bb9c-4456-8f35-193ba35d3cff"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Down"",
+                    ""type"": ""Button"",
+                    ""id"": ""117f1bd7-5f17-4595-a30f-cc8f9a506529"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Close"",
+                    ""type"": ""Button"",
+                    ""id"": ""0ea255c8-5e04-4cc6-b15e-fdb8df0faa1a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Delete"",
+                    ""type"": ""Button"",
+                    ""id"": ""906a249a-65d4-45ff-a7d9-098b4e1409d4"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -1048,6 +1115,94 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""action"": ""Right"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""af47c1f9-9030-4250-bfa7-ac9c1fef9378"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Up"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f3af7b2e-9cc3-4c7f-947d-87983ae59a93"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Up"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b74f32ce-f24e-4ccd-a3d5-b75128e615a7"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Down"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fd354afd-762b-496e-bcd8-1b749a000351"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Down"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""af071f96-f40a-4d95-9fe3-c7b7cc469200"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Close"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""db5d25cd-af1e-49bf-a0e5-9c6cd4708a1a"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Close"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5df53363-6e15-420d-a625-8fca56143d63"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Delete"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e76d0eb4-4159-4272-8979-43347d356376"",
+                    ""path"": ""<Keyboard>/delete"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Delete"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -1056,9 +1211,18 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
             ""id"": ""cbad51bd-8a74-4ee1-9372-b74bea24cd24"",
             ""actions"": [
                 {
-                    ""name"": ""ShowGraphy"",
+                    ""name"": ""ShowDebugMenu"",
                     ""type"": ""Button"",
-                    ""id"": ""1f51163a-97ff-48bb-9dd2-89a92d0d827f"",
+                    ""id"": ""e311dc0d-b09a-4539-9cb4-f86f21d15a59"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Test"",
+                    ""type"": ""Button"",
+                    ""id"": ""a9bfa085-9b8f-4784-b5e1-3cda5bde4955"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -1068,45 +1232,45 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
             ""bindings"": [
                 {
                     ""name"": ""One Modifier"",
-                    ""id"": ""3715d98a-c39c-499f-bd0e-ced64fe8fec6"",
+                    ""id"": ""884109ae-4eec-455d-a7aa-7387efa940b2"",
                     ""path"": ""OneModifier"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""ShowGraphy"",
+                    ""action"": ""ShowDebugMenu"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": ""modifier"",
-                    ""id"": ""c064ce47-4ab8-4d4a-b2a5-5f0ecfef6222"",
+                    ""id"": ""afeb8d0b-c8e1-419b-8b09-6e1646d47741"",
                     ""path"": ""<Keyboard>/shift"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""ShowGraphy"",
+                    ""action"": ""ShowDebugMenu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""binding"",
-                    ""id"": ""bc5b6419-0b9c-425d-8103-57d6c7e1cee1"",
-                    ""path"": ""<Keyboard>/d"",
+                    ""id"": ""8613728b-630b-4378-ac9b-ee1ba7743b0e"",
+                    ""path"": ""<Keyboard>/tab"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""ShowGraphy"",
+                    ""action"": ""ShowDebugMenu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
                     ""name"": """",
-                    ""id"": ""98282808-d9a5-4e72-9f98-b465af2dcc5e"",
-                    ""path"": ""<Keyboard>/backslash"",
+                    ""id"": ""c0229e8c-0cfb-4292-910b-ed6645bee929"",
+                    ""path"": ""<Keyboard>/p"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""ShowGraphy"",
+                    ""action"": ""Test"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1187,6 +1351,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         m_Player_RockOn = m_Player.FindAction("RockOn", throwIfNotFound: true);
         m_Player_FirstSkill = m_Player.FindAction("FirstSkill", throwIfNotFound: true);
         m_Player_Dogde = m_Player.FindAction("Dogde", throwIfNotFound: true);
+        m_Player_Action = m_Player.FindAction("Action", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1202,9 +1367,14 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         m_UI_Escape = m_UI.FindAction("Escape", throwIfNotFound: true);
         m_UI_Left = m_UI.FindAction("Left", throwIfNotFound: true);
         m_UI_Right = m_UI.FindAction("Right", throwIfNotFound: true);
+        m_UI_Up = m_UI.FindAction("Up", throwIfNotFound: true);
+        m_UI_Down = m_UI.FindAction("Down", throwIfNotFound: true);
+        m_UI_Close = m_UI.FindAction("Close", throwIfNotFound: true);
+        m_UI_Delete = m_UI.FindAction("Delete", throwIfNotFound: true);
         // Debug
         m_Debug = asset.FindActionMap("Debug", throwIfNotFound: true);
-        m_Debug_ShowGraphy = m_Debug.FindAction("ShowGraphy", throwIfNotFound: true);
+        m_Debug_ShowDebugMenu = m_Debug.FindAction("ShowDebugMenu", throwIfNotFound: true);
+        m_Debug_Test = m_Debug.FindAction("Test", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1273,6 +1443,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_RockOn;
     private readonly InputAction m_Player_FirstSkill;
     private readonly InputAction m_Player_Dogde;
+    private readonly InputAction m_Player_Action;
     public struct PlayerActions
     {
         private @InputActions m_Wrapper;
@@ -1286,6 +1457,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         public InputAction @RockOn => m_Wrapper.m_Player_RockOn;
         public InputAction @FirstSkill => m_Wrapper.m_Player_FirstSkill;
         public InputAction @Dogde => m_Wrapper.m_Player_Dogde;
+        public InputAction @Action => m_Wrapper.m_Player_Action;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1322,6 +1494,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @Dogde.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDogde;
                 @Dogde.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDogde;
                 @Dogde.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDogde;
+                @Action.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAction;
+                @Action.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAction;
+                @Action.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAction;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1353,6 +1528,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @Dogde.started += instance.OnDogde;
                 @Dogde.performed += instance.OnDogde;
                 @Dogde.canceled += instance.OnDogde;
+                @Action.started += instance.OnAction;
+                @Action.performed += instance.OnAction;
+                @Action.canceled += instance.OnAction;
             }
         }
     }
@@ -1374,6 +1552,10 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_Escape;
     private readonly InputAction m_UI_Left;
     private readonly InputAction m_UI_Right;
+    private readonly InputAction m_UI_Up;
+    private readonly InputAction m_UI_Down;
+    private readonly InputAction m_UI_Close;
+    private readonly InputAction m_UI_Delete;
     public struct UIActions
     {
         private @InputActions m_Wrapper;
@@ -1391,6 +1573,10 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         public InputAction @Escape => m_Wrapper.m_UI_Escape;
         public InputAction @Left => m_Wrapper.m_UI_Left;
         public InputAction @Right => m_Wrapper.m_UI_Right;
+        public InputAction @Up => m_Wrapper.m_UI_Up;
+        public InputAction @Down => m_Wrapper.m_UI_Down;
+        public InputAction @Close => m_Wrapper.m_UI_Close;
+        public InputAction @Delete => m_Wrapper.m_UI_Delete;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1439,6 +1625,18 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @Right.started -= m_Wrapper.m_UIActionsCallbackInterface.OnRight;
                 @Right.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnRight;
                 @Right.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnRight;
+                @Up.started -= m_Wrapper.m_UIActionsCallbackInterface.OnUp;
+                @Up.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnUp;
+                @Up.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnUp;
+                @Down.started -= m_Wrapper.m_UIActionsCallbackInterface.OnDown;
+                @Down.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnDown;
+                @Down.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnDown;
+                @Close.started -= m_Wrapper.m_UIActionsCallbackInterface.OnClose;
+                @Close.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnClose;
+                @Close.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnClose;
+                @Delete.started -= m_Wrapper.m_UIActionsCallbackInterface.OnDelete;
+                @Delete.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnDelete;
+                @Delete.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnDelete;
             }
             m_Wrapper.m_UIActionsCallbackInterface = instance;
             if (instance != null)
@@ -1482,6 +1680,18 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @Right.started += instance.OnRight;
                 @Right.performed += instance.OnRight;
                 @Right.canceled += instance.OnRight;
+                @Up.started += instance.OnUp;
+                @Up.performed += instance.OnUp;
+                @Up.canceled += instance.OnUp;
+                @Down.started += instance.OnDown;
+                @Down.performed += instance.OnDown;
+                @Down.canceled += instance.OnDown;
+                @Close.started += instance.OnClose;
+                @Close.performed += instance.OnClose;
+                @Close.canceled += instance.OnClose;
+                @Delete.started += instance.OnDelete;
+                @Delete.performed += instance.OnDelete;
+                @Delete.canceled += instance.OnDelete;
             }
         }
     }
@@ -1490,12 +1700,14 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
     // Debug
     private readonly InputActionMap m_Debug;
     private IDebugActions m_DebugActionsCallbackInterface;
-    private readonly InputAction m_Debug_ShowGraphy;
+    private readonly InputAction m_Debug_ShowDebugMenu;
+    private readonly InputAction m_Debug_Test;
     public struct DebugActions
     {
         private @InputActions m_Wrapper;
         public DebugActions(@InputActions wrapper) { m_Wrapper = wrapper; }
-        public InputAction @ShowGraphy => m_Wrapper.m_Debug_ShowGraphy;
+        public InputAction @ShowDebugMenu => m_Wrapper.m_Debug_ShowDebugMenu;
+        public InputAction @Test => m_Wrapper.m_Debug_Test;
         public InputActionMap Get() { return m_Wrapper.m_Debug; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1505,16 +1717,22 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         {
             if (m_Wrapper.m_DebugActionsCallbackInterface != null)
             {
-                @ShowGraphy.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnShowGraphy;
-                @ShowGraphy.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnShowGraphy;
-                @ShowGraphy.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnShowGraphy;
+                @ShowDebugMenu.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnShowDebugMenu;
+                @ShowDebugMenu.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnShowDebugMenu;
+                @ShowDebugMenu.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnShowDebugMenu;
+                @Test.started -= m_Wrapper.m_DebugActionsCallbackInterface.OnTest;
+                @Test.performed -= m_Wrapper.m_DebugActionsCallbackInterface.OnTest;
+                @Test.canceled -= m_Wrapper.m_DebugActionsCallbackInterface.OnTest;
             }
             m_Wrapper.m_DebugActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @ShowGraphy.started += instance.OnShowGraphy;
-                @ShowGraphy.performed += instance.OnShowGraphy;
-                @ShowGraphy.canceled += instance.OnShowGraphy;
+                @ShowDebugMenu.started += instance.OnShowDebugMenu;
+                @ShowDebugMenu.performed += instance.OnShowDebugMenu;
+                @ShowDebugMenu.canceled += instance.OnShowDebugMenu;
+                @Test.started += instance.OnTest;
+                @Test.performed += instance.OnTest;
+                @Test.canceled += instance.OnTest;
             }
         }
     }
@@ -1575,6 +1793,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         void OnRockOn(InputAction.CallbackContext context);
         void OnFirstSkill(InputAction.CallbackContext context);
         void OnDogde(InputAction.CallbackContext context);
+        void OnAction(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
@@ -1591,9 +1810,14 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         void OnEscape(InputAction.CallbackContext context);
         void OnLeft(InputAction.CallbackContext context);
         void OnRight(InputAction.CallbackContext context);
+        void OnUp(InputAction.CallbackContext context);
+        void OnDown(InputAction.CallbackContext context);
+        void OnClose(InputAction.CallbackContext context);
+        void OnDelete(InputAction.CallbackContext context);
     }
     public interface IDebugActions
     {
-        void OnShowGraphy(InputAction.CallbackContext context);
+        void OnShowDebugMenu(InputAction.CallbackContext context);
+        void OnTest(InputAction.CallbackContext context);
     }
 }

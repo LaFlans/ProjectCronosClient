@@ -5,34 +5,18 @@ namespace ProjectCronos
 {
     /// <summary>
     /// プレイヤーのセーブデータクラス
-    /// </summary>
+    /// </summary
+    [Serializable]
     public class PlayerSaveData
     {
         /// <summary>
-        /// プレイ時間
+        /// 現在所持しているコイン
         /// </summary>
-        public long playTime;
+        public int coinNum;
 
-        /// <summary>
-        /// 最後に保存した時間(UnixTime)
-        /// </summary>
-        public long lastSaveTime;
-
-        /// <summary>
-        /// セーブポイントのID
-        /// </summary>
-        public int savePointId;
-
-        PlayerSaveData(long playTime, long lastSaveTime, int savePointId)
+        public PlayerSaveData(int coinNum)
         {
-            this.playTime = playTime;
-            this.lastSaveTime = lastSaveTime;
-            this.savePointId = savePointId;
-        }
-
-        public static PlayerSaveData Create(int savePointId)
-        {
-            return new PlayerSaveData(((long)Time.time), Utility.GetUnixTime(DateTime.Now), savePointId);
+            this.coinNum = coinNum;
         }
     }
 }

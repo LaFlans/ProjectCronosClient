@@ -12,25 +12,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f4868657b53f884e8ef685e2321f70d, type: 3}
   m_Name: TestData
   m_EditorClassIdentifier: 
-  filter: 
   data:
   - id: 0
     name: "\u30B9\u30E9\u30A4\u30E0\u30DA\u30B9"
     hp: 100
     attack: 10
+    defense: 0
   - id: 1
     name: "\u30C9\u30E9\u30B4\u30F3"
     hp: 700
     attack: 399
+    defense: 0
   - id: 2
     name: "\u30B4\u30D6\u30EA\u30F3"
     hp: 500
     attack: 111
+    defense: 0
   - id: 3
     name: "\u30EA\u30EA\u30B9"
     hp: 7590
     attack: 500
+    defense: 0
   - id: 4
     name: "\u30EA\u30EA\u30B9"
     hp: 759
     attack: 500
+    defense: 0

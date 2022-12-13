@@ -128,6 +128,14 @@ namespace ProjectCronos
             playerStatus = this.GetComponent<PlayerStatus>();
             playerStatus.Initialize();
 
+            // プレイヤーの位置をセーブデータで保存されている位置に移動
+            if (SaveManager.instance.lastLoadSaveData != null)
+            {
+                var saveAreaInfo = SaveManager.instance.lastLoadSaveData.saveAreaInfo;
+                this.transform.position = saveAreaInfo.respawnPosition;
+                this.transform.rotation = saveAreaInfo.respawnRotation;
+            }
+
             //　地面判定設定
             groundChecker.Initialized(OnLanding, OnTakeoff);
 

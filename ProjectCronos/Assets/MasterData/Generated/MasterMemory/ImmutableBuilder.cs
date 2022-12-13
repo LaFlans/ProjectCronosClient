@@ -32,6 +32,7 @@ namespace Generated
                 memory.EnemyDataTable,
                 memory.PlayerDataTable,
                 memory.SampleTable,
+                memory.SaveAreaDataTable,
                 memory.SoundTable,
                 memory.TestTable
             
@@ -48,6 +49,7 @@ namespace Generated
                 memory.EnemyDataTable,
                 memory.PlayerDataTable,
                 memory.SampleTable,
+                memory.SaveAreaDataTable,
                 memory.SoundTable,
                 memory.TestTable
             
@@ -64,6 +66,7 @@ namespace Generated
                 memory.EnemyDataTable,
                 memory.PlayerDataTable,
                 memory.SampleTable,
+                memory.SaveAreaDataTable,
                 memory.SoundTable,
                 memory.TestTable
             
@@ -79,6 +82,7 @@ namespace Generated
                 table,
                 memory.PlayerDataTable,
                 memory.SampleTable,
+                memory.SaveAreaDataTable,
                 memory.SoundTable,
                 memory.TestTable
             
@@ -95,6 +99,7 @@ namespace Generated
                 table,
                 memory.PlayerDataTable,
                 memory.SampleTable,
+                memory.SaveAreaDataTable,
                 memory.SoundTable,
                 memory.TestTable
             
@@ -111,6 +116,7 @@ namespace Generated
                 table,
                 memory.PlayerDataTable,
                 memory.SampleTable,
+                memory.SaveAreaDataTable,
                 memory.SoundTable,
                 memory.TestTable
             
@@ -126,6 +132,7 @@ namespace Generated
                 memory.EnemyDataTable,
                 table,
                 memory.SampleTable,
+                memory.SaveAreaDataTable,
                 memory.SoundTable,
                 memory.TestTable
             
@@ -142,6 +149,7 @@ namespace Generated
                 memory.EnemyDataTable,
                 table,
                 memory.SampleTable,
+                memory.SaveAreaDataTable,
                 memory.SoundTable,
                 memory.TestTable
             
@@ -158,6 +166,7 @@ namespace Generated
                 memory.EnemyDataTable,
                 table,
                 memory.SampleTable,
+                memory.SaveAreaDataTable,
                 memory.SoundTable,
                 memory.TestTable
             
@@ -173,6 +182,7 @@ namespace Generated
                 memory.EnemyDataTable,
                 memory.PlayerDataTable,
                 table,
+                memory.SaveAreaDataTable,
                 memory.SoundTable,
                 memory.TestTable
             
@@ -189,6 +199,7 @@ namespace Generated
                 memory.EnemyDataTable,
                 memory.PlayerDataTable,
                 table,
+                memory.SaveAreaDataTable,
                 memory.SoundTable,
                 memory.TestTable
             
@@ -205,6 +216,57 @@ namespace Generated
                 memory.EnemyDataTable,
                 memory.PlayerDataTable,
                 table,
+                memory.SaveAreaDataTable,
+                memory.SoundTable,
+                memory.TestTable
+            
+            );
+        }
+
+        public void ReplaceAll(System.Collections.Generic.IList<SaveAreaData> data)
+        {
+            var newData = CloneAndSortBy(data, x => x.Id, System.Collections.Generic.Comparer<int>.Default);
+            var table = new SaveAreaDataTable(newData);
+            memory = new MemoryDatabase(
+                memory.DictionaryTable,
+                memory.EnemyDataTable,
+                memory.PlayerDataTable,
+                memory.SampleTable,
+                table,
+                memory.SoundTable,
+                memory.TestTable
+            
+            );
+        }
+
+        public void RemoveSaveAreaData(int[] keys)
+        {
+            var data = RemoveCore(memory.SaveAreaDataTable.GetRawDataUnsafe(), keys, x => x.Id, System.Collections.Generic.Comparer<int>.Default);
+            var newData = CloneAndSortBy(data, x => x.Id, System.Collections.Generic.Comparer<int>.Default);
+            var table = new SaveAreaDataTable(newData);
+            memory = new MemoryDatabase(
+                memory.DictionaryTable,
+                memory.EnemyDataTable,
+                memory.PlayerDataTable,
+                memory.SampleTable,
+                table,
+                memory.SoundTable,
+                memory.TestTable
+            
+            );
+        }
+
+        public void Diff(SaveAreaData[] addOrReplaceData)
+        {
+            var data = DiffCore(memory.SaveAreaDataTable.GetRawDataUnsafe(), addOrReplaceData, x => x.Id, System.Collections.Generic.Comparer<int>.Default);
+            var newData = CloneAndSortBy(data, x => x.Id, System.Collections.Generic.Comparer<int>.Default);
+            var table = new SaveAreaDataTable(newData);
+            memory = new MemoryDatabase(
+                memory.DictionaryTable,
+                memory.EnemyDataTable,
+                memory.PlayerDataTable,
+                memory.SampleTable,
+                table,
                 memory.SoundTable,
                 memory.TestTable
             
@@ -220,6 +282,7 @@ namespace Generated
                 memory.EnemyDataTable,
                 memory.PlayerDataTable,
                 memory.SampleTable,
+                memory.SaveAreaDataTable,
                 table,
                 memory.TestTable
             
@@ -236,6 +299,7 @@ namespace Generated
                 memory.EnemyDataTable,
                 memory.PlayerDataTable,
                 memory.SampleTable,
+                memory.SaveAreaDataTable,
                 table,
                 memory.TestTable
             
@@ -252,6 +316,7 @@ namespace Generated
                 memory.EnemyDataTable,
                 memory.PlayerDataTable,
                 memory.SampleTable,
+                memory.SaveAreaDataTable,
                 table,
                 memory.TestTable
             
@@ -267,6 +332,7 @@ namespace Generated
                 memory.EnemyDataTable,
                 memory.PlayerDataTable,
                 memory.SampleTable,
+                memory.SaveAreaDataTable,
                 memory.SoundTable,
                 table
             
@@ -283,6 +349,7 @@ namespace Generated
                 memory.EnemyDataTable,
                 memory.PlayerDataTable,
                 memory.SampleTable,
+                memory.SaveAreaDataTable,
                 memory.SoundTable,
                 table
             
@@ -299,6 +366,7 @@ namespace Generated
                 memory.EnemyDataTable,
                 memory.PlayerDataTable,
                 memory.SampleTable,
+                memory.SaveAreaDataTable,
                 memory.SoundTable,
                 table
             

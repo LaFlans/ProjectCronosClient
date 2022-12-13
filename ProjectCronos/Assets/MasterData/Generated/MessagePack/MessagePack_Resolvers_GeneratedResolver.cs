@@ -47,14 +47,15 @@ namespace MessagePack.Resolvers
 
         static GeneratedResolverGetFormatterHelper()
         {
-            lookup = new global::System.Collections.Generic.Dictionary<global::System.Type, int>(6)
+            lookup = new global::System.Collections.Generic.Dictionary<global::System.Type, int>(7)
             {
                 { typeof(global::Dictionary), 0 },
                 { typeof(global::EnemyData), 1 },
                 { typeof(global::PlayerData), 2 },
                 { typeof(global::Sample), 3 },
-                { typeof(global::Sound), 4 },
-                { typeof(global::Test), 5 },
+                { typeof(global::SaveAreaData), 4 },
+                { typeof(global::Sound), 5 },
+                { typeof(global::Test), 6 },
             };
         }
 
@@ -72,8 +73,9 @@ namespace MessagePack.Resolvers
                 case 1: return new MessagePack.Formatters.EnemyDataFormatter();
                 case 2: return new MessagePack.Formatters.PlayerDataFormatter();
                 case 3: return new MessagePack.Formatters.SampleFormatter();
-                case 4: return new MessagePack.Formatters.SoundFormatter();
-                case 5: return new MessagePack.Formatters.TestFormatter();
+                case 4: return new MessagePack.Formatters.SaveAreaDataFormatter();
+                case 5: return new MessagePack.Formatters.SoundFormatter();
+                case 6: return new MessagePack.Formatters.TestFormatter();
                 default: return null;
             }
         }

@@ -1,9 +1,8 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using TMPro;
 
 namespace ProjectCronos
 {
@@ -17,21 +16,196 @@ namespace ProjectCronos
         Transform slotParent;
 
         /// <summary>
+        /// 画面のタイトルテキスト
+        /// </summary>
+        [SerializeField]
+        TextMeshProUGUI savePopupTitleText;
+
+        /// <summary>
+        /// セーブエリア名テキスト
+        /// </summary>
+        [SerializeField]
+        TextMeshProUGUI saveAreaNameText;
+
+        /// <summary>
         /// セーブデータスロット
         /// </summary>
+        [SerializeField]
         List<SaveDataSlot> dataSlots;
+
+        int selectSlotNum;
+
+        /// <summary>
+        /// セーブエリア情報キャッシュ
+        /// </summary>
+        SaveAreaInfo saveAreaInfoCache;
 
         /// <summary>
         /// 適用
         /// </summary>
-        void Apply()
+        public void Apply(SaveAreaInfo saveAreaInfo)
         {
-            dataSlots = new List<SaveDataSlot>();
+            saveAreaInfoCache = saveAreaInfo;
 
-            for (int i = 0; i < SaveManager.SAVE_DATA_COUNT;i++)
+            ApplySaveDataSlot();
+            ResisterInputSavePopup();
+
+            // プレイヤー操作可能状態だった場合、UI操作可能状態にする
+            if (InputManager.instance.IsMatchInputStatus(EnumCollection.Input.INPUT_STATUS.PLAYER))
             {
-                dataSlots.Add(new SaveDataSlot());
+                InputManager.instance.SetInputStatus(EnumCollection.Input.INPUT_STATUS.UI);
+                TimeManager.instance.StopTime();
             }
+            savePopupTitleText.text = MasterDataManager.instance.GetDic("SavePopupTitle");
+            saveAreaNameText.text = MasterDataManager.instance.GetDic(MasterDataManager.DB.SaveAreaDataTable.FindById(saveAreaInfo.savePointId).SaveAreaNameDicKey);
+
+            selectSlotNum = 0;
+            ApplySlotSelectStatus();
+        }
+
+        /// <summary>
+        /// セーブデータスロット更新
+        /// </summary>
+        void ApplySaveDataSlot()
+        {
+            foreach (var slot in dataSlots.Select((item, index) => new { item, index }))
+            {
+                slot.item.Apply(SaveManager.instance.Load(slot.index), slot.index);
+            }
+        }
+
+        /// <summary>
+        /// セーブポップアップの入力登録
+        /// </summary>
+        void ResisterInputSavePopup()
+        {
+            InputManager.instance.inputActions.UI.Submit.performed += OnSubmit;
+            InputManager.instance.inputActions.UI.Up.performed += OnUp;
+            InputManager.instance.inputActions.UI.Down.performed += OnDown;
+            InputManager.instance.inputActions.UI.Close.performed += OnClose;
+            InputManager.instance.inputActions.UI.Delete.performed += OnDelete;
+        }
+
+        /// <summary>
+        /// セーブポップアップの入力登録解除
+        /// </summary>
+        void UnregisterInputSavePopup()
+        {
+            InputManager.instance.inputActions.UI.Submit.performed -= OnSubmit;
+            InputManager.instance.inputActions.UI.Up.performed -= OnUp;
+            InputManager.instance.inputActions.UI.Down.performed -= OnDown;
+            InputManager.instance.inputActions.UI.Close.performed -= OnClose;
+            InputManager.instance.inputActions.UI.Delete.performed -= OnDelete;
+        }
+
+        /// <summary>
+        /// スロットの選択状態を更新
+        /// </summary>
+        void ApplySlotSelectStatus()
+        {
+            Debug.Log($"スロットの選択状態を更新:{selectSlotNum}");
+            foreach (var slot in dataSlots.Select((item, index) => new {item, index}))
+            {
+                if (slot.index == selectSlotNum)
+                {
+                    Debug.Log($"スロットの選択状態をON:{selectSlotNum}");
+                    slot.item.SetSelectStatus(true);
+                    continue;
+                }
+
+                Debug.Log($"スロットの選択状態をOFF:{slot.index}");
+                slot.item.SetSelectStatus(false);
+            }
+        }
+
+        /// <summary>
+        /// 上選択
+        /// </summary>
+        /// <param name="context"></param>
+        void OnUp(InputAction.CallbackContext context)
+        {
+            Debug.Log("上を押したよ！");
+            SoundManager.Instance.Play("Button47");
+
+            selectSlotNum--;
+            if (selectSlotNum < 0)
+            {
+                selectSlotNum = dataSlots.Count - 1;
+            }
+
+            ApplySlotSelectStatus();
+        }
+
+        /// <summary>
+        /// 下選択
+        /// </summary>
+        /// <param name="context"></param>
+        void OnDown(InputAction.CallbackContext context)
+        {
+            Debug.Log("下を押したよ！");
+            SoundManager.Instance.Play("Button47");
+
+            selectSlotNum++;
+            if (selectSlotNum > (dataSlots.Count - 1))
+            {
+                selectSlotNum = 0;
+            }
+
+            ApplySlotSelectStatus();
+        }
+
+        /// <summary>
+        /// 選択
+        /// </summary>
+        /// <param name="context"></param>
+        void OnSubmit(InputAction.CallbackContext context)
+        {
+            Debug.Log($"{selectSlotNum}を選択した状態で決定を押したので保存するよ！");
+            SoundManager.Instance.Play("Button47");
+
+            // 保存処理
+            SaveManager.Instance.Save(
+                SaveData.Create(saveAreaInfoCache),
+                selectSlotNum,
+                () =>
+                {
+                    ApplySaveDataSlot();
+                });
+        }
+
+        /// <summary>
+        /// セーブデータを削除
+        /// </summary>
+        /// <param name="context"></param>
+        void OnDelete(InputAction.CallbackContext context)
+        {
+            Debug.Log($"{selectSlotNum}を選択した状態で削除ボタンを押したので削除するよ！");
+            SoundManager.Instance.Play("Button47");
+
+            // 削除処理
+            SaveManager.Instance.Delete(selectSlotNum);
+            ApplySaveDataSlot();
+        }
+
+        /// <summary>
+        /// 閉じる
+        /// </summary>
+        /// <param name="context"></param>
+        void OnClose(InputAction.CallbackContext context)
+        {
+            Debug.Log("閉じるを押したよ！");
+            SoundManager.Instance.Play("Button47");
+            
+            // UI操作可能状態だった場合、プレイヤー操作可能状態にする
+            if (InputManager.instance.IsMatchInputStatus(EnumCollection.Input.INPUT_STATUS.UI))
+            {
+                InputManager.instance.SetInputStatus(EnumCollection.Input.INPUT_STATUS.PLAYER);
+                TimeManager.instance.ApplyTimeScale();
+            }
+
+            UnregisterInputSavePopup();
+
+            this.gameObject.SetActive(false);
         }
     }
 }

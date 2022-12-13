@@ -1,14 +1,25 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
-using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 
 
 namespace ProjectCronos
 {
+    /// <summary>
+    /// 時間関連を管理するクラス
+    /// </summary>
     internal class TimeManager : Singleton<TimeManager>
     {
+        /// <summary>
+        /// プレイ時間(秒)
+        /// </summary>
+        float playTimeSeconds;
+
+        /// <summary>
+        /// プレイ時間を計測するか
+        /// </summary>
+        bool isMeasurePlayTime;
+
         // FIXME: マスタで管理
         const float DEFAULT_TIME_SCALE = 1.0f;
         const float DEFAULT_PLAYER_TIME_SCALE = 1.0f;
@@ -45,14 +56,41 @@ namespace ProjectCronos
         /// </summary>
         Action objectTimeScaleApplyAction;
 
+        /// <summary>
+        /// 初期化処理
+        /// </summary>
+        /// <returns></returns>
         public override async UniTask<bool> Initialize()
         {
             InitTimeScale();
             ApplyTimeScale();
 
+            isMeasurePlayTime = false;
+            playTimeSeconds = 0;
+
             Debug.Log("TimeManager初期化");
 
             return true;
+        }
+
+        /// <summary>
+        /// 更新処理
+        /// </summary>
+        void Update()
+        {
+            // プレイ時間計測
+            if (isMeasurePlayTime)
+            {
+                playTimeSeconds += Time.unscaledDeltaTime;
+            }
+        }
+
+        /// <summary>
+        /// 計測を終了する
+        /// </summary>
+        public void FinishMeasurePlayTime()
+        {
+            isMeasurePlayTime = false;
         }
 
         /// <summary>
@@ -190,6 +228,41 @@ namespace ProjectCronos
         public float GetObjectTimeScale()
         {
             return objectTimeScale;
+        }
+
+        /// <summary>
+        /// プレイ時間を設定
+        /// </summary>
+        /// <param name="value">設定したい秒数(float)</param>
+        public void SetPlayTimeFloat(float value)
+        {
+            playTimeSeconds = value;
+        }
+
+        /// <summary>
+        /// プレイ時間を取得
+        /// </summary>
+        /// <returns>floatでプレイ時間を取得</returns>
+        public float GetPlayTimeFloat()
+        {
+            return playTimeSeconds;
+        }
+
+        /// <summary>
+        /// プレイ時間を取得
+        /// </summary>
+        /// <returns>stringでプレイ時間を取得</returns>
+        public string GetPlayTimeString()
+        {
+            return Utility.GetDateTime((long)playTimeSeconds).ToLongTimeString();
+        }
+
+        /// <summary>
+        /// 計測を開始する
+        /// </summary>
+        public void StartMeasurePlayTime()
+        {
+            isMeasurePlayTime = true;
         }
     }
 }
