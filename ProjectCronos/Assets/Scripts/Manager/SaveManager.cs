@@ -1,6 +1,7 @@
 using UnityEngine;
 using Cysharp.Threading.Tasks;
 using System.IO;
+using System;
 
 namespace ProjectCronos
 {
@@ -11,6 +12,11 @@ namespace ProjectCronos
     {
         public static readonly int SAVE_DATA_COUNT = 3;
         string defaultFilePath;
+
+        /// <summary>
+        /// 最後に読み込んだセーブデータ
+        /// </summary>
+        public SaveData lastLoadSaveData { get; set; }
 
         /// <summary>
         /// 初期化
@@ -29,7 +35,7 @@ namespace ProjectCronos
         /// </summary>
         /// <param name="data">プレイヤーの保存したいデータ</param>
         /// <param name="saveDataNumber">保存先のセーブデータ番号</param>
-        public void Save(PlayerSaveData data, int saveDataNumber)
+        public void Save(SaveData data, int saveDataNumber, Action callback)
         {
             var filePath = string.Format(defaultFilePath, saveDataNumber);
             Debug.Log($"現在の状態を保存するよ！{filePath}");
@@ -38,6 +44,8 @@ namespace ProjectCronos
             streamWriter.Write(json);
             streamWriter.Flush();
             streamWriter.Close();
+
+            callback?.Invoke();
         }
 
         /// <summary>
@@ -45,7 +53,7 @@ namespace ProjectCronos
         /// </summary>
         /// <param name="saveDataNumber">読み込みたいセーブデータ番号</param>
         /// <returns>読み込んだセーブデータ情報を返す(ファイルが見つからない場合、nullを返す)</returns>
-        public PlayerSaveData Load(int saveDataNumber)
+        public SaveData Load(int saveDataNumber)
         {
             var filePath = string.Format(defaultFilePath, saveDataNumber);
             if (File.Exists(filePath))
@@ -54,11 +62,32 @@ namespace ProjectCronos
                 streamReader = new StreamReader(filePath);
                 string data = streamReader.ReadToEnd();
                 streamReader.Close();
-                return JsonUtility.FromJson<PlayerSaveData>(data);
+                var saveData = JsonUtility.FromJson<SaveData>(data);
+
+                // 最後に読み込んだセーブデータ情報を保存
+                lastLoadSaveData = saveData;
+
+                return saveData;
             }
 
-            Debug.LogError($"ファイルが見つからなかったよ…{filePath}");
-            return null;
+            Debug.Log($"ファイルが見つからなかったよ…{filePath}");
+            return default;
+        }
+
+        /// <summary>
+        /// 指定の番号のセーブデータを削除
+        /// </summary>
+        /// <param name="saveDataNumber">削除したいセーブデータ番号</param>
+        public void Delete(int saveDataNumber)
+        {
+            var filePath = string.Format(defaultFilePath, saveDataNumber);
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath);
+                Debug.Log($"ファイルを削除したよ！{filePath}");
+            }
+
+            Debug.Log($"ファイルが見つからなかったよ…{filePath}");
         }
     }
 }

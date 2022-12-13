@@ -1,23 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using System;
+using Cysharp.Threading.Tasks;
 
 namespace ProjectCronos
 {
     public class SaveArea : MonoBehaviour
     {
         [SerializeField]
-        GameObject saveAreaPopup;
-
-        bool canSave;
+        GameObject saveAreaGuidText;
 
         [SerializeField]
-        Transform respawnPos;
+        GameObject savePopup;
+
+        bool canSave;
+        bool isActive;
+
+        [SerializeField]
+        Transform respawnTransform;
 
         /// <summary>
         /// セーブポイントのID(ユニーク)
+        /// FIXME: マスタで設定するようにする
         /// </summary>
+        [SerializeField]
         int saveAreaId;
 
         /// <summary>
@@ -28,24 +36,47 @@ namespace ProjectCronos
         void Start()
         {
             canSave = false;
-            saveAreaPopup.SetActive(false);
+            isActive = false;
+            saveAreaGuidText.SetActive(false);
         }
 
-        void Update()
+        public async UniTask<bool> Initialize()
         {
-            if (canSave && Input.GetKeyUp(KeyCode.S))
+            isActive = true;
+
+            return true;
+        }
+
+        void OnSave(InputAction.CallbackContext context)
+        {
+            if (isActive && canSave)
             {
-                SaveManager.Instance.Save(PlayerSaveData.Create(saveAreaId), 0);
+                Debug.Log("Save！！");
+                savePopup.GetComponent<SavePopup>().Apply(new SaveAreaInfo(saveAreaId, respawnTransform));
+                savePopup.SetActive(true);
             }
+        }
+
+        private void OnDestroy()
+        {
+            // 念のため入力イベントを削除しておく
+            InputManager.Instance.inputActions.Player.Action.performed -= OnSave;
         }
 
         void OnTriggerEnter(Collider col)
         {
             if (col.gameObject.tag == "Player")
             {
+                if (!isActive)
+                {
+                    // 非アクティブ中は何もしない
+                    return;
+                }
+
                 //Debug.Log("SaveArea内に入ったよ");
-                saveAreaPopup.SetActive(true);
+                saveAreaGuidText.SetActive(true);
                 canSave = true;
+                InputManager.Instance.inputActions.Player.Action.performed += OnSave;
             }
         }
 
@@ -53,9 +84,16 @@ namespace ProjectCronos
         {
             if (col.gameObject.tag == "Player")
             {
+                if (!isActive)
+                {
+                    // 非アクティブ中は何もしない
+                    return;
+                }
+
                 //Debug.Log("SaveAreaを出たよ");
-                saveAreaPopup.SetActive(false);
+                saveAreaGuidText.SetActive(false);
                 canSave = false;
+                InputManager.Instance.inputActions.Player.Action.performed -= OnSave;
             }
         }
     }
