@@ -165,6 +165,12 @@ namespace ProjectCronos
                 if (obj != null)
                 {
                     isShowPopup = true;
+                    var messageParam = new PopupBase.MessageParam(
+                        MasterDataManager.Instance.GetDic("ApplicationPopupQuitTitle"),
+                        MasterDataManager.Instance.GetDic("ApplicationPopupQuitMessage"),
+                        MasterDataManager.Instance.GetDic("ApplicationPopupQuitYesButtonMessage"),
+                        MasterDataManager.Instance.GetDic("ApplicationPopupQuitNoButtonMessage"));
+
                     obj.GetComponent<PopupBase>().Setup(
                         EnumCollection.Popup.POPUP_BUTTON_STATUS.DEFAULT,
                         new PopupBase.Param(
@@ -178,7 +184,8 @@ namespace ProjectCronos
                             () =>
                             {
                                 isShowPopup = false;
-                            }));
+                            })
+                        ,messageParam);
                 }
             }
         }
