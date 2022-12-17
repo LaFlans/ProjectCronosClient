@@ -18,7 +18,7 @@ namespace ProjectCronos
         /// <returns>初期化に成功したかどうか</returns>
         public override async UniTask<bool> Initialize()
         {
-            await AddressableManager.instance.LoadInstance(path,
+            await AddressableManager.Instance.LoadInstance(path,
                 (obj) =>
                 {
                     graphy = obj;

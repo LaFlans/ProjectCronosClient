@@ -129,9 +129,9 @@ namespace ProjectCronos
             playerStatus.Initialize();
 
             // プレイヤーの位置をセーブデータで保存されている位置に移動
-            if (SaveManager.instance.lastLoadSaveData != null)
+            if (SaveManager.Instance.lastLoadSaveData != null)
             {
-                var saveAreaInfo = SaveManager.instance.lastLoadSaveData.saveAreaInfo;
+                var saveAreaInfo = SaveManager.Instance.lastLoadSaveData.saveAreaInfo;
                 this.transform.position = saveAreaInfo.respawnPosition;
                 this.transform.rotation = saveAreaInfo.respawnRotation;
             }

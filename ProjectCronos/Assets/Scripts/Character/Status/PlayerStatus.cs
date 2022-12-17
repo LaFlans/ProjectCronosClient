@@ -59,7 +59,7 @@ namespace ProjectCronos
 
             // セーブデータの読み込み
             // FIXME: 現在は決め打ちでデータを読み込んでいる
-            var saveData = SaveManager.instance.Load(0);
+            var saveData = SaveManager.Instance.Load(0);
             if (saveData != null)
             {
                 if (saveData.playerSaveData != null)

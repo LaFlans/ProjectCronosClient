@@ -65,7 +65,7 @@ namespace ProjectCronos
             if (data.saveAreaInfo != null)
             {
                 var dickey = MasterDataManager.DB.SaveAreaDataTable.FindById(data.saveAreaInfo.savePointId).SaveAreaNameDicKey;
-                var message = MasterDataManager.instance.GetDic(dickey);
+                var message = MasterDataManager.Instance.GetDic(dickey);
                 saveAreaNameText.text = message;
             }
             else

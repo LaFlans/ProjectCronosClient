@@ -40,7 +40,7 @@ namespace ProjectCronos
         public static SaveData Create(SaveAreaInfo saveAreaInfo)
         {
             // 時間のセーブ情報を作成
-            var playTime = (long)TimeManager.instance.GetPlayTimeFloat();
+            var playTime = (long)TimeManager.Instance.GetPlayTimeFloat();
             var lastSaveTime = Utility.GetUnixTime(DateTime.Now);
 
             // プレイヤーのセーブ情報を作成

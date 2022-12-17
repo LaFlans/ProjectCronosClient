@@ -187,6 +187,37 @@ namespace ProjectCronos
                 /// </summary>
                 MAXMUM,
             }
+
+            /// <summary>
+            /// ポップアップのボタン状態
+            /// </summary>
+            public enum POPUP_BUTTON_STATUS
+            {
+                /// <summary>
+                /// ベース(ポジティブとネガティブ)
+                /// </summary>
+                DEFAULT,
+                /// <summary>
+                /// すべて
+                /// </summary>
+                ALL,
+                /// <summary>
+                /// ポジティブボタンのみ
+                /// </summary>
+                POSITIVE_ONLY,
+                /// <summary>
+                /// ネガティブのみ
+                /// </summary>
+                NEGATIVE_ONLY,
+                /// <summary>
+                /// その他のみ
+                /// </summary>
+                OTHER_ONLY,
+                /// <summary>
+                /// 要素数
+                /// </summary>
+                MAXMUM,
+            }
         }
 
         /// <summary>

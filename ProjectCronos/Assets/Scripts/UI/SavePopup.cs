@@ -51,13 +51,13 @@ namespace ProjectCronos
             ResisterInputSavePopup();
 
             // プレイヤー操作可能状態だった場合、UI操作可能状態にする
-            if (InputManager.instance.IsMatchInputStatus(EnumCollection.Input.INPUT_STATUS.PLAYER))
+            if (InputManager.Instance.IsMatchInputStatus(EnumCollection.Input.INPUT_STATUS.PLAYER))
             {
-                InputManager.instance.SetInputStatus(EnumCollection.Input.INPUT_STATUS.UI);
-                TimeManager.instance.StopTime();
+                InputManager.Instance.SetInputStatus(EnumCollection.Input.INPUT_STATUS.UI);
+                TimeManager.Instance.StopTime();
             }
-            savePopupTitleText.text = MasterDataManager.instance.GetDic("SavePopupTitle");
-            saveAreaNameText.text = MasterDataManager.instance.GetDic(MasterDataManager.DB.SaveAreaDataTable.FindById(saveAreaInfo.savePointId).SaveAreaNameDicKey);
+            savePopupTitleText.text = MasterDataManager.Instance.GetDic("SavePopupTitle");
+            saveAreaNameText.text = MasterDataManager.Instance.GetDic(MasterDataManager.DB.SaveAreaDataTable.FindById(saveAreaInfo.savePointId).SaveAreaNameDicKey);
 
             selectSlotNum = 0;
             ApplySlotSelectStatus();
@@ -70,7 +70,7 @@ namespace ProjectCronos
         {
             foreach (var slot in dataSlots.Select((item, index) => new { item, index }))
             {
-                slot.item.Apply(SaveManager.instance.Load(slot.index), slot.index);
+                slot.item.Apply(SaveManager.Instance.Load(slot.index), slot.index);
             }
         }
 
@@ -79,11 +79,11 @@ namespace ProjectCronos
         /// </summary>
         void ResisterInputSavePopup()
         {
-            InputManager.instance.inputActions.UI.Submit.performed += OnSubmit;
-            InputManager.instance.inputActions.UI.Up.performed += OnUp;
-            InputManager.instance.inputActions.UI.Down.performed += OnDown;
-            InputManager.instance.inputActions.UI.Close.performed += OnClose;
-            InputManager.instance.inputActions.UI.Delete.performed += OnDelete;
+            InputManager.Instance.inputActions.UI.Submit.performed += OnSubmit;
+            InputManager.Instance.inputActions.UI.Up.performed += OnUp;
+            InputManager.Instance.inputActions.UI.Down.performed += OnDown;
+            InputManager.Instance.inputActions.UI.Close.performed += OnClose;
+            InputManager.Instance.inputActions.UI.Delete.performed += OnDelete;
         }
 
         /// <summary>
@@ -91,11 +91,11 @@ namespace ProjectCronos
         /// </summary>
         void UnregisterInputSavePopup()
         {
-            InputManager.instance.inputActions.UI.Submit.performed -= OnSubmit;
-            InputManager.instance.inputActions.UI.Up.performed -= OnUp;
-            InputManager.instance.inputActions.UI.Down.performed -= OnDown;
-            InputManager.instance.inputActions.UI.Close.performed -= OnClose;
-            InputManager.instance.inputActions.UI.Delete.performed -= OnDelete;
+            InputManager.Instance.inputActions.UI.Submit.performed -= OnSubmit;
+            InputManager.Instance.inputActions.UI.Up.performed -= OnUp;
+            InputManager.Instance.inputActions.UI.Down.performed -= OnDown;
+            InputManager.Instance.inputActions.UI.Close.performed -= OnClose;
+            InputManager.Instance.inputActions.UI.Delete.performed -= OnDelete;
         }
 
         /// <summary>
@@ -197,10 +197,10 @@ namespace ProjectCronos
             SoundManager.Instance.Play("Button47");
             
             // UI操作可能状態だった場合、プレイヤー操作可能状態にする
-            if (InputManager.instance.IsMatchInputStatus(EnumCollection.Input.INPUT_STATUS.UI))
+            if (InputManager.Instance.IsMatchInputStatus(EnumCollection.Input.INPUT_STATUS.UI))
             {
-                InputManager.instance.SetInputStatus(EnumCollection.Input.INPUT_STATUS.PLAYER);
-                TimeManager.instance.ApplyTimeScale();
+                InputManager.Instance.SetInputStatus(EnumCollection.Input.INPUT_STATUS.PLAYER);
+                TimeManager.Instance.ApplyTimeScale();
             }
 
             UnregisterInputSavePopup();

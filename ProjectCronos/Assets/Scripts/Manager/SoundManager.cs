@@ -18,7 +18,7 @@ namespace ProjectCronos
         {
             soundKeys = new Stack<string>();
 
-            await AddressableManager.instance.LoadInstance(
+            await AddressableManager.Instance.LoadInstance(
                 "Assets/Prefabs/SoundPlayer.prefab",
                 (obj) =>
                 {
@@ -26,6 +26,8 @@ namespace ProjectCronos
                     player.Init();
                 },
                 this.transform);
+
+            Debug.Log("SoundManager初期化");
 
             return true;
         }

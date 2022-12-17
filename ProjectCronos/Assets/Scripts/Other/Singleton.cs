@@ -5,7 +5,7 @@ namespace ProjectCronos
 {
     public abstract class Singleton<T> : MonoBehaviour
     {
-        public static T instance;
+        private static T instance;
 
         /// <summary>
         /// インスタンスを取得等行う

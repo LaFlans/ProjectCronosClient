@@ -22,6 +22,8 @@ namespace ProjectCronos
         TextMeshProUGUI coinText;
         [SerializeField]
         TextMeshProUGUI playTimeText;
+        [SerializeField]
+        TextMeshProUGUI popupCountText;
 
         /// <summary>
         /// プレイヤーステータス参照
@@ -84,7 +86,8 @@ namespace ProjectCronos
             if (playerStatus != null)
             {
                 coinText.text = $"コイン数:{playerStatus.coinNum}";
-                playTimeText.text = $"プレイ時間:{TimeManager.instance.GetPlayTimeString()}";
+                playTimeText.text = $"プレイ時間:{TimeManager.Instance.GetPlayTimeString()}";
+                popupCountText.text = $"ポップアップの数:{PopupManager.Instance.GetPopupCount()}";
             }
         }
 

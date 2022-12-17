@@ -20,8 +20,7 @@ namespace ProjectCronos
             }
         }
 
-        GameObject parentCanvas;
-
+        [SerializeField]
         Stack<Param> popupParams;
 
         /// <summary>
@@ -30,21 +29,28 @@ namespace ProjectCronos
         /// </summary>
         /// <param name="type">ポップアップの種類</param>
         /// <returns>読み込まれたプレハブオブジェクト</returns>
-        public GameObject GetPopupObject(EnumCollection.Popup.POPUP_TYPE type)
+        public GameObject GetPopupObject(EnumCollection.Popup.POPUP_TYPE type, GameObject parentCanvas)
         {
-            if (parentCanvas == null)
-            {
-                parentCanvas = GameObject.Find("PopupParent");
-                if (parentCanvas == null)
-                {
-                    //　一度探して該当するオブジェクトがない場合、何もしない
-                    return null;
-                }
-            }
-
-            var obj = Instantiate(AddressableManager.Instance.GetLoadedObject(GetPopupPath(type)), parentCanvas.transform);
+            var obj = AddressableManager.Instance.GetLoadedObject(GetPopupPath(type));
+            obj.transform.parent = parentCanvas.transform;
+            obj.transform.localPosition = Vector3.zero;
             PushPopup(new Param(obj));
             return obj;
+        }
+
+        public void ShowSystemPopup(PopupBase.MessageParam messageParam, Action closeCallback = null)
+        {
+            var obj = PopupManager.Instance.GetPopupObject(
+                EnumCollection.Popup.POPUP_TYPE.TRANSITION_TITLE_CONFIRM,
+                GameObject.Find("PopupParent"));
+
+            if (obj != null)
+            {
+                obj.GetComponent<PopupBase>().Setup(
+                    EnumCollection.Popup.POPUP_BUTTON_STATUS.POSITIVE_ONLY,
+                    new PopupBase.Param(closeAction:closeCallback),
+                    messageParam);
+            }
         }
 
         string GetPopupPath(EnumCollection.Popup.POPUP_TYPE type)
@@ -54,9 +60,9 @@ namespace ProjectCronos
                 case EnumCollection.Popup.POPUP_TYPE.DEFAULT:
                     return "Assets/Resources_moved/Prefabs/Popup/DefaultPopup.prefab";
                 case EnumCollection.Popup.POPUP_TYPE.QUIT_APPLICATION:
-                    return "Assets/Resources_moved/Prefabs/Popup/ApplicationQuitPopup.prefab";
+                    return "Assets/Resources_moved/Prefabs/Popup/DefaultPopup.prefab";
                 case EnumCollection.Popup.POPUP_TYPE.TRANSITION_TITLE_CONFIRM:
-                    return "Assets/Resources_moved/Prefabs/Popup/TransitionTitleConfirmPopup.prefab";
+                    return "Assets/Resources_moved/Prefabs/Popup/DefaultPopup.prefab";
                 default:
                     // デフォルトのポップアップのパスを返す
                     return "Assets/Resources_moved/Prefabs/Popup/DefaultPopup.prefab";  
@@ -69,12 +75,6 @@ namespace ProjectCronos
         /// <returns>初期化に成功したかどうか</returns>
         public override async UniTask<bool> Initialize()
         {
-            // 表示対処のキャンパスを設定
-            if (parentCanvas == null)
-            {
-                parentCanvas = GameObject.Find("PopupParent");
-            }
-
             popupParams = new Stack<Param>();
 
             // ポップアッププレハブの事前ロード
@@ -97,10 +97,10 @@ namespace ProjectCronos
             popupParams.Push(param);
 
             // ポップアップを表示した時、プレイヤー操作可能状態だった場合、UI操作可能状態にする
-            if (InputManager.instance.IsMatchInputStatus(EnumCollection.Input.INPUT_STATUS.PLAYER))
+            if (InputManager.Instance.IsMatchInputStatus(EnumCollection.Input.INPUT_STATUS.PLAYER))
             {
-                InputManager.instance.SetInputStatus(EnumCollection.Input.INPUT_STATUS.UI);
-                TimeManager.instance.StopTime();
+                InputManager.Instance.SetInputStatus(EnumCollection.Input.INPUT_STATUS.UI);
+                TimeManager.Instance.StopTime();
             }
         }
 
@@ -109,12 +109,15 @@ namespace ProjectCronos
         /// </summary>
         public void PopPopup()
         {
-            popupParams.Pop();
-
-            if (popupParams.Count == 0 && InputManager.instance.IsMatchInputStatus(EnumCollection.Input.INPUT_STATUS.UI))
+            if (popupParams.Count > 0)
             {
-                InputManager.instance.SetInputStatus(EnumCollection.Input.INPUT_STATUS.PLAYER);
-                TimeManager.instance.ApplyTimeScale();
+                popupParams.Pop();
+            }
+
+            if (popupParams.Count == 0 && InputManager.Instance.IsMatchInputStatus(EnumCollection.Input.INPUT_STATUS.UI))
+            {
+                InputManager.Instance.SetInputStatus(EnumCollection.Input.INPUT_STATUS.PLAYER);
+                TimeManager.Instance.ApplyTimeScale();
             }
         }
 
@@ -122,18 +125,9 @@ namespace ProjectCronos
         /// 現在表示されているポップアップの数を返す
         /// </summary>
         /// <returns></returns>
-        public int PopupCount()
+        public int GetPopupCount()
         {
             return popupParams.Count();
-        }
-
-        /// <summary>
-        /// ポップアップ描画対象のキャンバスを設定
-        /// </summary>
-        /// <param name="target">対象となるキャンバス</param>
-        public void SetParentCanvas(GameObject target)
-        {
-            parentCanvas = target;
         }
     }
 }

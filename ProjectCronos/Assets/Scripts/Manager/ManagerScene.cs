@@ -51,16 +51,16 @@ namespace ProjectCronos
 
             // マネージャーを初期化
             List<UniTask<bool>> task = new List<UniTask<bool>>();
-            task.Add(AddressableManager.instance.Initialize());
-            task.Add(MasterDataManager.instance.Initialize());
-            task.Add(InputManager.instance.Initialize());
-            task.Add(SoundManager.instance.Initialize());
-            task.Add(PopupManager.instance.Initialize());
-            task.Add(TimeManager.instance.Initialize());
+            task.Add(AddressableManager.Instance.Initialize());
+            task.Add(MasterDataManager.Instance.Initialize());
+            task.Add(InputManager.Instance.Initialize());
+            task.Add(SoundManager.Instance.Initialize());
+            task.Add(PopupManager.Instance.Initialize());
+            task.Add(TimeManager.Instance.Initialize());
             task.Add(SaveManager.Instance.Initialize());
 
 #if UNITY_EDITOR
-            task.Add(DebugManager.instance.Initialize());
+            task.Add(DebugManager.Instance.Initialize());
 #endif
             foreach (var item in task)
             {
@@ -73,7 +73,7 @@ namespace ProjectCronos
 
             // その他データ読み込み
             // マスタデータに登録されているサウンドデータを読み込む
-            await MasterDataManager.instance.LoadSoundData();
+            await MasterDataManager.Instance.LoadSoundData();
 
             isLaunch = true;
         }

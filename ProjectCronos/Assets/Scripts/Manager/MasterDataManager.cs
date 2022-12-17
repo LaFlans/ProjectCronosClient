@@ -60,7 +60,7 @@ namespace ProjectCronos
 
             foreach (var item in DB.SoundTable.All)
             {
-                await AddressableManager.instance.LoadClip(item.Path);
+                await AddressableManager.Instance.LoadClip(item.Path);
             }
 
             Debug.Log("Soundデータの読み込み");

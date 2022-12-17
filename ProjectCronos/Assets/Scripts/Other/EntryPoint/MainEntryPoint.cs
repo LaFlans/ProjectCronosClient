@@ -38,8 +38,8 @@ namespace ProjectCronos
 
             // プレイ時間周りの設定
             // FIXME: ここは一旦1つ目のセーブデータを参照しているので後で修正
-            TimeManager.instance.SetPlayTimeFloat(SaveManager.instance.Load(0).playTime);
-            TimeManager.instance.StartMeasurePlayTime();
+            TimeManager.Instance.SetPlayTimeFloat(SaveManager.Instance.Load(0).playTime);
+            TimeManager.Instance.StartMeasurePlayTime();
 
             isShowPopup = false;
             isGameOver = false;
@@ -83,7 +83,7 @@ namespace ProjectCronos
                     if (player == null && !isGameOver)
                     {
                         // プレイ時間計測終了
-                        TimeManager.instance.FinishMeasurePlayTime();
+                        TimeManager.Instance.FinishMeasurePlayTime();
 
                         isGameOver = true;
                         gameOverEffect.Apply(
@@ -100,6 +100,7 @@ namespace ProjectCronos
 
         void OnDestroy()
         {
+            Debug.Log("遷移イベント削除");
             InputManager.Instance.inputActions.UI.Escape.performed -= OnTransitionTitleConfirm;
         }
 
@@ -122,13 +123,30 @@ namespace ProjectCronos
             if (!isShowPopup)
             {
                 var obj = PopupManager.Instance.GetPopupObject(
-                    EnumCollection.Popup.POPUP_TYPE.QUIT_APPLICATION);
+                    EnumCollection.Popup.POPUP_TYPE.QUIT_APPLICATION,
+                    GameObject.Find("PopupParent"));
 
                 if (obj != null)
                 {
                     isShowPopup = true;
-                    obj.GetComponent<PopupBase>().Setup(() => { isShowPopup = false; });
+                    obj.GetComponent<PopupBase>().Setup(
+                        EnumCollection.Popup.POPUP_BUTTON_STATUS.DEFAULT,
+                        new PopupBase.Param(null, null, null, () => { isShowPopup = false; }));
                 }
+            }
+        }
+
+        void OnSystemPopupTest(InputAction.CallbackContext context)
+        {
+            if (!isShowPopup)
+            {
+                isShowPopup = true;
+                PopupManager.Instance.ShowSystemPopup(
+                    new PopupBase.MessageParam("テスト", "テストポップアップです", "YES"),
+                    () =>
+                    {
+                        isShowPopup = false;
+                    });
             }
         }
 
@@ -141,12 +159,26 @@ namespace ProjectCronos
             if (!isShowPopup)
             {
                 var obj = PopupManager.Instance.GetPopupObject(
-                    EnumCollection.Popup.POPUP_TYPE.TRANSITION_TITLE_CONFIRM);
+                    EnumCollection.Popup.POPUP_TYPE.TRANSITION_TITLE_CONFIRM,
+                    GameObject.Find("PopupParent"));
 
                 if (obj != null)
                 {
                     isShowPopup = true;
-                    obj.GetComponent<PopupBase>().Setup(() => { isShowPopup = false; });
+                    obj.GetComponent<PopupBase>().Setup(
+                        EnumCollection.Popup.POPUP_BUTTON_STATUS.DEFAULT,
+                        new PopupBase.Param(
+                            () =>
+                            {
+                                // タイトルに遷移を行う
+                                SceneLoader.TransitionScene(EnumCollection.Scene.SCENE_TYPE.TITLE);
+                            },
+                            null,
+                            null,
+                            () =>
+                            {
+                                isShowPopup = false;
+                            }));
                 }
             }
         }

@@ -172,7 +172,7 @@ namespace ProjectCronos
         {
             if (loaded.ContainsKey(path))
             {
-                return Instantiate(loaded[path].Result);
+                return Instantiate(loaded[path].Result, transform);
             }
 
             Load(path);
