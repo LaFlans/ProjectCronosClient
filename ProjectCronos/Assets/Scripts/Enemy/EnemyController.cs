@@ -7,13 +7,13 @@ namespace ProjectCronos
     public class EnemyController : MonoBehaviour
     {
         [SerializeField]
-        Enemy[] enemies;
+        EnemyGroup[] enemyGroups;
 
         public async void Initialize()
         {
-            foreach (var enemy in enemies)
+            foreach (var enemyGroup in enemyGroups)
             {
-                await enemy.Initialize();
+                enemyGroup.Initialize();
             }
         }
     }

@@ -2,6 +2,7 @@ using System;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Animations;
 using TMPro;
 
 namespace ProjectCronos
@@ -27,7 +28,7 @@ namespace ProjectCronos
         /// <summary>
         /// ターゲットとの距離
         /// </summary>
-        float targetDistance;
+        protected float targetDistance;
 
         /// <summary>
         /// プレイヤー参照
@@ -39,8 +40,19 @@ namespace ProjectCronos
         /// </summary>
         protected Transform target;
 
+        /// <summary>
+        /// アニメーター
+        /// </summary>
         [SerializeField]
-        NavMeshAgent agent;
+        protected Animator anim;
+
+        /// <summary>
+        /// アニメ―ターのステート情報
+        /// </summary>
+        protected AnimatorStateInfo animStateInfo;
+
+        [SerializeField]
+        protected NavMeshAgent agent;
         protected Vector3 targetDir;
 
         //　デバック用
@@ -50,7 +62,12 @@ namespace ProjectCronos
         /// <summary>
         /// 行動することができるか
         /// </summary>
-        bool isAct;
+        protected bool isAct;
+
+        /// <summary>
+        /// 追跡するか
+        /// </summary>
+        protected bool isTracking;
 
         [SerializeField]
         protected Transform bodyTransform;
@@ -58,15 +75,50 @@ namespace ProjectCronos
         Action EnemyTimeScaleApplyEvent;
 
         /// <summary>
+        /// コライダ情報
+        /// </summary>
+        protected EnemyColliderInfo colliderInfo;
+
+        /// <summary>
         /// 敵のステータス情報
         /// </summary>
         EnemyStatus enemyStatus;
 
+        /// <summary>
+        /// 体の位置
+        /// </summary>
+        [SerializeField]
+        protected Transform bodyPos;
+
+        public float attackMoveSpeed = 20.0f;
+
+        /// <summary>
+        /// 体の親子関係コンストレイント
+        /// </summary>
+        [SerializeField]
+        public ParentConstraint bodyParentConstraint;
+
+        /// <summary>
+        /// ナビメッシュの親子関係コンストレイント
+        /// </summary>
+        [SerializeField]
+        public ParentConstraint navmeshParentConstraint;
+
+        [SerializeField]
+        Transform allBody;
+
         protected virtual void OnEnemyTimeScaleApply()
         {
+            var enemyTimeScale = TimeManager.Instance.GetEnemyTimeScale();
             Debug.Log("敵のタイムスケール変更時イベントを行うよ");
-            agent.speed = status.moveSpeed * TimeManager.Instance.GetEnemyTimeScale();
-            isAct = TimeManager.Instance.GetEnemyTimeScale() > 0;
+            agent.speed = status.moveSpeed * enemyTimeScale;
+            isAct = enemyTimeScale > 0;
+            isTracking = false;
+
+            if (anim != null)
+            {
+                anim.speed = enemyTimeScale;
+            }
         }
 
         /// <summary>
@@ -84,8 +136,15 @@ namespace ProjectCronos
             player = GameObject.FindWithTag("Player");
             target = player.GetComponent<Player>().GetCenterPos();
 
+            colliderInfo = this.GetComponent<EnemyColliderInfo>();
+            colliderInfo?.Init(status.attack);
+
             // エージェントの移動速度初期化
             agent.speed = status.moveSpeed;
+
+            // コンストレイント設定
+            bodyParentConstraint.enabled = true;
+            navmeshParentConstraint.enabled = false;
 
             await base.Initialize();
 
@@ -112,8 +171,13 @@ namespace ProjectCronos
         {
         }
 
-        void Update()
+        async void Update()
         {
+            if (isTracking)
+            {
+                TrackingTarget();
+            }
+
             //　デバック用
             stateDebugText.text = state.ToString();
 
@@ -121,13 +185,25 @@ namespace ProjectCronos
             {
                 ApplyAi();
             }
+
+            // アニメーターステート情報更新
+            if (anim)
+            {
+                animStateInfo = anim.GetCurrentAnimatorStateInfo(0);
+                anim.SetFloat("Speed", agent.velocity.magnitude);
+            }
         }
 
-        void ApplyAi()
+        async void ApplyAi()
         {
             SetAi();
 
-            switch(state)
+            if (isTracking)
+            {
+                TrackingTarget();
+            }
+
+            switch (state)
             {
                 case ENEMY_AI_STATE.WAIT:
                     Wait();
@@ -164,6 +240,11 @@ namespace ProjectCronos
         /// AI初期化
         /// </summary>
         void InitAi()
+        {
+            CalcTargetDistAndDirection();
+        }
+
+        void CalcTargetDistAndDirection()
         {
             if (target != null)
             {
@@ -226,10 +307,12 @@ namespace ProjectCronos
 
         protected virtual void Move()
         {
-            if (target != null)
+            if (agent.isStopped)
             {
-                agent.SetDestination(target.position);
+                agent.isStopped = false;
             }
+
+            TrackingTarget();
         }
 
         protected virtual void Attack()
@@ -242,11 +325,70 @@ namespace ProjectCronos
             agent.SetDestination(bodyTransform.position);
         }
 
-        void LookTarget()
+        void TrackingTarget()
+        {
+            if (target != null)
+            {
+                Debug.Log("追跡！");
+                //agent.destination = target.position;
+
+                agent.SetDestination(target.position);
+            }
+        }
+
+        /// <summary>
+        /// 追跡オン
+        /// </summary>
+        protected void TrackingOn()
+        {
+            isTracking = true;
+
+            // 攻撃中の追跡速度を上げるテスト
+            agent.speed = attackMoveSpeed;
+
+            // ターゲットの位置へ移動
+            TrackingTarget();
+
+            Debug.Log("追跡オン！");
+        }
+
+        /// <summary>
+        /// 追跡オフ
+        /// </summary>
+        protected void TrackingOff()
+        {
+            isTracking = false;
+
+            // 攻撃中の追跡速度を元に戻す
+            agent.speed = status.moveSpeed;
+
+            // 移動を止める
+            agent.isStopped = true;
+
+            Debug.Log("追跡オフ！");
+        }
+
+        /// <summary>
+        /// 回転速度に応じてターゲットのほうへ向く
+        /// </summary>
+        protected void LookTarget()
         {
             // その方向に向けて旋回する(120度/秒)
             Quaternion targetRotation = Quaternion.LookRotation(targetDir);
             bodyTransform.rotation = Quaternion.RotateTowards(bodyTransform.rotation, targetRotation, 120f * Time.deltaTime);
+        }
+
+        /// <summary>
+        /// 一瞬でターゲットの方へ向く
+        /// </summary>
+        public void LookTargetMoment()
+        {
+            Debug.Log("一瞬でターゲットの方へ向く");
+
+            CalcTargetDistAndDirection();
+
+            // その方向に向けて旋回する
+            bodyTransform.rotation = Quaternion.LookRotation(targetDir);
         }
 
         /// <summary>
@@ -264,7 +406,6 @@ namespace ProjectCronos
         public override void Damage(int value)
         {
             base.Damage(value);
-            //Debug.Log("敵被弾");
         }
 
         /// <summary>
@@ -284,6 +425,28 @@ namespace ProjectCronos
         void OnDestroy()
         {
             TimeManager.Instance.UnregisterEnemyTimeScaleApplyAction(EnemyTimeScaleApplyEvent);
+        }
+
+        void SwitchParentConstraint()
+        {
+            bodyParentConstraint.enabled = !bodyParentConstraint.enabled;
+            navmeshParentConstraint.enabled = !navmeshParentConstraint.enabled;
+        }
+
+        protected void SetNavmeshUpdatePositionFlase()
+        {
+            //Debug.LogError("Agentの更新を止めました");
+            agent.updatePosition = false;
+            SwitchParentConstraint();
+        }
+
+        protected void SetNavmeshUpdatePositionTrue()
+        {
+            //Debug.LogError("Agentの更新を再開しました");
+            agent.updatePosition = true;
+
+            SwitchParentConstraint();
+            agent.Warp(allBody.position);
         }
     }
 }

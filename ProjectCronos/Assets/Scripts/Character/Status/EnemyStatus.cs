@@ -41,6 +41,11 @@ namespace ProjectCronos
             var initData = MasterDataManager.DB.EnemyDataTable.FindByKey(statusKey);
 
             // HP周り設定
+            if (hpBar != null && !hpBar.gameObject.activeSelf)
+            {
+                hpBar.gameObject.SetActive(true);
+            }
+
             maxHp = initData.MaxHp;
             currentHp = maxHp;
             timeHpHealPerSeconds = initData.TimeHpHealPerSeconds;

@@ -31,6 +31,7 @@ namespace ProjectCronos
         /// </summary>
         public virtual void Damage(int value) 
         {
+            UnityEngine.Debug.LogError($"{value}ダメージを受けました");
             if (status != null)
             {
                 if (status.DamageHp(value))

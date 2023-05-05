@@ -5,7 +5,7 @@ using Cysharp.Threading.Tasks;
 namespace ProjectCronos
 {
     /// <summary>
-    /// 入手したアイテムのログを管理するクラス
+    /// アイテム系のログクラス
     /// </summary>
     class ItemLogger : MonoBehaviour
     {
@@ -24,6 +24,10 @@ namespace ProjectCronos
             return true;
         }
 
+        /// <summary>
+        /// ログ表示
+        /// </summary>
+        /// <param name="message"></param>
         public void ShowItemLog(string message)
         {
             GameObject obj = AddressableManager.Instance.GetLoadedObject(prefabPath);
@@ -32,6 +36,10 @@ namespace ProjectCronos
             obj.GetComponent<ItemLogCell>().Initialize(message);
         }
 
+        /// <summary>
+        /// ログ追加
+        /// </summary>
+        /// <param name="context"></param>
         public void AddItemLog(InputAction.CallbackContext context)
         {
             GameObject obj = AddressableManager.Instance.GetLoadedObject(prefabPath);

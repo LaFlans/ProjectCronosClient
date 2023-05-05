@@ -7,25 +7,15 @@ namespace ProjectCronos
         /// <summary>
         /// 親
         /// </summary>
-        Enemy enemy;
-        
-        /// <summary>
-        /// ダメージ倍率
-        /// </summary>
         [SerializeField]
-        int damageRate = 1;
-
-        void Start()
-        {
-            enemy = this.transform.parent.parent.GetComponent<Enemy>();
-        }
+        Enemy enemy;
 
         /// <summary>
-        /// ダメージを与える
+        /// 敵の親トランスフォームを取得
         /// </summary>
-        public void Damage(int value)
+        public Transform GetParentObject()
         {
-            enemy.Damage(value * damageRate);
+            return enemy.transform;
         }
     }
 }

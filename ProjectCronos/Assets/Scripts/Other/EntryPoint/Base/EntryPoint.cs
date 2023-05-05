@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace ProjectCronos
 {
-    public abstract class IEntryPoint : MonoBehaviour
+    public abstract class EntryPoint : MonoBehaviour
     {
         protected EnumCollection.Scene.SCENE_LOAD_STATUS loadStatus;
 

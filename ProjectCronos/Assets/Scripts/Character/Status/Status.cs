@@ -165,6 +165,11 @@ namespace ProjectCronos
             isInit = false;
 
             //　HP周りの設定
+            if (hpBar != null && !hpBar.gameObject.activeSelf)
+            {
+                hpBar.gameObject.SetActive(true);
+            }
+
             maxHp = 10;
             currentHp = maxHp;
             timeHpHealPerSeconds = 10;

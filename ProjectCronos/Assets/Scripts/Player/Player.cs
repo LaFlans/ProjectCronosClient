@@ -112,6 +112,10 @@ namespace ProjectCronos
 
         bool isDodge = false;
 
+        [SerializeField]
+        Animator testEnemyAnim;
+
+
         /// <summary>
         /// 初期化
         /// </summary>
@@ -262,6 +266,9 @@ namespace ProjectCronos
 
         void OnTest(InputAction.CallbackContext context)
         {
+            UnityEngine.Debug.Log("敵攻撃テスト");
+            testEnemyAnim.SetTrigger("Attack");
+
             //// プレイヤーにダメージを与えるテスト
             //UnityEngine.Debug.Log("ダメージテスト");
             //Damage(1);
@@ -490,7 +497,7 @@ namespace ProjectCronos
                     }
 
                     // ロックオンを行う
-                    playerCamera.RockOn(targetEnemy.transform.parent.GetComponent<EnemyInfo>().GetCenterPos());
+                    playerCamera.RockOn(targetEnemy.GetComponent<EnemyBody>().GetParentObject().GetComponent<EnemyInfo>().GetCenterPos());
                 }
             }
         }

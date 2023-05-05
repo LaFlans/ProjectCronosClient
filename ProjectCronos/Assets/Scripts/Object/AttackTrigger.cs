@@ -10,6 +10,9 @@ namespace ProjectCronos
     /// </summary>
     public class AttackTrigger : MonoBehaviour
     {
+        MeshRenderer meshRenderer;
+        Material mat;
+
         /// <summary>
         /// デフォルトの移動速度
         /// </summary>
@@ -57,6 +60,11 @@ namespace ProjectCronos
         /// </summary>
         bool isHitDestory = false;
 
+        /// <summary>
+        /// ステージに当たり判定があるかどうか
+        /// </summary>
+        bool isHitStage = false;
+
         bool isAct;
 
         /// <summary>
@@ -84,6 +92,15 @@ namespace ProjectCronos
 
             isAct = true;
             moveSpeed = defaultMoveSpeed;
+
+            meshRenderer = this.GetComponent<MeshRenderer>();
+            if (meshRenderer != null)
+            {
+                mat = meshRenderer.material;
+            }
+
+            // 初期状態は当たり判定はない状態
+            DisableCollider();
         }
 
         public async void Init(EnumCollection.Attack.ATTACK_TYPE type, int attack, bool isHitDestory = false)
@@ -91,6 +108,7 @@ namespace ProjectCronos
             attackType = type;
             this.attack = attack;
             this.isHitDestory = isHitDestory;
+            isHitStage = false;
         }
 
         public async void Init(GameObject target, float lifeTime, EnumCollection.Attack.ATTACK_TYPE type, int attack, bool isHitDestory = false)
@@ -101,6 +119,7 @@ namespace ProjectCronos
             this.isHitDestory = isHitDestory;
             transform.LookAt(target.transform);
             this.attack = attack;
+            isHitStage = true;
 
             await MoveDelay();
         }
@@ -166,6 +185,7 @@ namespace ProjectCronos
             if (!col.enabled)
             {
                 col.enabled = true;
+                SetDebugColliderColor();
             }
         }
 
@@ -177,6 +197,15 @@ namespace ProjectCronos
             if (col.enabled)
             {
                 col.enabled = false;
+                SetDebugColliderColor();
+            }
+        }
+
+        void SetDebugColliderColor()
+        {
+            if (mat != null)
+            {
+                mat.SetColor("_EmissiveColor", col.enabled ? Color.green : Color.red);
             }
         }
 
@@ -202,9 +231,11 @@ namespace ProjectCronos
                 case EnumCollection.Attack.ATTACK_TYPE.PLAYER:
                     if (col.gameObject.tag == "EnemyBody")
                     {
-                        col.gameObject.GetComponent<EnemyBody>().Damage(attack);
+                        col.gameObject.GetComponent<EnemyDamageBody>().Damage(attack);
                         Vector3 hitPos = col.ClosestPointOnBounds(this.transform.position);
                         Utility.CreateObject("Prefabs/DamageEffect1", hitPos, 1.0f);
+
+                        DamageLogger.ShowLog(attack, hitPos, EnumCollection.Attack.ATTACK_TYPE.PLAYER);
 
                         if (isHitDestory)
                         {
@@ -229,6 +260,8 @@ namespace ProjectCronos
                         Vector3 hitPos = col.ClosestPointOnBounds(this.transform.position);
                         Utility.CreateObject("Prefabs/DamageEffect1", hitPos, 1.0f);
 
+                        DamageLogger.ShowLog(attack, hitPos, EnumCollection.Attack.ATTACK_TYPE.ENEMY);
+
                         if (isHitDestory)
                         {
                             Destroy(this.gameObject);
@@ -238,7 +271,7 @@ namespace ProjectCronos
                     break;
             }
 
-            if (col.gameObject.tag == "Ground")
+            if (isHitStage && col.gameObject.tag == "Ground")
             {
                 Vector3 hitPos = col.ClosestPointOnBounds(this.transform.position);
                 Utility.CreateObject("Prefabs/DamageEffect1", hitPos, 1.0f);

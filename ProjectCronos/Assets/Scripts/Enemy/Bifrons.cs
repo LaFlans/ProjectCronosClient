@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-
 namespace ProjectCronos
 {
     /// <summary>
@@ -74,7 +73,15 @@ namespace ProjectCronos
                     obj.GetComponent<AttackTrigger>().Init(target.gameObject, 10, EnumCollection.Attack.ATTACK_TYPE.ENEMY, status.attack, true);
                 }
 
+                SetNavmeshUpdatePositionFlase();
+                agent.isStopped = true;
+                isTracking = false;
+
                 await AttackInterval();
+
+                isTracking = true;
+                agent.isStopped = false;
+                SetNavmeshUpdatePositionTrue();
             }
         }
 

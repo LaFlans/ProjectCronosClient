@@ -15,11 +15,11 @@ MonoBehaviour:
   data:
   - Key: Bifrons
     Name: "\u30D3\u30D5\u30ED\u30F3\u30B9"
-    MaxHp: 90000
+    MaxHp: 900
     TimeHpHealPerSeconds: 0
     MaxMp: 0
     TimeMpHealPerSeconds: 0
-    Attack: 15
+    Attack: 155
     MagicAttack: 100
     Defense: 10
     MagicDefense: 10
@@ -27,3 +27,17 @@ MonoBehaviour:
     AttackDist: 5
     SearchDist: 15
     MoveSpeed: 5
+  - Key: Raum
+    Name: "\u30E9\u30A6\u30E0"
+    MaxHp: 1000
+    TimeHpHealPerSeconds: 0
+    MaxMp: 0
+    TimeMpHealPerSeconds: 0
+    Attack: 10
+    MagicAttack: 10
+    Defense: 10
+    MagicDefense: 10
+    AiThinkingIntervalTime: 2
+    AttackDist: 10
+    SearchDist: 15
+    MoveSpeed: 4

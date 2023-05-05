@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 namespace ProjectCronos
 {
-    class MainEntryPoint : IEntryPoint
+    class MainEntryPoint : EntryPoint
     {
         [SerializeField]
         Player player;
@@ -16,7 +16,7 @@ namespace ProjectCronos
         SaveAreaController saveAreaController;
 
         [SerializeField]
-        ItemLogger itemLogger;
+        GameLogger gameLogger;
 
         bool isShowPopup;
         bool isGameOver;
@@ -57,7 +57,7 @@ namespace ProjectCronos
             saveAreaController.Initialize();
 
             // アイテムロガーの初期化
-            await itemLogger.Initialize();
+            await gameLogger.Initialize();
 
 #if UNITY_EDITOR
             // デバックメニューの初期化

@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 namespace ProjectCronos
 {
-    class TitleEntryPoint : IEntryPoint
+    class TitleEntryPoint : EntryPoint
     {
         /// <summary>
         /// シーンの初期化

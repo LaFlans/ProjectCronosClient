@@ -24,8 +24,6 @@ namespace ProjectCronos
             anim.SetTrigger("In");
 
             text.text = message;
-            //Destroy(this.gameObject, 20.0f);
-
             Invoke("DestroyLog", 3.0f);
         }
 

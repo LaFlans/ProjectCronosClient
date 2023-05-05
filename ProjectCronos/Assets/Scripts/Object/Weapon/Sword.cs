@@ -52,7 +52,7 @@ namespace ProjectCronos
         {
             if (col.gameObject.tag == "EnemyBody")
             {
-                col.gameObject.GetComponent<EnemyBody>().Damage(1);
+                col.gameObject.GetComponent<EnemyDamageBody>().Damage(1);
                 Vector3 hitPos = col.ClosestPointOnBounds(this.transform.position);
                 Utility.CreateObject("Prefabs/DamageEffect1", hitPos, 1.0f);
             }
