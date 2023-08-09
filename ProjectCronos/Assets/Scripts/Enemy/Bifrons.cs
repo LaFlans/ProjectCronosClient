@@ -70,7 +70,7 @@ namespace ProjectCronos
                     GameObject obj = AddressableManager.Instance.GetLoadedObject(fireSkeltonPrefabPath);
                     obj.transform.position = pos.position;
                     obj.transform.SetParent(attackObjParent);
-                    obj.GetComponent<AttackTrigger>().Init(target.gameObject, 10, EnumCollection.Attack.ATTACK_TYPE.ENEMY, status.attack, true);
+                    obj.GetComponent<AttackTrigger>().Init(target.gameObject, 10, EnumCollection.Attack.ATTACK_TYPE.ENEMY, status.attack, 1.0f,true);
                 }
 
                 SetNavmeshUpdatePositionFlase();

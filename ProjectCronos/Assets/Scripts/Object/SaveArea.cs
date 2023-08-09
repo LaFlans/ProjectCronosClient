@@ -51,9 +51,22 @@ namespace ProjectCronos
         {
             if (isActive && canSave)
             {
-                Debug.Log("Save！！");
-                savePopup.GetComponent<SavePopup>().Apply(new SaveAreaInfo(saveAreaId, respawnTransform));
-                savePopup.SetActive(true);
+                //Debug.Log("Save！！");
+                //savePopup.GetComponent<SavePopup>().Apply(new SaveAreaInfo(saveAreaId, respawnTransform));
+                //savePopup.SetActive(true);
+
+                var obj = PopupManager.Instance.GetPopupObject(
+                    EnumCollection.Popup.POPUP_TYPE.SAVE);
+
+                if (obj != null)
+                {
+                    obj.GetComponent<SavePopup>().Apply(new SaveAreaInfo(saveAreaId, respawnTransform));
+
+                    //obj.GetComponent<PopupBase>().Setup(
+                    //    EnumCollection.Popup.POPUP_BUTTON_STATUS.DEFAULT,
+                    //    new PopupBase.Param(null, null, null, () => {}));
+                }
+
             }
         }
 

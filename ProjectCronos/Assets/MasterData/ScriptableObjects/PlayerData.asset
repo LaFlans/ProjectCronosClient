@@ -18,11 +18,11 @@ MonoBehaviour:
     TimeHpHealPerSeconds: 2
     MaxMp: 1000
     TimeMpHealPerSeconds: 5
-    Attack: 15
+    Attack: 100
     MagicAttack: 100
     Defense: 10
     MagicDefense: 10
     CriticalRate: 10
     CriticalDamageRate: 2
     MoveSpeed: 5
-    JumpPower: 5
+    JumpPower: 270

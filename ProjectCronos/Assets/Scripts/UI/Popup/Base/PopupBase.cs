@@ -79,5 +79,15 @@ namespace ProjectCronos
             PopupManager.Instance.PopPopup();
             Destroy(this.gameObject);
         }
+
+        /// <summary>
+        /// 入力イベントの登録
+        /// </summary>
+        public abstract void RegisterInputActions();
+
+        /// <summary>
+        /// 入力イベントの解除
+        /// </summary>
+        public abstract void UnregisterInputActions();
     }
 }

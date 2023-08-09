@@ -12,11 +12,11 @@ namespace ProjectCronos
     {
         public class Param
         {
-            public GameObject obj;
+            public PopupBase popup;
 
-            public Param(GameObject obj)
+            public Param(PopupBase popup)
             {
-                this.obj = obj;
+                this.popup = popup;
             }
         }
 
@@ -29,20 +29,19 @@ namespace ProjectCronos
         /// </summary>
         /// <param name="type">ポップアップの種類</param>
         /// <returns>読み込まれたプレハブオブジェクト</returns>
-        public GameObject GetPopupObject(EnumCollection.Popup.POPUP_TYPE type, GameObject parentCanvas)
+        public GameObject GetPopupObject(EnumCollection.Popup.POPUP_TYPE type)
         {
             var obj = AddressableManager.Instance.GetLoadedObject(GetPopupPath(type));
-            obj.transform.parent = parentCanvas.transform;
+            obj.transform.parent = GameObject.Find("PopupParent").transform;
             obj.transform.localPosition = Vector3.zero;
-            PushPopup(new Param(obj));
+            PushPopup(new Param(obj.GetComponent<PopupBase>()));
             return obj;
         }
 
         public void ShowSystemPopup(PopupBase.MessageParam messageParam, Action closeCallback = null)
         {
             var obj = PopupManager.Instance.GetPopupObject(
-                EnumCollection.Popup.POPUP_TYPE.TRANSITION_TITLE_CONFIRM,
-                GameObject.Find("PopupParent"));
+                EnumCollection.Popup.POPUP_TYPE.TRANSITION_TITLE_CONFIRM);
 
             if (obj != null)
             {
@@ -63,6 +62,8 @@ namespace ProjectCronos
                     return "Assets/Resources_moved/Prefabs/Popup/DefaultPopup.prefab";
                 case EnumCollection.Popup.POPUP_TYPE.TRANSITION_TITLE_CONFIRM:
                     return "Assets/Resources_moved/Prefabs/Popup/DefaultPopup.prefab";
+                case EnumCollection.Popup.POPUP_TYPE.SAVE:
+                    return "Assets/Resources_moved/Prefabs/Popup/SavePopup.prefab";
                 default:
                     // デフォルトのポップアップのパスを返す
                     return "Assets/Resources_moved/Prefabs/Popup/DefaultPopup.prefab";  
@@ -94,8 +95,14 @@ namespace ProjectCronos
         /// <param name="param">対象のポップアップ</param>
         public void PushPopup(Param param)
         {
-            popupParams.Push(param);
+            if (popupParams.Count > 0)
+            {
+                popupParams.Peek().popup.UnregisterInputActions();
+            }
 
+            popupParams.Push(param);
+            param.popup.RegisterInputActions();
+            
             // ポップアップを表示した時、プレイヤー操作可能状態だった場合、UI操作可能状態にする
             if (InputManager.Instance.IsMatchInputStatus(EnumCollection.Input.INPUT_STATUS.PLAYER))
             {
@@ -111,9 +118,16 @@ namespace ProjectCronos
         {
             if (popupParams.Count > 0)
             {
+                popupParams.Peek().popup.UnregisterInputActions();
                 popupParams.Pop();
+
+                if (popupParams.Count > 0)
+                {
+                    popupParams.Peek().popup.RegisterInputActions();
+                }
             }
 
+            // ポップアップを取り除いた時、UI操作可能状態だった場合、プレイヤー操作可能状態にする
             if (popupParams.Count == 0 && InputManager.Instance.IsMatchInputStatus(EnumCollection.Input.INPUT_STATUS.UI))
             {
                 InputManager.Instance.SetInputStatus(EnumCollection.Input.INPUT_STATUS.PLAYER);

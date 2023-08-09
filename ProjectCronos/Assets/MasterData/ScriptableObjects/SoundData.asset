@@ -40,6 +40,9 @@ MonoBehaviour:
   - key: LandingPlayer
     type: 1
     path: Assets/ProjectCronosAssets/Sounds/SE/Landing1.mp3
+  - key: Shot1
+    type: 1
+    path: Assets/ProjectCronosAssets/Sounds/SE/kurage/button/button14.mp3
   - key: TakeoffPlayer
     type: 1
     path: Assets/ProjectCronosAssets/Sounds/SE/Swish1.mp3

@@ -45,7 +45,7 @@ namespace ProjectCronos
             isGameOver = false;
 
             // BGMの再生
-            SoundManager.Instance.Play("WorkBGM2");
+            SoundManager.Instance.Play("BGM1");
 
             // プレイヤーの初期化
             await player.Initialize();
@@ -123,8 +123,7 @@ namespace ProjectCronos
             if (!isShowPopup)
             {
                 var obj = PopupManager.Instance.GetPopupObject(
-                    EnumCollection.Popup.POPUP_TYPE.QUIT_APPLICATION,
-                    GameObject.Find("PopupParent"));
+                    EnumCollection.Popup.POPUP_TYPE.QUIT_APPLICATION);
 
                 if (obj != null)
                 {
@@ -159,8 +158,7 @@ namespace ProjectCronos
             if (!isShowPopup)
             {
                 var obj = PopupManager.Instance.GetPopupObject(
-                    EnumCollection.Popup.POPUP_TYPE.TRANSITION_TITLE_CONFIRM,
-                    GameObject.Find("PopupParent"));
+                    EnumCollection.Popup.POPUP_TYPE.TRANSITION_TITLE_CONFIRM);
 
                 if (obj != null)
                 {
@@ -179,9 +177,7 @@ namespace ProjectCronos
                                 // タイトルに遷移を行う
                                 SceneLoader.TransitionScene(EnumCollection.Scene.SCENE_TYPE.TITLE);
                             },
-                            null,
-                            null,
-                            () =>
+                            closeAction:() =>
                             {
                                 isShowPopup = false;
                             })

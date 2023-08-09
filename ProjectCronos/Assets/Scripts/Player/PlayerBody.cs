@@ -25,6 +25,7 @@ namespace ProjectCronos
         /// </summary>
         public void Damage(int value)
         {
+            Debug.LogError($"PlayerBodyプレイヤーに{value}を与えました。");
             player.Damage(value * damageRate);
         }
     }

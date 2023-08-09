@@ -160,6 +160,10 @@ namespace ProjectCronos
                 /// </summary>
                 TRANSITION_TITLE_CONFIRM,
                 /// <summary>
+                /// セーブポップアップ
+                /// </summary>
+                SAVE,
+                /// <summary>
                 /// 要素数
                 /// </summary>
                 MAXMUM,
@@ -246,6 +250,31 @@ namespace ProjectCronos
                 /// 着地
                 /// </summary>
                 LANDING,
+                /// <summary>
+                /// 要素数
+                /// </summary>
+                MAXMUM,
+            }
+        }
+
+        /// <summary>
+        /// スキル関連
+        /// </summary>
+        namespace Skill
+        {
+            /// <summary>
+            /// 種類
+            /// </summary>
+            public enum TYPE
+            {
+                /// <summary>
+                /// 攻撃スキル
+                /// </summary>
+                ATTACK,
+                /// <summary>
+                /// 補助スキル
+                /// </summary>
+                SUPPORT,
                 /// <summary>
                 /// 要素数
                 /// </summary>

@@ -157,5 +157,14 @@ namespace ProjectCronos
             // 向きの設定
             rockOnCamera.transform.LookAt(targetTransform);
         }
+
+        /// <summary>
+        /// ターゲットのTransformを返す
+        /// </summary>
+        /// <returns>ロックオン中のターゲット</returns>
+        public Transform GetTarget()
+        {
+            return targetTransform;
+        }
     }
 }

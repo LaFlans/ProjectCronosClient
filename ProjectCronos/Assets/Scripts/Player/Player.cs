@@ -92,6 +92,9 @@ namespace ProjectCronos
 
         string demonHandPrefabPath = "Assets/Resources_moved/Prefabs/DemonHand.prefab";
 
+        //string fireSkeltonPrefabPath = "Assets/Prefabs/FireSkelton.prefab";
+        string fireSkeltonPrefabPath = "Assets/Prefabs/NierBullet.prefab";
+
         /// <summary>
         /// プレイヤー用カメラ
         /// </summary>
@@ -115,6 +118,8 @@ namespace ProjectCronos
         [SerializeField]
         Animator testEnemyAnim;
 
+        [SerializeField]
+        Transform attackObjParent;
 
         /// <summary>
         /// 初期化
@@ -171,6 +176,7 @@ namespace ProjectCronos
         public async UniTask PreLoadAsync()
         {
             await AddressableManager.Instance.Load(demonHandPrefabPath);
+            await AddressableManager.Instance.Load(fireSkeltonPrefabPath);
         }
 
         /// <summary>
@@ -212,6 +218,8 @@ namespace ProjectCronos
             // 第一のスキル
             InputManager.Instance.inputActions.Player.FirstSkill.performed += playerSkill.OnActiveFirstSkill;
 
+            //InputManager.Instance.inputActions.Player.Attack2.performed += Shot;
+
             // 回避
             InputManager.Instance.inputActions.Player.Dogde.performed += OnDogde;
         }
@@ -238,8 +246,10 @@ namespace ProjectCronos
             // 第一のスキル
             InputManager.Instance.inputActions.Player.FirstSkill.performed -= playerSkill.OnActiveFirstSkill;
 
+            //InputManager.Instance.inputActions.Player.Attack2.performed -= Shot;
+
             // 回避
-            InputManager.Instance.inputActions.Player.Dogde.performed -= OnDogde;
+            InputManager.Instance.inputActions.Player.Dogde.performed -= OnDogde;     
         }
 
         void OnDestroy()
@@ -260,14 +270,32 @@ namespace ProjectCronos
                 isDodge = true;
                 anim.SetTrigger("Dogde");
                 rigid.velocity = Vector3.zero;
-                rigid.AddForce(this.transform.forward * dodgeRollPower, ForceMode.Impulse);
+
+                var moveVec = Vector3.ProjectOnPlane(this.transform.forward, normalVector);
+
+                rigid.AddForce(moveVec * dodgeRollPower, ForceMode.Impulse);
             }
         }
 
+        bool isTest = false;
+
         void OnTest(InputAction.CallbackContext context)
         {
-            UnityEngine.Debug.Log("敵攻撃テスト");
-            testEnemyAnim.SetTrigger("Attack");
+            //if(isTest)
+            //{
+            //    isTest = false;
+            //    SoundManager.Instance.Play("WorkBGM1");
+            //}
+            //else
+            //{
+            //    isTest = true;
+            //    SoundManager.Instance.Play("WorkBGM2");
+            //}
+
+            //SoundManager.Instance.Play("Shot1");
+
+            //UnityEngine.Debug.Log("敵攻撃テスト");
+            //testEnemyAnim.SetTrigger("Attack");
 
             //// プレイヤーにダメージを与えるテスト
             //UnityEngine.Debug.Log("ダメージテスト");
@@ -317,6 +345,14 @@ namespace ProjectCronos
                     jumpState = EnumCollection.Player.PLAYER_JUMP_STATE.IDOL;
                     rigid.velocity = Vector3.zero;
                 }
+
+                // 弾の発射間隔の計算
+                bulletFreqTime -= Time.deltaTime;
+
+                if (InputManager.Instance.inputActions.Player.Attack2.IsPressed())
+                {
+                    Shot();
+                }
             }
         }
 
@@ -334,7 +370,7 @@ namespace ProjectCronos
             obj.transform.position = spawnPos[0].position;
             obj.transform.rotation = spawnPos[0].rotation;
             obj.transform.localScale = spawnPos[0].localScale;
-            obj.GetComponent<DemonHand>().Initialize(status.attack);
+            obj.GetComponent<DemonHand>().Initialize(1);
         }
 
         /// <summary>
@@ -346,7 +382,7 @@ namespace ProjectCronos
             obj.transform.position = spawnPos[1].position;
             obj.transform.rotation = spawnPos[1].rotation;
             obj.transform.localScale = spawnPos[1].localScale;
-            obj.GetComponent<DemonHand>().Initialize(status.attack);
+            obj.GetComponent<DemonHand>().Initialize(1);
         }
 
         /// <summary>
@@ -358,7 +394,7 @@ namespace ProjectCronos
             obj.transform.position = spawnPos[2].position;
             obj.transform.rotation = spawnPos[2].rotation;
             obj.transform.localScale = spawnPos[2].localScale;
-            obj.GetComponent<DemonHand>().Initialize(status.attack);
+            obj.GetComponent<DemonHand>().Initialize(1);
         }
 
         /// <summary>
@@ -398,10 +434,13 @@ namespace ProjectCronos
         /// </summary>
         public void OnLanding()
         {
-            isGround = true;
-            anim.SetBool("IsGround", true);
+            if (!isGround)
+            {
+                isGround = true;
+                anim.SetBool("IsGround", true);
 
-            SoundManager.Instance.Play("LandingPlayer");
+                SoundManager.Instance.Play("LandingPlayer");
+            }
         }
 
         /// <summary>
@@ -409,8 +448,11 @@ namespace ProjectCronos
         /// </summary>
         public void OnTakeoff()
         {
-            isGround = false;
-            anim.SetBool("IsGround", false);
+            if (isGround)
+            {
+                isGround = false;
+                anim.SetBool("IsGround", false);
+            }
         }
 
         /// <summary>
@@ -446,23 +488,48 @@ namespace ProjectCronos
             }
         }
 
-        ///// <summary>
-        ///// 弾を撃つ
-        ///// </summary>
-        //void Shot()
-        //{
-        //    bulletFreqTime -= Time.deltaTime;
+        /// <summary>
+        /// 弾を撃つ
+        /// </summary>
+        void Shot()
+        {
+            if (bulletFreqTime <= 0)
+            {
+                //var pos = spawnPos[UnityEngine.Random.Range(0, spawnPos.Count)];
+                //if (pos != null)
+                {
+                    GameObject obj = AddressableManager.Instance.GetLoadedObject(fireSkeltonPrefabPath);
+                    obj.transform.position = this.transform.position + new Vector3(0,2,0);
+                    obj.transform.SetParent(attackObjParent);
+                    SoundManager.Instance.Play("Shot1");
 
-        //    if (Gamepad.current.rightTrigger.ReadValue() > 0.1f)
-        //    {
-        //        if (bulletFreqTime < 0)
-        //        {
-        //            // HACK: 設計から後で修正する必要あり
-        //            book.Shot(targetObj.IsTargetEnemy() ? targetObj.transform.position : Camera.main.transform.forward * 1000);
-        //            bulletFreqTime = bulletFreq;
-        //        }
-        //    }
-        //}
+                    if (playerCamera.GetTarget() != null)
+                    {
+                        obj.GetComponent<AttackTrigger>().Init(
+                            playerCamera.GetTarget().gameObject,
+                            10,
+                            EnumCollection.Attack.ATTACK_TYPE.PLAYER,
+                            10,
+                            0.0f,
+                            true);
+                    }
+                    else
+                    {
+                        obj.GetComponent<AttackTrigger>().Init(
+                            Camera.main.transform.forward,
+                            10,
+                            EnumCollection.Attack.ATTACK_TYPE.PLAYER,
+                            status.attack,
+                            0.0f,
+                            true);
+                    }
+                }
+
+                // HACK: 設計から後で修正する必要あり
+                //book.Shot(targetObj.IsTargetEnemy() ? targetObj.transform.position : Camera.main.transform.forward * 1000);
+                bulletFreqTime = bulletFreq;
+            }
+        }
 
         /// <summary>
         /// ターゲットロックオン
@@ -502,54 +569,6 @@ namespace ProjectCronos
             }
         }
 
-        ///// <summary>
-        ///// ロックオン処理
-        ///// </summary>
-        //void SetTarget()
-        //{
-        //    if (targetGroup.m_Targets.Count() > 1)
-        //    {
-        //        // 既に敵をロックオン中なので、解除する
-        //        // ターゲットを全解除
-        //        foreach (var target in targetGroup.m_Targets)
-        //        {
-        //            targetGroup.RemoveMember(target.target);
-        //        }
-
-        //        //　プレイヤーの頭を対象に追加
-        //        targetGroup.AddMember(head.transform, 1, 1);
-        //    }
-        //    else
-        //    {
-        //        // 敵を探す
-        //        var enemys = Physics.SphereCastAll(
-        //            transform.position, searchRange, transform.forward, 0.01f, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore)
-        //            .Where(h => h.transform.gameObject.tag == "Enemy")
-        //            .Select(h => h.transform.gameObject)
-        //            .ToList();
-
-        //        if (enemys.Count > 0)
-        //        {
-        //            Debug.Log("敵をロックオンしたよ！");
-        //            float minDistance = searchRange;
-        //            Transform targetEnemy = null;
-        //            foreach (var enemy in enemys)
-        //            {
-        //                float dist = Vector3.Distance(this.transform.position, enemy.transform.position);
-        //                if (dist < minDistance)
-        //                {
-        //                    minDistance = dist;
-        //                    targetEnemy = enemy.GetComponent<EnemyInfo>().GetHeadPos();
-        //                }
-        //            }
-
-        //            //　プレイヤーの頭を対象に追加
-        //            targetGroup.AddMember(targetEnemy, 1, 1);
-        //            rockOnCamera.Priority = 15;
-        //        }
-        //    }
-        //}
-
         private void OnDrawGizmos()
         {
             var isHitAll = Physics.SphereCastAll(transform.position, searchRange, transform.forward, 0.01f);
@@ -566,14 +585,26 @@ namespace ProjectCronos
         {
             var vec = GetDirection();
 
+            var moveVec = Vector3.ProjectOnPlane(vec, normalVector);
+
             // アニメーション中は移動速度を落とす
             if (anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
             {
-                rigid.velocity = new Vector3(vec.x * status.moveSpeed / attackMoveDelayRate, rigid.velocity.y, vec.z * status.moveSpeed / attackMoveDelayRate);
+                //rigid.velocity = new Vector3(vec.x * status.moveSpeed / attackMoveDelayRate, rigid.velocity.y, vec.z * status.moveSpeed / attackMoveDelayRate);
+
+                rigid.velocity = new Vector3(
+                    moveVec.x * status.moveSpeed / attackMoveDelayRate,
+                    rigid.velocity.y,
+                    moveVec.z * status.moveSpeed / attackMoveDelayRate);
             }
             else
             {
-                rigid.velocity = new Vector3(vec.x * status.moveSpeed, rigid.velocity.y, vec.z * status.moveSpeed);
+                //rigid.velocity = new Vector3(vec.x * status.moveSpeed, rigid.velocity.y, vec.z * status.moveSpeed);
+
+                rigid.velocity = new Vector3(
+                    moveVec.x * status.moveSpeed,
+                    rigid.velocity.y,
+                    moveVec.z * status.moveSpeed);
             }
 
             anim.SetFloat("Speed", vec.magnitude);
@@ -593,6 +624,7 @@ namespace ProjectCronos
         Vector3 GetDirection()
         {
             return SetCameraDirection(new Vector3(inputVec.x, 0, inputVec.y));
+            //return SetCameraDirection(new Vector3(inputVec.x, 0, inputVec.y));
         }
 
         /// <summary>
@@ -618,6 +650,14 @@ namespace ProjectCronos
             Vector3 moveForward = cameraForward * inputDir.z + Camera.main.transform.right * inputDir.x;
 
             return moveForward;
+        }
+
+        Vector3 normalVector = Vector3.zero;
+
+        private void OnCollisionStay(Collision collision)
+        {
+            // 衝突した面の、接触した点における法線を取得
+            normalVector = collision.contacts[0].normal;
         }
     }
 }

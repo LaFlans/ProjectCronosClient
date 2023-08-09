@@ -37,7 +37,7 @@ namespace ProjectCronos
         /// </summary>
         GrayScale grayScale;
 
-        private void Update()
+        void Update()
         {
             if (isTimeStopWorld)
             {

@@ -19,7 +19,7 @@ MonoBehaviour:
     TimeHpHealPerSeconds: 0
     MaxMp: 0
     TimeMpHealPerSeconds: 0
-    Attack: 155
+    Attack: 50
     MagicAttack: 100
     Defense: 10
     MagicDefense: 10

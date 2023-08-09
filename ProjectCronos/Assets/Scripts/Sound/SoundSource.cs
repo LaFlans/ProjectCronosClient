@@ -13,6 +13,12 @@ namespace ProjectCronos
         AudioSource source;
 
         /// <summary>
+        /// メインの音源かどうか
+        /// BGMとして使用する時のみ使用
+        /// </summary>
+        public bool isMain { get; set; }
+
+        /// <summary>
         /// 初期化
         /// </summary>
         public void Init()
@@ -58,10 +64,18 @@ namespace ProjectCronos
         /// <summary>
         /// ボリューム設定
         /// </summary>
-        /// <param name="val"></param>
+        /// <param name="val">指定のボリューム値</param>
         public void SetVolume(float val)
         {
             source.volume = val;
+        }
+
+        /// <summary>
+        /// ボリュームの値取得
+        /// </summary>
+        public float GetVolume()
+        {
+            return source.volume;
         }
     }
 }

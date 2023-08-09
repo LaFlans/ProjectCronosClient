@@ -27,20 +27,8 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 1a9ed044122388a48b7986c6ccc71ac5
-    m_Address: Assets/Resources_moved/Prefabs/Popup/ApplicationQuitPopup.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Preload
-    - preload
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 998cb53eedfcd9e49b39c18f9bd3334a
     m_Address: Assets/Resources_moved/Prefabs/Graphy.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a3c0a8458a9f08b43bc00fd310b2a277
-    m_Address: Assets/Resources_moved/Prefabs/Popup/DefaultPopup.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -64,11 +52,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: f37fe3d3ead8fdf4890cdf231ff8ac85
-    m_Address: Assets/Resources_moved/Prefabs/Popup/TransitionTitleConfirmPopup.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e2d6431e7c308d14b98fb5b010ceda53
     m_Address: Assets/Resources_moved/Prefabs/Effects/DecreaseHpEffect.prefab
     m_ReadOnly: 0
@@ -86,6 +69,16 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 426c0e7a01e156446a3a4b70af7a9fd8
     m_Address: Assets/Prefabs/UIs/Log/DamageLogCell.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f767ac99bc1936d47bb9feb05b678a06
+    m_Address: Assets/ProjectCronosAssets/Textures/Stage/RaumHouse/Ver0.1Texture/RaumMansion_202230506_1_Wall.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dd8ab57827cc37e42be708f5fd03be9b
+    m_Address: Assets/Prefabs/NierBullet.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

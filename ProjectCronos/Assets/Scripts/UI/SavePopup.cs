@@ -6,7 +6,7 @@ using TMPro;
 
 namespace ProjectCronos
 {
-    internal class SavePopup : MonoBehaviour
+    internal class SavePopup : PopupBase
     {
         /// <summary>
         /// セーブデータスロットのプレハブパス
@@ -48,16 +48,10 @@ namespace ProjectCronos
             saveAreaInfoCache = saveAreaInfo;
 
             ApplySaveDataSlot();
-            ResisterInputSavePopup();
 
-            // プレイヤー操作可能状態だった場合、UI操作可能状態にする
-            if (InputManager.Instance.IsMatchInputStatus(EnumCollection.Input.INPUT_STATUS.PLAYER))
-            {
-                InputManager.Instance.SetInputStatus(EnumCollection.Input.INPUT_STATUS.UI);
-                TimeManager.Instance.StopTime();
-            }
             savePopupTitleText.text = MasterDataManager.Instance.GetDic("SavePopupTitle");
-            saveAreaNameText.text = MasterDataManager.Instance.GetDic(MasterDataManager.DB.SaveAreaDataTable.FindById(saveAreaInfo.savePointId).SaveAreaNameDicKey);
+            saveAreaNameText.text = MasterDataManager.Instance.GetDic(
+                MasterDataManager.DB.SaveAreaDataTable.FindById(saveAreaInfo.savePointId).SaveAreaNameDicKey);
 
             selectSlotNum = 0;
             ApplySlotSelectStatus();
@@ -72,30 +66,6 @@ namespace ProjectCronos
             {
                 slot.item.Apply(SaveManager.Instance.Load(slot.index), slot.index);
             }
-        }
-
-        /// <summary>
-        /// セーブポップアップの入力登録
-        /// </summary>
-        void ResisterInputSavePopup()
-        {
-            InputManager.Instance.inputActions.UI.Submit.performed += OnSubmit;
-            InputManager.Instance.inputActions.UI.Up.performed += OnUp;
-            InputManager.Instance.inputActions.UI.Down.performed += OnDown;
-            InputManager.Instance.inputActions.UI.Close.performed += OnClose;
-            InputManager.Instance.inputActions.UI.Delete.performed += OnDelete;
-        }
-
-        /// <summary>
-        /// セーブポップアップの入力登録解除
-        /// </summary>
-        void UnregisterInputSavePopup()
-        {
-            InputManager.Instance.inputActions.UI.Submit.performed -= OnSubmit;
-            InputManager.Instance.inputActions.UI.Up.performed -= OnUp;
-            InputManager.Instance.inputActions.UI.Down.performed -= OnDown;
-            InputManager.Instance.inputActions.UI.Close.performed -= OnClose;
-            InputManager.Instance.inputActions.UI.Delete.performed -= OnDelete;
         }
 
         /// <summary>
@@ -169,7 +139,12 @@ namespace ProjectCronos
                 selectSlotNum,
                 () =>
                 {
-                    ApplySaveDataSlot();
+                    PopupManager.Instance.ShowSystemPopup(
+                        new PopupBase.MessageParam("セーブ", "セーブが完了しました。", "はい"),
+                        () =>
+                        {
+                            ApplySaveDataSlot();
+                        });
                 });
         }
 
@@ -195,17 +170,34 @@ namespace ProjectCronos
         {
             Debug.Log("閉じるを押したよ！");
             SoundManager.Instance.Play("Button47");
-            
-            // UI操作可能状態だった場合、プレイヤー操作可能状態にする
-            if (InputManager.Instance.IsMatchInputStatus(EnumCollection.Input.INPUT_STATUS.UI))
-            {
-                InputManager.Instance.SetInputStatus(EnumCollection.Input.INPUT_STATUS.PLAYER);
-                TimeManager.Instance.ApplyTimeScale();
-            }
 
-            UnregisterInputSavePopup();
+            Close();
+        }
 
-            this.gameObject.SetActive(false);
+        protected override void Close()
+        {
+            base.Close();
+        }
+
+
+        public override void RegisterInputActions()
+        {
+            Debug.LogError("SavePopupのアクションを登録");
+            InputManager.Instance.inputActions.UI.Submit.performed += OnSubmit;
+            InputManager.Instance.inputActions.UI.Up.performed += OnUp;
+            InputManager.Instance.inputActions.UI.Down.performed += OnDown;
+            InputManager.Instance.inputActions.UI.Close.performed += OnClose;
+            InputManager.Instance.inputActions.UI.Delete.performed += OnDelete;
+        }
+
+        public override void UnregisterInputActions()
+        {
+            Debug.LogError("SavePopupのアクションを解除");
+            InputManager.Instance.inputActions.UI.Submit.performed -= OnSubmit;
+            InputManager.Instance.inputActions.UI.Up.performed -= OnUp;
+            InputManager.Instance.inputActions.UI.Down.performed -= OnDown;
+            InputManager.Instance.inputActions.UI.Close.performed -= OnClose;
+            InputManager.Instance.inputActions.UI.Delete.performed -= OnDelete;
         }
     }
 }

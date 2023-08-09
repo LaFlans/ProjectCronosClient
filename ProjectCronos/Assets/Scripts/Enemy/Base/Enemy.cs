@@ -329,7 +329,7 @@ namespace ProjectCronos
         {
             if (target != null)
             {
-                Debug.Log("追跡！");
+                //Debug.Log("追跡！");
                 //agent.destination = target.position;
 
                 agent.SetDestination(target.position);

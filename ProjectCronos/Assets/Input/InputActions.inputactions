@@ -94,6 +94,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Attack2",
+                    "type": "Button",
+                    "id": "b5c39af6-04b7-4192-918d-7f059606e105",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -396,17 +405,6 @@
                 },
                 {
                     "name": "",
-                    "id": "27d9d2a6-5f6e-4b07-86ed-6f9a586d377e",
-                    "path": "<Gamepad>/leftTrigger",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "FirstSkill",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "85d47083-66b0-41c3-879b-aa5379cc1f13",
                     "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
@@ -435,6 +433,17 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "Action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9034fd99-393e-4f09-8263-cb036a77aeaa",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Attack2",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

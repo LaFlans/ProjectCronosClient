@@ -72,17 +72,12 @@ namespace ProjectCronos
         /// </summary>
         int attack;
 
-        public VisualEffect effect;
-
         public void SetIsAct(bool result)
         {
             isAct = result;
         }
 
-        /// <summary>
-        /// 開始処理
-        /// </summary>
-        void Start()
+        void Initialize()
         {
             col = GetComponent<Collider>();
             if (col == null)
@@ -105,14 +100,48 @@ namespace ProjectCronos
 
         public async void Init(EnumCollection.Attack.ATTACK_TYPE type, int attack, bool isHitDestory = false)
         {
+            Initialize();
+
             attackType = type;
             this.attack = attack;
             this.isHitDestory = isHitDestory;
             isHitStage = false;
+
+            EnableCollider();
         }
 
-        public async void Init(GameObject target, float lifeTime, EnumCollection.Attack.ATTACK_TYPE type, int attack, bool isHitDestory = false)
+        public async void Init(Vector3 targetVec, float lifeTime,
+EnumCollection.Attack.ATTACK_TYPE type, int attack, float delayTime,
+ bool isHitDestory = false)
         {
+            Initialize();
+
+            this.delayTime = delayTime;
+
+            this.moveVec = targetVec;
+            Destroy(gameObject, lifeTime);
+            attackType = type;
+            this.attack = attack;
+            this.isHitDestory = isHitDestory;
+            isHitStage = true;
+
+            EnableCollider();
+
+            isMove = true;
+        }
+
+
+        public async void Init(
+            GameObject target,
+            float lifeTime,
+            EnumCollection.Attack.ATTACK_TYPE type,
+            int attack,
+            float delayTime,
+            bool isHitDestory = false)
+        {
+            Initialize();
+
+            this.delayTime = delayTime;
             this.target = target;
             attackType = type;
             Destroy(gameObject, lifeTime);
@@ -122,6 +151,7 @@ namespace ProjectCronos
             isHitStage = true;
 
             await MoveDelay();
+            EnableCollider();
         }
 
         void FixedUpdate()
@@ -156,11 +186,6 @@ namespace ProjectCronos
             if (target != null && this != null)
             {
                 this.moveVec = Vector3.Normalize(target.transform.position - this.transform.position);
-
-                //if (effect != null && effect.HasVector3("Velocity"))
-                //{
-                //    effect.SetVector3("Velocity", this.moveVec * 10);
-                //}
             }
         }
 
@@ -236,6 +261,7 @@ namespace ProjectCronos
                         Utility.CreateObject("Prefabs/DamageEffect1", hitPos, 1.0f);
 
                         DamageLogger.ShowLog(attack, hitPos, EnumCollection.Attack.ATTACK_TYPE.PLAYER);
+                        Debug.LogError($"エネミーに{attack}を与えました。");
 
                         if (isHitDestory)
                         {
@@ -247,6 +273,8 @@ namespace ProjectCronos
                     {
                         if (col.gameObject.GetComponent<AttackTrigger>().GetAttackType() == EnumCollection.Attack.ATTACK_TYPE.ENEMY)
                         {
+                            Debug.LogError($"エネミーの武器にあたりました！");
+
                             Utility.CreateObject("Prefabs/DamageEffect1", col.gameObject.transform.position, 1.0f);
                             Destroy(col.gameObject);
                         }
@@ -256,6 +284,7 @@ namespace ProjectCronos
                 case EnumCollection.Attack.ATTACK_TYPE.ENEMY:
                     if (col.gameObject.tag == "PlayerBody")
                     {
+                        Debug.LogError($"AttackTriggerプレイヤーに{attack}を与えました。");
                         col.gameObject.GetComponent<PlayerBody>().Damage(attack);
                         Vector3 hitPos = col.ClosestPointOnBounds(this.transform.position);
                         Utility.CreateObject("Prefabs/DamageEffect1", hitPos, 1.0f);
@@ -271,8 +300,9 @@ namespace ProjectCronos
                     break;
             }
 
-            if (isHitStage && col.gameObject.tag == "Ground")
+            if (isHitStage && col.gameObject.CompareTag("Ground"))
             {
+                //Debug.LogError("地面にあたりました");
                 Vector3 hitPos = col.ClosestPointOnBounds(this.transform.position);
                 Utility.CreateObject("Prefabs/DamageEffect1", hitPos, 1.0f);
                 if (isHitDestory)

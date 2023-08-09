@@ -52,11 +52,6 @@ namespace ProjectCronos
             buttons[(int)EnumCollection.Popup.POPUP_SELECT_STATUS.NEGATIVE].onClick.AddListener(OnClickNegativeButton);
             buttons[(int)EnumCollection.Popup.POPUP_SELECT_STATUS.OTHER].onClick.AddListener(OnClickOtherButton);
 
-            //　入力設定
-            InputManager.Instance.inputActions.UI.Submit.performed += OnSubmit;
-            InputManager.Instance.inputActions.UI.Left.performed += OnLeft;
-            InputManager.Instance.inputActions.UI.Right.performed += OnRight;
-
             canvasGroup.alpha = 0;
 
             // メッセージ設定
@@ -89,11 +84,6 @@ namespace ProjectCronos
                 // アニメーション開始
                 anim.SetTrigger("Open");
             }
-        }
-
-        void OnDestroy()
-        {
-            Close();
         }
 
         /// <summary>
@@ -298,17 +288,29 @@ namespace ProjectCronos
 
         protected override void Close()
         {
-            // ボタンイベント削除
-            buttons[(int)EnumCollection.Popup.POPUP_SELECT_STATUS.POSITIVE].onClick.RemoveAllListeners();
-            buttons[(int)EnumCollection.Popup.POPUP_SELECT_STATUS.NEGATIVE].onClick.RemoveAllListeners();
-            buttons[(int)EnumCollection.Popup.POPUP_SELECT_STATUS.OTHER].onClick.RemoveAllListeners();
+            //// ボタンイベント削除
+            //buttons[(int)EnumCollection.Popup.POPUP_SELECT_STATUS.POSITIVE].onClick.RemoveAllListeners();
+            //buttons[(int)EnumCollection.Popup.POPUP_SELECT_STATUS.NEGATIVE].onClick.RemoveAllListeners();
+            //buttons[(int)EnumCollection.Popup.POPUP_SELECT_STATUS.OTHER].onClick.RemoveAllListeners();
 
-            //　入力設定
+            base.Close();
+        }
+
+
+        public override void RegisterInputActions()
+        {
+            Debug.LogError("SystemPopupのアクションを登録");
+            InputManager.Instance.inputActions.UI.Submit.performed += OnSubmit;
+            InputManager.Instance.inputActions.UI.Left.performed += OnLeft;
+            InputManager.Instance.inputActions.UI.Right.performed += OnRight;
+        }
+
+        public override void UnregisterInputActions()
+        {
+            Debug.LogError("SystemPopupのアクションを解除");
             InputManager.Instance.inputActions.UI.Submit.performed -= OnSubmit;
             InputManager.Instance.inputActions.UI.Left.performed -= OnLeft;
             InputManager.Instance.inputActions.UI.Right.performed -= OnRight;
-
-            base.Close();
         }
     }
 }
