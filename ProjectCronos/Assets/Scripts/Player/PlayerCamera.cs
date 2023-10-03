@@ -100,6 +100,7 @@ namespace ProjectCronos
         {
             Debug.Log("ロックオンを解除したよ");
             rockOnImage.enabled = false;
+            targetTransform = null;
             SetPriority(rockOnPriority: 5);
             isRockOn = false;
         }

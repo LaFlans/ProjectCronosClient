@@ -442,11 +442,26 @@ namespace ProjectCronos
 
         protected void SetNavmeshUpdatePositionTrue()
         {
-            //Debug.LogError("Agentの更新を再開しました");
-            agent.updatePosition = true;
+            if(agent != null)
+            {
+                //Debug.LogError("Agentの更新を再開しました");
+                agent.updatePosition = true;
 
-            SwitchParentConstraint();
-            agent.Warp(allBody.position);
+                SwitchParentConstraint();
+                agent.Warp(allBody.position);
+            }
+        }
+
+        /// <summary>
+        /// ナビメッシュエージェントの移動制御
+        /// </summary>
+        /// <param name="result">移動するかどうか</param>
+        protected void SetIsStoppedAgent(bool result)
+        {
+            if (agent != null)
+            {
+                agent.isStopped = result;
+            }
         }
     }
 }

@@ -74,13 +74,13 @@ namespace ProjectCronos
                 }
 
                 SetNavmeshUpdatePositionFlase();
-                agent.isStopped = true;
+                SetIsStoppedAgent(true);
                 isTracking = false;
 
                 await AttackInterval();
 
                 isTracking = true;
-                agent.isStopped = false;
+                SetIsStoppedAgent(false);
                 SetNavmeshUpdatePositionTrue();
             }
         }
@@ -95,6 +95,14 @@ namespace ProjectCronos
             await UniTask.Delay(TimeSpan.FromSeconds(attackInterval));
 
             isAttack = true;
+        }
+
+        void SetIsStoppedAgent(bool result)
+        {
+            if (agent != null)
+            {
+                agent.isStopped = result;
+            }
         }
     }
 }
