@@ -96,13 +96,5 @@ namespace ProjectCronos
 
             isAttack = true;
         }
-
-        void SetIsStoppedAgent(bool result)
-        {
-            if (agent != null)
-            {
-                agent.isStopped = result;
-            }
-        }
     }
 }
