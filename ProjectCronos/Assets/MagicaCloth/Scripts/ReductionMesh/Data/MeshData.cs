@@ -593,7 +593,7 @@ namespace MagicaReductionMesh
                 wnor = Vector3.Cross(v0, v1).normalized;
                 if (wnor.magnitude <= 0.001f)
                 {
-                    Debug.LogError($"CalcTriangleNormal Invalid! ({shareVertexList[0].sindex},{shareVertexList[1].sindex},{shareVertexList[2].sindex})");
+                    Debug.Log($"CalcTriangleNormal Invalid! ({shareVertexList[0].sindex},{shareVertexList[1].sindex},{shareVertexList[2].sindex})");
                 }
                 //Debug.Assert(wnor.magnitude > 0.001f);
 
@@ -633,7 +633,7 @@ namespace MagicaReductionMesh
                 if (area == 0.0f)
                 {
                     // error
-                    Debug.LogError("Calc tangent area = 0!");
+                    Debug.Log("Calc tangent area = 0!");
                 }
                 else
                 {

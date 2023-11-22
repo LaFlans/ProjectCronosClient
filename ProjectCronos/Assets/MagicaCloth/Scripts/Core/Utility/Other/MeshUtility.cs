@@ -354,7 +354,7 @@ namespace MagicaCloth
                 if (area == 0.0f)
                 {
                     // error!
-                    Debug.LogError("area = 0!");
+                    Debug.Log("area = 0!");
                 }
                 else
                 {
@@ -594,7 +594,7 @@ namespace MagicaCloth
             }
             else
             {
-                Debug.LogError("RestTriangleVertex() failed!");
+                Debug.Log("RestTriangleVertex() failed!");
                 v1 = -1;
                 v2 = -1;
             }

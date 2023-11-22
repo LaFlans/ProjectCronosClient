@@ -43,6 +43,34 @@ MonoBehaviour:
   cascadeShadowBorder3:
     m_OverrideState: 0
     m_Value: 0
+--- !u!114 &-6601604934827050132
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ee656e01ea29d54f9aee1a506e892be, type: 3}
+  m_Name: OutLine
+  m_EditorClassIdentifier: 
+  active: 0
+  edgeColorParameter:
+    m_OverrideState: 1
+    m_Value: {r: 1, g: 0, b: 0, a: 1}
+  edgeThreshold:
+    m_OverrideState: 1
+    m_Value: {x: 1, y: 1}
+  fillOpacity:
+    m_OverrideState: 1
+    m_Value: 0.028
+  colorKeyParameter:
+    m_OverrideState: 1
+    m_Value: {r: 0, g: 1, b: 0.016851425, a: 1}
+  ditherStrength:
+    m_OverrideState: 1
+    m_Value: 1
 --- !u!114 &-4567627499511452834
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -183,6 +211,7 @@ MonoBehaviour:
   - {fileID: 7036966077458927148}
   - {fileID: 1644020029972551459}
   - {fileID: 2083185016109318518}
+  - {fileID: -6601604934827050132}
 --- !u!114 &762741289838740830
 MonoBehaviour:
   m_ObjectHideFlags: 3

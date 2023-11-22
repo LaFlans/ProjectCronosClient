@@ -22,10 +22,13 @@ namespace ProjectCronos
         /// <param name="col"></param>
         void OnTriggerEnter(Collider col)
         {
-            action?.Invoke();
+            if (col.gameObject.tag == "Player")
+            {
+                action?.Invoke();
 
-            // このオブジェクトの当たり判定を非活性化
-            gameObject.GetComponent<Collider>().enabled = false;
+                // このオブジェクトの当たり判定を非活性化
+                gameObject.GetComponent<Collider>().enabled = false;
+            }
         }
     }
 }

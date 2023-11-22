@@ -2112,7 +2112,7 @@ namespace MagicaCloth
                     compute.SetBuffer(kernel, "VertexBuffer2", vertexBuffer);
                     break;
                 default:
-                    Debug.LogError($"Invalid write compute shader index! :{index}");
+                    Debug.Log($"Invalid write compute shader index! :{index}");
                     break;
             }
         }

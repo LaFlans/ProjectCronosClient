@@ -24,7 +24,7 @@ namespace Cysharp.Threading.Tasks
         bool preserveRemoveSelf;
         ITriggerHandler<T> iteratingNode;
 
-        void LogError(Exception ex)
+        void Log(Exception ex)
         {
 #if UNITY_2018_3_OR_NEWER
             UnityEngine.Debug.LogException(ex);
@@ -51,7 +51,7 @@ namespace Cysharp.Threading.Tasks
                 }
                 catch (Exception ex)
                 {
-                    LogError(ex);
+                    Log(ex);
                     Remove(h);
                 }
 
@@ -94,7 +94,7 @@ namespace Cysharp.Threading.Tasks
                 }
                 catch (Exception ex)
                 {
-                    LogError(ex);
+                    Log(ex);
                 }
 
                 preserveRemoveSelf = false;
@@ -129,7 +129,7 @@ namespace Cysharp.Threading.Tasks
                 }
                 catch (Exception ex)
                 {
-                    LogError(ex);
+                    Log(ex);
                 }
 
                 preserveRemoveSelf = false;
@@ -164,7 +164,7 @@ namespace Cysharp.Threading.Tasks
                 }
                 catch (Exception ex)
                 {
-                    LogError(ex);
+                    Log(ex);
                 }
 
                 preserveRemoveSelf = false;

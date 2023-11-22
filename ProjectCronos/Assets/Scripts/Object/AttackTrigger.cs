@@ -261,7 +261,7 @@ EnumCollection.Attack.ATTACK_TYPE type, int attack, float delayTime,
                         Utility.CreateObject("Prefabs/DamageEffect1", hitPos, 1.0f);
 
                         DamageLogger.ShowLog(attack, hitPos, EnumCollection.Attack.ATTACK_TYPE.PLAYER);
-                        Debug.LogError($"エネミーに{attack}を与えました。");
+                        Debug.Log($"エネミーに{attack}を与えました。");
 
                         if (isHitDestory)
                         {
@@ -273,7 +273,7 @@ EnumCollection.Attack.ATTACK_TYPE type, int attack, float delayTime,
                     {
                         if (col.gameObject.GetComponent<AttackTrigger>().GetAttackType() == EnumCollection.Attack.ATTACK_TYPE.ENEMY)
                         {
-                            Debug.LogError($"エネミーの武器にあたりました！");
+                            Debug.Log($"エネミーの武器にあたりました！");
 
                             Utility.CreateObject("Prefabs/DamageEffect1", col.gameObject.transform.position, 1.0f);
                             Destroy(col.gameObject);
@@ -284,7 +284,7 @@ EnumCollection.Attack.ATTACK_TYPE type, int attack, float delayTime,
                 case EnumCollection.Attack.ATTACK_TYPE.ENEMY:
                     if (col.gameObject.tag == "PlayerBody")
                     {
-                        Debug.LogError($"AttackTriggerプレイヤーに{attack}を与えました。");
+                        Debug.Log($"AttackTriggerプレイヤーに{attack}を与えました。");
                         col.gameObject.GetComponent<PlayerBody>().Damage(attack);
                         Vector3 hitPos = col.ClosestPointOnBounds(this.transform.position);
                         Utility.CreateObject("Prefabs/DamageEffect1", hitPos, 1.0f);
@@ -302,7 +302,7 @@ EnumCollection.Attack.ATTACK_TYPE type, int attack, float delayTime,
 
             if (isHitStage && col.gameObject.CompareTag("Ground"))
             {
-                //Debug.LogError("地面にあたりました");
+                //Debug.Log("地面にあたりました");
                 Vector3 hitPos = col.ClosestPointOnBounds(this.transform.position);
                 Utility.CreateObject("Prefabs/DamageEffect1", hitPos, 1.0f);
                 if (isHitDestory)

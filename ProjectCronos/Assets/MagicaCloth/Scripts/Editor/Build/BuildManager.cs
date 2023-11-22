@@ -111,7 +111,7 @@ namespace MagicaCloth
             if (result == Define.Error.None)
                 Debug.Log($"<color=cyan>[Creation]</color> {core.name}");
             else
-                Debug.LogError($"<color=cyan>[Creation]</color> <color=red>Failed!</color> {core.name}\n{Define.GetErrorMessage(result)}");
+                Debug.Log($"<color=cyan>[Creation]</color> <color=red>Failed!</color> {core.name}\n{Define.GetErrorMessage(result)}");
 
             return result;
         }
@@ -163,7 +163,7 @@ namespace MagicaCloth
                         if (Define.IsError(err))
                         {
                             result.SetError(err);
-                            //Debug.LogError(Define.GetErrorMessage(err));
+                            //Debug.Log(Define.GetErrorMessage(err));
 
                             // エラー時の停止
                             if (options.errorStop)
@@ -176,7 +176,7 @@ namespace MagicaCloth
                     if (Define.IsError(err))
                     {
                         result.SetError(err);
-                        //Debug.LogError(Define.GetErrorMessage(err));
+                        //Debug.Log(Define.GetErrorMessage(err));
 
                         // エラー時の停止
                         if (options.errorStop)

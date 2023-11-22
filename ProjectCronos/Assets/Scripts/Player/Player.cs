@@ -4,6 +4,7 @@ using UnityEngine.InputSystem.Controls;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using Cinemachine;
+using System.Diagnostics.Contracts;
 
 namespace ProjectCronos
 {
@@ -91,7 +92,7 @@ namespace ProjectCronos
         EnumCollection.Player.PLAYER_JUMP_STATE jumpState = EnumCollection.Player.PLAYER_JUMP_STATE.IDOL;
 
         string demonHandPrefabPath = "Assets/Resources_moved/Prefabs/DemonHand.prefab";
-
+        string demonHandTrapPrefabPath = "Assets/Resources_moved/Prefabs/MagicCircle/DemonHandTrap.prefab";
         //string fireSkeltonPrefabPath = "Assets/Prefabs/FireSkelton.prefab";
         string fireSkeltonPrefabPath = "Assets/Prefabs/NierBullet.prefab";
 
@@ -120,6 +121,12 @@ namespace ProjectCronos
 
         [SerializeField]
         Transform attackObjParent;
+
+
+        GameObject controlMagicCircle;
+
+        [SerializeField]
+        float controlMagicCircleSpeed = 1.0f;
 
         /// <summary>
         /// 初期化
@@ -176,6 +183,7 @@ namespace ProjectCronos
         public async UniTask PreLoadAsync()
         {
             await AddressableManager.Instance.Load(demonHandPrefabPath);
+            await AddressableManager.Instance.Load(demonHandTrapPrefabPath);
             await AddressableManager.Instance.Load(fireSkeltonPrefabPath);
         }
 
@@ -265,6 +273,12 @@ namespace ProjectCronos
         /// </summary>
         void OnDogde(InputAction.CallbackContext context)
         {
+            // 操作中の魔法陣がある場合、回避できない
+            if (controlMagicCircle != null)
+            {
+                return;
+            }
+
             if (!isDodge && isGround)
             {
                 isDodge = true;
@@ -277,10 +291,24 @@ namespace ProjectCronos
             }
         }
 
-        bool isTest = false;
-
         void OnTest(InputAction.CallbackContext context)
         {
+            if (controlMagicCircle == null)
+            {
+                // トラップ攻撃テスト
+                GameObject obj = AddressableManager.Instance.GetLoadedObject(demonHandTrapPrefabPath);
+                obj.transform.position = this.transform.position;
+                obj.transform.position += new Vector3(0, 0.1f, 0);
+                obj.GetComponent<DemonHand>().Initialize(10, 1);
+                controlMagicCircle = obj;
+            }
+            else
+            {
+                // 魔法陣の操作を解除
+                controlMagicCircle.GetComponent<MagicCircle>().PutTrap();
+                controlMagicCircle = null;
+            }
+
             //if(isTest)
             //{
             //    isTest = false;
@@ -370,7 +398,7 @@ namespace ProjectCronos
             obj.transform.position = spawnPos[0].position;
             obj.transform.rotation = spawnPos[0].rotation;
             obj.transform.localScale = spawnPos[0].localScale;
-            obj.GetComponent<DemonHand>().Initialize(1);
+            obj.GetComponent<DemonHand>().Initialize(5, 1);
         }
 
         /// <summary>
@@ -382,7 +410,7 @@ namespace ProjectCronos
             obj.transform.position = spawnPos[1].position;
             obj.transform.rotation = spawnPos[1].rotation;
             obj.transform.localScale = spawnPos[1].localScale;
-            obj.GetComponent<DemonHand>().Initialize(1);
+            obj.GetComponent<DemonHand>().Initialize(10, 1);
         }
 
         /// <summary>
@@ -394,7 +422,7 @@ namespace ProjectCronos
             obj.transform.position = spawnPos[2].position;
             obj.transform.rotation = spawnPos[2].rotation;
             obj.transform.localScale = spawnPos[2].localScale;
-            obj.GetComponent<DemonHand>().Initialize(1);
+            obj.GetComponent<DemonHand>().Initialize(15, 1);
         }
 
         /// <summary>
@@ -423,8 +451,17 @@ namespace ProjectCronos
 
                 if (!isDodge)
                 {
-                    // 回避中は移動できない
-                    Move();
+                    // 操作途中の魔法陣がある場合、移動はできない
+                    if (controlMagicCircle == null)
+                    {
+                        // 回避中は移動できない
+                        Move();
+                    }
+                    else
+                    {
+                        // 魔法陣移動
+                        MoveMagicCircle();
+                    }
                 }
             }
         }
@@ -615,6 +652,23 @@ namespace ProjectCronos
             }
 
             latestPos = transform.position;
+        }
+
+        /// <summary>
+        /// 魔法陣移動
+        /// </summary>
+        void MoveMagicCircle()
+        {
+            var vec = GetDirection();
+
+            // プレイヤーの移動を止める
+            rigid.velocity = Vector3.zero;
+            anim.SetFloat("Speed", 0);
+
+
+            var moveVec = Vector3.ProjectOnPlane(vec, normalVector);
+
+            controlMagicCircle.transform.position += moveVec * controlMagicCircleSpeed;
         }
 
         /// <summary>

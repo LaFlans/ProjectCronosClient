@@ -88,7 +88,7 @@ namespace MagicaCloth
                 }
             }
             else
-                Debug.LogError("remove faild!");
+                Debug.Log("remove faild!");
         }
 
         /// <summary>

@@ -132,7 +132,7 @@ namespace ProjectCronos
                 // 生成しなければいけないマテリアルの数が設定されている最大を超えた場合、警告をして何も行わない
                 if (textureNames.Count > generateMaterialMax)
                 {
-                    Debug.LogError("生成できるマテリアル最大数を超えているので生成できません。テクスチャを整理してからもう一度試してください。");
+                    Debug.Log("生成できるマテリアル最大数を超えているので生成できません。テクスチャを整理してからもう一度試してください。");
                     return;
                 }
 

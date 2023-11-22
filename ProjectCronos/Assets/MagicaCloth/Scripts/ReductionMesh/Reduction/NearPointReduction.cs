@@ -199,7 +199,7 @@ namespace MagicaReductionMesh
                     gridMap.Remove(grid);
             }
             else
-                Debug.LogError("remove faild!");
+                Debug.Log("remove faild!");
             p.grid = Vector3Int.zero;
         }
 

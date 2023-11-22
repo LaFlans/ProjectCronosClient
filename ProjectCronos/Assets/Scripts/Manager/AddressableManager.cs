@@ -93,7 +93,7 @@ namespace ProjectCronos
             }
             else
             {
-                Debug.LogError($"path:{path}のクリップは既に読み込まれているよ！");
+                Debug.Log($"path:{path}のクリップは既に読み込まれているよ！");
             }
         }
 
@@ -131,7 +131,7 @@ namespace ProjectCronos
             }
             else
             {
-                Debug.LogError($"path:{path}は既に読み込まれているよ！");
+                Debug.Log($"path:{path}は既に読み込まれているよ！");
             }
         }
 
@@ -164,7 +164,7 @@ namespace ProjectCronos
             }
             else
             {
-                Debug.LogError($"path:{path}は既に読み込まれているよ！");
+                Debug.Log($"path:{path}は既に読み込まれているよ！");
             }
         }
 
@@ -176,7 +176,7 @@ namespace ProjectCronos
             }
 
             Load(path);
-            Debug.LogError("事前に読み込むようにしてね！");
+            Debug.Log("事前に読み込むようにしてね！");
             return null;
         }
 
@@ -190,7 +190,7 @@ namespace ProjectCronos
                 }
                 else
                 {
-                    //Debug.LogError("読み込もうとしているアセットの型が一致しないよ！");
+                    //Debug.Log("読み込もうとしているアセットの型が一致しないよ！");
                     return default(T);
                 }
             }

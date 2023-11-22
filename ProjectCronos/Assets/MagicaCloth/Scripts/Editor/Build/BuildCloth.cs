@@ -891,8 +891,8 @@ namespace MagicaCloth
             var ren = gameObject.GetComponent<Renderer>();
             if (ren == null)
             {
-                //Debug.LogError("Creation failed. Renderer not found.");
-                //Debug.LogError(Define.GetErrorMessage(Define.Error.RendererNotFound));
+                //Debug.Log("Creation failed. Renderer not found.");
+                //Debug.Log(Define.GetErrorMessage(Define.Error.RendererNotFound));
                 return Define.Error.RendererNotFound;
             }
 
@@ -913,8 +913,8 @@ namespace MagicaCloth
                 var meshFilter = ren.GetComponent<MeshFilter>();
                 if (meshFilter == null)
                 {
-                    //Debug.LogError("Creation failed. MeshFilter not found.");
-                    //Debug.LogError(Define.GetErrorMessage(Define.Error.MeshFilterNotFound));
+                    //Debug.Log("Creation failed. MeshFilter not found.");
+                    //Debug.Log(Define.GetErrorMessage(Define.Error.MeshFilterNotFound));
                     return Define.Error.MeshFilterNotFound;
                 }
                 sharedMesh = meshFilter.sharedMesh;
@@ -985,7 +985,7 @@ namespace MagicaCloth
             if (VerifyChildData(scr.Deformer) == false)
             {
                 // error
-                Debug.LogError("Setup failed. Invalid RenderDeformer data.");
+                Debug.Log("Setup failed. Invalid RenderDeformer data.");
                 return Define.Error.BuildInvalidRenderDeformer;
             }
 

@@ -31,7 +31,7 @@ namespace ProjectCronos
         /// </summary>
         public virtual void Damage(int value) 
         {
-            Debug.LogError($"{value}ダメージを受けました");
+            Debug.Log($"{value}ダメージを受けました");
             if (status != null)
             {
                 if (status.DamageHp(value))

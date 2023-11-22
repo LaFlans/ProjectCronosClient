@@ -69,6 +69,7 @@ MonoBehaviour:
   afterPostProcessBlursCustomPostProcesses: []
   afterPostProcessCustomPostProcesses:
   - GrayScale, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+  - OutLine, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
   beforeTAACustomPostProcesses: []
   defaultRenderingLayerMask: 257
   renderingLayerNames:

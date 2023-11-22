@@ -16,7 +16,7 @@ MonoBehaviour:
   - Key: Player1
     MaxHp: 410
     TimeHpHealPerSeconds: 0
-    MaxMp: 1000
+    MaxMp: 10000
     TimeMpHealPerSeconds: 5
     Attack: 100
     MagicAttack: 100

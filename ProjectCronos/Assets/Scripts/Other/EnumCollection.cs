@@ -317,6 +317,27 @@ namespace ProjectCronos
                 /// </summary>
                 MAXMUM,
             }
+
+            /// <summary>
+            /// 召喚攻撃の種類
+            /// </summary>
+            public enum SUMMON_ATTACK_TYPE
+            {
+                /// <summary>
+                /// 直接
+                /// </summary>
+                DIRECT,
+                /// <summary>
+                /// 地雷
+                /// 敵が指定の場所に来た時に発動する攻撃の種類
+                /// </summary>
+                TRAP,
+                /// <summary>
+                /// 要素数
+                /// </summary>
+                MAXMUM,
+            }
+
         }
 
         /// <summary>

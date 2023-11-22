@@ -94,7 +94,7 @@ namespace MagicaReductionMesh
         {
             if (ren == null)
             {
-                Debug.LogError("Renderer is NUll!");
+                Debug.Log("Renderer is NUll!");
                 return -1;
             }
 

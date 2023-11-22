@@ -53,14 +53,14 @@ namespace ProjectCronos
 
         void SetNavmeshUpdatePositionFlase()
         {
-            Debug.LogError("Agentの更新を止めました");
+            Debug.Log("Agentの更新を止めました");
             agent.updatePosition = false;
             SwitchParentConstraint();
         }
 
         void SetNavmeshUpdatePositionTrue()
         {
-            Debug.LogError("Agentの更新を再開しました");
+            Debug.Log("Agentの更新を再開しました");
             agent.updatePosition = true;
 
             SwitchParentConstraint();

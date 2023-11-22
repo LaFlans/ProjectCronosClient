@@ -22,7 +22,6 @@ Shader "Hidden/Shader/GrayScale"
         float4 positionCS : SV_POSITION;
         float2 texcoord   : TEXCOORD0;
         UNITY_VERTEX_OUTPUT_STEREO
-
     };
 
     Varyings Vert(Attributes input)
@@ -38,7 +37,7 @@ Shader "Hidden/Shader/GrayScale"
         return output;
     }
 
-    // ƒ|ƒXƒgƒvƒƒZƒXƒGƒtƒFƒNƒg‚ğ§Œä‚·‚éƒvƒƒpƒeƒB[ƒŠƒXƒg
+    // ãƒã‚¹ãƒˆãƒ—ãƒ­ã‚»ã‚¹ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã‚’åˆ¶å¾¡ã™ã‚‹ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£ãƒ¼ãƒªã‚¹ãƒˆ
     float _Intensity;
     TEXTURE2D_X(_InputTexture);
 
@@ -49,8 +48,8 @@ Shader "Hidden/Shader/GrayScale"
         uint2 positionSS = input.texcoord * _ScreenSize.xy;
         float3 outColor = LOAD_TEXTURE2D_X(_InputTexture, positionSS).xyz;
 
-        // ƒuƒŒƒ“ƒfƒBƒ“ƒO‚Íƒn[ƒhƒEƒFƒAƒuƒŒƒ“ƒh‚É—Š‚ç‚¸Aè“®‚Ås‚¤
-        // ‚±‚ê‚ÍƒJƒ‰[ƒoƒbƒtƒ@‚ÉˆÈ‘O‚Ìƒ|ƒXƒgƒvƒƒZƒXƒGƒtƒFƒNƒg‚©‚ç‚Ì”p•¨‚ªŠÜ‚Ü‚ê‚Ä‚¢‚é‚½‚ßA•K—v‚Å‚ ‚éB
+        // ãƒ–ãƒ¬ãƒ³ãƒ‡ã‚£ãƒ³ã‚°ã¯ãƒãƒ¼ãƒ‰ã‚¦ã‚§ã‚¢ãƒ–ãƒ¬ãƒ³ãƒ‰ã«é ¼ã‚‰ãšã€æ‰‹å‹•ã§è¡Œã†
+        // ã“ã‚Œã¯ã‚«ãƒ©ãƒ¼ãƒãƒƒãƒ•ã‚¡ã«ä»¥å‰ã®ãƒã‚¹ãƒˆãƒ—ãƒ­ã‚»ã‚¹ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã‹ã‚‰ã®å»ƒç‰©ãŒå«ã¾ã‚Œã¦ã„ã‚‹ãŸã‚ã€å¿…è¦ã§ã‚ã‚‹ã€‚
         return float4(lerp(outColor, Luminance(outColor).xxx, _Intensity), 1);
     }
 

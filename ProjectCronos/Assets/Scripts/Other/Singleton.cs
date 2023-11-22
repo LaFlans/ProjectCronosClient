@@ -28,7 +28,7 @@ namespace ProjectCronos
             {
                 if (instance == null)
                 {
-                    Debug.LogError("instanceが生成されていません！");
+                    Debug.Log("instanceが生成されていません！");
                 }
 
                 return instance;

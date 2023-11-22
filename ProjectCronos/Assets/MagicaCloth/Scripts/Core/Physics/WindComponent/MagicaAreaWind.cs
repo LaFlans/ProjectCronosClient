@@ -74,7 +74,7 @@ namespace MagicaCloth
             else if (shapeType == PhysicsManagerWindData.ShapeType.Sphere)
                 return new Vector3(areaRadius, areaRadius, areaRadius);
 
-            Debug.LogError("Invalid wind shape type!");
+            Debug.Log("Invalid wind shape type!");
             return Vector3.zero;
         }
 
@@ -98,7 +98,7 @@ namespace MagicaCloth
             else if (shapeType == PhysicsManagerWindData.ShapeType.Sphere)
                 return (4.0f / 3.0f) * areaRadius * areaRadius * areaRadius * Mathf.PI;
 
-            Debug.LogError("Invalid wind volume!");
+            Debug.Log("Invalid wind volume!");
             return 0;
         }
 

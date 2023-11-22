@@ -299,7 +299,7 @@ namespace ProjectCronos
 
         public override void RegisterInputActions()
         {
-            Debug.LogError("SystemPopupのアクションを登録");
+            Debug.Log("SystemPopupのアクションを登録");
             InputManager.Instance.inputActions.UI.Submit.performed += OnSubmit;
             InputManager.Instance.inputActions.UI.Left.performed += OnLeft;
             InputManager.Instance.inputActions.UI.Right.performed += OnRight;
@@ -307,7 +307,7 @@ namespace ProjectCronos
 
         public override void UnregisterInputActions()
         {
-            Debug.LogError("SystemPopupのアクションを解除");
+            Debug.Log("SystemPopupのアクションを解除");
             InputManager.Instance.inputActions.UI.Submit.performed -= OnSubmit;
             InputManager.Instance.inputActions.UI.Left.performed -= OnLeft;
             InputManager.Instance.inputActions.UI.Right.performed -= OnRight;

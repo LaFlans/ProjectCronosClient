@@ -28,7 +28,7 @@ namespace ProjectCronos
         {
             if (enemy == null)
             {
-                Debug.LogError("敵情報がnullだよ");
+                Debug.Log("敵情報がnullだよ");
             }
 
             enemy.Damage(value * damageRate);

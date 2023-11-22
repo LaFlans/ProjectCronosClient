@@ -75,7 +75,7 @@ namespace Cysharp.Threading.Tasks
                     switch (UnobservedExceptionWriteLogType)
                     {
                         case UnityEngine.LogType.Error:
-                            UnityEngine.Debug.LogError(msg);
+                            UnityEngine.Debug.Log(msg);
                             break;
                         case UnityEngine.LogType.Assert:
                             UnityEngine.Debug.LogAssertion(msg);

@@ -247,7 +247,7 @@ namespace MagicaCloth
 
                 if (result.IsError())
                 {
-                    Debug.LogError($"<color=red>Failed!</color> [{path}]\n{result.GetErrorMessage()}");
+                    Debug.Log($"<color=red>Failed!</color> [{path}]\n{result.GetErrorMessage()}");
                     if (option.errorStop)
                     {
                         Debug.Log("Error Stop!");
