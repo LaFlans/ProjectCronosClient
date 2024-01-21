@@ -68,7 +68,6 @@ namespace ProjectCronos
 
         public void SetColliderEnable(bool isEnable)
         {
-
             if (col != null)
             {
                 col.enabled = isEnable;

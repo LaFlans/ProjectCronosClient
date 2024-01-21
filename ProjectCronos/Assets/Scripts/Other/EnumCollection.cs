@@ -338,6 +338,28 @@ namespace ProjectCronos
                 MAXMUM,
             }
 
+            /// <summary>
+            /// 召喚陣の状態
+            /// </summary>
+            public enum MAGIC_CIRCLE_STATUS
+            {
+                /// <summary>
+                /// 設置前
+                /// </summary>
+                BEFORE_PUT,
+                /// <summary>
+                /// 設置後(トラップ状態)
+                /// </summary>
+                TRAP,
+                /// <summary>
+                /// 発動
+                /// </summary>
+                INVOKE,
+                /// <summary>
+                /// 要素数
+                /// </summary>
+                MAXMUM,
+            }
         }
 
         /// <summary>

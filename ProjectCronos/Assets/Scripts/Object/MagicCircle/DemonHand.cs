@@ -20,11 +20,6 @@ namespace ProjectCronos
         /// </summary>
         bool isAct;
 
-        /// <summary>
-        /// トラップが発動したかどうか
-        /// </summary>
-        bool isTriggerTrap;
-
         float tempSpeed;
 
         /// <summary>
@@ -50,24 +45,7 @@ namespace ProjectCronos
         [SerializeField]
         TextMeshPro debugLevelText;
 
-        void Start()
-        {
-            // デバック処理
-            Debug();
-
-            InitSummonMat();
-            anim = target.GetComponent<Animator>();
-
-            target.GetComponent<DefaultAnimationEvent>().Init(
-                finishAction: AnimationFinishEvent,
-                extension1Action: EnableCollider,
-                extension2Action: DisableCollider);
-
-            // オブジェクトのタイムスケールの値更新時イベント設定
-            TimeManager.Instance.RegisterObjectTimeScaleApplyAction(OnObjectTimeScaleApply);
-
-            InitAct();
-        }
+        EnumCollection.Attack.MAGIC_CIRCLE_STATUS magicCircleStatus;
 
         void Debug()
         {
@@ -85,7 +63,27 @@ namespace ProjectCronos
         public void Initialize(int attack, int level, bool isTrap = false)
         {
             this.level = level;
+            tempSpeed = 1;
+
+            // デバック処理
+            Debug();
+
+            InitSummonMat();
+            anim = target.GetComponent<Animator>();
+
+            target.GetComponent<DefaultAnimationEvent>().Init(
+                finishAction: AnimationFinishEvent,
+                extension1Action: EnableCollider,
+                extension2Action: DisableCollider);
+
+            // オブジェクトのタイムスケールの値更新時イベント設定
+            TimeManager.Instance.RegisterObjectTimeScaleApplyAction(OnObjectTimeScaleApply);
+
+            magicCircleStatus = EnumCollection.Attack.MAGIC_CIRCLE_STATUS.BEFORE_PUT;
+
+            InitAct();
             attackTrigger.Init(EnumCollection.Attack.ATTACK_TYPE.PLAYER, attack);
+            attackTrigger.DisableCollider();
 
             if (circleTrapCol != null)
             {
@@ -93,25 +91,24 @@ namespace ProjectCronos
                 switch (summonAttackType)
                 {
                     case EnumCollection.Attack.SUMMON_ATTACK_TYPE.DIRECT:
-                        isTriggerTrap = true;
+                        magicCircleStatus = EnumCollection.Attack.MAGIC_CIRCLE_STATUS.INVOKE;
                         circleTrapCol.gameObject.SetActive(false);
-                        tempSpeed = 1;
                         break;
                     case EnumCollection.Attack.SUMMON_ATTACK_TYPE.TRAP:
+                        magicCircleStatus = EnumCollection.Attack.MAGIC_CIRCLE_STATUS.BEFORE_PUT;
                         circleCol.gameObject.SetActive(isTrap);
                         circleTrapCol.gameObject.SetActive(false);
-                        tempSpeed = 0;
                         break;
                     default:
-                        isTriggerTrap = true;
+                        magicCircleStatus = EnumCollection.Attack.MAGIC_CIRCLE_STATUS.INVOKE;
                         circleTrapCol.gameObject.SetActive(false);
-                        tempSpeed = 1;
+                        AttackAction();
                         break;
                 }
             }
             else
             {
-                tempSpeed = 1;
+                AttackAction();
             }
         }
 
@@ -128,6 +125,7 @@ namespace ProjectCronos
         void OnObjectTimeScaleApply()
         {
             InitAct();
+            TrapStatusUpdate();
         }
 
         void InitAct()
@@ -137,8 +135,7 @@ namespace ProjectCronos
                 return;
             }
 
-            var result = TimeManager.Instance.GetObjectTimeScale() > 0;
-            if (result)
+            if (!TimeManager.Instance.IsStopObjectTimeScale())
             {
                 anim.speed = tempSpeed;
                 isAct = true;
@@ -146,7 +143,6 @@ namespace ProjectCronos
             else
             {
                 tempSpeed = anim.speed;
-                //tempSpeed = isTriggerTrap ? anim.speed : 0;
                 anim.speed = 0;
                 isAct = false;
             }
@@ -154,9 +150,6 @@ namespace ProjectCronos
 
         void EnableCollider()
         {
-            // 魔法陣の当たり判定を非アクティブに
-            circleCol.SetColliderEnable(false);
-
             attackTrigger.EnableCollider();
         }
 
@@ -181,13 +174,33 @@ namespace ProjectCronos
             TimeManager.Instance.UnregisterObjectTimeScaleApplyAction(OnObjectTimeScaleApply);
         }
 
+        void TrapStatusUpdate()
+        {
+            switch (magicCircleStatus)
+            {
+                case EnumCollection.Attack.MAGIC_CIRCLE_STATUS.INVOKE:
+                    circleCol.gameObject.SetActive(false);
+                    circleTrapCol.gameObject.SetActive(false);
+                    break;
+                case EnumCollection.Attack.MAGIC_CIRCLE_STATUS.BEFORE_PUT:
+                    break;
+                case EnumCollection.Attack.MAGIC_CIRCLE_STATUS.TRAP:
+                    var isStopobjTime = TimeManager.Instance.IsStopObjectTimeScale();
+                    circleCol.gameObject.SetActive(true);
+                    circleTrapCol.gameObject.SetActive(!isStopobjTime);
+                    break;
+                default:
+                    break;
+            }
+        }
+
         /// <summary>
         /// トラップ設置
         /// </summary>
         public override void PutTrap()
         {
-            circleCol.gameObject.SetActive(true);
-            circleTrapCol.gameObject.SetActive(true);
+            magicCircleStatus = EnumCollection.Attack.MAGIC_CIRCLE_STATUS.TRAP;
+            TrapStatusUpdate();
         }
 
         /// <summary>
@@ -197,11 +210,18 @@ namespace ProjectCronos
         {
             if (anim != null)
             {
-                isTriggerTrap = true;
-                circleTrapCol.gameObject.SetActive(false);
-                tempSpeed = 1;
-                InitAct();
+                magicCircleStatus = EnumCollection.Attack.MAGIC_CIRCLE_STATUS.INVOKE;
+                TrapStatusUpdate();
+                AttackAction();
             }
+        }
+
+        void AttackAction()
+        {
+            // 魔法陣の当たり判定を非アクティブに
+            circleCol.SetColliderEnable(false);
+
+            anim.SetTrigger("Action");
         }
     }
 }

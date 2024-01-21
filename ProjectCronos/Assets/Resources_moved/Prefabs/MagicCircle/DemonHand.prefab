@@ -153,12 +153,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6846569872df3774280c5cf589d16e4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  summonAttackType: 0
   level: 0
   target: {fileID: 5527037612526824550}
   frontCrest: {fileID: 1943193419346421429}
   backCrest: {fileID: 7921522706343037999}
   attackTrigger: {fileID: 1398614752927530952}
   circleCol: {fileID: 8475169109609380861}
+  circleTrapCol: {fileID: 0}
+  debugLevelText: {fileID: 0}
 --- !u!1 &3670480024687493469
 GameObject:
   m_ObjectHideFlags: 0
@@ -686,6 +689,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6da6eb5617348624daf4b321bb8443db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isCombine: 0
 --- !u!65 &8086696455867393617
 BoxCollider:
   m_ObjectHideFlags: 0

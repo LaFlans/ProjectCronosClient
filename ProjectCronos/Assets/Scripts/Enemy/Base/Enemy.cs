@@ -107,6 +107,11 @@ namespace ProjectCronos
         [SerializeField]
         Transform allBody;
 
+        /// <summary>
+        /// 死亡時アクション
+        /// </summary>
+        Action deathAction;
+
         protected virtual void OnEnemyTimeScaleApply()
         {
             var enemyTimeScale = TimeManager.Instance.GetEnemyTimeScale();
@@ -391,6 +396,11 @@ namespace ProjectCronos
             bodyTransform.rotation = Quaternion.LookRotation(targetDir);
         }
 
+        public void SetDeathAction(Action action)
+        {
+            this.deathAction = action;
+        }
+
         /// <summary>
         /// 出現時処理
         /// </summary>
@@ -418,6 +428,9 @@ namespace ProjectCronos
 
             // ドロップ追加
             player.GetComponent<PlayerStatus>().AddCoin(enemyStatus.dropCoin);
+
+            // 死亡時アクション(あれば)
+            deathAction?.Invoke();
 
             base.Death();
         }

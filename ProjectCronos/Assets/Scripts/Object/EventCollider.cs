@@ -11,6 +11,9 @@ namespace ProjectCronos
         [SerializeField]
         Action action;
 
+        [SerializeField]
+        GameObject[] appearObject;
+
         public void SetAction(Action action)
         {
             this.action = action;
@@ -28,6 +31,14 @@ namespace ProjectCronos
 
                 // このオブジェクトの当たり判定を非活性化
                 gameObject.GetComponent<Collider>().enabled = false;
+
+                if (appearObject != null)
+                {
+                    foreach (var obj in appearObject)
+                    {
+                        obj.SetActive(true);
+                    }
+                }
             }
         }
     }

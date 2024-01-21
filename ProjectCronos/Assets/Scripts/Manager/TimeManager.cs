@@ -21,15 +21,15 @@ namespace ProjectCronos
         bool isMeasurePlayTime;
 
         // FIXME: マスタで管理
-        const float DEFAULT_TIME_SCALE = 1.0f;
+        const float DEFAULT_WORLD_TIME_SCALE = 1.0f;
         const float DEFAULT_PLAYER_TIME_SCALE = 1.0f;
         const float DEFAULT_ENEMY_TIME_SCALE = 1.0f;
         const float DEFAULT_OBJECT_TIME_SCALE = 1.0f;
 
         /// <summary>
-        /// ゲーム全体のタイムスケール
+        /// 世界のタイムスケール
         /// </summary>
-        float timeScale;
+        float worldTimeScale;
 
         /// <summary>
         /// プレイヤーのタイムスケール
@@ -98,7 +98,7 @@ namespace ProjectCronos
         /// </summary>
         public void InitTimeScale()
         {
-            timeScale = DEFAULT_TIME_SCALE;
+            worldTimeScale = DEFAULT_WORLD_TIME_SCALE;
             playerTimeScale = DEFAULT_PLAYER_TIME_SCALE;
             enemyTimeScale = DEFAULT_ENEMY_TIME_SCALE;
             objectTimeScale = DEFAULT_OBJECT_TIME_SCALE;
@@ -119,7 +119,7 @@ namespace ProjectCronos
         /// </summary>
         public void ApplyTimeScale()
         {
-            Time.timeScale = DEFAULT_TIME_SCALE;
+            Time.timeScale = DEFAULT_WORLD_TIME_SCALE;
         }
 
         /// <summary>
@@ -128,8 +128,8 @@ namespace ProjectCronos
         /// <param name="value">値</param>
         public void ApplyTimeScale(float value)
         {
-            timeScale = value;
-            Time.timeScale = timeScale;
+            worldTimeScale = value;
+            Time.timeScale = worldTimeScale;
         }
 
         /// <summary>
@@ -204,12 +204,21 @@ namespace ProjectCronos
         }
 
         /// <summary>
-        /// 現在設定されているタイムスケールの値を取得
+        /// 現在設定されている世界のタイムスケールの値を取得
         /// </summary>
         /// <returns>タイムスケールの値</returns>
-        public float GetTimeScale()
+        public float GetWorldTimeScale()
         {
-            return timeScale;
+            return worldTimeScale;
+        }
+
+        /// <summary>
+        /// 世界のタイムスケールが止まっているかどうかを返す
+        /// </summary>
+        /// <returns>世界のタイムスケールが止まっている場合、Trueを返す</returns>
+        public bool IsStopWorldTimeScale()
+        {
+            return worldTimeScale <= 0;
         }
 
         /// <summary>
@@ -222,12 +231,30 @@ namespace ProjectCronos
         }
 
         /// <summary>
+        /// 敵のタイムスケールが止まっているかどうかを返す
+        /// </summary>
+        /// <returns>敵のタイムスケールが止まっている場合、Trueを返す</returns>
+        public bool IsStopEnemyTimeScale()
+        {
+            return enemyTimeScale <= 0;
+        }
+
+        /// <summary>
         /// 現在設定されているオブジェクト(プレイヤーの攻撃等)のタイムスケールの値を取得
         /// </summary>
         /// <returns>オブジェクト(プレイヤーの攻撃等)のタイムスケールの値</returns>
         public float GetObjectTimeScale()
         {
             return objectTimeScale;
+        }
+
+        /// <summary>
+        /// オブジェクト(プレイヤーの攻撃等)のタイムスケールが止まっているかどうかを返す
+        /// </summary>
+        /// <returns>オブジェクト(プレイヤーの攻撃等)のタイムスケールが止まっている場合、Trueを返す</returns>
+        public bool IsStopObjectTimeScale()
+        {
+            return objectTimeScale <= 0;
         }
 
         /// <summary>
