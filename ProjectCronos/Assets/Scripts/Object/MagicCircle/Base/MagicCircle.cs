@@ -26,5 +26,11 @@ namespace ProjectCronos
         /// トラップ発動処理
         /// </summary>
         public abstract void TriggerTrap();
+
+        /// <summary>
+        /// トラップを設置できるか
+        /// </summary>
+        /// <returns></returns>
+        public abstract bool IsPutTrap();
     }
 }

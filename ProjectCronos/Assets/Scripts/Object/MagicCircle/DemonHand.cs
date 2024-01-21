@@ -29,6 +29,13 @@ namespace ProjectCronos
         AttackTrigger attackTrigger;
 
         /// <summary>
+        /// 魔法陣設置前用当たり判定
+        /// 設置できるかどうか確認する用
+        /// </summary>
+        [SerializeField]
+        MagicCircleBeforePutCollider circleBeforePutCol;
+
+        /// <summary>
         /// 魔法陣当たり判定
         /// 魔法陣どうしの合成用
         /// </summary>
@@ -186,6 +193,7 @@ namespace ProjectCronos
                     break;
                 case EnumCollection.Attack.MAGIC_CIRCLE_STATUS.TRAP:
                     var isStopobjTime = TimeManager.Instance.IsStopObjectTimeScale();
+                    circleBeforePutCol.gameObject.SetActive(false);
                     circleCol.gameObject.SetActive(true);
                     circleTrapCol.gameObject.SetActive(!isStopobjTime);
                     break;
@@ -214,6 +222,14 @@ namespace ProjectCronos
                 TrapStatusUpdate();
                 AttackAction();
             }
+        }
+
+        /// <summary>
+        /// トラップを設置できるか
+        /// </summary>
+        public override bool IsPutTrap()
+        {
+            return circleBeforePutCol.IsPutTrap();
         }
 
         void AttackAction()
