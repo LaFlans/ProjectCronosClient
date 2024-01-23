@@ -304,9 +304,16 @@ namespace ProjectCronos
             }
             else
             {
-                // 魔法陣の操作を解除
-                controlMagicCircle.GetComponent<MagicCircle>().PutTrap();
-                controlMagicCircle = null;
+                if(controlMagicCircle.GetComponent<MagicCircle>().IsPutTrap())
+                {
+                    // 魔法陣の操作を解除
+                    controlMagicCircle.GetComponent<MagicCircle>().PutTrap();
+                    controlMagicCircle = null;
+                }
+                else
+                {
+                    Debug.LogError("この場所にはトラップを設置することができません");
+                }
             }
 
             //if(isTest)
