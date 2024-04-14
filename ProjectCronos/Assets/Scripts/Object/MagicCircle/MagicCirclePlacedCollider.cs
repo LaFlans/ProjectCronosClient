@@ -2,7 +2,10 @@ using UnityEngine;
 
 namespace ProjectCronos
 {
-    class MagicCircleCollider : MonoBehaviour
+    /// <summary>
+    /// 魔法陣設置時用当たり判定
+    /// </summary>
+    class MagicCirclePlacedCollider : MonoBehaviour
     {
         string demonHandPrefabPath = "Assets/Resources_moved/Prefabs/DemonHand.prefab";
         string demonHandTrapPrefabPath = "Assets/Resources_moved/Prefabs/MagicCircle/DemonHandTrap.prefab";
@@ -33,12 +36,13 @@ namespace ProjectCronos
         {
             if (other.gameObject.tag == "MagicCircle")
             {
-                var magicCircleCollider = other.GetComponent<MagicCircleCollider>();
+                var magicCircleCollider = other.GetComponent<MagicCirclePlacedCollider>();
                 if (magicCircleCollider.CheckCombine(this))
                 {
                     isCombine = false;
                     var newLevel = level + 1;
                     var attack = 10 * newLevel;
+                    var size = 1 + (newLevel / 10f);
 
                     // 二つの陣の間に新しい魔法陣を生成する
                     if (baseMagicCircle.summonAttackType == EnumCollection.Attack.SUMMON_ATTACK_TYPE.DIRECT)
@@ -46,7 +50,7 @@ namespace ProjectCronos
                         GameObject obj = AddressableManager.Instance.GetLoadedObject(demonHandPrefabPath);
                         obj.transform.position = (other.transform.position + transform.position) * 0.5f;
                         obj.transform.rotation = Quaternion.Lerp(other.transform.rotation, transform.rotation, 0.5f);
-                        obj.transform.localScale = new Vector3(newLevel, newLevel, newLevel);
+                        obj.transform.localScale = new Vector3(size, size, size);
                         obj.GetComponent<DemonHand>().Initialize(attack, newLevel);
                     }
                     else
@@ -54,7 +58,7 @@ namespace ProjectCronos
                         GameObject obj = AddressableManager.Instance.GetLoadedObject(demonHandTrapPrefabPath);
                         obj.transform.position = (other.transform.position + transform.position) * 0.5f;
                         obj.transform.rotation = Quaternion.Lerp(other.transform.rotation, transform.rotation, 0.5f);
-                        obj.transform.localScale = new Vector3(newLevel, newLevel, newLevel);
+                        obj.transform.localScale = new Vector3(size, size, size);
                         obj.GetComponent<DemonHand>().Initialize(attack, newLevel, true);
                         obj.GetComponent<DemonHand>().PutTrap();
                     }
@@ -85,7 +89,7 @@ namespace ProjectCronos
         /// </summary>
         /// <param name="magicCircleCollider"></param>
         /// <returns>結合できる場合true、出来ない場合false</returns>
-        public bool CheckCombine(MagicCircleCollider magicCircleCollider)
+        public bool CheckCombine(MagicCirclePlacedCollider magicCircleCollider)
         {
             // 結合できない場合
             if (!isCombine)

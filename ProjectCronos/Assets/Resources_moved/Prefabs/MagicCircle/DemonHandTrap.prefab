@@ -162,9 +162,9 @@ MonoBehaviour:
   frontCrest: {fileID: 1943193419346421429}
   backCrest: {fileID: 7921522706343037999}
   attackTrigger: {fileID: 1398614752927530952}
-  circleBeforePutCol: {fileID: 4051173229467470875}
-  circleCol: {fileID: 8475169109609380861}
-  circleTrapCol: {fileID: 6514592261569975534}
+  magicCircleControlledCol: {fileID: 3395898069970742222}
+  magicCirclePlacedCol: {fileID: 8979032772814190294}
+  magicCircleTriggerCol: {fileID: 5123844793110257111}
   debugLevelText: {fileID: 7245413535631630848}
 --- !u!1 &3670480024687493469
 GameObject:
@@ -830,9 +830,9 @@ GameObject:
   - component: {fileID: 6202085889965142161}
   - component: {fileID: 3571522947158343}
   - component: {fileID: 4261894677039953005}
-  - component: {fileID: 6514592261569975534}
+  - component: {fileID: 5123844793110257111}
   m_Layer: 0
-  m_Name: MagicCircleTrapCollider
+  m_Name: TriggerCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -924,7 +924,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6514592261569975534
+--- !u!114 &5123844793110257111
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -945,13 +945,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7096474269353116049}
-  - component: {fileID: 8475169109609380861}
   - component: {fileID: 8086696455867393617}
   - component: {fileID: 3947295778415112778}
   - component: {fileID: 1188912272259896490}
   - component: {fileID: 7949034931268235924}
+  - component: {fileID: 8979032772814190294}
   m_Layer: 0
-  m_Name: MagicCircleCollider
+  m_Name: PlaceCollider
   m_TagString: MagicCircle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -972,19 +972,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3670480024337951245}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8475169109609380861
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7031585415691931791}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6da6eb5617348624daf4b321bb8443db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isCombine: 0
 --- !u!65 &8086696455867393617
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1083,6 +1070,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &8979032772814190294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7031585415691931791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6da6eb5617348624daf4b321bb8443db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isCombine: 0
 --- !u!1 &7921522706343037999
 GameObject:
   m_ObjectHideFlags: 0
@@ -1202,9 +1202,9 @@ GameObject:
   - component: {fileID: 4030014983024053085}
   - component: {fileID: 9051503628318820373}
   - component: {fileID: 955071249873606315}
-  - component: {fileID: 4051173229467470875}
+  - component: {fileID: 3395898069970742222}
   m_Layer: 8
-  m_Name: BeforePutCollider
+  m_Name: ControledCollider
   m_TagString: MagicCircle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1219,7 +1219,7 @@ Transform:
   m_GameObject: {fileID: 8328422767615354957}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.129, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.5, y: 0.12, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1323,7 +1323,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &4051173229467470875
+--- !u!114 &3395898069970742222
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

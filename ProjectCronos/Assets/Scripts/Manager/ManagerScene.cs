@@ -46,9 +46,8 @@ namespace ProjectCronos
             this.gameObject.AddComponent<TimeManager>();
             this.gameObject.AddComponent<SaveManager>();
 #if UNITY_EDITOR
-            this.gameObject.AddComponent<DebugManager>();
+            //this.gameObject.AddComponent<DebugManager>();
 #endif
-
             // マネージャーを初期化
             List<UniTask<bool>> task = new List<UniTask<bool>>();
             task.Add(AddressableManager.Instance.Initialize());
@@ -60,7 +59,7 @@ namespace ProjectCronos
             task.Add(SaveManager.Instance.Initialize());
 
 #if UNITY_EDITOR
-            task.Add(DebugManager.Instance.Initialize());
+            //task.Add(DebugManager.Instance.Initialize());
 #endif
             foreach (var item in task)
             {

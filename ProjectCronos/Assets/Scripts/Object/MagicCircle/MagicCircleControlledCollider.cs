@@ -2,7 +2,10 @@ using UnityEngine;
 
 namespace ProjectCronos
 {
-    class MagicCircleBeforePutCollider : MonoBehaviour
+    /// <summary>
+    /// 魔法陣操作時用当たり判定
+    /// </summary>
+    class MagicCircleControlledCollider : MonoBehaviour
     {
         Material mat;
         bool isPutTrap;
@@ -24,14 +27,14 @@ namespace ProjectCronos
 
         private void OnTriggerEnter(Collider other)
         {
-            //UnityEngine.Debug.LogError("入ったよ！");
+            UnityEngine.Debug.LogError($"入ったよ！({other.gameObject.name})");
             mat.SetColor("_EmissiveColor", Color.red);
             isPutTrap = false;
         }
 
         private void OnTriggerExit(Collider other)
         {
-            //UnityEngine.Debug.LogError("出たよ！");
+            UnityEngine.Debug.LogError($"出たよ！({other.gameObject.name})");
             mat.SetColor("_EmissiveColor", Color.green);
             isPutTrap = true;
         }

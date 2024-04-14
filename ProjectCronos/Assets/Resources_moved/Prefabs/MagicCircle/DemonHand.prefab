@@ -159,8 +159,9 @@ MonoBehaviour:
   frontCrest: {fileID: 1943193419346421429}
   backCrest: {fileID: 7921522706343037999}
   attackTrigger: {fileID: 1398614752927530952}
-  circleCol: {fileID: 8475169109609380861}
-  circleTrapCol: {fileID: 0}
+  magicCircleControlledCol: {fileID: 0}
+  magicCirclePlacedCol: {fileID: 8475169109609380861}
+  magicCircleTriggerCol: {fileID: 0}
   debugLevelText: {fileID: 0}
 --- !u!1 &3670480024687493469
 GameObject:
