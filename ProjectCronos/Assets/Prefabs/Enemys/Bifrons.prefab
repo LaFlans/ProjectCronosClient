@@ -689,7 +689,7 @@ GameObject:
   - component: {fileID: 856564995636861749}
   m_Layer: 0
   m_Name: Body
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2351,7 +2351,7 @@ GameObject:
   - component: {fileID: 212551976879389164}
   m_Layer: 0
   m_Name: BodyProduct
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
