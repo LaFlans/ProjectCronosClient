@@ -27,14 +27,14 @@ namespace ProjectCronos
 
         private void OnTriggerEnter(Collider other)
         {
-            UnityEngine.Debug.LogError($"入ったよ！({other.gameObject.name})");
+            //UnityEngine.Debug.LogError($"入ったよ！({other.gameObject.name})");
             mat.SetColor("_EmissiveColor", Color.red);
             isPutTrap = false;
         }
 
         private void OnTriggerExit(Collider other)
         {
-            UnityEngine.Debug.LogError($"出たよ！({other.gameObject.name})");
+            //UnityEngine.Debug.LogError($"出たよ！({other.gameObject.name})");
             mat.SetColor("_EmissiveColor", Color.green);
             isPutTrap = true;
         }

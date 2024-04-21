@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using System.Linq;
 
 namespace ProjectCronos
 {
@@ -13,6 +14,23 @@ namespace ProjectCronos
 
         [SerializeField]
         GameObject[] appearObject;
+
+        void Start()
+        {
+            Initialize();
+        }
+
+        void Initialize()
+        {
+            // 最初は非アクティブ状態にしておく
+            if (appearObject.Any())
+            {
+                foreach (var obj in appearObject)
+                {
+                    obj.SetActive(false);
+                }
+            }
+        }
 
         public void SetAction(Action action)
         {

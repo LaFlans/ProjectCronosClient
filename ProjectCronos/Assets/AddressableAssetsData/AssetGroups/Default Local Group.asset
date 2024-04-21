@@ -72,11 +72,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: f767ac99bc1936d47bb9feb05b678a06
-    m_Address: Assets/ProjectCronosAssets/Textures/Stage/RaumHouse/Ver0.1Texture/RaumMansion_202230506_1_Wall.mat
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: dd8ab57827cc37e42be708f5fd03be9b
     m_Address: Assets/Prefabs/NierBullet.prefab
     m_ReadOnly: 0

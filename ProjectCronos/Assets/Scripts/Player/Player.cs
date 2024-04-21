@@ -5,6 +5,8 @@ using System.Linq;
 using Cysharp.Threading.Tasks;
 using Cinemachine;
 using System.Diagnostics.Contracts;
+using Cysharp.Threading.Tasks.Triggers;
+using UnityEngine.UIElements;
 
 namespace ProjectCronos
 {
@@ -391,6 +393,38 @@ namespace ProjectCronos
             }
         }
 
+        float rayDist = 1.0f;
+
+        // 高さ調整
+        void AdjustmentHeight()
+        {
+            // 正面レイ
+            var origin = this.transform.position + (this.transform.forward * 0.4f) + (Vector3.up * 1.0f);
+            var direction = Vector3.down * rayDist;
+            Ray ray = new Ray(origin, direction);
+            //Debug.DrawRay(origin, direction, Color.blue);
+
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit, rayDist))
+            {
+                //Debug.LogError($"hit:{hit.collider.name}");
+
+                if (hit.collider.tag == "Ground")
+                {
+                    // 水平であればプレイヤーの高さを補正する
+                    var hitNormal = hit.normal;
+                    var angle = Vector3.Angle(hitNormal, Vector3.up);
+                    //Debug.LogError($"当たっているオブジェクト:{hitNormal}:{(int)angle}°");
+                    if (angle <= 30)
+                    {
+                        var vec = this.transform.position;
+                        vec.y = hit.point.y;
+                        this.transform.position = vec;
+                    }
+                }
+            }
+        }
+
         void OnAttack(InputAction.CallbackContext context)
         {
             anim.SetTrigger("Attack");
@@ -631,6 +665,12 @@ namespace ProjectCronos
 
             var moveVec = Vector3.ProjectOnPlane(vec, normalVector);
 
+            // 高さ調整
+            if (isGround)
+            {
+                AdjustmentHeight();
+            }
+
             // アニメーション中は移動速度を落とす
             if (anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
             {
@@ -657,6 +697,7 @@ namespace ProjectCronos
             {
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(vec, Vector3.up), rotateSpeed * Time.deltaTime);
             }
+
 
             latestPos = transform.position;
         }
