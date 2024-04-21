@@ -24,14 +24,17 @@ namespace ProjectCronos
         /// <summary>
         /// ダメージを与える
         /// </summary>
-        public void Damage(int value)
+        /// <param name="value">ダメージの値</param>
+        /// <returns>この被弾により死亡した場合、Trueで返す</returns>
+        public bool Damage(int value)
         {
             if (enemy == null)
             {
                 Debug.Log("敵情報がnullだよ");
+                return false;
             }
 
-            enemy.Damage(value * damageRate);
+            return enemy.Damage(value * damageRate);
         }
     }
 }

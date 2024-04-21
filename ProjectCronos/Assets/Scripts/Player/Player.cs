@@ -348,13 +348,14 @@ namespace ProjectCronos
         }
 
         /// <summary>
-        /// 被弾時
+        /// 被弾時処理
         /// </summary>
-        public override void Damage(int value)
+        /// <param name="value">ダメージの値</param>
+        /// <returns>この被弾により死亡した場合、Trueで返す</returns>
+        public override bool Damage(int value)
         {
-            base.Damage(value);
-
             SoundManager.Instance.Play("Damage1");
+            return base.Damage(value);
         }
 
         /// <summary>
