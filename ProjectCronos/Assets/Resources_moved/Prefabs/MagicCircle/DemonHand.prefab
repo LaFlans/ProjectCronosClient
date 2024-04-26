@@ -965,6 +965,10 @@ PrefabInstance:
       propertyPath: m_CastShadows
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3219252673800183902, guid: 1e88d225d99217d49b8418b3b5b6bf04, type: 3}
+      propertyPath: m_RendererPriority
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3448880921423417998, guid: 1e88d225d99217d49b8418b3b5b6bf04, type: 3}
       propertyPath: m_TagString
       value: BoundObject

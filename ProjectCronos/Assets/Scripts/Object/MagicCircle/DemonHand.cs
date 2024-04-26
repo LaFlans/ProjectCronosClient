@@ -1,19 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering.HighDefinition;
 
 namespace ProjectCronos
 {
     public class DemonHand : MagicCircle
     {
+        const string magicCircleMatBasePath = "Assets/ProjectCronosAssets/Materials/MagicCircle/MagicCircleLevel";
+
         [SerializeField]
         GameObject target;
         Material mat;
         Animator anim;
 
-        [SerializeField] GameObject frontCrest;
-        [SerializeField] GameObject backCrest;
+        [SerializeField]
+        GameObject frontCrest;
+
+        [SerializeField]
+        GameObject backCrest;
 
         /// <summary>
         /// 行動することができるか
@@ -121,9 +128,22 @@ namespace ProjectCronos
 
         void InitSummonMat()
         {
+            // 召喚物のマテリアルカラー初期化
             mat = target.GetComponent<Renderer>().material;
             mat.SetVector("_Up", this.transform.up.normalized);
             mat.SetVector("_CenterPos", this.transform.position);
+
+            // 召喚陣のマテリアルカラー初期化
+            Material crestMat = AddressableManager.Instance.GetLoadedMaterial(magicCircleMatBasePath + level.ToString() + ".mat");
+            if (crestMat != null)
+            {
+                frontCrest.GetComponent<Renderer>().material = crestMat;
+
+                Material backMat = new Material(crestMat);
+                backMat.SetFloat("_TransparentSortPriority", 1);
+                HDMaterial.ValidateMaterial(backMat);
+                backCrest.GetComponent<Renderer>().material = backMat;
+            }
         }
 
         /// <summary>

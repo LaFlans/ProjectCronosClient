@@ -9,7 +9,7 @@ namespace ProjectCronos
 {
     public class Utility : MonoBehaviour
     {
-        #region Addressables
+#region Addressables
         /// <summary>
         /// Addressableなゲームオブジェクトを生成
         /// </summary>
@@ -108,9 +108,9 @@ namespace ProjectCronos
             };
         }
 
-        #endregion
+#endregion
 
-        #region Prefab
+#region Prefab
 
         /// <summary>
         /// スクリーン座標でのプレハブを生成
@@ -283,7 +283,6 @@ namespace ProjectCronos
             Destroy(obj, time);
         }
 
-
         /// <summary>
         /// プレハブを指定した位置で生成する
         /// </summary>
@@ -294,6 +293,7 @@ namespace ProjectCronos
             GameObject prefab = (GameObject)Resources.Load(path);
             Instantiate(prefab, pos, Quaternion.identity);
         }
+
         /// <summary>
         /// プレハブを指定した位置に生成して指定した親をセットして指定した時間後に消す
         /// <param name="path">プレハブのパス</param>
@@ -306,6 +306,7 @@ namespace ProjectCronos
             GameObject obj = Instantiate(prefab, Vector3.zero, Quaternion.identity, parent.transform);
             Destroy(obj, time);
         }
+
         /// <summary>
         /// プレハブを指定した位置に生成して指定した親をセットして指定した時間後に消す
         /// <param name="path">プレハブのパス</param>
@@ -318,9 +319,9 @@ namespace ProjectCronos
             Instantiate(prefab, pos, Quaternion.identity, parent.transform);
         }
 
-        #endregion
+#endregion
 
-        #region Clone
+#region Clone
         //****************************************************************************************************************************************************************************************
         //　クローン
         //****************************************************************************************************************************************************************************************
@@ -336,9 +337,10 @@ namespace ProjectCronos
             clone.transform.localScale = go.transform.localScale;
             return clone;
         }
-        #endregion
+#endregion
 
-        #region Material
+#region Material
+
         /// <summary>
         /// ターゲットの子オブジェクト含むすべてのオブジェクトのマテリアルカラーを指定した色に変える
         /// </summary>
@@ -362,6 +364,7 @@ namespace ProjectCronos
                 ChangeMaterialOfGameObject(targetObject.transform.GetChild(i).gameObject, mat);
             }
         }
+
         /// <summary>
         /// ターゲットの子オブジェクト含むすべてのオブジェクトのマテリアルカラーを指定した色に変える
         /// </summary>
@@ -384,6 +387,7 @@ namespace ProjectCronos
                 ChangeColorOfGameObject(targetObject.transform.GetChild(i).gameObject, color);
             }
         }
+
         /// <summary>
         /// ターゲットの子オブジェクト含むすべてのオブジェクトの指定したマテリアルカラーを指定した色に変える
         /// </summary>
@@ -409,13 +413,17 @@ namespace ProjectCronos
             }
         }
 
+#endregion
 
+#region IEnumerator
 
-        #endregion
-
-        #region IEnumerator
-
-        //　目的地(target)と目的地までの時間(time)
+        /// <summary>
+        /// 目的地へ指定の時間をかけて移動させる
+        /// </summary>
+        /// <param name="obj">対象のオブジェクト</param>
+        /// <param name="target">目的地</param>
+        /// <param name="time">目的にたどり着くまでの時間</param>
+        /// <returns>IEnumerator</returns>
         public static IEnumerator ToTargetPos(GameObject obj, Vector3 target, float time)
         {
             Vector3 startPos = obj.transform.position;
@@ -435,7 +443,13 @@ namespace ProjectCronos
             yield return null;
         }
 
-        //　目的地(target)と目的地までの時間(time)
+        /// <summary>
+        /// 目的地を向きながら指定の時間をかけて移動させる
+        /// </summary>
+        /// <param name="obj">対象のオブジェクト</param>
+        /// <param name="target">目的地</param>
+        /// <param name="time">目的にたどり着くまでの時間</param>
+        /// <returns>IEnumerator</returns>
         public static IEnumerator ToTargetLookPos(GameObject obj, Vector3 target, float time)
         {
             Vector3 startPos = obj.transform.position;
@@ -448,7 +462,6 @@ namespace ProjectCronos
                 diff = Time.time - startTime; //　経過時間
                 var rate = diff / time;
                 obj.transform.position = Vector3.Lerp(startPos, endPos, rate);
-
                 obj.transform.LookAt(target);
                 yield return null;
             }
@@ -457,7 +470,12 @@ namespace ProjectCronos
             yield return null;
         }
 
-        //　フェードイン
+        /// <summary>
+        /// フェードイン
+        /// </summary>
+        /// <param name="fadeImage">フェードする画像</param>
+        /// <param name="speed">スピード</param>
+        /// <returns>IEnumerator</returns>
         public static IEnumerator FadeIn(Image fadeImage, float speed)
         {
             while (fadeImage.color.a > 0)
@@ -468,7 +486,13 @@ namespace ProjectCronos
             fadeImage.color = new Color(fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, 0);
             yield return null;
         }
-        //　フェードアウト
+
+        /// <summary>
+        /// フェードアウト
+        /// </summary>
+        /// <param name="fadeImage">フェードする画像</param>
+        /// <param name="speed">スピード</param>
+        /// <returns>IEnumerator</returns>
         public static IEnumerator FadeOut(Image fadeImage, float speed)
         {
             while (fadeImage.color.a < 1)
@@ -479,9 +503,9 @@ namespace ProjectCronos
             fadeImage.color = new Color(fadeImage.color.r, fadeImage.color.g, fadeImage.color.b, 1);
             yield return null;
         }
-        #endregion
+#endregion
 
-        #region UI
+#region UI
         /// <summary>
         /// ターゲットの子オブジェクト含むすべてのオブジェクトのテキストカラーを指定した色に変える
         /// </summary>
@@ -502,9 +526,9 @@ namespace ProjectCronos
             }
         }
 
-        #endregion
+#endregion
 
-        #region Scene
+#region Scene
 
         /// <summary>
         /// すでにシーンが読み込まれているかを返す
@@ -524,9 +548,10 @@ namespace ProjectCronos
 
             return false;
         }
-        #endregion
 
-        #region Application
+#endregion
+
+#region Application
         /// <summary>
         /// アプリケーション終了処理
         /// </summary>
@@ -538,11 +563,11 @@ namespace ProjectCronos
             Application.Quit();
 #endif
         }
-        #endregion
+#endregion
 
-        #region Time
+#region Time
+
         private static DateTime UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, 0);
-
 
         /// <summary>
         /// DateTimeからUnixTimeへ変換
@@ -564,6 +589,6 @@ namespace ProjectCronos
             return UnixEpoch.AddSeconds(unixTime);
         }
 
-        #endregion
+#endregion
     }
 }

@@ -187,6 +187,15 @@ namespace ProjectCronos
             await AddressableManager.Instance.Load(demonHandPrefabPath);
             await AddressableManager.Instance.Load(demonHandTrapPrefabPath);
             await AddressableManager.Instance.Load(fireSkeltonPrefabPath);
+
+            // 魔法陣マテリアル読み込み
+            await AddressableManager.Instance.LoadMaterial("Assets/ProjectCronosAssets/Materials/MagicCircle/MagicCircleLevel1.mat");
+            await AddressableManager.Instance.LoadMaterial("Assets/ProjectCronosAssets/Materials/MagicCircle/MagicCircleLevel2.mat");
+            await AddressableManager.Instance.LoadMaterial("Assets/ProjectCronosAssets/Materials/MagicCircle/MagicCircleLevel3.mat");
+            await AddressableManager.Instance.LoadMaterial("Assets/ProjectCronosAssets/Materials/MagicCircle/MagicCircleLevel4.mat");
+            await AddressableManager.Instance.LoadMaterial("Assets/ProjectCronosAssets/Materials/MagicCircle/MagicCircleLevel5.mat");
+            await AddressableManager.Instance.LoadMaterial("Assets/ProjectCronosAssets/Materials/MagicCircle/MagicCircleLevel6.mat");
+            await AddressableManager.Instance.LoadMaterial("Assets/ProjectCronosAssets/Materials/MagicCircle/MagicCircleLevel7.mat");
         }
 
         /// <summary>
