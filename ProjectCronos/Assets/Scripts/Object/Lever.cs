@@ -57,12 +57,10 @@ namespace ProjectCronos
 
                 if (isSwitchEnable)
                 {
-                    onSwitchEnableAction?.Invoke();
                     anim.SetTrigger("SwitchOn");
                 }
                 else
                 {
-                    onSwitchDisableAction?.Invoke();
                     anim.SetTrigger("SwitchOff");
                 }
             }
@@ -76,6 +74,16 @@ namespace ProjectCronos
         {
             if (isLock)
             {
+                // レバーアニメーションが終わったタイミングで登録されているアクションを行う
+                if (isSwitchEnable)
+                {
+                    onSwitchEnableAction?.Invoke();
+                }
+                else
+                {
+                    onSwitchDisableAction?.Invoke();
+                }
+
                 isLock = false;
             }
         }
