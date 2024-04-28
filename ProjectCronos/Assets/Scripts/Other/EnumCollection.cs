@@ -363,6 +363,31 @@ namespace ProjectCronos
         }
 
         /// <summary>
+        /// ステージ関連
+        /// </summary>
+        namespace Stage
+        {
+            /// <summary>
+            /// ギミック(仕掛け)の種類
+            /// </summary>
+            public enum GIMMICK_TYPE
+            {
+                /// <summary>
+                /// スイッチで動作する仕掛け
+                /// </summary>
+                Switch,
+                /// <summary>
+                /// 特定のアイテムを使用することで動作する仕掛け
+                /// </summary>
+                Item,
+                /// <summary>
+                /// 要素数
+                /// </summary>
+                MAXMUM,
+            }
+        }
+
+        /// <summary>
         /// サウンド関連
         /// </summary>
         namespace Sound
