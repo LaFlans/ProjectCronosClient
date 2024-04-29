@@ -48,25 +48,25 @@ namespace ProjectCronos
 
         void OnSwitch(InputAction.CallbackContext context)
         {
-            if (!isLock)
+            if (isLock)
             {
-                isSwitchEnable = !isSwitchEnable;
-                isLock = true;
-                SoundManager.Instance.Play("Button47");
-                Debug.Log("スイッチ" + (isSwitchEnable ? "オン！" : "オフ！"));
+                // ロックされていたら何もしない
+                Debug.Log("ロックされているようだ");
+                return;
+            }
 
-                if (isSwitchEnable)
-                {
-                    anim.SetTrigger("SwitchOn");
-                }
-                else
-                {
-                    anim.SetTrigger("SwitchOff");
-                }
+            isSwitchEnable = !isSwitchEnable;
+            isLock = true;
+            SoundManager.Instance.Play("Button47");
+            Debug.Log("スイッチ" + (isSwitchEnable ? "オン！" : "オフ！"));
+
+            if (isSwitchEnable)
+            {
+                anim.SetTrigger("SwitchOn");
             }
             else
             {
-                Debug.Log("ロックされているようだ");
+                anim.SetTrigger("SwitchOff");
             }
         }
 
