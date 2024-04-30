@@ -53,6 +53,33 @@ namespace ProjectCronos
                 /// </summary>
                 MAXMUM,
             }
+
+            /// <summary>
+            /// メインメニューの種類
+            /// </summary>
+            public enum MAIN_MENU_CATEGORY
+            {
+                /// <summary>
+                /// アイテム
+                /// </summary>
+                ITEM,
+                /// <summary>
+                /// スキル
+                /// </summary>
+                SKILL,
+                /// <summary>
+                /// 
+                /// </summary>
+                MAP,
+                /// <summary>
+                /// 設定
+                /// </summary>
+                SETTING,
+                /// <summary>
+                /// 要素数
+                /// </summary>
+                MAXMUM,
+            }
         }
 
         /// <summary>
