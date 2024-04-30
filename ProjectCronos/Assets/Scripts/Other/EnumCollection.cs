@@ -53,6 +53,33 @@ namespace ProjectCronos
                 /// </summary>
                 MAXMUM,
             }
+
+            /// <summary>
+            /// メインメニューの種類
+            /// </summary>
+            public enum MAIN_MENU_CATEGORY
+            {
+                /// <summary>
+                /// アイテム
+                /// </summary>
+                ITEM,
+                /// <summary>
+                /// スキル
+                /// </summary>
+                SKILL,
+                /// <summary>
+                /// 
+                /// </summary>
+                MAP,
+                /// <summary>
+                /// 設定
+                /// </summary>
+                SETTING,
+                /// <summary>
+                /// 要素数
+                /// </summary>
+                MAXMUM,
+            }
         }
 
         /// <summary>
@@ -355,6 +382,31 @@ namespace ProjectCronos
                 /// 発動
                 /// </summary>
                 INVOKE,
+                /// <summary>
+                /// 要素数
+                /// </summary>
+                MAXMUM,
+            }
+        }
+
+        /// <summary>
+        /// ステージ関連
+        /// </summary>
+        namespace Stage
+        {
+            /// <summary>
+            /// ギミック(仕掛け)の種類
+            /// </summary>
+            public enum GIMMICK_TYPE
+            {
+                /// <summary>
+                /// スイッチで動作する仕掛け
+                /// </summary>
+                Switch,
+                /// <summary>
+                /// 特定のアイテムを使用することで動作する仕掛け
+                /// </summary>
+                Item,
                 /// <summary>
                 /// 要素数
                 /// </summary>

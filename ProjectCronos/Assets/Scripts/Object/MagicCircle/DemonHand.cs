@@ -1,19 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering.HighDefinition;
 
 namespace ProjectCronos
 {
     public class DemonHand : MagicCircle
     {
+        const string magicCircleMatBasePath = "Assets/ProjectCronosAssets/Materials/MagicCircle/MagicCircleLevel";
+
         [SerializeField]
         GameObject target;
         Material mat;
         Animator anim;
 
-        [SerializeField] GameObject frontCrest;
-        [SerializeField] GameObject backCrest;
+        [SerializeField]
+        GameObject frontCrest;
+
+        [SerializeField]
+        GameObject backCrest;
 
         /// <summary>
         /// 行動することができるか
@@ -33,21 +40,21 @@ namespace ProjectCronos
         /// 設置できるかどうか確認する用
         /// </summary>
         [SerializeField]
-        MagicCircleBeforePutCollider circleBeforePutCol;
+        MagicCircleControlledCollider magicCircleControlledCol;
 
         /// <summary>
         /// 魔法陣当たり判定
         /// 魔法陣どうしの合成用
         /// </summary>
         [SerializeField]
-        MagicCircleCollider circleCol;
+        MagicCirclePlacedCollider magicCirclePlacedCol;
 
         /// <summary>
         /// 魔法陣トラップ用当たり判定
         /// 敵が範囲内に来たことを判定する用
         /// </summary>
         [SerializeField]
-        MagicCircleTrapCollider circleTrapCol;
+        MagicCircleTriggerCollider magicCircleTriggerCol;
 
         [SerializeField]
         TextMeshPro debugLevelText;
@@ -92,23 +99,23 @@ namespace ProjectCronos
             attackTrigger.Init(EnumCollection.Attack.ATTACK_TYPE.PLAYER, attack);
             attackTrigger.DisableCollider();
 
-            if (circleTrapCol != null)
+            if (magicCircleTriggerCol != null)
             {
                 // 攻撃の種類がトラップの場合は初期アニメーションスピードは0
                 switch (summonAttackType)
                 {
                     case EnumCollection.Attack.SUMMON_ATTACK_TYPE.DIRECT:
                         magicCircleStatus = EnumCollection.Attack.MAGIC_CIRCLE_STATUS.INVOKE;
-                        circleTrapCol.gameObject.SetActive(false);
+                        magicCircleTriggerCol.gameObject.SetActive(false);
                         break;
                     case EnumCollection.Attack.SUMMON_ATTACK_TYPE.TRAP:
                         magicCircleStatus = EnumCollection.Attack.MAGIC_CIRCLE_STATUS.BEFORE_PUT;
-                        circleCol.gameObject.SetActive(isTrap);
-                        circleTrapCol.gameObject.SetActive(false);
+                        magicCirclePlacedCol.gameObject.SetActive(isTrap);
+                        magicCircleTriggerCol.gameObject.SetActive(false);
                         break;
                     default:
                         magicCircleStatus = EnumCollection.Attack.MAGIC_CIRCLE_STATUS.INVOKE;
-                        circleTrapCol.gameObject.SetActive(false);
+                        magicCircleTriggerCol.gameObject.SetActive(false);
                         AttackAction();
                         break;
                 }
@@ -121,9 +128,22 @@ namespace ProjectCronos
 
         void InitSummonMat()
         {
+            // 召喚物のマテリアルカラー初期化
             mat = target.GetComponent<Renderer>().material;
             mat.SetVector("_Up", this.transform.up.normalized);
             mat.SetVector("_CenterPos", this.transform.position);
+
+            // 召喚陣のマテリアルカラー初期化
+            Material crestMat = AddressableManager.Instance.GetLoadedMaterial(magicCircleMatBasePath + level.ToString() + ".mat");
+            if (crestMat != null)
+            {
+                frontCrest.GetComponent<Renderer>().material = crestMat;
+
+                Material backMat = new Material(crestMat);
+                backMat.SetFloat("_TransparentSortPriority", 1);
+                HDMaterial.ValidateMaterial(backMat);
+                backCrest.GetComponent<Renderer>().material = backMat;
+            }
         }
 
         /// <summary>
@@ -186,16 +206,16 @@ namespace ProjectCronos
             switch (magicCircleStatus)
             {
                 case EnumCollection.Attack.MAGIC_CIRCLE_STATUS.INVOKE:
-                    circleCol.gameObject.SetActive(false);
-                    circleTrapCol.gameObject.SetActive(false);
+                    magicCirclePlacedCol.gameObject.SetActive(false);
+                    magicCircleTriggerCol.gameObject.SetActive(false);
                     break;
                 case EnumCollection.Attack.MAGIC_CIRCLE_STATUS.BEFORE_PUT:
                     break;
                 case EnumCollection.Attack.MAGIC_CIRCLE_STATUS.TRAP:
                     var isStopobjTime = TimeManager.Instance.IsStopObjectTimeScale();
-                    circleBeforePutCol.gameObject.SetActive(false);
-                    circleCol.gameObject.SetActive(true);
-                    circleTrapCol.gameObject.SetActive(!isStopobjTime);
+                    magicCircleControlledCol.gameObject.SetActive(false);
+                    magicCirclePlacedCol.gameObject.SetActive(true);
+                    magicCircleTriggerCol.gameObject.SetActive(!isStopobjTime);
                     break;
                 default:
                     break;
@@ -229,13 +249,13 @@ namespace ProjectCronos
         /// </summary>
         public override bool IsPutTrap()
         {
-            return circleBeforePutCol.IsPutTrap();
+            return magicCircleControlledCol.IsPutTrap();
         }
 
         void AttackAction()
         {
             // 魔法陣の当たり判定を非アクティブに
-            circleCol.SetColliderEnable(false);
+            magicCirclePlacedCol.SetColliderEnable(false);
 
             anim.SetTrigger("Action");
         }

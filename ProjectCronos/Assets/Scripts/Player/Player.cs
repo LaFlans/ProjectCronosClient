@@ -5,6 +5,8 @@ using System.Linq;
 using Cysharp.Threading.Tasks;
 using Cinemachine;
 using System.Diagnostics.Contracts;
+using Cysharp.Threading.Tasks.Triggers;
+using UnityEngine.UIElements;
 
 namespace ProjectCronos
 {
@@ -185,6 +187,15 @@ namespace ProjectCronos
             await AddressableManager.Instance.Load(demonHandPrefabPath);
             await AddressableManager.Instance.Load(demonHandTrapPrefabPath);
             await AddressableManager.Instance.Load(fireSkeltonPrefabPath);
+
+            // 魔法陣マテリアル読み込み
+            await AddressableManager.Instance.LoadMaterial("Assets/ProjectCronosAssets/Materials/MagicCircle/MagicCircleLevel1.mat");
+            await AddressableManager.Instance.LoadMaterial("Assets/ProjectCronosAssets/Materials/MagicCircle/MagicCircleLevel2.mat");
+            await AddressableManager.Instance.LoadMaterial("Assets/ProjectCronosAssets/Materials/MagicCircle/MagicCircleLevel3.mat");
+            await AddressableManager.Instance.LoadMaterial("Assets/ProjectCronosAssets/Materials/MagicCircle/MagicCircleLevel4.mat");
+            await AddressableManager.Instance.LoadMaterial("Assets/ProjectCronosAssets/Materials/MagicCircle/MagicCircleLevel5.mat");
+            await AddressableManager.Instance.LoadMaterial("Assets/ProjectCronosAssets/Materials/MagicCircle/MagicCircleLevel6.mat");
+            await AddressableManager.Instance.LoadMaterial("Assets/ProjectCronosAssets/Materials/MagicCircle/MagicCircleLevel7.mat");
         }
 
         /// <summary>
@@ -346,13 +357,14 @@ namespace ProjectCronos
         }
 
         /// <summary>
-        /// 被弾時
+        /// 被弾時処理
         /// </summary>
-        public override void Damage(int value)
+        /// <param name="value">ダメージの値</param>
+        /// <returns>この被弾により死亡した場合、Trueで返す</returns>
+        public override bool Damage(int value)
         {
-            base.Damage(value);
-
             SoundManager.Instance.Play("Damage1");
+            return base.Damage(value);
         }
 
         /// <summary>
@@ -387,6 +399,38 @@ namespace ProjectCronos
                 if (InputManager.Instance.inputActions.Player.Attack2.IsPressed())
                 {
                     Shot();
+                }
+            }
+        }
+
+        float rayDist = 1.0f;
+
+        // 高さ調整
+        void AdjustmentHeight()
+        {
+            // 正面レイ
+            var origin = this.transform.position + (this.transform.forward * 0.4f) + (Vector3.up * 1.0f);
+            var direction = Vector3.down * rayDist;
+            Ray ray = new Ray(origin, direction);
+            //Debug.DrawRay(origin, direction, Color.blue);
+
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit, rayDist))
+            {
+                //Debug.LogError($"hit:{hit.collider.name}");
+
+                if (hit.collider.tag == "Ground")
+                {
+                    // 水平であればプレイヤーの高さを補正する
+                    var hitNormal = hit.normal;
+                    var angle = Vector3.Angle(hitNormal, Vector3.up);
+                    //Debug.LogError($"当たっているオブジェクト:{hitNormal}:{(int)angle}°");
+                    if (angle <= 30)
+                    {
+                        var vec = this.transform.position;
+                        vec.y = hit.point.y;
+                        this.transform.position = vec;
+                    }
                 }
             }
         }
@@ -631,6 +675,12 @@ namespace ProjectCronos
 
             var moveVec = Vector3.ProjectOnPlane(vec, normalVector);
 
+            // 高さ調整
+            if (isGround)
+            {
+                AdjustmentHeight();
+            }
+
             // アニメーション中は移動速度を落とす
             if (anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
             {
@@ -657,6 +707,7 @@ namespace ProjectCronos
             {
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(vec, Vector3.up), rotateSpeed * Time.deltaTime);
             }
+
 
             latestPos = transform.position;
         }

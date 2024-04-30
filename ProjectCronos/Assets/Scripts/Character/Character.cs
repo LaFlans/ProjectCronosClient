@@ -29,7 +29,9 @@ namespace ProjectCronos
         /// <summary>
         /// 被弾時処理
         /// </summary>
-        public virtual void Damage(int value) 
+        /// <param name="value">ダメージの値</param>
+        /// <returns>この被弾により死亡した場合、Trueで返す</returns>
+        public virtual bool Damage(int value) 
         {
             Debug.Log($"{value}ダメージを受けました");
             if (status != null)
@@ -37,8 +39,11 @@ namespace ProjectCronos
                 if (status.DamageHp(value))
                 {
                     Death();
+                    return true;
                 }
             }
+
+            return false;
         }
 
         /// <summary>

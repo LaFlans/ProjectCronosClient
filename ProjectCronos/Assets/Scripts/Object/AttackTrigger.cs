@@ -256,9 +256,15 @@ EnumCollection.Attack.ATTACK_TYPE type, int attack, float delayTime,
                 case EnumCollection.Attack.ATTACK_TYPE.PLAYER:
                     if (col.gameObject.tag == "EnemyBody")
                     {
-                        col.gameObject.GetComponent<EnemyDamageBody>().Damage(attack);
+                        if (col.gameObject.GetComponent<EnemyDamageBody>().Damage(attack))
+                        {
+                            //var rididBody = col.gameObject.GetComponent<Rigidbody>();
+                            //Debug.Log($"トドメをさしました！");
+                            //rididBody?.AddForce(this.transform.up * 50, ForceMode.Impulse);
+                        }
+
                         Vector3 hitPos = col.ClosestPointOnBounds(this.transform.position);
-                        Utility.CreateObject("Prefabs/DamageEffect1", hitPos, 1.0f);
+                        Utility.CreateObject("Assets/Resources_moved/Prefabs/Effects/DamageEffect1.prefab", hitPos, 1.0f);
 
                         DamageLogger.ShowLog(attack, hitPos, EnumCollection.Attack.ATTACK_TYPE.PLAYER);
                         Debug.Log($"エネミーに{attack}を与えました。");
@@ -274,10 +280,19 @@ EnumCollection.Attack.ATTACK_TYPE type, int attack, float delayTime,
                         if (col.gameObject.GetComponent<AttackTrigger>().GetAttackType() == EnumCollection.Attack.ATTACK_TYPE.ENEMY)
                         {
                             Debug.Log($"エネミーの武器にあたりました！");
-
-                            Utility.CreateObject("Prefabs/DamageEffect1", col.gameObject.transform.position, 1.0f);
+                            Vector3 hitPos = col.ClosestPointOnBounds(this.transform.position);
+                            Utility.CreateObject("Assets/Resources_moved/Prefabs/Effects/DamageEffect1.prefab", hitPos, 1.0f);
                             Destroy(col.gameObject);
                         }
+                    }
+
+                    if (col.gameObject.tag == "BoundObject")
+                    {
+                        var rididBody = col.gameObject.GetComponent<Rigidbody>();
+                        Debug.Log($"バウンドオブジェクトにあたりました！");
+                        Vector3 hitPos = col.ClosestPointOnBounds(this.transform.position);
+                        rididBody?.AddForce(this.transform.up * 50, ForceMode.Impulse);
+                        Utility.CreateObject("Assets/Resources_moved/Prefabs/Effects/DamageEffect1.prefab", hitPos, 1.0f);
                     }
 
                     break;
@@ -287,7 +302,7 @@ EnumCollection.Attack.ATTACK_TYPE type, int attack, float delayTime,
                         Debug.Log($"AttackTriggerプレイヤーに{attack}を与えました。");
                         col.gameObject.GetComponent<PlayerBody>().Damage(attack);
                         Vector3 hitPos = col.ClosestPointOnBounds(this.transform.position);
-                        Utility.CreateObject("Prefabs/DamageEffect1", hitPos, 1.0f);
+                        Utility.CreateObject("Assets/Resources_moved/Prefabs/Effects/DamageEffect1.prefab", hitPos, 1.0f);
 
                         DamageLogger.ShowLog(attack, hitPos, EnumCollection.Attack.ATTACK_TYPE.ENEMY);
 
@@ -304,7 +319,7 @@ EnumCollection.Attack.ATTACK_TYPE type, int attack, float delayTime,
             {
                 //Debug.Log("地面にあたりました");
                 Vector3 hitPos = col.ClosestPointOnBounds(this.transform.position);
-                Utility.CreateObject("Prefabs/DamageEffect1", hitPos, 1.0f);
+                Utility.CreateObject("Assets/Resources_moved/Prefabs/Effects/DamageEffect1.prefab", hitPos, 1.0f);
                 if (isHitDestory)
                 {
                     Destroy(this.gameObject);

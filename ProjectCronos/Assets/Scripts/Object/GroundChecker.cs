@@ -15,19 +15,18 @@ namespace ProjectCronos
     public class GroundChecker : MonoBehaviour
     {
         [SerializeField]
-        float onGroundDist = 0.5f;
+        float onGroundDist = 0.3f;
 
         [SerializeField]
         LayerMask groundLayer;
 
-        /// <summary>
-        /// Ray
-        /// </summary>
-        Ray downRay;
-
         Action onLanding;
         Action onTakeOff;
         Collider col;
+
+        /// <summary>
+        /// 浮いているかどうか
+        /// </summary>
         bool isFloating = true;
 
         /// <summary>
@@ -37,7 +36,7 @@ namespace ProjectCronos
 
         void Start()
         {
-            isFloating = GetOnGroundStatus();
+            isFloating = IsGrounded();
 
             if (col == null)
             {
@@ -50,33 +49,62 @@ namespace ProjectCronos
         {
             // オブジェクトから離れた時、すぐに浮く判定にするのではなく
             // そこからN秒間チェックしてプレイヤーの下にあるレイに何も当たらなかったら浮いた判定
-            if (isFloating)
-            {
-                floatingTime += Time.deltaTime;
-                if (floatingTime >= 1.0f)
-                {
-                    isFloating = false;
-                    floatingTime = 0.0f;
-                }
+            //if (isFloating)
+            //{
+            //    floatingTime += Time.deltaTime;
+            //    if (floatingTime >= 1.0f)
+            //    {
+            //        isFloating = false;
+            //        floatingTime = 0.0f;
+            //    }
 
-                if (!GetOnGroundStatus())
-                {
-                    onTakeOff?.Invoke();
-                    isFloating = false;
-                    floatingTime = 0.0f;
-                }
-            }
+            //    if (!IsGrounded())
+            //    {
+            //        onTakeOff?.Invoke();
+            //        isFloating = false;
+            //        floatingTime = 0.0f;
+            //    }
+            //}
+            //else
+            //{
+
+            //}
 
             //Debug.DrawRay(transform.position, Vector3.down * onGroundDist, Color.red);
+
+
+            //if (IsGrounded())
+            //{
+            //    if (isFloating)
+            //    {
+            //        isFloating = false;
+            //        onLanding?.Invoke();
+            //    }
+            //}
+            //else
+            //{
+            //    if (!isFloating)
+            //    {
+            //        isFloating = true;
+            //        onTakeOff?.Invoke();
+            //    }
+            //}
+
         }
 
-        public bool GetOnGroundStatus()
+        /// <summary>
+        /// 地面に設置しているかどうかを返す
+        /// </summary>
+        /// <returns>設置している場合、Trueを返す</returns>
+        public bool IsGrounded()
         {
+            Debug.DrawRay(transform.position, new Vector3(0,-onGroundDist, 0), Color.cyan);
+
             return Physics.Raycast(
                 transform.position,
                 Vector3.down,
                 onGroundDist,
-                groundLayer); ;
+                groundLayer);
         }
 
         /// <summary>
@@ -110,8 +138,13 @@ namespace ProjectCronos
         {
             if (col.gameObject.tag == "Ground")
             {
-                isFloating = true;
-                //onTakeOff?.Invoke();
+                if (!IsGrounded())
+                {
+                    return;
+                }
+
+                //isFloating = true;
+                onTakeOff?.Invoke();
             }
         }
     }

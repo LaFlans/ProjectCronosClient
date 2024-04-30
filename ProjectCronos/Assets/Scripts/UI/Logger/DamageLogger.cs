@@ -46,7 +46,7 @@ namespace ProjectCronos
             if (isInitialize)
             {
                 GameObject obj = AddressableManager.Instance.GetLoadedObject(prefabPath);
-                obj.transform.parent = GameObject.Find("DamageLogger").transform;
+                obj.transform.SetParent(GameObject.Find("DamageLogger").transform);
                 obj.transform.localScale = Vector3.one;
                 obj.GetComponent<RectTransform>().position = Camera.main.WorldToScreenPoint(position);
                 obj.GetComponent<DamageLogCell>().Initialize(damageVal.ToString(), type);
@@ -60,7 +60,7 @@ namespace ProjectCronos
         public void AddItemLog(InputAction.CallbackContext context)
         {
             GameObject obj = AddressableManager.Instance.GetLoadedObject(prefabPath);
-            obj.transform.parent = GameObject.Find("DamageLogger").transform;
+            obj.transform.SetParent(GameObject.Find("DamageLogger").transform);
             obj.transform.localScale = Vector3.one;
             obj.GetComponent<RectTransform>().position = new Vector3(Random.Range(0, 1500), Random.Range(0, 750), 0);
             obj.GetComponent<DamageLogCell>().Initialize($"{Random.Range(0, 1000)}", (EnumCollection.Attack.ATTACK_TYPE)Random.Range(0,2));

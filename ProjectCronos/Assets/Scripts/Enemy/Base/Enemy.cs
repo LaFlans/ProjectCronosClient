@@ -192,7 +192,7 @@ namespace ProjectCronos
             }
 
             // アニメーターステート情報更新
-            if (anim)
+            if (isInit && anim)
             {
                 animStateInfo = anim.GetCurrentAnimatorStateInfo(0);
                 anim.SetFloat("Speed", agent.velocity.magnitude);
@@ -413,9 +413,10 @@ namespace ProjectCronos
         /// 被弾時処理
         /// </summary>
         /// <param name="value">ダメージの値</param>
-        public override void Damage(int value)
+        /// <returns>この被弾により死亡した場合、Trueで返す</returns>
+        public override bool Damage(int value)
         {
-            base.Damage(value);
+            return base.Damage(value);
         }
 
         /// <summary>

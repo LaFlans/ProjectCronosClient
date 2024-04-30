@@ -24,6 +24,9 @@ namespace ProjectCronos
         [SerializeField]
         GameOverUIEffect gameOverEffect;
 
+        [SerializeField]
+        MainMenu mainMenu;
+
         /// <summary>
         /// シーンの初期化
         /// </summary>
@@ -59,6 +62,9 @@ namespace ProjectCronos
             // アイテムロガーの初期化
             await gameLogger.Initialize();
 
+            // メインメニューを非アクティブに
+            mainMenu.gameObject.SetActive(false);
+
 #if UNITY_EDITOR
             // デバックメニューの初期化
             this.GetComponent<DebugMenu>().Initialize();
@@ -66,7 +72,7 @@ namespace ProjectCronos
 
             // 入力イベント設定
             InputManager.Instance.SetInputStatus(EnumCollection.Input.INPUT_STATUS.PLAYER);
-            InputManager.Instance.inputActions.UI.Escape.performed += OnTransitionTitleConfirm;
+            InputManager.Instance.inputActions.UI.Escape.performed += OnOpenMainMenu;
 
             return true;
         }
@@ -101,7 +107,7 @@ namespace ProjectCronos
         void OnDestroy()
         {
             Debug.Log("遷移イベント削除");
-            InputManager.Instance.inputActions.UI.Escape.performed -= OnTransitionTitleConfirm;
+            InputManager.Instance.inputActions.UI.Escape.performed -= OnOpenMainMenu;
         }
 
         /// <summary>
@@ -147,6 +153,18 @@ namespace ProjectCronos
                         isShowPopup = false;
                     });
             }
+        }
+
+        /// <summary>
+        /// メインメニューを開く
+        /// </summary>
+        /// <param name="context"></param>
+        void OnOpenMainMenu(InputAction.CallbackContext context)
+        {
+            // 入力イベント設定
+            InputManager.Instance.SetInputStatus(EnumCollection.Input.INPUT_STATUS.UI);
+            mainMenu.gameObject.SetActive(true);
+            mainMenu.Initialize();
         }
 
         /// <summary>
