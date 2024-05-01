@@ -44,15 +44,16 @@ namespace Generated
 
         static MasterMemoryResolverGetFormatterHelper()
         {
-            lookup = new global::System.Collections.Generic.Dictionary<Type, int>(7)
+            lookup = new global::System.Collections.Generic.Dictionary<Type, int>(8)
             {
                 {typeof(Dictionary[]), 0 },
                 {typeof(EnemyData[]), 1 },
-                {typeof(PlayerData[]), 2 },
-                {typeof(Sample[]), 3 },
-                {typeof(SaveAreaData[]), 4 },
-                {typeof(Sound[]), 5 },
-                {typeof(Test[]), 6 },
+                {typeof(ItemData[]), 2 },
+                {typeof(PlayerData[]), 3 },
+                {typeof(Sample[]), 4 },
+                {typeof(SaveAreaData[]), 5 },
+                {typeof(Sound[]), 6 },
+                {typeof(Test[]), 7 },
             };
         }
 
@@ -65,11 +66,12 @@ namespace Generated
             {
                 case 0: return new MessagePack.Formatters.ArrayFormatter<Dictionary>();
                 case 1: return new MessagePack.Formatters.ArrayFormatter<EnemyData>();
-                case 2: return new MessagePack.Formatters.ArrayFormatter<PlayerData>();
-                case 3: return new MessagePack.Formatters.ArrayFormatter<Sample>();
-                case 4: return new MessagePack.Formatters.ArrayFormatter<SaveAreaData>();
-                case 5: return new MessagePack.Formatters.ArrayFormatter<Sound>();
-                case 6: return new MessagePack.Formatters.ArrayFormatter<Test>();
+                case 2: return new MessagePack.Formatters.ArrayFormatter<ItemData>();
+                case 3: return new MessagePack.Formatters.ArrayFormatter<PlayerData>();
+                case 4: return new MessagePack.Formatters.ArrayFormatter<Sample>();
+                case 5: return new MessagePack.Formatters.ArrayFormatter<SaveAreaData>();
+                case 6: return new MessagePack.Formatters.ArrayFormatter<Sound>();
+                case 7: return new MessagePack.Formatters.ArrayFormatter<Test>();
                 default: return null;
             }
         }

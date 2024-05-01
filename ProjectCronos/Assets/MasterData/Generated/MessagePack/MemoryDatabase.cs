@@ -13,6 +13,7 @@ namespace Generated
    {
         public DictionaryTable DictionaryTable { get; private set; }
         public EnemyDataTable EnemyDataTable { get; private set; }
+        public ItemDataTable ItemDataTable { get; private set; }
         public PlayerDataTable PlayerDataTable { get; private set; }
         public SampleTable SampleTable { get; private set; }
         public SaveAreaDataTable SaveAreaDataTable { get; private set; }
@@ -22,6 +23,7 @@ namespace Generated
         public MemoryDatabase(
             DictionaryTable DictionaryTable,
             EnemyDataTable EnemyDataTable,
+            ItemDataTable ItemDataTable,
             PlayerDataTable PlayerDataTable,
             SampleTable SampleTable,
             SaveAreaDataTable SaveAreaDataTable,
@@ -31,6 +33,7 @@ namespace Generated
         {
             this.DictionaryTable = DictionaryTable;
             this.EnemyDataTable = EnemyDataTable;
+            this.ItemDataTable = ItemDataTable;
             this.PlayerDataTable = PlayerDataTable;
             this.SampleTable = SampleTable;
             this.SaveAreaDataTable = SaveAreaDataTable;
@@ -59,6 +62,7 @@ namespace Generated
         {
             this.DictionaryTable = ExtractTableData<Dictionary, DictionaryTable>(header, databaseBinary, options, xs => new DictionaryTable(xs));
             this.EnemyDataTable = ExtractTableData<EnemyData, EnemyDataTable>(header, databaseBinary, options, xs => new EnemyDataTable(xs));
+            this.ItemDataTable = ExtractTableData<ItemData, ItemDataTable>(header, databaseBinary, options, xs => new ItemDataTable(xs));
             this.PlayerDataTable = ExtractTableData<PlayerData, PlayerDataTable>(header, databaseBinary, options, xs => new PlayerDataTable(xs));
             this.SampleTable = ExtractTableData<Sample, SampleTable>(header, databaseBinary, options, xs => new SampleTable(xs));
             this.SaveAreaDataTable = ExtractTableData<SaveAreaData, SaveAreaDataTable>(header, databaseBinary, options, xs => new SaveAreaDataTable(xs));
@@ -72,6 +76,7 @@ namespace Generated
             {
                 () => this.DictionaryTable = ExtractTableData<Dictionary, DictionaryTable>(header, databaseBinary, options, xs => new DictionaryTable(xs)),
                 () => this.EnemyDataTable = ExtractTableData<EnemyData, EnemyDataTable>(header, databaseBinary, options, xs => new EnemyDataTable(xs)),
+                () => this.ItemDataTable = ExtractTableData<ItemData, ItemDataTable>(header, databaseBinary, options, xs => new ItemDataTable(xs)),
                 () => this.PlayerDataTable = ExtractTableData<PlayerData, PlayerDataTable>(header, databaseBinary, options, xs => new PlayerDataTable(xs)),
                 () => this.SampleTable = ExtractTableData<Sample, SampleTable>(header, databaseBinary, options, xs => new SampleTable(xs)),
                 () => this.SaveAreaDataTable = ExtractTableData<SaveAreaData, SaveAreaDataTable>(header, databaseBinary, options, xs => new SaveAreaDataTable(xs)),
@@ -95,6 +100,7 @@ namespace Generated
             var builder = new DatabaseBuilder();
             builder.Append(this.DictionaryTable.GetRawDataUnsafe());
             builder.Append(this.EnemyDataTable.GetRawDataUnsafe());
+            builder.Append(this.ItemDataTable.GetRawDataUnsafe());
             builder.Append(this.PlayerDataTable.GetRawDataUnsafe());
             builder.Append(this.SampleTable.GetRawDataUnsafe());
             builder.Append(this.SaveAreaDataTable.GetRawDataUnsafe());
@@ -108,6 +114,7 @@ namespace Generated
             var builder = new DatabaseBuilder(resolver);
             builder.Append(this.DictionaryTable.GetRawDataUnsafe());
             builder.Append(this.EnemyDataTable.GetRawDataUnsafe());
+            builder.Append(this.ItemDataTable.GetRawDataUnsafe());
             builder.Append(this.PlayerDataTable.GetRawDataUnsafe());
             builder.Append(this.SampleTable.GetRawDataUnsafe());
             builder.Append(this.SaveAreaDataTable.GetRawDataUnsafe());
@@ -125,6 +132,7 @@ namespace Generated
             {
                 DictionaryTable,
                 EnemyDataTable,
+                ItemDataTable,
                 PlayerDataTable,
                 SampleTable,
                 SaveAreaDataTable,
@@ -136,6 +144,8 @@ namespace Generated
             ValidateTable(DictionaryTable.All, database, "Key", DictionaryTable.PrimaryKeySelector, result);
             ((ITableUniqueValidate)EnemyDataTable).ValidateUnique(result);
             ValidateTable(EnemyDataTable.All, database, "Key", EnemyDataTable.PrimaryKeySelector, result);
+            ((ITableUniqueValidate)ItemDataTable).ValidateUnique(result);
+            ValidateTable(ItemDataTable.All, database, "Id", ItemDataTable.PrimaryKeySelector, result);
             ((ITableUniqueValidate)PlayerDataTable).ValidateUnique(result);
             ValidateTable(PlayerDataTable.All, database, "Key", PlayerDataTable.PrimaryKeySelector, result);
             ((ITableUniqueValidate)SampleTable).ValidateUnique(result);
@@ -162,6 +172,8 @@ namespace Generated
                     return db.DictionaryTable;
                 case "m_enemy_data":
                     return db.EnemyDataTable;
+                case "m_item":
+                    return db.ItemDataTable;
                 case "m_player_data":
                     return db.PlayerDataTable;
                 case "m_sample":
@@ -187,6 +199,7 @@ namespace Generated
             var dict = new Dictionary<string, MasterMemory.Meta.MetaTable>();
             dict.Add("m_dictionary", Generated.Tables.DictionaryTable.CreateMetaTable());
             dict.Add("m_enemy_data", Generated.Tables.EnemyDataTable.CreateMetaTable());
+            dict.Add("m_item", Generated.Tables.ItemDataTable.CreateMetaTable());
             dict.Add("m_player_data", Generated.Tables.PlayerDataTable.CreateMetaTable());
             dict.Add("m_sample", Generated.Tables.SampleTable.CreateMetaTable());
             dict.Add("m_save_area_data", Generated.Tables.SaveAreaDataTable.CreateMetaTable());

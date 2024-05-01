@@ -26,6 +26,12 @@ namespace Generated
             return this;
         }
 
+        public DatabaseBuilder Append(System.Collections.Generic.IEnumerable<ItemData> dataSource)
+        {
+            AppendCore(dataSource, x => x.Id, System.Collections.Generic.Comparer<int>.Default);
+            return this;
+        }
+
         public DatabaseBuilder Append(System.Collections.Generic.IEnumerable<PlayerData> dataSource)
         {
             AppendCore(dataSource, x => x.Key, System.StringComparer.Ordinal);

@@ -30,6 +30,7 @@ namespace Generated
             memory = new MemoryDatabase(
                 table,
                 memory.EnemyDataTable,
+                memory.ItemDataTable,
                 memory.PlayerDataTable,
                 memory.SampleTable,
                 memory.SaveAreaDataTable,
@@ -47,6 +48,7 @@ namespace Generated
             memory = new MemoryDatabase(
                 table,
                 memory.EnemyDataTable,
+                memory.ItemDataTable,
                 memory.PlayerDataTable,
                 memory.SampleTable,
                 memory.SaveAreaDataTable,
@@ -64,6 +66,7 @@ namespace Generated
             memory = new MemoryDatabase(
                 table,
                 memory.EnemyDataTable,
+                memory.ItemDataTable,
                 memory.PlayerDataTable,
                 memory.SampleTable,
                 memory.SaveAreaDataTable,
@@ -80,6 +83,7 @@ namespace Generated
             memory = new MemoryDatabase(
                 memory.DictionaryTable,
                 table,
+                memory.ItemDataTable,
                 memory.PlayerDataTable,
                 memory.SampleTable,
                 memory.SaveAreaDataTable,
@@ -97,6 +101,7 @@ namespace Generated
             memory = new MemoryDatabase(
                 memory.DictionaryTable,
                 table,
+                memory.ItemDataTable,
                 memory.PlayerDataTable,
                 memory.SampleTable,
                 memory.SaveAreaDataTable,
@@ -114,6 +119,60 @@ namespace Generated
             memory = new MemoryDatabase(
                 memory.DictionaryTable,
                 table,
+                memory.ItemDataTable,
+                memory.PlayerDataTable,
+                memory.SampleTable,
+                memory.SaveAreaDataTable,
+                memory.SoundTable,
+                memory.TestTable
+            
+            );
+        }
+
+        public void ReplaceAll(System.Collections.Generic.IList<ItemData> data)
+        {
+            var newData = CloneAndSortBy(data, x => x.Id, System.Collections.Generic.Comparer<int>.Default);
+            var table = new ItemDataTable(newData);
+            memory = new MemoryDatabase(
+                memory.DictionaryTable,
+                memory.EnemyDataTable,
+                table,
+                memory.PlayerDataTable,
+                memory.SampleTable,
+                memory.SaveAreaDataTable,
+                memory.SoundTable,
+                memory.TestTable
+            
+            );
+        }
+
+        public void RemoveItemData(int[] keys)
+        {
+            var data = RemoveCore(memory.ItemDataTable.GetRawDataUnsafe(), keys, x => x.Id, System.Collections.Generic.Comparer<int>.Default);
+            var newData = CloneAndSortBy(data, x => x.Id, System.Collections.Generic.Comparer<int>.Default);
+            var table = new ItemDataTable(newData);
+            memory = new MemoryDatabase(
+                memory.DictionaryTable,
+                memory.EnemyDataTable,
+                table,
+                memory.PlayerDataTable,
+                memory.SampleTable,
+                memory.SaveAreaDataTable,
+                memory.SoundTable,
+                memory.TestTable
+            
+            );
+        }
+
+        public void Diff(ItemData[] addOrReplaceData)
+        {
+            var data = DiffCore(memory.ItemDataTable.GetRawDataUnsafe(), addOrReplaceData, x => x.Id, System.Collections.Generic.Comparer<int>.Default);
+            var newData = CloneAndSortBy(data, x => x.Id, System.Collections.Generic.Comparer<int>.Default);
+            var table = new ItemDataTable(newData);
+            memory = new MemoryDatabase(
+                memory.DictionaryTable,
+                memory.EnemyDataTable,
+                table,
                 memory.PlayerDataTable,
                 memory.SampleTable,
                 memory.SaveAreaDataTable,
@@ -130,6 +189,7 @@ namespace Generated
             memory = new MemoryDatabase(
                 memory.DictionaryTable,
                 memory.EnemyDataTable,
+                memory.ItemDataTable,
                 table,
                 memory.SampleTable,
                 memory.SaveAreaDataTable,
@@ -147,6 +207,7 @@ namespace Generated
             memory = new MemoryDatabase(
                 memory.DictionaryTable,
                 memory.EnemyDataTable,
+                memory.ItemDataTable,
                 table,
                 memory.SampleTable,
                 memory.SaveAreaDataTable,
@@ -164,6 +225,7 @@ namespace Generated
             memory = new MemoryDatabase(
                 memory.DictionaryTable,
                 memory.EnemyDataTable,
+                memory.ItemDataTable,
                 table,
                 memory.SampleTable,
                 memory.SaveAreaDataTable,
@@ -180,6 +242,7 @@ namespace Generated
             memory = new MemoryDatabase(
                 memory.DictionaryTable,
                 memory.EnemyDataTable,
+                memory.ItemDataTable,
                 memory.PlayerDataTable,
                 table,
                 memory.SaveAreaDataTable,
@@ -197,6 +260,7 @@ namespace Generated
             memory = new MemoryDatabase(
                 memory.DictionaryTable,
                 memory.EnemyDataTable,
+                memory.ItemDataTable,
                 memory.PlayerDataTable,
                 table,
                 memory.SaveAreaDataTable,
@@ -214,6 +278,7 @@ namespace Generated
             memory = new MemoryDatabase(
                 memory.DictionaryTable,
                 memory.EnemyDataTable,
+                memory.ItemDataTable,
                 memory.PlayerDataTable,
                 table,
                 memory.SaveAreaDataTable,
@@ -230,6 +295,7 @@ namespace Generated
             memory = new MemoryDatabase(
                 memory.DictionaryTable,
                 memory.EnemyDataTable,
+                memory.ItemDataTable,
                 memory.PlayerDataTable,
                 memory.SampleTable,
                 table,
@@ -247,6 +313,7 @@ namespace Generated
             memory = new MemoryDatabase(
                 memory.DictionaryTable,
                 memory.EnemyDataTable,
+                memory.ItemDataTable,
                 memory.PlayerDataTable,
                 memory.SampleTable,
                 table,
@@ -264,6 +331,7 @@ namespace Generated
             memory = new MemoryDatabase(
                 memory.DictionaryTable,
                 memory.EnemyDataTable,
+                memory.ItemDataTable,
                 memory.PlayerDataTable,
                 memory.SampleTable,
                 table,
@@ -280,6 +348,7 @@ namespace Generated
             memory = new MemoryDatabase(
                 memory.DictionaryTable,
                 memory.EnemyDataTable,
+                memory.ItemDataTable,
                 memory.PlayerDataTable,
                 memory.SampleTable,
                 memory.SaveAreaDataTable,
@@ -297,6 +366,7 @@ namespace Generated
             memory = new MemoryDatabase(
                 memory.DictionaryTable,
                 memory.EnemyDataTable,
+                memory.ItemDataTable,
                 memory.PlayerDataTable,
                 memory.SampleTable,
                 memory.SaveAreaDataTable,
@@ -314,6 +384,7 @@ namespace Generated
             memory = new MemoryDatabase(
                 memory.DictionaryTable,
                 memory.EnemyDataTable,
+                memory.ItemDataTable,
                 memory.PlayerDataTable,
                 memory.SampleTable,
                 memory.SaveAreaDataTable,
@@ -330,6 +401,7 @@ namespace Generated
             memory = new MemoryDatabase(
                 memory.DictionaryTable,
                 memory.EnemyDataTable,
+                memory.ItemDataTable,
                 memory.PlayerDataTable,
                 memory.SampleTable,
                 memory.SaveAreaDataTable,
@@ -347,6 +419,7 @@ namespace Generated
             memory = new MemoryDatabase(
                 memory.DictionaryTable,
                 memory.EnemyDataTable,
+                memory.ItemDataTable,
                 memory.PlayerDataTable,
                 memory.SampleTable,
                 memory.SaveAreaDataTable,
@@ -364,6 +437,7 @@ namespace Generated
             memory = new MemoryDatabase(
                 memory.DictionaryTable,
                 memory.EnemyDataTable,
+                memory.ItemDataTable,
                 memory.PlayerDataTable,
                 memory.SampleTable,
                 memory.SaveAreaDataTable,

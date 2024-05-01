@@ -1,4 +1,4 @@
-// Copyright (c) All contributors. All rights reserved.
+﻿// Copyright (c) All contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System;
@@ -8,7 +8,7 @@ using MessagePack.Formatters;
 namespace MessagePack.Resolvers
 {
     /// <summary>
-    /// Singleton version of CompositeResolver, which be able to register a collection of formatters and resolvers to a single instance.
+    /// Singleton version of <see cref="CompositeResolver"/>, which can register a collection of formatters and resolvers to a single instance.
     /// </summary>
     public class StaticCompositeResolver : IFormatterResolver
     {
@@ -35,12 +35,12 @@ namespace MessagePack.Resolvers
         /// </param>
         public void Register(params IMessagePackFormatter[] formatters)
         {
-            if (this.freezed )
+            if (this.freezed)
             {
                 throw new InvalidOperationException("Register must call on startup(before use GetFormatter<T>).");
             }
 
-            if (this.formatters is null)
+            if (formatters is null)
             {
                 throw new ArgumentNullException(nameof(formatters));
             }
@@ -112,15 +112,15 @@ namespace MessagePack.Resolvers
         /// Gets an <see cref="IMessagePackFormatter{T}"/> instance that can serialize or deserialize some type <typeparamref name="T"/>.
         /// </summary>
         /// <typeparam name="T">The type of value to be serialized or deserialized.</typeparam>
-        /// <returns>A formatter, if this resolver supplies one for type <typeparamref name="T"/>; otherwise <c>null</c>.</returns>
-        public IMessagePackFormatter<T> GetFormatter<T>()
+        /// <returns>A formatter, if this resolver supplies one for type <typeparamref name="T"/>; otherwise <see langword="null"/>.</returns>
+        public IMessagePackFormatter<T>? GetFormatter<T>()
         {
             return Cache<T>.Formatter;
         }
 
         private static class Cache<T>
         {
-            public static readonly IMessagePackFormatter<T> Formatter;
+            public static readonly IMessagePackFormatter<T>? Formatter;
 
             static Cache()
             {
