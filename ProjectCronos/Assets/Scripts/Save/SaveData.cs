@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace ProjectCronos
@@ -45,8 +46,15 @@ namespace ProjectCronos
 
             // プレイヤーのセーブ情報を作成
             var playerStatus = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatus>();
-            var playerSaveData = new PlayerSaveData(playerStatus.coinNum);
-            Debug.Log($"セーブします:所持コイン{playerStatus.coinNum}");
+
+
+            
+            var playerSaveData = new PlayerSaveData(playerStatus.coinNum, playerStatus.ownItems);
+
+            foreach(var item in playerSaveData.ownItems)
+            {
+                Debug.Log($"{item.Key}:{item.Value}");
+            }
 
             return new SaveData(playTime, lastSaveTime, playerSaveData, saveAreaInfo);
         }

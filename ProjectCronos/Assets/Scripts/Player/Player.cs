@@ -294,7 +294,7 @@ namespace ProjectCronos
             {
                 isDodge = true;
                 anim.SetTrigger("Dogde");
-                rigid.velocity = Vector3.zero;
+                rigid.linearVelocity = Vector3.zero;
 
                 var moveVec = Vector3.ProjectOnPlane(this.transform.forward, normalVector);
 
@@ -390,7 +390,7 @@ namespace ProjectCronos
                 if (jumpState == EnumCollection.Player.PLAYER_JUMP_STATE.JUMP && isGround)
                 {
                     jumpState = EnumCollection.Player.PLAYER_JUMP_STATE.IDOL;
-                    rigid.velocity = Vector3.zero;
+                    rigid.linearVelocity = Vector3.zero;
                 }
 
                 // 弾の発射間隔の計算
@@ -686,18 +686,18 @@ namespace ProjectCronos
             {
                 //rigid.velocity = new Vector3(vec.x * status.moveSpeed / attackMoveDelayRate, rigid.velocity.y, vec.z * status.moveSpeed / attackMoveDelayRate);
 
-                rigid.velocity = new Vector3(
+                rigid.linearVelocity = new Vector3(
                     moveVec.x * status.moveSpeed / attackMoveDelayRate,
-                    rigid.velocity.y,
+                    rigid.linearVelocity.y,
                     moveVec.z * status.moveSpeed / attackMoveDelayRate);
             }
             else
             {
                 //rigid.velocity = new Vector3(vec.x * status.moveSpeed, rigid.velocity.y, vec.z * status.moveSpeed);
 
-                rigid.velocity = new Vector3(
+                rigid.linearVelocity = new Vector3(
                     moveVec.x * status.moveSpeed,
-                    rigid.velocity.y,
+                    rigid.linearVelocity.y,
                     moveVec.z * status.moveSpeed);
             }
 
@@ -720,7 +720,7 @@ namespace ProjectCronos
             var vec = GetDirection();
 
             // プレイヤーの移動を止める
-            rigid.velocity = Vector3.zero;
+            rigid.linearVelocity = Vector3.zero;
             anim.SetFloat("Speed", 0);
 
 

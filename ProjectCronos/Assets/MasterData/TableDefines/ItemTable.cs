@@ -25,7 +25,7 @@ public class ItemData
     public int Category {  get; set; }
 
     /// <summary>
-    /// アイテムのパス
+    /// アイテムの画像パス
     /// </summary>
     public string Path {  get; set; }
 

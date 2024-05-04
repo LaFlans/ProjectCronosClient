@@ -1256,14 +1256,14 @@
             ]
         },
         {
-            "name": "Debug",
+            "name": "DebugActions",
             "id": "cbad51bd-8a74-4ee1-9372-b74bea24cd24",
             "actions": [
                 {
                     "name": "ShowDebugMenu",
                     "type": "Button",
                     "id": "e311dc0d-b09a-4539-9cb4-f86f21d15a59",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -1272,7 +1272,7 @@
                     "name": "Test",
                     "type": "Button",
                     "id": "a9bfa085-9b8f-4784-b5e1-3cda5bde4955",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false

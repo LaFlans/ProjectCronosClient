@@ -53,7 +53,7 @@ namespace ProjectCronos
         void SubEnemy()
         {
             enemyCount = enemyCount - 1;
-            Debug.LogError($"残りの敵はあと{enemyCount}体です");
+            Debug.LogError($"残りの敵はあと{enemyCount}体です!");
 
             if (enemyCount <= 0)
             {

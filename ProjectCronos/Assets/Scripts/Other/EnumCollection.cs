@@ -438,5 +438,30 @@ namespace ProjectCronos
                 MAXMUM,
             }
         }
+
+        /// <summary>
+        /// アイテム関連
+        /// </summary>
+        namespace Item
+        {
+            /// <summary>
+            /// アイテムの種類
+            /// </summary>
+            public enum ITEM_CATEGORY
+            {
+                /// <summary>
+                /// 通常アイテム
+                /// </summary>
+                NORMAL,
+                /// <summary>
+                /// 大切なもの
+                /// </summary>
+                IMPORTANT,
+                /// <summary>
+                /// 要素数
+                /// </summary>
+                MAXMUM,
+            }
+        }
     }
 }

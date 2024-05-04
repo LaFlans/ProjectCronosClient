@@ -29,6 +29,11 @@ namespace ProjectCronos
         Dictionary<string, AsyncOperationHandle<AudioClip>> loadedclips;
 
         /// <summary>
+        /// 読み込み済みAudioClipパス
+        /// </summary>
+        Dictionary<string, AsyncOperationHandle<Texture2D>> loadedTextures;
+
+        /// <summary>
         /// 初期化
         /// </summary>
         /// <returns>初期化に成功したかどうか</returns>
@@ -37,6 +42,7 @@ namespace ProjectCronos
             loadedObjects = new Dictionary<string, AsyncOperationHandle<GameObject>>();
             loadedMaterials = new Dictionary<string, AsyncOperationHandle<Material>>();
             loadedclips = new Dictionary<string, AsyncOperationHandle<AudioClip>>();
+            loadedTextures = new Dictionary<string, AsyncOperationHandle<Texture2D>>();
 
             Debug.Log("AddressableManager初期化");
 
@@ -151,6 +157,46 @@ namespace ProjectCronos
             }
 
             LoadMaterial(path);
+            Debug.Log("事前に読み込むようにしてね！");
+            return null;
+        }
+
+        public async UniTask LoadTexture(string path, Action callback = null)
+        {
+            if (!loadedTextures.ContainsKey(path))
+            {
+                var handle = Addressables.LoadAssetAsync<Texture2D>(path);
+                await handle.Task;
+                handle.Completed += op =>
+                {
+                    if (op.Status == AsyncOperationStatus.Succeeded)
+                    {
+                        if (!loadedTextures.ContainsKey(path))
+                        {
+                            loadedTextures.Add(path, op);
+
+                            if (callback != null)
+                            {
+                                callback.Invoke();
+                            }
+                        }
+                    }
+                };
+            }
+            else
+            {
+                Debug.Log($"path:{path}のクリップは既に読み込まれているよ！");
+            }
+        }
+
+        public Texture2D GetLoadedTextures(string path)
+        {
+            if (loadedTextures.ContainsKey(path))
+            {
+                return loadedTextures[path].Result;
+            }
+
+            LoadTexture(path);
             Debug.Log("事前に読み込むようにしてね！");
             return null;
         }

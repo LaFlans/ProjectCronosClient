@@ -2,6 +2,7 @@ using UnityEngine;
 using Cysharp.Threading.Tasks;
 using System.IO;
 using System;
+using MessagePack;
 
 namespace ProjectCronos
 {
@@ -38,7 +39,7 @@ namespace ProjectCronos
         public void Save(SaveData data, int saveDataNumber, Action callback)
         {
             var filePath = string.Format(defaultFilePath, saveDataNumber);
-            Debug.Log($"現在の状態を保存するよ！{filePath}");
+            Debug.Log($"現在の状態を保存！{filePath}");
             string json = JsonUtility.ToJson(data);
             StreamWriter streamWriter = new StreamWriter(filePath);
             streamWriter.Write(json);

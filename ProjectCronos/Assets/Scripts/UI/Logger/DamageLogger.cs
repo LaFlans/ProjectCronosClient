@@ -30,7 +30,7 @@ namespace ProjectCronos
         public async UniTask<bool> Initialize()
         {
             await AddressableManager.Instance.Load(prefabPath);
-            InputManager.Instance.inputActions.Debug.Test.performed += AddItemLog;
+            InputManager.Instance.inputActions.DebugActions.Test.performed += AddItemLog;
 
             isInitialize = true;
             return true;

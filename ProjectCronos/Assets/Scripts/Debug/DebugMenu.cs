@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
+using Cysharp.Threading.Tasks;
 
 namespace ProjectCronos
 {
@@ -35,6 +36,13 @@ namespace ProjectCronos
         /// </summary>
         bool isShow;
 
+        [SerializeField]
+        GameObject itemDebugCellParent;
+        [SerializeField]
+        ItemDebugCell itemDebugCellprefab;
+
+        List<ItemDebugCell> itemDebugCells;
+
         void Start()
         {
             isShow = true;
@@ -55,8 +63,11 @@ namespace ProjectCronos
             // 自動ビュー更新をするようにする
             isAutoUpdateView = true;
 
+            // アイテムデバック機能初期化
+            InitializeItemDebugMenu();
+
             // 入力設定
-            InputManager.Instance.inputActions.Debug.ShowDebugMenu.performed += OnShowDebugMenu;
+            InputManager.Instance.inputActions.DebugActions.ShowDebugMenu.performed += OnShowDebugMenu;
         }
 
         /// <summary>
@@ -78,7 +89,7 @@ namespace ProjectCronos
         private void OnDestroy()
         {
             playerStatus.UnresisterStatusUpdateEvent(UpdateView);
-            InputManager.Instance.inputActions.Debug.ShowDebugMenu.performed -= OnShowDebugMenu;
+            InputManager.Instance.inputActions.DebugActions.ShowDebugMenu.performed -= OnShowDebugMenu;
         }
 
         void UpdateView()
@@ -96,6 +107,60 @@ namespace ProjectCronos
             Debug.Log("デバックメニュー表示切り替え");
             isShow = !isShow;
             parentCanvasGroup.alpha = isShow ? 1 : 0;
+        }
+
+        /// <summary>
+        /// アイテム関連デバック機能初期化
+        /// </summary>
+        void InitializeItemDebugMenu()
+        {
+            itemDebugCells = new List<ItemDebugCell>();
+            var test = MasterDataManager.DB.ItemDataTable.All;
+            foreach (var item in test)
+            {
+                var obj = Instantiate(itemDebugCellprefab, itemDebugCellParent.transform);
+                itemDebugCells.Add(obj);
+                if (obj != null)
+                {
+                    var count = playerStatus.ownItems.ContainsKey(item.Id) ? playerStatus.ownItems[item.Id] : 0;
+                    //var count = 0;
+                    obj.GetComponent<ItemDebugCell>().Initialize(
+                        item.Id,
+                        item.Name,
+                        count,
+                        () =>
+                        {
+                            playerStatus.AddItem(item.Id, 1);
+                            UpdateItemDebugMenu(item.Id);
+                        },
+                        () =>
+                        {
+                            playerStatus.SubItem(item.Id, 1);
+                            UpdateItemDebugMenu(item.Id);
+                        });
+                }
+            }
+        }
+
+        /// <summary>
+        /// アイテム関連のデバック機能更新
+        /// </summary>
+        void UpdateItemDebugMenu(int updateItemId)
+        {
+            itemDebugCells[updateItemId].GetComponent<ItemDebugCell>().UpdateView(playerStatus.ownItems[updateItemId]);
+
+            //Transform[] children = itemDebugCellParent.GetComponentsInChildren<Transform>();
+            //foreach (var item in children)
+            //{
+            //    Debug.Log($"子オブジェクト名:{item.name}");
+
+            //    var id = item.gameObject.GetComponent<ItemDebugCell>().itemId;
+            //    if (id == updateItemId)
+            //    {
+            //        item.gameObject.GetComponent<ItemDebugCell>().UpdateView(playerStatus.ownItems[id]);
+            //        Debug.Log($"アイテム{id}の所持数を更新");
+            //    }
+            //}
         }
     }
 }

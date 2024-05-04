@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -26,6 +27,17 @@ namespace ProjectCronos
         /// </summary>
         [SerializeField]
         MainMenuCategoryTabView tabView;
+
+        /// <summary>
+        /// 事前読み込み
+        /// マネージャー系生成後に呼ばれる
+        /// </summary>
+        /// <returns>UniTask</returns>
+        public async UniTask PreLoadAsync()
+        {
+            // ここで事前に必要な素材を読み込む
+            contentView.PreLoadAsync();
+        }
 
         /// <summary>
         /// 初期化
