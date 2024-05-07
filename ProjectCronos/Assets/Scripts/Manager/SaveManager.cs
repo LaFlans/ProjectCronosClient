@@ -3,6 +3,7 @@ using Cysharp.Threading.Tasks;
 using System.IO;
 using System;
 using MessagePack;
+using System.Text;
 
 namespace ProjectCronos
 {
@@ -32,18 +33,32 @@ namespace ProjectCronos
         }
 
         /// <summary>
+        /// 新規データ作成
+        /// </summary>
+        public async UniTask CreateNewData()
+        {
+            PlayerSaveData playerData = new PlayerSaveData(0,null);
+            SaveAreaInfo info = new SaveAreaInfo(0,Vector3.zero,Quaternion.identity);
+
+            var data = new SaveData(0, Utility.GetUnixTime(DateTime.Now), playerData, info);
+            await Save(data, 0, () => { Debug.Log("初期データを追加しました"); });
+            lastLoadSaveData = data;
+        }
+
+        /// <summary>
         /// データを保存
         /// </summary>
         /// <param name="data">プレイヤーの保存したいデータ</param>
         /// <param name="saveDataNumber">保存先のセーブデータ番号</param>
-        public void Save(SaveData data, int saveDataNumber, Action callback)
+        public async UniTask Save(SaveData data, int saveDataNumber, Action callback)
         {
             var filePath = string.Format(defaultFilePath, saveDataNumber);
             Debug.Log($"現在の状態を保存！{filePath}");
-            string json = JsonUtility.ToJson(data);
-            StreamWriter streamWriter = new StreamWriter(filePath);
-            streamWriter.Write(json);
-            streamWriter.Flush();
+            var fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write);
+            var streamWriter = new StreamWriter(fileStream, Encoding.UTF8);
+            var json = MessagePackSerializer.SerializeToJson(data);
+            await streamWriter.WriteAsync(json);
+            //streamWriter.Flush();
             streamWriter.Close();
 
             callback?.Invoke();
@@ -54,21 +69,20 @@ namespace ProjectCronos
         /// </summary>
         /// <param name="saveDataNumber">読み込みたいセーブデータ番号</param>
         /// <returns>読み込んだセーブデータ情報を返す(ファイルが見つからない場合、nullを返す)</returns>
-        public SaveData Load(int saveDataNumber)
+        public async UniTask<SaveData> Load(int saveDataNumber)
         {
             var filePath = string.Format(defaultFilePath, saveDataNumber);
             if (File.Exists(filePath))
             {
-                StreamReader streamReader;
-                streamReader = new StreamReader(filePath);
-                string data = streamReader.ReadToEnd();
-                streamReader.Close();
-                var saveData = JsonUtility.FromJson<SaveData>(data);
+                var fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
+                var stream = new StreamReader(fileStream, Encoding.UTF8);
+                var json = await stream.ReadToEndAsync();
+                var bytes = MessagePackSerializer.ConvertFromJson(json);
+                var result = MessagePackSerializer.Deserialize<SaveData>(bytes);
+                stream.Close();
+                lastLoadSaveData = result;
 
-                // 最後に読み込んだセーブデータ情報を保存
-                lastLoadSaveData = saveData;
-
-                return saveData;
+                return result;
             }
 
             Debug.Log($"ファイルが見つからなかったよ…{filePath}");

@@ -24,10 +24,7 @@ namespace ProjectCronos
         /// </summary>
         public int coinNum { get; set; }
 
-        /// <summary>
-        /// 所持しているアイテム
-        /// </summary>
-        public Dictionary<int,int> ownItems { get; set; }
+        public ItemHolder itemHolder { get; set; }
 
         /// <summary>
         /// ステータス更新イベント
@@ -40,6 +37,7 @@ namespace ProjectCronos
             isInit = false;
 
             var initData = MasterDataManager.DB.PlayerDataTable.FindByKey(statusKey);
+            itemHolder = new ItemHolder();
 
             // HP周り設定
             maxHp = initData.MaxHp;
@@ -65,22 +63,18 @@ namespace ProjectCronos
 
             // セーブデータの読み込み
             // FIXME: 現在は決め打ちでデータを読み込んでいる
-            var saveData = SaveManager.Instance.Load(0);
+            var saveData = SaveManager.Instance.lastLoadSaveData;
             if (saveData != null)
             {
                 if (saveData.playerSaveData != null)
                 {
                     coinNum = saveData.playerSaveData.coinNum;
 
-                    if (saveData.playerSaveData.ownItems == null)
+                    itemHolder.Initialize();
+                    
+                    if (saveData.playerSaveData.ownItems != null)
                     {
-                        Debug.Log("所持アイテム初期化");
-                        ownItems = new Dictionary<int, int>();
-                    }
-                    else
-                    {
-                        Debug.Log("所持アイテム読み込み");
-                        ownItems = saveData.playerSaveData.ownItems;
+                        itemHolder.LoadOwnItems(saveData.playerSaveData.ownItems);
                     }
                 }
             }
@@ -91,45 +85,6 @@ namespace ProjectCronos
             }
 
             isInit = true;
-        }
-
-        /// <summary>
-        /// アイテムを追加
-        /// </summary>
-        /// <param name="itemId">追加するアイテムのID</param>
-        /// <param name="amount">追加するアイテムの個数</param>
-        public void AddItem(int itemId, int amount)
-        {
-            if (ownItems.ContainsKey(itemId))
-            {
-                ownItems[itemId] += amount;
-                Debug.Log($"アイテムID:{itemId}を{amount}個追加しました");
-            }
-            else
-            {
-                ownItems.Add(itemId, amount);
-            }
-        }
-
-        /// <summary>
-        /// アイテムを消費
-        /// </summary>
-        /// <param name="itemId">消費するアイテムのID</param>
-        /// <param name="amount">消費数</param>
-        /// <returns>所持しているアイテムが足りずに消費に失敗したらfalse,消費に成功したらtrue</returns>
-        public bool SubItem(int itemId, int amount)
-        {
-            if (ownItems.ContainsKey(itemId))
-            {
-                if (ownItems[itemId] >= amount)
-                {
-                    ownItems[itemId] -= amount;
-                    Debug.Log($"アイテムID:{itemId}を{amount}個消費しました");
-                    return true;
-                }
-            }
-            
-            return false;
         }
 
         /// <summary>

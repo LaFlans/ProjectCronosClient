@@ -50,8 +50,8 @@ namespace ProjectCronos
 #endif
             // マネージャーを初期化
             List<UniTask<bool>> task = new List<UniTask<bool>>();
-            task.Add(AddressableManager.Instance.Initialize());
             task.Add(MasterDataManager.Instance.Initialize());
+            task.Add(AddressableManager.Instance.Initialize());
             task.Add(InputManager.Instance.Initialize());
             task.Add(SoundManager.Instance.Initialize());
             task.Add(PopupManager.Instance.Initialize());

@@ -247,6 +247,7 @@ namespace ProjectCronos
                         MasterMemoryResolver.Instance,
                         GeneratedResolver.Instance,
                         StandardResolver.Instance,
+                        PrimitiveObjectResolver.Instance
                     });
 
                 var options = MessagePackSerializerOptions.Standard.WithResolver(StaticCompositeResolver.Instance);

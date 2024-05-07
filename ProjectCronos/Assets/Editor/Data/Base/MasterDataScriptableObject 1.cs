@@ -55,9 +55,10 @@ namespace ProjectCronos
                 (
                     new IFormatterResolver[]
                     {
-                    MasterMemoryResolver.Instance,
-                    GeneratedResolver.Instance,
-                    StandardResolver.Instance,
+                        MasterMemoryResolver.Instance,
+                        GeneratedResolver.Instance,
+                        StandardResolver.Instance,
+                        PrimitiveObjectResolver.Instance
                     });
                 var options = MessagePackSerializerOptions.Standard.WithResolver(StaticCompositeResolver.Instance);
                 MessagePackSerializer.DefaultOptions = options;

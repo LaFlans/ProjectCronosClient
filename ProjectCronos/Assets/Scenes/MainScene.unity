@@ -34134,7 +34134,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 408708502}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.9999848
+  m_Size: 0.99997264
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -41693,6 +41693,7 @@ MonoBehaviour:
   gameLogger: {fileID: 42298968}
   gameOverEffect: {fileID: 1047505610}
   mainMenu: {fileID: 845775806}
+  isInitSaveData: 0
 --- !u!114 &1729653125
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48106,7 +48107,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.000026007332}
+  m_AnchoredPosition: {x: 0, y: 0.000034765828}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!4 &2046553494 stripped

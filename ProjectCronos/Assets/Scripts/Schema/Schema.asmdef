@@ -1,0 +1,18 @@
+{
+    "name": "Schema",
+    "rootNamespace": "",
+    "references": [
+        "MessagePack.Annotations",
+        "MasterMemory",
+        "MessagePack"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

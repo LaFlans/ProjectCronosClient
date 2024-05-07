@@ -60,13 +60,12 @@ namespace ProjectCronos
 
                 if (obj != null)
                 {
-                    obj.GetComponent<SavePopup>().Apply(new SaveAreaInfo(saveAreaId, respawnTransform));
-
-                    //obj.GetComponent<PopupBase>().Setup(
-                    //    EnumCollection.Popup.POPUP_BUTTON_STATUS.DEFAULT,
-                    //    new PopupBase.Param(null, null, null, () => {}));
+                    obj.GetComponent<SavePopup>().Apply(
+                        new SaveAreaInfo(
+                            saveAreaId,
+                            respawnTransform.position,
+                            respawnTransform.rotation));
                 }
-
             }
         }
 

@@ -15,21 +15,38 @@ namespace ProjectCronos
         private static MemoryDatabase _db;
         public static MemoryDatabase DB => _db;
 
+        static bool isSerializeRegisterd = false;
+
         string masterDataPath = "Assets/MasterData/Generated/master-data.bytes";
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-        private static void InitializeMessagePack()
+        static void InitializeMessagePack()
         {
-            StaticCompositeResolver.Instance.Register
-            (
-                MasterMemoryResolver.Instance,
-                GeneratedResolver.Instance,
-                StandardResolver.Instance
-            );
+            if (!isSerializeRegisterd)
+            {
+                StaticCompositeResolver.Instance.Register
+                (
+                    MasterMemoryResolver.Instance,
+                    GeneratedResolver.Instance,
+                    StandardResolver.Instance,
+                    PrimitiveObjectResolver.Instance
+                );
 
-            var options = MessagePackSerializerOptions.Standard.WithResolver(StaticCompositeResolver.Instance);
-            MessagePackSerializer.DefaultOptions = options;
+                var options = MessagePackSerializerOptions.Standard.WithResolver(StaticCompositeResolver.Instance);
+                MessagePackSerializer.DefaultOptions = options;
+                isSerializeRegisterd = true;
+            }
         }
+
+#if UNITY_EDITOR
+
+        [UnityEditor.InitializeOnLoadMethod]
+        static void EditorInitialize()
+        {
+            InitializeMessagePack();
+        }
+
+#endif
 
         public override async UniTask<bool> Initialize()
         {

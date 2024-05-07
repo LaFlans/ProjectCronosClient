@@ -27,6 +27,9 @@ namespace ProjectCronos
         [SerializeField]
         MainMenu mainMenu;
 
+        [SerializeField]
+        bool isInitSaveData;
+
         /// <summary>
         /// シーンの初期化
         /// </summary>
@@ -39,9 +42,19 @@ namespace ProjectCronos
             // ゲーム状態を設定
             ManagerScene.SetGameStatus(EnumCollection.Game.GAME_STATUS.GAME_PLAY);
 
+            // セーブデータの読み込み
+            if (isInitSaveData)
+            {
+                await SaveManager.Instance.CreateNewData();
+            }
+            else
+            {
+                await SaveManager.Instance.Load(0);
+            }
+
             // プレイ時間周りの設定
             // FIXME: ここは一旦1つ目のセーブデータを参照しているので後で修正
-            TimeManager.Instance.SetPlayTimeFloat(SaveManager.Instance.Load(0).playTime);
+            TimeManager.Instance.SetPlayTimeFloat(SaveManager.Instance.lastLoadSaveData.playTime);
             TimeManager.Instance.StartMeasurePlayTime();
 
             isShowPopup = false;

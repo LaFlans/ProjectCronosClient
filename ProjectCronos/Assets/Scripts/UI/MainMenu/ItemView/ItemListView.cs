@@ -35,9 +35,9 @@ namespace ProjectCronos
            
             var playerStatus = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatus>();
 
-            if (playerStatus.ownItems != null)
+            if (playerStatus.itemHolder.IsHoldItems())
             {
-                foreach (var item in playerStatus.ownItems)
+                foreach (var item in playerStatus.itemHolder.ownItems)
                 {
                     var obj = Instantiate(cell, parent.transform);
                     obj.GetComponent<ItemCell>().Initialize(item.Key, item.Value);

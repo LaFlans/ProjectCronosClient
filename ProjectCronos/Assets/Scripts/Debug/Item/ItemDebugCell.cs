@@ -13,10 +13,16 @@ namespace ProjectCronos
     public class ItemDebugCell : MonoBehaviour
     {
         /// <summary>
-        /// アイテム名と個数のテキスト
+        /// アイテム名テキスト
         /// </summary>
         [SerializeField]
         TextMeshProUGUI itemNameText;
+
+        /// <summary>
+        /// アイテム所持数テキスト
+        /// </summary>
+        [SerializeField]
+        TextMeshProUGUI itemAmountText;
 
         /// <summary>
         /// アイテム加算ボタン
@@ -39,7 +45,8 @@ namespace ProjectCronos
         public void Initialize(int itemId, string itemNameText, int amount, Action addAction, Action subAction)
         {
             this.itemId = itemId;
-            this.itemNameText.text = itemNameText + $"({amount})";
+            this.itemNameText.text = itemNameText;
+            this.itemAmountText.text = $"[{amount}]";
             this.amount = amount;
 
             addButton.onClick.AddListener(() => { addAction?.Invoke(); });
@@ -53,6 +60,7 @@ namespace ProjectCronos
         public void UpdateView(int amount)
         {
             this.amount = amount;
+            this.itemAmountText.text = $"[{amount}]";
         }
     }
 }

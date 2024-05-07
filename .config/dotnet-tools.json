@@ -9,7 +9,7 @@
       ]
     },
     "messagepack.generator": {
-      "version": "2.4.35",
+      "version": "2.5.140",
       "commands": [
         "mpc"
       ]
