@@ -175,7 +175,7 @@ namespace ProjectCronos
         void OnOpenMainMenu(InputAction.CallbackContext context)
         {
             // 入力イベント設定
-            InputManager.Instance.SetInputStatus(EnumCollection.Input.INPUT_STATUS.UI);
+            InputManager.Instance.SetInputStatus(EnumCollection.Input.INPUT_STATUS.MAIN_MENU);
             TimeManager.Instance.StopTime();
             mainMenu.gameObject.SetActive(true);
             mainMenu.Initialize();

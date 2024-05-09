@@ -19,13 +19,17 @@ namespace ProjectCronos
                 /// </summary>
                 UNCONTROLLABLE,
                 /// <summary>
-                /// UI側の操作可能
+                /// UI側の操作
                 /// </summary>
                 UI,
                 /// <summary>
-                /// プレイヤー側の操作可能
+                /// プレイヤー側の操作
                 /// </summary>
                 PLAYER,
+                /// <summary>
+                /// メインメニューの操作
+                /// </summary>
+                MAIN_MENU,
                 /// <summary>
                 /// 要素数
                 /// </summary>
@@ -453,6 +457,14 @@ namespace ProjectCronos
                 /// 通常アイテム
                 /// </summary>
                 NORMAL,
+                /// <summary>
+                /// 特殊なアイテム
+                /// </summary>
+                SPECIAL,
+                /// <summary>
+                /// 回復アイテム
+                /// </summary>
+                RECOVERY,
                 /// <summary>
                 /// 大切なもの
                 /// </summary>

@@ -520,7 +520,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""name"": ""Submit"",
                     ""type"": ""Button"",
                     ""id"": ""b1592ccd-e23a-44dc-b001-3f09d316e084"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -610,7 +610,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""name"": ""Left"",
                     ""type"": ""Button"",
                     ""id"": ""fb59bfb0-7feb-4135-b32f-664576c1f6dd"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -619,7 +619,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""name"": ""Right"",
                     ""type"": ""Button"",
                     ""id"": ""2e5026c5-2108-4c52-9160-11c182d07c29"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -628,7 +628,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""name"": ""Up"",
                     ""type"": ""Button"",
                     ""id"": ""ebc29d98-bb9c-4456-8f35-193ba35d3cff"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -637,7 +637,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""name"": ""Down"",
                     ""type"": ""Button"",
                     ""id"": ""117f1bd7-5f17-4595-a30f-cc8f9a506529"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -646,7 +646,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""name"": ""Close"",
                     ""type"": ""Button"",
                     ""id"": ""0ea255c8-5e04-4cc6-b15e-fdb8df0faa1a"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -655,24 +655,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""name"": ""Delete"",
                     ""type"": ""Button"",
                     ""id"": ""906a249a-65d4-45ff-a7d9-098b4e1409d4"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""RightBumper"",
-                    ""type"": ""Button"",
-                    ""id"": ""f0cb5b9d-c74b-4ea8-a353-041cc63406e8"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""LeftBumper"",
-                    ""type"": ""Button"",
-                    ""id"": ""3908e5d4-c645-45e6-bb6e-49c73207d376"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -1262,50 +1244,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Delete"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""d411a9c4-d59e-4182-9f2a-941c24aec6eb"",
-                    ""path"": ""<XInputController>/rightShoulder"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""RightBumper"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""aef133d5-23d9-4271-ad64-35a2f631a700"",
-                    ""path"": ""<Keyboard>/e"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""RightBumper"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""e77772f1-9d58-439e-9435-8668d093acd8"",
-                    ""path"": ""<XInputController>/leftShoulder"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""LeftBumper"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""b65a6977-df27-4316-8630-bd7d40cbf28b"",
-                    ""path"": ""<Keyboard>/q"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""LeftBumper"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -1374,6 +1312,262 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Test"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""MainMenu"",
+            ""id"": ""5494454f-fa56-4d20-99b5-a9466712eb08"",
+            ""actions"": [
+                {
+                    ""name"": ""Submit"",
+                    ""type"": ""Button"",
+                    ""id"": ""05674877-7664-41ec-b674-1cdaebda426e"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LeftBumper"",
+                    ""type"": ""Button"",
+                    ""id"": ""c8c181aa-e357-4d67-8759-7cb82cca13d5"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RightBumper"",
+                    ""type"": ""Button"",
+                    ""id"": ""5191f66e-1007-4672-9df3-38cbf6c71eaa"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Close"",
+                    ""type"": ""Button"",
+                    ""id"": ""f740b970-3e16-4b3a-920c-215947053085"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Left"",
+                    ""type"": ""Button"",
+                    ""id"": ""98e60550-e8ff-4763-b44f-0d139c12deef"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Right"",
+                    ""type"": ""Button"",
+                    ""id"": ""3af01eb9-ee1a-4b65-87ae-3ac88a3912be"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Down"",
+                    ""type"": ""Button"",
+                    ""id"": ""723893f2-3dab-47c6-915f-12118765a20d"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Up"",
+                    ""type"": ""Button"",
+                    ""id"": ""471b6327-aca6-4e3f-b3c3-0e51d0223285"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""944b47ea-8c41-4d1c-b736-90268e59a38a"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5bfaec3b-33ae-4b7e-ac8a-fa259f2950c2"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c8bf5713-01fe-43b9-8d0e-88ff9d59ac9d"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Submit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b49d018d-55d7-490a-8c5b-1343b42dd440"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Submit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6342b093-28e1-479d-ae49-4bfc604175e6"",
+                    ""path"": ""<XInputController>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""LeftBumper"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7e94c395-5afa-4bb5-bd38-ec78eb1dadb6"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""LeftBumper"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""36b93c1e-6899-45f6-b848-1747e12d544b"",
+                    ""path"": ""<XInputController>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""RightBumper"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""526ed441-4634-4aa7-af26-d0acc13a0f7a"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""RightBumper"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a80ba63c-91d2-4ed8-8148-fc491156ca9e"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Close"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d0b37a4d-19d6-412e-9c25-a3132672c76b"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Close"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""09c270a7-1308-4d5b-b53c-84d8ddd85469"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Down"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""43f77d16-92a7-42e1-b886-c345f7fd71f3"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Down"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fe4774ef-fb20-489d-9a84-5d1f13888f43"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Up"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""da913cf6-3225-4b27-8124-be98047f442b"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Up"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""39447374-39fd-4f99-8bc4-9b020ce8a412"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1454b940-003a-4781-bcaa-bae9928730b3"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Right"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1476,12 +1670,20 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_UI_Down = m_UI.FindAction("Down", throwIfNotFound: true);
         m_UI_Close = m_UI.FindAction("Close", throwIfNotFound: true);
         m_UI_Delete = m_UI.FindAction("Delete", throwIfNotFound: true);
-        m_UI_RightBumper = m_UI.FindAction("RightBumper", throwIfNotFound: true);
-        m_UI_LeftBumper = m_UI.FindAction("LeftBumper", throwIfNotFound: true);
         // DebugActions
         m_DebugActions = asset.FindActionMap("DebugActions", throwIfNotFound: true);
         m_DebugActions_ShowDebugMenu = m_DebugActions.FindAction("ShowDebugMenu", throwIfNotFound: true);
         m_DebugActions_Test = m_DebugActions.FindAction("Test", throwIfNotFound: true);
+        // MainMenu
+        m_MainMenu = asset.FindActionMap("MainMenu", throwIfNotFound: true);
+        m_MainMenu_Submit = m_MainMenu.FindAction("Submit", throwIfNotFound: true);
+        m_MainMenu_LeftBumper = m_MainMenu.FindAction("LeftBumper", throwIfNotFound: true);
+        m_MainMenu_RightBumper = m_MainMenu.FindAction("RightBumper", throwIfNotFound: true);
+        m_MainMenu_Close = m_MainMenu.FindAction("Close", throwIfNotFound: true);
+        m_MainMenu_Left = m_MainMenu.FindAction("Left", throwIfNotFound: true);
+        m_MainMenu_Right = m_MainMenu.FindAction("Right", throwIfNotFound: true);
+        m_MainMenu_Down = m_MainMenu.FindAction("Down", throwIfNotFound: true);
+        m_MainMenu_Up = m_MainMenu.FindAction("Up", throwIfNotFound: true);
     }
 
     ~@InputActions()
@@ -1489,6 +1691,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         Debug.Assert(!m_Player.enabled, "This will cause a leak and performance issues, InputActions.Player.Disable() has not been called.");
         Debug.Assert(!m_UI.enabled, "This will cause a leak and performance issues, InputActions.UI.Disable() has not been called.");
         Debug.Assert(!m_DebugActions.enabled, "This will cause a leak and performance issues, InputActions.DebugActions.Disable() has not been called.");
+        Debug.Assert(!m_MainMenu.enabled, "This will cause a leak and performance issues, InputActions.MainMenu.Disable() has not been called.");
     }
 
     public void Dispose()
@@ -1701,8 +1904,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_Down;
     private readonly InputAction m_UI_Close;
     private readonly InputAction m_UI_Delete;
-    private readonly InputAction m_UI_RightBumper;
-    private readonly InputAction m_UI_LeftBumper;
     public struct UIActions
     {
         private @InputActions m_Wrapper;
@@ -1724,8 +1925,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         public InputAction @Down => m_Wrapper.m_UI_Down;
         public InputAction @Close => m_Wrapper.m_UI_Close;
         public InputAction @Delete => m_Wrapper.m_UI_Delete;
-        public InputAction @RightBumper => m_Wrapper.m_UI_RightBumper;
-        public InputAction @LeftBumper => m_Wrapper.m_UI_LeftBumper;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1786,12 +1985,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Delete.started += instance.OnDelete;
             @Delete.performed += instance.OnDelete;
             @Delete.canceled += instance.OnDelete;
-            @RightBumper.started += instance.OnRightBumper;
-            @RightBumper.performed += instance.OnRightBumper;
-            @RightBumper.canceled += instance.OnRightBumper;
-            @LeftBumper.started += instance.OnLeftBumper;
-            @LeftBumper.performed += instance.OnLeftBumper;
-            @LeftBumper.canceled += instance.OnLeftBumper;
         }
 
         private void UnregisterCallbacks(IUIActions instance)
@@ -1847,12 +2040,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Delete.started -= instance.OnDelete;
             @Delete.performed -= instance.OnDelete;
             @Delete.canceled -= instance.OnDelete;
-            @RightBumper.started -= instance.OnRightBumper;
-            @RightBumper.performed -= instance.OnRightBumper;
-            @RightBumper.canceled -= instance.OnRightBumper;
-            @LeftBumper.started -= instance.OnLeftBumper;
-            @LeftBumper.performed -= instance.OnLeftBumper;
-            @LeftBumper.canceled -= instance.OnLeftBumper;
         }
 
         public void RemoveCallbacks(IUIActions instance)
@@ -1924,6 +2111,108 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         }
     }
     public DebugActionsActions @DebugActions => new DebugActionsActions(this);
+
+    // MainMenu
+    private readonly InputActionMap m_MainMenu;
+    private List<IMainMenuActions> m_MainMenuActionsCallbackInterfaces = new List<IMainMenuActions>();
+    private readonly InputAction m_MainMenu_Submit;
+    private readonly InputAction m_MainMenu_LeftBumper;
+    private readonly InputAction m_MainMenu_RightBumper;
+    private readonly InputAction m_MainMenu_Close;
+    private readonly InputAction m_MainMenu_Left;
+    private readonly InputAction m_MainMenu_Right;
+    private readonly InputAction m_MainMenu_Down;
+    private readonly InputAction m_MainMenu_Up;
+    public struct MainMenuActions
+    {
+        private @InputActions m_Wrapper;
+        public MainMenuActions(@InputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Submit => m_Wrapper.m_MainMenu_Submit;
+        public InputAction @LeftBumper => m_Wrapper.m_MainMenu_LeftBumper;
+        public InputAction @RightBumper => m_Wrapper.m_MainMenu_RightBumper;
+        public InputAction @Close => m_Wrapper.m_MainMenu_Close;
+        public InputAction @Left => m_Wrapper.m_MainMenu_Left;
+        public InputAction @Right => m_Wrapper.m_MainMenu_Right;
+        public InputAction @Down => m_Wrapper.m_MainMenu_Down;
+        public InputAction @Up => m_Wrapper.m_MainMenu_Up;
+        public InputActionMap Get() { return m_Wrapper.m_MainMenu; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(MainMenuActions set) { return set.Get(); }
+        public void AddCallbacks(IMainMenuActions instance)
+        {
+            if (instance == null || m_Wrapper.m_MainMenuActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_MainMenuActionsCallbackInterfaces.Add(instance);
+            @Submit.started += instance.OnSubmit;
+            @Submit.performed += instance.OnSubmit;
+            @Submit.canceled += instance.OnSubmit;
+            @LeftBumper.started += instance.OnLeftBumper;
+            @LeftBumper.performed += instance.OnLeftBumper;
+            @LeftBumper.canceled += instance.OnLeftBumper;
+            @RightBumper.started += instance.OnRightBumper;
+            @RightBumper.performed += instance.OnRightBumper;
+            @RightBumper.canceled += instance.OnRightBumper;
+            @Close.started += instance.OnClose;
+            @Close.performed += instance.OnClose;
+            @Close.canceled += instance.OnClose;
+            @Left.started += instance.OnLeft;
+            @Left.performed += instance.OnLeft;
+            @Left.canceled += instance.OnLeft;
+            @Right.started += instance.OnRight;
+            @Right.performed += instance.OnRight;
+            @Right.canceled += instance.OnRight;
+            @Down.started += instance.OnDown;
+            @Down.performed += instance.OnDown;
+            @Down.canceled += instance.OnDown;
+            @Up.started += instance.OnUp;
+            @Up.performed += instance.OnUp;
+            @Up.canceled += instance.OnUp;
+        }
+
+        private void UnregisterCallbacks(IMainMenuActions instance)
+        {
+            @Submit.started -= instance.OnSubmit;
+            @Submit.performed -= instance.OnSubmit;
+            @Submit.canceled -= instance.OnSubmit;
+            @LeftBumper.started -= instance.OnLeftBumper;
+            @LeftBumper.performed -= instance.OnLeftBumper;
+            @LeftBumper.canceled -= instance.OnLeftBumper;
+            @RightBumper.started -= instance.OnRightBumper;
+            @RightBumper.performed -= instance.OnRightBumper;
+            @RightBumper.canceled -= instance.OnRightBumper;
+            @Close.started -= instance.OnClose;
+            @Close.performed -= instance.OnClose;
+            @Close.canceled -= instance.OnClose;
+            @Left.started -= instance.OnLeft;
+            @Left.performed -= instance.OnLeft;
+            @Left.canceled -= instance.OnLeft;
+            @Right.started -= instance.OnRight;
+            @Right.performed -= instance.OnRight;
+            @Right.canceled -= instance.OnRight;
+            @Down.started -= instance.OnDown;
+            @Down.performed -= instance.OnDown;
+            @Down.canceled -= instance.OnDown;
+            @Up.started -= instance.OnUp;
+            @Up.performed -= instance.OnUp;
+            @Up.canceled -= instance.OnUp;
+        }
+
+        public void RemoveCallbacks(IMainMenuActions instance)
+        {
+            if (m_Wrapper.m_MainMenuActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IMainMenuActions instance)
+        {
+            foreach (var item in m_Wrapper.m_MainMenuActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_MainMenuActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public MainMenuActions @MainMenu => new MainMenuActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -2003,12 +2292,21 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         void OnDown(InputAction.CallbackContext context);
         void OnClose(InputAction.CallbackContext context);
         void OnDelete(InputAction.CallbackContext context);
-        void OnRightBumper(InputAction.CallbackContext context);
-        void OnLeftBumper(InputAction.CallbackContext context);
     }
     public interface IDebugActionsActions
     {
         void OnShowDebugMenu(InputAction.CallbackContext context);
         void OnTest(InputAction.CallbackContext context);
+    }
+    public interface IMainMenuActions
+    {
+        void OnSubmit(InputAction.CallbackContext context);
+        void OnLeftBumper(InputAction.CallbackContext context);
+        void OnRightBumper(InputAction.CallbackContext context);
+        void OnClose(InputAction.CallbackContext context);
+        void OnLeft(InputAction.CallbackContext context);
+        void OnRight(InputAction.CallbackContext context);
+        void OnDown(InputAction.CallbackContext context);
+        void OnUp(InputAction.CallbackContext context);
     }
 }

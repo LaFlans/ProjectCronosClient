@@ -43,6 +43,11 @@ namespace ProjectCronos
             return true;
         }
 
+        public void SetAction(InputActions.PlayerActions action)
+        {
+        }
+
+
         /// <summary>
         /// 操作状態を設定
         /// </summary>
@@ -56,12 +61,22 @@ namespace ProjectCronos
                 case EnumCollection.Input.INPUT_STATUS.UNCONTROLLABLE:
                     inputActions.Player.Disable();
                     inputActions.UI.Disable();
+                    inputActions.MainMenu.Disable();
                     break;
                 case EnumCollection.Input.INPUT_STATUS.PLAYER:
                     inputActions.Player.Enable();
+                    inputActions.UI.Disable();
+                    inputActions.MainMenu.Disable();
                     break;
                 case EnumCollection.Input.INPUT_STATUS.UI:
                     inputActions.Player.Disable();
+                    inputActions.UI.Enable();
+                    inputActions.MainMenu.Disable();
+                    break;
+                case EnumCollection.Input.INPUT_STATUS.MAIN_MENU:
+                    inputActions.Player.Disable();
+                    inputActions.UI.Disable();
+                    inputActions.MainMenu.Enable();
                     break;
             }
 

@@ -95,53 +95,20 @@ namespace ProjectCronos
             UpdateView();
         }
 
-        /// <summary>
-        /// 左選択
-        /// </summary>
-        /// <param name="context"></param>
-        void OnLeft(InputAction.CallbackContext context)
-        {
-            //SoundManager.Instance.Play("Button47");
-        }
-
-        /// <summary>
-        /// 右選択
-        /// </summary>
-        /// <param name="context"></param>
-        void OnRight(InputAction.CallbackContext context)
-        {
-            //SoundManager.Instance.Play("Button47");
-        }
-
-        /// <summary>
-        /// 決定処理
-        /// </summary>
-        /// <param name="context"></param>
-        void OnSubmit(InputAction.CallbackContext context)
-        {
-            //SoundManager.Instance.Play("Button47");
-        }
-
         void RegisterInputActions()
         {
-            InputManager.Instance.inputActions.UI.Submit.performed += OnSubmit;
-            InputManager.Instance.inputActions.UI.Left.performed += OnLeft;
-            InputManager.Instance.inputActions.UI.Right.performed += OnRight;
-            InputManager.Instance.inputActions.UI.RightBumper.performed += OnToggleTabRight;
-            InputManager.Instance.inputActions.UI.LeftBumper.performed += OnToggleTabLeft;
-
-            InputManager.Instance.inputActions.UI.Escape.performed += OnCloseMenu;
+            contentView.RegisterInputActions();
+            InputManager.Instance.inputActions.MainMenu.RightBumper.performed += OnToggleTabRight;
+            InputManager.Instance.inputActions.MainMenu.LeftBumper.performed += OnToggleTabLeft;
+            InputManager.Instance.inputActions.MainMenu.Close.performed += OnCloseMenu;
         }
 
         void UnregisterInputActions()
         {
-            InputManager.Instance.inputActions.UI.Submit.performed -= OnSubmit;
-            InputManager.Instance.inputActions.UI.Left.performed -= OnLeft;
-            InputManager.Instance.inputActions.UI.Right.performed -= OnRight;
-            InputManager.Instance.inputActions.UI.RightBumper.performed -= OnToggleTabRight;
-            InputManager.Instance.inputActions.UI.LeftBumper.performed -= OnToggleTabLeft;
-
-            InputManager.Instance.inputActions.UI.Escape.performed -= OnCloseMenu;
+            contentView.UnregisterInputActions();
+            InputManager.Instance.inputActions.MainMenu.RightBumper.performed -= OnToggleTabRight;
+            InputManager.Instance.inputActions.MainMenu.LeftBumper.performed -= OnToggleTabLeft;
+            InputManager.Instance.inputActions.MainMenu.Close.performed -= OnCloseMenu;
         }
 
         private void OnDestroy()
@@ -152,6 +119,7 @@ namespace ProjectCronos
         void OnCloseMenu(InputAction.CallbackContext context)
         {
             UnregisterInputActions();
+
             this.gameObject.SetActive(false);
             InputManager.Instance.SetInputStatus(EnumCollection.Input.INPUT_STATUS.PLAYER);
             TimeManager.Instance.ApplyTimeScale();

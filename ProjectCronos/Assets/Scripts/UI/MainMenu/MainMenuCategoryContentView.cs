@@ -42,7 +42,7 @@ namespace ProjectCronos
         public async UniTask PreLoadAsync()
         {
             // ここで事前に必要な素材を読み込む
-            itemView.PreLoadAsync();
+            await itemView.PreLoadAsync();
         }
 
         /// <summary>
@@ -67,6 +67,18 @@ namespace ProjectCronos
             skillView.gameObject.SetActive(currentCategory == EnumCollection.UI.MAIN_MENU_CATEGORY.SKILL);
             mapView.gameObject.SetActive(currentCategory == EnumCollection.UI.MAIN_MENU_CATEGORY.MAP);
             settingView.gameObject.SetActive(currentCategory == EnumCollection.UI.MAIN_MENU_CATEGORY.SETTING);
+        }
+
+        public void RegisterInputActions()
+        {
+            Debug.Log("コンテンツ画面の入力登録");
+            itemView.RegisterInputActions();
+        }
+
+        public void UnregisterInputActions()
+        {
+            Debug.Log("コンテンツ画面の入力解除");
+            itemView.UnregisterInputActions();
         }
     }
 }

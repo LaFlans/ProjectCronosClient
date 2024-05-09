@@ -2,6 +2,7 @@ using Cysharp.Threading.Tasks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace ProjectCronos
 {
@@ -16,6 +17,9 @@ namespace ProjectCronos
         [SerializeField]
         ItemCategoryListView itemCategoryListView;
 
+        /// <summary>
+        /// アイテム一覧画面
+        /// </summary>
         [SerializeField]
         ItemListView itemListView;
 
@@ -24,6 +28,11 @@ namespace ProjectCronos
         /// </summary>
         [SerializeField]
         ItemDetailView itemDetailView;
+
+        /// <summary>
+        /// 現在選択中のアイテムカテゴリー
+        /// </summary>
+        EnumCollection.Item.ITEM_CATEGORY currentItemCategory;
 
         /// <summary>
         /// 事前読み込み
@@ -45,14 +54,73 @@ namespace ProjectCronos
         {
             itemCategoryListView.Initialize();
             itemListView.Initialize();
+
+            currentItemCategory = EnumCollection.Item.ITEM_CATEGORY.NORMAL;
+            UpdateItemCategoryView();
+        }
+
+        void RegisterItemCategoryInputActions()
+        {
+            InputManager.Instance.inputActions.MainMenu.Up.performed += OnUp;
+            InputManager.Instance.inputActions.MainMenu.Down.performed += OnDown;
+            InputManager.Instance.inputActions.MainMenu.Submit.performed += OnSubmit;
+        }
+
+        void UnregisterItemCategoryInputActions()
+        {
+            InputManager.Instance.inputActions.MainMenu.Up.performed -= OnUp;
+            InputManager.Instance.inputActions.MainMenu.Down.performed -= OnDown;
+            InputManager.Instance.inputActions.MainMenu.Submit.performed -= OnSubmit;
+        }
+
+        void OnSubmit(InputAction.CallbackContext context)
+        {
+            SoundManager.Instance.Play("Button30");
+        }
+
+        void OnUp(InputAction.CallbackContext context)
+        {
+            SoundManager.Instance.Play("Button47");
+
+            currentItemCategory--;
+            if (currentItemCategory < 0)
+            {
+                currentItemCategory = EnumCollection.Item.ITEM_CATEGORY.MAXMUM -1;
+            }
+
+            UpdateItemCategoryView();
+        }
+
+        void OnDown(InputAction.CallbackContext context)
+        {
+            SoundManager.Instance.Play("Button47");
+
+            currentItemCategory++;
+            if (currentItemCategory == EnumCollection.Item.ITEM_CATEGORY.MAXMUM)
+            {
+                currentItemCategory = 0;
+            }
+
+            UpdateItemCategoryView();
         }
 
         /// <summary>
-        /// ビューの更新
+        /// アイテムの種類画面の更新
         /// </summary>
-        public void UpdateView()
+        public void UpdateItemCategoryView()
         {
+            itemCategoryListView.UpdateView(currentItemCategory);
+        }
 
+        public void RegisterInputActions()
+        {
+            Debug.Log("コンテンツ画面の入力登録");
+            RegisterItemCategoryInputActions();
+        }
+        public void UnregisterInputActions()
+        {
+            Debug.Log("コンテンツ画面の入力解除");
+            UnregisterItemCategoryInputActions();
         }
     }
 }

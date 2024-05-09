@@ -219,7 +219,7 @@ GameObject:
   - component: {fileID: 3049526937977332938}
   - component: {fileID: 3156641528380178722}
   m_Layer: 5
-  m_Name: Images
+  m_Name: ToggleImages
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -313,6 +313,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   categoryNameText: {fileID: 4171559283107760738}
+  toggleImage: {fileID: 3156641528380178722}
+  category: 0
 --- !u!1 &8175250153580210141
 GameObject:
   m_ObjectHideFlags: 0
