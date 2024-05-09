@@ -50,7 +50,6 @@ namespace ProjectCronos
 
             UpdateView();
 
-
             // 入力イベントを登録
             RegisterInputActions();
         }
@@ -130,6 +129,8 @@ namespace ProjectCronos
             InputManager.Instance.inputActions.UI.Right.performed += OnRight;
             InputManager.Instance.inputActions.UI.RightBumper.performed += OnToggleTabRight;
             InputManager.Instance.inputActions.UI.LeftBumper.performed += OnToggleTabLeft;
+
+            InputManager.Instance.inputActions.UI.Escape.performed += OnCloseMenu;
         }
 
         void UnregisterInputActions()
@@ -139,6 +140,21 @@ namespace ProjectCronos
             InputManager.Instance.inputActions.UI.Right.performed -= OnRight;
             InputManager.Instance.inputActions.UI.RightBumper.performed -= OnToggleTabRight;
             InputManager.Instance.inputActions.UI.LeftBumper.performed -= OnToggleTabLeft;
+
+            InputManager.Instance.inputActions.UI.Escape.performed -= OnCloseMenu;
+        }
+
+        private void OnDestroy()
+        {
+            UnregisterInputActions();
+        }
+
+        void OnCloseMenu(InputAction.CallbackContext context)
+        {
+            UnregisterInputActions();
+            this.gameObject.SetActive(false);
+            InputManager.Instance.SetInputStatus(EnumCollection.Input.INPUT_STATUS.PLAYER);
+            TimeManager.Instance.ApplyTimeScale();
         }
     }
 }

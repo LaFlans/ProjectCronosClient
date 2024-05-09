@@ -27,6 +27,12 @@ namespace ProjectCronos
         /// </summary>
         public void Initialize()
         {
+            // 生成前に初期化しておく
+            foreach (Transform child in parent.transform)
+            {
+                Destroy(child.gameObject);
+            }
+
             foreach (var i in Enum.GetValues(typeof(EnumCollection.Item.ITEM_CATEGORY)))
             {
                 var obj = Instantiate(cell, parent.transform);

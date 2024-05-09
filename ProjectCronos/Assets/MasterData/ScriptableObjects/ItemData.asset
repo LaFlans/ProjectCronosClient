@@ -22,10 +22,10 @@ MonoBehaviour:
     effectValue2: 0
     effectValue3: 0
   - id: 1
-    name: "\u9928\u306E\u9375"
+    name: "\u30E9\u30A6\u30E0\u306E\u9928\u306E\u9375"
     description: "\u9928\u306B\u5165\u308B\u305F\u3081\u306E\u9375\u3002"
     category: 0
-    imagePath: Assets/ProjectCronosAssets/Textures/Item/item_dummy_1.png
+    imagePath: Assets/ProjectCronosAssets/Textures/Item/item_raum_house_key_1.png
     effectValue1: 0
     effectValue2: 0
     effectValue3: 0

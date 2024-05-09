@@ -31,6 +31,12 @@ namespace ProjectCronos
         /// </summary>
         public void Initialize()
         {
+            // 生成前に初期化しておく
+            foreach (Transform child in parent.transform)
+            {
+                Destroy(child.gameObject);
+            }
+
             noItemText.gameObject.SetActive(false);
            
             var playerStatus = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatus>();

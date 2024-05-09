@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using TMPro;
 using Cysharp.Threading.Tasks;
@@ -41,6 +42,18 @@ namespace ProjectCronos
         [SerializeField]
         ItemDebugCell itemDebugCellprefab;
 
+        /// <summary>
+        /// デバックメニュー表示切り替えボタン
+        /// </summary>
+        [SerializeField]
+        Button debugMenuEnableButton;
+
+        /// <summary>
+        /// デバックメニューの親オブジェクト
+        /// </summary>
+        [SerializeField]
+        Transform debugMenuParent;
+
         List<ItemDebugCell> itemDebugCells;
 
         void Start()
@@ -68,6 +81,8 @@ namespace ProjectCronos
 
             // 入力設定
             InputManager.Instance.inputActions.DebugActions.ShowDebugMenu.performed += OnShowDebugMenu;
+
+            debugMenuEnableButton.onClick.AddListener(() => { debugMenuParent.gameObject.SetActive(!debugMenuParent.gameObject.activeSelf); });
         }
 
         /// <summary>

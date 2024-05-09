@@ -85,7 +85,7 @@ namespace ProjectCronos
 
             // 入力イベント設定
             InputManager.Instance.SetInputStatus(EnumCollection.Input.INPUT_STATUS.PLAYER);
-            InputManager.Instance.inputActions.UI.Escape.performed += OnOpenMainMenu;
+            InputManager.Instance.inputActions.Player.OpenMenu.performed += OnOpenMainMenu;
 
             return true;
         }
@@ -120,7 +120,7 @@ namespace ProjectCronos
         void OnDestroy()
         {
             Debug.Log("遷移イベント削除");
-            InputManager.Instance.inputActions.UI.Escape.performed -= OnOpenMainMenu;
+            InputManager.Instance.inputActions.Player.OpenMenu.performed -= OnOpenMainMenu;
         }
 
         /// <summary>
@@ -176,6 +176,7 @@ namespace ProjectCronos
         {
             // 入力イベント設定
             InputManager.Instance.SetInputStatus(EnumCollection.Input.INPUT_STATUS.UI);
+            TimeManager.Instance.StopTime();
             mainMenu.gameObject.SetActive(true);
             mainMenu.Initialize();
         }

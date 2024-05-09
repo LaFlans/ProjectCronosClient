@@ -126,6 +126,15 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""OpenMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""1a504e77-5fdb-4076-9474-29633939775e"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -469,6 +478,28 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Attack2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a0d27258-0268-478b-88bd-b779e1acef95"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""OpenMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1eafe5d4-0784-4c52-961c-cd23f59d965a"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""OpenMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -570,7 +601,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""name"": ""Escape"",
                     ""type"": ""Button"",
                     ""id"": ""5338b892-d7ea-4e08-ba81-cb29709f0dfd"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -1425,6 +1456,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_Player_Dogde = m_Player.FindAction("Dogde", throwIfNotFound: true);
         m_Player_Action = m_Player.FindAction("Action", throwIfNotFound: true);
         m_Player_Attack2 = m_Player.FindAction("Attack2", throwIfNotFound: true);
+        m_Player_OpenMenu = m_Player.FindAction("OpenMenu", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1529,6 +1561,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Dogde;
     private readonly InputAction m_Player_Action;
     private readonly InputAction m_Player_Attack2;
+    private readonly InputAction m_Player_OpenMenu;
     public struct PlayerActions
     {
         private @InputActions m_Wrapper;
@@ -1544,6 +1577,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         public InputAction @Dogde => m_Wrapper.m_Player_Dogde;
         public InputAction @Action => m_Wrapper.m_Player_Action;
         public InputAction @Attack2 => m_Wrapper.m_Player_Attack2;
+        public InputAction @OpenMenu => m_Wrapper.m_Player_OpenMenu;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1586,6 +1620,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Attack2.started += instance.OnAttack2;
             @Attack2.performed += instance.OnAttack2;
             @Attack2.canceled += instance.OnAttack2;
+            @OpenMenu.started += instance.OnOpenMenu;
+            @OpenMenu.performed += instance.OnOpenMenu;
+            @OpenMenu.canceled += instance.OnOpenMenu;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -1623,6 +1660,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Attack2.started -= instance.OnAttack2;
             @Attack2.performed -= instance.OnAttack2;
             @Attack2.canceled -= instance.OnAttack2;
+            @OpenMenu.started -= instance.OnOpenMenu;
+            @OpenMenu.performed -= instance.OnOpenMenu;
+            @OpenMenu.canceled -= instance.OnOpenMenu;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1942,6 +1982,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         void OnDogde(InputAction.CallbackContext context);
         void OnAction(InputAction.CallbackContext context);
         void OnAttack2(InputAction.CallbackContext context);
+        void OnOpenMenu(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

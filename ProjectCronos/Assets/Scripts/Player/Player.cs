@@ -146,6 +146,13 @@ namespace ProjectCronos
             playerStatus = this.GetComponent<PlayerStatus>();
             playerStatus.Initialize();
 
+            // FIXME: 本来は別の場所でやる
+            // アイテム画像読み込み
+            foreach(var item in MasterDataManager.DB.ItemDataTable.All)
+            {
+                await AddressableManager.Instance.LoadTexture(item.Path);
+            }
+
             // プレイヤーの位置をセーブデータで保存されている位置に移動
             if (SaveManager.Instance.lastLoadSaveData != null)
             {

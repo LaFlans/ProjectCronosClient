@@ -13,12 +13,15 @@ MonoBehaviour:
   m_Name: Image
   m_EditorClassIdentifier: 
   m_GroupName: Image
-  m_Data:
-    m_SerializedData: []
   m_GUID: 55b586cca90c2fe44a29b0dfebbda7c9
   m_SerializeEntries:
   - m_GUID: 234f928d7c02ba04d9e5b73e79016cef
     m_Address: Assets/ProjectCronosAssets/Textures/Item/item_dummy_1.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1a50c6997f7b3cd48bb33dcbf83754f9
+    m_Address: Assets/ProjectCronosAssets/Textures/Item/item_raum_house_key_1.png
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

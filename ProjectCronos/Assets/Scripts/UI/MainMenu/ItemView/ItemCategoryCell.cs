@@ -18,11 +18,18 @@ namespace ProjectCronos
         TextMeshProUGUI categoryNameText;
 
         /// <summary>
+        /// 選択状態を表す画像
+        /// </summary>
+        [SerializeField]
+        ToggleObject toggleImage;
+
+        /// <summary>
         /// 初期化
         /// </summary>
         public void Initialize(string name)
         {
             categoryNameText.text = name;
+            toggleImage.SetToggle(false);
         }
     }
 }
