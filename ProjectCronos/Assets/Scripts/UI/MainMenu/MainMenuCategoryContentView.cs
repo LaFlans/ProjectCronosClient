@@ -80,5 +80,19 @@ namespace ProjectCronos
             Debug.Log("コンテンツ画面の入力解除");
             itemView.UnregisterInputActions();
         }
+
+        /// <summary>
+        /// メニューを閉じることができるか
+        /// </summary>
+        /// <returns></returns>
+        public bool IsCloseMenu()
+        {
+            if (itemView.IsCloseMenu())
+            {
+                return true;
+            }
+
+            return false;
+        }
     }
 }

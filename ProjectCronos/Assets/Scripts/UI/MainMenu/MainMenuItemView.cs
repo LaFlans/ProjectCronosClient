@@ -35,6 +35,13 @@ namespace ProjectCronos
         EnumCollection.Item.ITEM_CATEGORY currentItemCategory;
 
         /// <summary>
+        /// 現在のアイテムメニュー操作状態
+        /// </summary>
+        EnumCollection.Item.MENU_ITEM_CONTROL_STATUS currentItemMenuControlStatus;
+
+        ItemHolder playerItemHolder;
+
+        /// <summary>
         /// 事前読み込み
         /// マネージャー系生成後に呼ばれる
         /// </summary>
@@ -44,7 +51,6 @@ namespace ProjectCronos
             // ここで事前に必要な素材を読み込む
 
             // ここでアイテム画面に必要なリソースをすべて読み込んでおく
-
         }
 
         /// <summary>
@@ -53,57 +59,146 @@ namespace ProjectCronos
         public void Initialize()
         {
             itemCategoryListView.Initialize();
-            itemListView.Initialize();
+
+            // カテゴリー選択前はアイテム一覧と詳細は非表示
+            itemListView.gameObject.SetActive(false);
+            itemDetailView.gameObject.SetActive(false);
 
             currentItemCategory = EnumCollection.Item.ITEM_CATEGORY.NORMAL;
+            currentItemMenuControlStatus = EnumCollection.Item.MENU_ITEM_CONTROL_STATUS.CATEGORY;
             UpdateItemCategoryView();
-        }
 
-        void RegisterItemCategoryInputActions()
-        {
-            InputManager.Instance.inputActions.MainMenu.Up.performed += OnUp;
-            InputManager.Instance.inputActions.MainMenu.Down.performed += OnDown;
-            InputManager.Instance.inputActions.MainMenu.Submit.performed += OnSubmit;
-        }
-
-        void UnregisterItemCategoryInputActions()
-        {
-            InputManager.Instance.inputActions.MainMenu.Up.performed -= OnUp;
-            InputManager.Instance.inputActions.MainMenu.Down.performed -= OnDown;
-            InputManager.Instance.inputActions.MainMenu.Submit.performed -= OnSubmit;
+            // プレイヤーのアイテム情報を取得
+            playerItemHolder = GameObject.FindGameObjectWithTag("Player").
+                GetComponent<PlayerStatus>().itemHolder;
         }
 
         void OnSubmit(InputAction.CallbackContext context)
         {
             SoundManager.Instance.Play("Button30");
+
+            switch (currentItemMenuControlStatus)
+            {
+                case EnumCollection.Item.MENU_ITEM_CONTROL_STATUS.CATEGORY:
+                    itemListView.Initialize(playerItemHolder);
+                    itemListView.gameObject.SetActive(true);
+                    itemDetailView.gameObject.SetActive(true);
+                    currentItemMenuControlStatus = EnumCollection.Item.MENU_ITEM_CONTROL_STATUS.LIST;
+                    UpdateItemDetailView();
+                    break;
+                case EnumCollection.Item.MENU_ITEM_CONTROL_STATUS.LIST:
+                    break;
+                default:
+                    break;
+            }
         }
 
         void OnUp(InputAction.CallbackContext context)
         {
             SoundManager.Instance.Play("Button47");
 
-            currentItemCategory--;
-            if (currentItemCategory < 0)
+            switch (currentItemMenuControlStatus)
             {
-                currentItemCategory = EnumCollection.Item.ITEM_CATEGORY.MAXMUM -1;
-            }
+                case EnumCollection.Item.MENU_ITEM_CONTROL_STATUS.CATEGORY:
+                    currentItemCategory--;
+                    if (currentItemCategory < 0)
+                    {
+                        currentItemCategory = EnumCollection.Item.ITEM_CATEGORY.MAXMUM - 1;
+                    }
 
-            UpdateItemCategoryView();
+                    UpdateItemCategoryView();
+                    break;
+                case EnumCollection.Item.MENU_ITEM_CONTROL_STATUS.LIST:
+                    itemListView.OnUp();
+                    UpdateItemDetailView();
+                    break;
+                default:
+                    break;
+            }
         }
 
         void OnDown(InputAction.CallbackContext context)
         {
             SoundManager.Instance.Play("Button47");
 
-            currentItemCategory++;
-            if (currentItemCategory == EnumCollection.Item.ITEM_CATEGORY.MAXMUM)
+            switch (currentItemMenuControlStatus)
             {
-                currentItemCategory = 0;
-            }
+                case EnumCollection.Item.MENU_ITEM_CONTROL_STATUS.CATEGORY:
+                    currentItemCategory++;
+                    if (currentItemCategory == EnumCollection.Item.ITEM_CATEGORY.MAXMUM)
+                    {
+                        currentItemCategory = 0;
+                    }
 
-            UpdateItemCategoryView();
+                    UpdateItemCategoryView();
+                    break;
+                case EnumCollection.Item.MENU_ITEM_CONTROL_STATUS.LIST:
+                    itemListView.OnDown();
+                    UpdateItemDetailView();
+                    break;
+                default:
+                    break;
+            }
         }
 
+        void OnLeft(InputAction.CallbackContext context)
+        {
+            switch (currentItemMenuControlStatus)
+            {
+                case EnumCollection.Item.MENU_ITEM_CONTROL_STATUS.CATEGORY:
+                    break;
+                case EnumCollection.Item.MENU_ITEM_CONTROL_STATUS.LIST:
+                    SoundManager.Instance.Play("Button47");
+                    itemListView.OnLeft();
+                    UpdateItemDetailView();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        void OnRight(InputAction.CallbackContext context)
+        {
+            switch (currentItemMenuControlStatus)
+            {
+                case EnumCollection.Item.MENU_ITEM_CONTROL_STATUS.CATEGORY:
+                    break;
+                case EnumCollection.Item.MENU_ITEM_CONTROL_STATUS.LIST:
+                    SoundManager.Instance.Play("Button47");
+                    itemListView.OnRight();
+                    UpdateItemDetailView();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        public bool IsCloseMenu()
+        {
+            switch (currentItemMenuControlStatus)
+            {
+                case EnumCollection.Item.MENU_ITEM_CONTROL_STATUS.CATEGORY:
+                    return true;
+                case EnumCollection.Item.MENU_ITEM_CONTROL_STATUS.LIST:
+                    itemListView.gameObject.SetActive(false);
+                    itemDetailView.gameObject.SetActive(false);
+                    currentItemMenuControlStatus = EnumCollection.Item.MENU_ITEM_CONTROL_STATUS.CATEGORY;
+                    return false;
+                default:
+                    break;
+            }
+
+            // 来ることはないと思うけど念のため
+            return false;
+        }
+
+        void UpdateItemDetailView()
+        {
+            // アイテム詳細を更新
+            var id = itemListView.GetSelectedItemId();
+            var info = playerItemHolder.GetItemDetailInfo(id);
+            itemDetailView.UpdateView(info, playerItemHolder.ownItems[id]);
+        }
         /// <summary>
         /// アイテムの種類画面の更新
         /// </summary>
@@ -117,10 +212,29 @@ namespace ProjectCronos
             Debug.Log("コンテンツ画面の入力登録");
             RegisterItemCategoryInputActions();
         }
+
         public void UnregisterInputActions()
         {
             Debug.Log("コンテンツ画面の入力解除");
             UnregisterItemCategoryInputActions();
+        }
+
+        void RegisterItemCategoryInputActions()
+        {
+            InputManager.Instance.inputActions.MainMenu.Up.performed += OnUp;
+            InputManager.Instance.inputActions.MainMenu.Down.performed += OnDown;
+            InputManager.Instance.inputActions.MainMenu.Right.performed += OnRight;
+            InputManager.Instance.inputActions.MainMenu.Left.performed += OnLeft;
+            InputManager.Instance.inputActions.MainMenu.Submit.performed += OnSubmit;
+        }
+
+        void UnregisterItemCategoryInputActions()
+        {
+            InputManager.Instance.inputActions.MainMenu.Up.performed -= OnUp;
+            InputManager.Instance.inputActions.MainMenu.Down.performed -= OnDown;
+            InputManager.Instance.inputActions.MainMenu.Right.performed -= OnRight;
+            InputManager.Instance.inputActions.MainMenu.Left.performed -= OnLeft;
+            InputManager.Instance.inputActions.MainMenu.Submit.performed -= OnSubmit;
         }
     }
 }

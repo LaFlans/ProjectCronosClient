@@ -9,12 +9,27 @@ namespace ProjectCronos
     /// </summary>
     public class Item : MonoBehaviour
     {
-        ItemDetailInfo itemDetailInfo;
+        public int itemId { get; set; }
+        public ItemDetailInfo itemDetailInfo { get; set; }
 
-        void Initialize()
+        /// <summary>
+        /// デフォルトのコンストラクタ
+        /// アイテムidを指定しなかった場合、ダミーデータを読み込みます
+        /// </summary>
+        public Item()
         {
             var initData = MasterDataManager.DB.ItemDataTable.FindById(0);
+            itemDetailInfo = new ItemDetailInfo();
             itemDetailInfo.Initialize(initData);
+            this.itemId = itemId;
+        }
+
+        public Item(int itemId)
+        {
+            var initData = MasterDataManager.DB.ItemDataTable.FindById(itemId);
+            itemDetailInfo = new ItemDetailInfo();
+            itemDetailInfo.Initialize(initData);
+            this.itemId = itemId;
         }
     }
 

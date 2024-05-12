@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Cysharp.Threading.Tasks;
+
 
 namespace ProjectCronos
 {
@@ -14,6 +16,8 @@ namespace ProjectCronos
         /// </summary>
         public Dictionary<int, int> ownItems { get; set; }
 
+        List<Item> itemInfos { get; set; }
+
         /// <summary>
         /// アイテム初期化
         /// </summary>
@@ -21,6 +25,18 @@ namespace ProjectCronos
         {
             Debug.Log("所持アイテム初期化");
             ownItems = new Dictionary<int, int>();
+            itemInfos = new List<Item>();
+        }
+
+        /// <summary>
+        /// 指定したアイテムIDの詳細情報を取得する
+        /// </summary>
+        /// <param name="id">アイテムID</param>
+        /// <returns>アイテム詳細情報</returns>
+        public ItemDetailInfo GetItemDetailInfo(int id)
+        {
+            // FIXME: nullチェックが必要なはず
+            return itemInfos.FirstOrDefault(x => x.itemId == id).itemDetailInfo;
         }
 
         /// <summary>
@@ -34,7 +50,11 @@ namespace ProjectCronos
             {
                 if (int.TryParse(item.Key, out var id))
                 {
+                    Debug.Log($"アイテムID:{id} 所持数:{item.Value}");
                     ownItems.Add(id, item.Value);
+
+                    // アイテム情報保存
+                    itemInfos.Add(new Item(id));
                 }
                 else
                 {

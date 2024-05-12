@@ -474,6 +474,25 @@ namespace ProjectCronos
                 /// </summary>
                 MAXMUM,
             }
+
+            /// <summary>
+            /// メインメニューのアイテム画面操作状態
+            /// </summary>
+            public enum MENU_ITEM_CONTROL_STATUS
+            {
+                /// <summary>
+                /// アイテムの種類選択状態
+                /// </summary>
+                CATEGORY,
+                /// <summary>
+                /// アイテムの一覧選択状態
+                /// </summary>
+                LIST,
+                /// <summary>
+                /// 要素数
+                /// </summary>
+                MAXMIZE,
+            }
         }
     }
 }

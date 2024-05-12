@@ -61,6 +61,9 @@ namespace ProjectCronos
             moveSpeed = initData.MoveSpeed;
             jumpPower = initData.JumpPower;
 
+            var test = MasterDataManager.DB.ItemDataTable.FindById(0);
+            Debug.Log($"{test.Id}:{test.Name}:{test.Description}");
+
             // セーブデータの読み込み
             // FIXME: 現在は決め打ちでデータを読み込んでいる
             var saveData = SaveManager.Instance.lastLoadSaveData;

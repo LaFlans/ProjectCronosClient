@@ -25,6 +25,61 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bef161ff97310af4b8abe812cd30d15c
+    m_Address: Assets/ProjectCronosAssets/Textures/Item/Orb/item_orb_blue_1.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d6044ae24b2ff61418cc79b5704a282b
+    m_Address: Assets/ProjectCronosAssets/Textures/Item/Orb/item_orb_light_green_1.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e51b6fadf117d0042b6ccd6d32db3cfd
+    m_Address: Assets/ProjectCronosAssets/Textures/Item/Orb/item_orb_pink_1.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: aa0cb647613d103439f8893b5ee2128e
+    m_Address: Assets/ProjectCronosAssets/Textures/Item/Orb/item_orb_light_blue_1.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7834bc160fbaf4a449eff0d3bc0b1994
+    m_Address: Assets/ProjectCronosAssets/Textures/Item/Orb/item_orb_yellow_1.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 359aae1e64c8b9c429448ede61f289fd
+    m_Address: item_orb_orange_1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 29481ef6895eff24097a7b04d5ebf03d
+    m_Address: Assets/ProjectCronosAssets/Textures/Item/Orb/item_orb_red_1.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c2e7116e11ebe8840a4814272171c1c4
+    m_Address: Assets/ProjectCronosAssets/Textures/Item/Orb/item_orb_gray_1.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5a909cd76659bc94290a2b5b60ef7c8d
+    m_Address: Assets/ProjectCronosAssets/Textures/Item/Orb/item_orb_green_1.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 136fbf4444401214eac58aabe632914e
+    m_Address: Assets/ProjectCronosAssets/Textures/Item/item_blue_portion_1.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ee31b7efcea6ff14eadc0a002b2b5bdf
+    m_Address: Assets/ProjectCronosAssets/Textures/Item/item_green_portion_1.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 935c614e6cbfb024884f0f3e5a7850c3, type: 2}
   m_SchemaSet:

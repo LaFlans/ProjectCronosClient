@@ -118,11 +118,14 @@ namespace ProjectCronos
 
         void OnCloseMenu(InputAction.CallbackContext context)
         {
-            UnregisterInputActions();
+            if (contentView.IsCloseMenu())
+            {
+                UnregisterInputActions();
 
-            this.gameObject.SetActive(false);
-            InputManager.Instance.SetInputStatus(EnumCollection.Input.INPUT_STATUS.PLAYER);
-            TimeManager.Instance.ApplyTimeScale();
+                this.gameObject.SetActive(false);
+                InputManager.Instance.SetInputStatus(EnumCollection.Input.INPUT_STATUS.PLAYER);
+                TimeManager.Instance.ApplyTimeScale();
+            }
         }
     }
 }

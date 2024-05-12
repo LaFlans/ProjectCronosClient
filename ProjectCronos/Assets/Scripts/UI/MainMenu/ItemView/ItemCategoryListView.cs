@@ -22,6 +22,9 @@ namespace ProjectCronos
         [SerializeField]
         GameObject cell;
 
+        /// <summary>
+        /// アイテムの種類セル
+        /// </summary>
         List<ItemCategoryCell> itemCategoryCells;
 
         /// <summary>

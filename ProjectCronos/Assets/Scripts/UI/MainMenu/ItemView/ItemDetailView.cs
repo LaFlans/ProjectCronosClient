@@ -39,19 +39,16 @@ namespace ProjectCronos
         /// <summary>
         /// 初期化
         /// </summary>
-        void Initialize(ItemDetailInfo info)
+        public void Initialize(ItemDetailInfo info)
         {
-            UpdateView(info);
         }
 
-        void UpdateView(ItemDetailInfo info)
+        public void UpdateView(ItemDetailInfo info, int amount)
         {
             image.texture = AddressableManager.Instance.GetLoadedTextures(info.imagePath);
             nameText.text = info.name;
             descriptionText.text = info.description;
-
-            // FIXME: プレイヤー情報から取得
-            amountText.text = "1";
+            amountText.text = amount.ToString();
         }
     }
 }
