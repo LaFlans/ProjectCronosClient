@@ -15,7 +15,13 @@ namespace ProjectCronos
         /// セルを生成する親オブジェクト
         /// </summary>
         [SerializeField]
-        GameObject parent;
+        RectTransform itemListContent;
+
+        /// <summary>
+        /// アイテム一覧の基盤となるビューオブジェクト
+        /// </summary>
+        [SerializeField]
+        RectTransform itemListView;
 
         /// <summary>
         /// 生成するセル
@@ -44,8 +50,6 @@ namespace ProjectCronos
         /// </summary>
         int lastSelectedIndex;
 
-        EventSystem eventSystem;
-
         GridLayoutGroup gridLayoutGroup;
 
         /// <summary>
@@ -54,11 +58,10 @@ namespace ProjectCronos
         public void Initialize(ItemHolder itemHolder)
         {
             itemCells = new List<ItemCell>();
-            eventSystem = EventSystem.current;
-            gridLayoutGroup = parent.GetComponent<GridLayoutGroup>();
+            gridLayoutGroup = itemListContent.GetComponent<GridLayoutGroup>();
 
             // 生成前に初期化しておく
-            foreach (Transform child in parent.transform)
+            foreach (Transform child in itemListContent.transform)
             {
                 Destroy(child.gameObject);
             }
@@ -67,7 +70,7 @@ namespace ProjectCronos
            
             foreach (var item in itemHolder.ownItems)
             {
-                var obj = Instantiate(cell, parent.transform).GetComponent<ItemCell>();
+                var obj = Instantiate(cell, itemListContent.transform).GetComponent<ItemCell>();
                 obj.Initialize(item.Key, item.Value);
                 itemCells.Add(obj);
             }
@@ -84,87 +87,9 @@ namespace ProjectCronos
             {
                 noItemText.gameObject.SetActive(true);
             }
+
+            itemListContent.localPosition = Vector3.zero;
         }
-
-        ///// <summary>
-        ///// ナビゲーションを設定
-        ///// </summary>
-        //void SetNavigation()
-        //{
-        //    // ナビゲーション設定
-        //    var selects = itemCells.Select(x => x.toggle.GetComponent<Selectable>()).ToList();
-        //    var min = 0;
-        //    var max = selects.Count - 1;
-        //    var width = gridLayoutGroup.constraintCount;
-        //    for (int i = 0; i < selects.Count; i++)
-        //    {
-        //        var nav = selects[i].navigation;
-
-        //        // 右
-        //        var rightIndex = 0;
-        //        if ((i + 1) % width == 0)
-        //        {
-        //            rightIndex = Math.Clamp(i - (width - 1), min, max);
-        //        }
-        //        else if (i == max)
-        //        {
-        //            rightIndex = Math.Clamp(i - ((i + 1) % width - 1), min, max);
-        //        }
-        //        else
-        //        {
-        //            rightIndex = Math.Clamp(i + 1, min, max);
-        //        }
-
-        //        nav.selectOnRight = selects[rightIndex];
-
-        //        // 左
-        //        var leftIndex = 0;
-        //        if ((i + 1) % width == 1)
-        //        {
-        //            leftIndex = Math.Clamp(i + (width - 1), min, max);
-        //        }
-        //        else
-        //        {
-        //            leftIndex = Math.Clamp(i - 1, min, max);
-        //        }
-
-        //        nav.selectOnLeft = selects[leftIndex];
-
-        //        // 上
-        //        var upIndex = 0;
-        //        if (i < width)
-        //        {
-        //            upIndex = Math.Clamp(i + ((max / width) * width), min, max);
-        //        }
-        //        else
-        //        {
-        //            upIndex = Math.Clamp(i - width, min, max);
-        //        }
-
-        //        nav.selectOnUp = selects[upIndex];
-
-        //        // 下
-        //        var downIndex = 0;
-        //        if (((max / width) * width) <= i)
-        //        {
-        //            downIndex = Math.Clamp((i % width), min, max);
-        //        }
-        //        else
-        //        {
-        //            downIndex = Math.Clamp(i + width, min, max);
-        //        }
-
-        //        nav.selectOnDown = selects[downIndex];
-
-        //        selects[i].navigation = nav;
-        //    }
-
-        //    if (itemCells.Any())
-        //    {
-        //        eventSystem.SetSelectedGameObject(itemCells.First().toggle.gameObject);
-        //        selectedIndex = 0;
-        //    }
-        //}
 
         /// <summary>
         /// 入力に対してのセルの移動先を設定
@@ -269,6 +194,28 @@ namespace ProjectCronos
             itemCells[id].SetSelected(true);
             selectedIndex = id;
             lastSelectedIndex = id;
+
+            ScrollToSelectedItem();
+        }
+
+        void ScrollToSelectedItem()
+        {
+            var selected = itemCells[lastSelectedIndex];
+            if (selected != null)
+            {
+                var selectedRect = selected.GetComponent<RectTransform>();
+                var itemLocalPos = itemListContent.InverseTransformPoint(selectedRect.position);
+                var itemListLocalPos = itemListContent.localPosition;
+
+                itemListLocalPos.y = -itemLocalPos.y;
+
+                if (itemListLocalPos.y <= 0)
+                {
+                    itemListLocalPos.y = 0;
+                }
+
+                itemListContent.localPosition = itemListLocalPos;
+            }
         }
 
         public int GetSelectedItemId()
