@@ -1,3 +1,4 @@
+using ProjectCronos.EnumCollection.Item;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -30,12 +31,6 @@ namespace ProjectCronos
         GameObject cell;
 
         /// <summary>
-        /// アイテムがない時のテキスト
-        /// </summary>
-        [SerializeField]
-        TextMeshProUGUI noItemText;
-
-        /// <summary>
         /// アイテムの種類セル
         /// </summary>
         List<ItemCell> itemCells;
@@ -52,13 +47,15 @@ namespace ProjectCronos
 
         GridLayoutGroup gridLayoutGroup;
 
+
         /// <summary>
         /// 初期化
         /// </summary>
-        public void Initialize(ItemHolder itemHolder)
+        public void Initialize(ItemHolder itemHolder, ITEM_CATEGORY category)
         {
             itemCells = new List<ItemCell>();
             gridLayoutGroup = itemListContent.GetComponent<GridLayoutGroup>();
+            lastSelectedIndex = 0;
 
             // 生成前に初期化しておく
             foreach (Transform child in itemListContent.transform)
@@ -66,26 +63,24 @@ namespace ProjectCronos
                 Destroy(child.gameObject);
             }
 
-            noItemText.gameObject.SetActive(false);
            
             foreach (var item in itemHolder.ownItems)
             {
-                var obj = Instantiate(cell, itemListContent.transform).GetComponent<ItemCell>();
-                obj.Initialize(item.Key, item.Value);
-                itemCells.Add(obj);
+                if ((int)category == MasterDataManager.DB.ItemDataTable.FindById(item.Key).Category)
+                {
+                    var obj = Instantiate(cell, itemListContent.transform).GetComponent<ItemCell>();
+                    obj.Initialize(item.Key, item.Value);
+                    itemCells.Add(obj);
+                }
             }
 
-            // アイテムセルの移動先を設定
-            SetMoveIndex();
-
-            if (itemHolder.IsHoldItems())
+            if (itemCells.Any())
             {
+                // アイテムセルの移動先を設定
+                SetMoveIndex();
+
                 // 最初のアイテムを選択状態に設定しておく
                 UpdateSelectedItemView(0, true);
-            }
-            else
-            {
-                noItemText.gameObject.SetActive(true);
             }
 
             itemListContent.localPosition = Vector3.zero;

@@ -1,6 +1,8 @@
 using Cysharp.Threading.Tasks;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -28,6 +30,17 @@ namespace ProjectCronos
         /// </summary>
         [SerializeField]
         ItemDetailView itemDetailView;
+
+        /// <summary>
+        /// 表示するアイテムがない時のテキスト
+        /// </summary>
+        [SerializeField]
+        TextMeshProUGUI noItemText;
+
+        /// <summary>
+        /// 表示するアイテムがあるかどうか
+        /// </summary>
+        bool isShowItem;
 
         /// <summary>
         /// 現在選択中のアイテムカテゴリー
@@ -66,6 +79,8 @@ namespace ProjectCronos
 
             currentItemCategory = EnumCollection.Item.ITEM_CATEGORY.NORMAL;
             currentItemMenuControlStatus = EnumCollection.Item.MENU_ITEM_CONTROL_STATUS.CATEGORY;
+            noItemText.gameObject.SetActive(false);
+            isShowItem = false;
             UpdateItemCategoryView();
 
             // プレイヤーのアイテム情報を取得
@@ -80,11 +95,21 @@ namespace ProjectCronos
             switch (currentItemMenuControlStatus)
             {
                 case EnumCollection.Item.MENU_ITEM_CONTROL_STATUS.CATEGORY:
-                    itemListView.Initialize(playerItemHolder);
-                    itemListView.gameObject.SetActive(true);
-                    itemDetailView.gameObject.SetActive(true);
+                    isShowItem = playerItemHolder.ownItems
+                        .Any(x => MasterDataManager.DB.ItemDataTable.FindById(x.Key).Category == (int)currentItemCategory);
+                    if (isShowItem)
+                    {
+                        itemListView.Initialize(playerItemHolder, currentItemCategory);
+                        itemListView.gameObject.SetActive(true);
+                        itemDetailView.gameObject.SetActive(true);
+                        UpdateItemDetailView();
+                    }
+                    else
+                    {
+                        noItemText.gameObject.SetActive(true);
+                    }
+
                     currentItemMenuControlStatus = EnumCollection.Item.MENU_ITEM_CONTROL_STATUS.LIST;
-                    UpdateItemDetailView();
                     break;
                 case EnumCollection.Item.MENU_ITEM_CONTROL_STATUS.LIST:
                     break;
@@ -95,8 +120,6 @@ namespace ProjectCronos
 
         void OnUp(InputAction.CallbackContext context)
         {
-            SoundManager.Instance.Play("Button47");
-
             switch (currentItemMenuControlStatus)
             {
                 case EnumCollection.Item.MENU_ITEM_CONTROL_STATUS.CATEGORY:
@@ -107,10 +130,15 @@ namespace ProjectCronos
                     }
 
                     UpdateItemCategoryView();
+                    SoundManager.Instance.Play("Button47");
                     break;
                 case EnumCollection.Item.MENU_ITEM_CONTROL_STATUS.LIST:
-                    itemListView.OnUp();
-                    UpdateItemDetailView();
+                    if (isShowItem)
+                    {
+                        itemListView.OnUp();
+                        UpdateItemDetailView();
+                        SoundManager.Instance.Play("Button47");
+                    }
                     break;
                 default:
                     break;
@@ -119,7 +147,6 @@ namespace ProjectCronos
 
         void OnDown(InputAction.CallbackContext context)
         {
-            SoundManager.Instance.Play("Button47");
 
             switch (currentItemMenuControlStatus)
             {
@@ -131,10 +158,15 @@ namespace ProjectCronos
                     }
 
                     UpdateItemCategoryView();
+                    SoundManager.Instance.Play("Button47");
                     break;
                 case EnumCollection.Item.MENU_ITEM_CONTROL_STATUS.LIST:
-                    itemListView.OnDown();
-                    UpdateItemDetailView();
+                    if (isShowItem)
+                    {
+                        itemListView.OnDown();
+                        UpdateItemDetailView();
+                        SoundManager.Instance.Play("Button47");
+                    }
                     break;
                 default:
                     break;
@@ -148,9 +180,12 @@ namespace ProjectCronos
                 case EnumCollection.Item.MENU_ITEM_CONTROL_STATUS.CATEGORY:
                     break;
                 case EnumCollection.Item.MENU_ITEM_CONTROL_STATUS.LIST:
-                    SoundManager.Instance.Play("Button47");
-                    itemListView.OnLeft();
-                    UpdateItemDetailView();
+                    if (isShowItem)
+                    {
+                        itemListView.OnLeft();
+                        UpdateItemDetailView();
+                        SoundManager.Instance.Play("Button47");
+                    }
                     break;
                 default:
                     break;
@@ -164,9 +199,12 @@ namespace ProjectCronos
                 case EnumCollection.Item.MENU_ITEM_CONTROL_STATUS.CATEGORY:
                     break;
                 case EnumCollection.Item.MENU_ITEM_CONTROL_STATUS.LIST:
-                    SoundManager.Instance.Play("Button47");
-                    itemListView.OnRight();
-                    UpdateItemDetailView();
+                    if (isShowItem)
+                    {
+                        itemListView.OnRight();
+                        UpdateItemDetailView();
+                        SoundManager.Instance.Play("Button47");
+                    }
                     break;
                 default:
                     break;
@@ -182,7 +220,9 @@ namespace ProjectCronos
                 case EnumCollection.Item.MENU_ITEM_CONTROL_STATUS.LIST:
                     itemListView.gameObject.SetActive(false);
                     itemDetailView.gameObject.SetActive(false);
+                    noItemText.gameObject.SetActive(false);
                     currentItemMenuControlStatus = EnumCollection.Item.MENU_ITEM_CONTROL_STATUS.CATEGORY;
+                    SoundManager.Instance.Play("Button47");
                     return false;
                 default:
                     break;
