@@ -12,6 +12,140 @@ namespace ProjectCronos
         /// </summary>
         namespace Input
         {
+            /// <summary>
+            /// 入力の種類
+            /// </summary>
+            public enum INPUT_TYPE
+            {
+                /// <summary>
+                /// ゲームパッド
+                /// </summary>
+                GAMEPAD,
+                /// <summary>
+                /// キーボード
+                /// </summary>
+                KEYBOARD,
+                /// <summary>
+                /// マウス
+                /// </summary>
+                MOUSE,
+                /// <summary>
+                /// 要素数
+                /// </summary>
+                MAXMUM,
+            }
+
+            /// <summary>
+            /// ゲームパッドの入力の種類
+            /// </summary>
+            public enum INPUT_GAMEPAD_BUTTON
+            {
+                /// <summary>
+                /// Aボタン
+                /// </summary>
+                A,
+                /// <summary>
+                /// Bボタン
+                /// </summary>
+                B,
+                /// <summary>
+                /// Xボタン
+                /// </summary>
+                X,
+                /// <summary>
+                /// Yボタン
+                /// </summary>
+                Y,
+                /// <summary>
+                /// Lボタン
+                /// </summary>
+                L,
+                /// <summary>
+                /// Rボタン
+                /// </summary>
+                R,
+                /// <summary>
+                /// LBボタン
+                /// </summary>
+                LB,
+                /// <summary>
+                /// RBボタン
+                /// </summary>
+                RB,
+                /// <summary>
+                /// LTボタン
+                /// </summary>
+                LT,
+                /// <summary>
+                /// RTボタン
+                /// </summary>
+                RT,
+                /// <summary>
+                /// L3ボタン
+                /// </summary>
+                L3,
+                /// <summary>
+                /// R3ボタン
+                /// </summary>
+                R3,
+                /// <summary>
+                /// STARTボタン
+                /// </summary>
+                START,
+                /// <summary>
+                /// SELECTボタン
+                /// </summary>
+                SELECT,
+                /// <summary>
+                /// 十字ボタン
+                /// </summary>
+                CROSS,
+                /// <summary>
+                /// 十字上ボタン
+                /// </summary>
+                CROSS_UP,
+                /// <summary>
+                /// 十字下ボタン
+                /// </summary>
+                CROSS_DOWN,
+                /// <summary>
+                /// 十字右ボタン
+                /// </summary>
+                CROSS_RIGHT,
+                /// <summary>
+                /// 十字左ボタン
+                /// </summary>
+                CROSS_LEFT,
+                /// <summary>
+                /// ジョイスティック
+                /// </summary>
+                JOYSTICK,
+                /// <summary>
+                /// ジョイスティック上
+                /// </summary>
+                JOYSTICK_UP,
+                /// <summary>
+                /// ジョイスティック下
+                /// </summary>
+                JOYSTICK_DOWN,
+                /// <summary>
+                /// ジョイスティック右
+                /// </summary>
+                JOYSTICK_RIGHT,
+                /// <summary>
+                /// ジョイスティック左
+                /// </summary>
+                JOYSTICK_LEFT,
+                /// <summary>
+                /// 要素数
+                /// </summary>
+                MAXMUM,
+            }
+
+
+            /// <summary>
+            /// 入力状態
+            /// </summary>
             public enum INPUT_STATUS
             {
                 /// <summary>

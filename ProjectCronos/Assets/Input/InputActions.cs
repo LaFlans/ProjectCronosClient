@@ -101,10 +101,10 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Dogde"",
+                    ""name"": ""Dodge"",
                     ""type"": ""Button"",
                     ""id"": ""baf349ba-8cbe-476f-8c27-154d8c471ba7"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -442,7 +442,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""Dogde"",
+                    ""action"": ""Dodge"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -1486,7 +1486,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""a80ba63c-91d2-4ed8-8148-fc491156ca9e"",
-                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
@@ -1545,6 +1545,17 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Up"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6b94821a-e5db-4b65-865e-69f50de38929"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
                     ""action"": ""Up"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -1647,7 +1658,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_Player_Test = m_Player.FindAction("Test", throwIfNotFound: true);
         m_Player_RockOn = m_Player.FindAction("RockOn", throwIfNotFound: true);
         m_Player_FirstSkill = m_Player.FindAction("FirstSkill", throwIfNotFound: true);
-        m_Player_Dogde = m_Player.FindAction("Dogde", throwIfNotFound: true);
+        m_Player_Dodge = m_Player.FindAction("Dodge", throwIfNotFound: true);
         m_Player_Action = m_Player.FindAction("Action", throwIfNotFound: true);
         m_Player_Attack2 = m_Player.FindAction("Attack2", throwIfNotFound: true);
         m_Player_OpenMenu = m_Player.FindAction("OpenMenu", throwIfNotFound: true);
@@ -1761,7 +1772,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Test;
     private readonly InputAction m_Player_RockOn;
     private readonly InputAction m_Player_FirstSkill;
-    private readonly InputAction m_Player_Dogde;
+    private readonly InputAction m_Player_Dodge;
     private readonly InputAction m_Player_Action;
     private readonly InputAction m_Player_Attack2;
     private readonly InputAction m_Player_OpenMenu;
@@ -1777,7 +1788,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         public InputAction @Test => m_Wrapper.m_Player_Test;
         public InputAction @RockOn => m_Wrapper.m_Player_RockOn;
         public InputAction @FirstSkill => m_Wrapper.m_Player_FirstSkill;
-        public InputAction @Dogde => m_Wrapper.m_Player_Dogde;
+        public InputAction @Dodge => m_Wrapper.m_Player_Dodge;
         public InputAction @Action => m_Wrapper.m_Player_Action;
         public InputAction @Attack2 => m_Wrapper.m_Player_Attack2;
         public InputAction @OpenMenu => m_Wrapper.m_Player_OpenMenu;
@@ -1814,9 +1825,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @FirstSkill.started += instance.OnFirstSkill;
             @FirstSkill.performed += instance.OnFirstSkill;
             @FirstSkill.canceled += instance.OnFirstSkill;
-            @Dogde.started += instance.OnDogde;
-            @Dogde.performed += instance.OnDogde;
-            @Dogde.canceled += instance.OnDogde;
+            @Dodge.started += instance.OnDodge;
+            @Dodge.performed += instance.OnDodge;
+            @Dodge.canceled += instance.OnDodge;
             @Action.started += instance.OnAction;
             @Action.performed += instance.OnAction;
             @Action.canceled += instance.OnAction;
@@ -1854,9 +1865,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @FirstSkill.started -= instance.OnFirstSkill;
             @FirstSkill.performed -= instance.OnFirstSkill;
             @FirstSkill.canceled -= instance.OnFirstSkill;
-            @Dogde.started -= instance.OnDogde;
-            @Dogde.performed -= instance.OnDogde;
-            @Dogde.canceled -= instance.OnDogde;
+            @Dodge.started -= instance.OnDodge;
+            @Dodge.performed -= instance.OnDodge;
+            @Dodge.canceled -= instance.OnDodge;
             @Action.started -= instance.OnAction;
             @Action.performed -= instance.OnAction;
             @Action.canceled -= instance.OnAction;
@@ -2268,7 +2279,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         void OnTest(InputAction.CallbackContext context);
         void OnRockOn(InputAction.CallbackContext context);
         void OnFirstSkill(InputAction.CallbackContext context);
-        void OnDogde(InputAction.CallbackContext context);
+        void OnDodge(InputAction.CallbackContext context);
         void OnAction(InputAction.CallbackContext context);
         void OnAttack2(InputAction.CallbackContext context);
         void OnOpenMenu(InputAction.CallbackContext context);

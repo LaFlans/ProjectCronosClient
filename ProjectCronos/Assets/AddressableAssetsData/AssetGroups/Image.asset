@@ -16,37 +16,37 @@ MonoBehaviour:
   m_GUID: 55b586cca90c2fe44a29b0dfebbda7c9
   m_SerializeEntries:
   - m_GUID: 234f928d7c02ba04d9e5b73e79016cef
-    m_Address: Assets/ProjectCronosAssets/Textures/Item/item_dummy_1.png
+    m_Address: item_dummy_1
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1a50c6997f7b3cd48bb33dcbf83754f9
-    m_Address: Assets/ProjectCronosAssets/Textures/Item/item_raum_house_key_1.png
+    m_Address: item_raum_house_key_1
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: bef161ff97310af4b8abe812cd30d15c
-    m_Address: Assets/ProjectCronosAssets/Textures/Item/Orb/item_orb_blue_1.png
+    m_Address: item_orb_blue_1
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d6044ae24b2ff61418cc79b5704a282b
-    m_Address: Assets/ProjectCronosAssets/Textures/Item/Orb/item_orb_light_green_1.png
+    m_Address: item_orb_light_green_1
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e51b6fadf117d0042b6ccd6d32db3cfd
-    m_Address: Assets/ProjectCronosAssets/Textures/Item/Orb/item_orb_pink_1.png
+    m_Address: item_orb_pink_1
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: aa0cb647613d103439f8893b5ee2128e
-    m_Address: Assets/ProjectCronosAssets/Textures/Item/Orb/item_orb_light_blue_1.png
+    m_Address: item_orb_light_blue_1
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 7834bc160fbaf4a449eff0d3bc0b1994
-    m_Address: Assets/ProjectCronosAssets/Textures/Item/Orb/item_orb_yellow_1.png
+    m_Address: item_orb_yellow_1
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -56,27 +56,122 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 29481ef6895eff24097a7b04d5ebf03d
-    m_Address: Assets/ProjectCronosAssets/Textures/Item/Orb/item_orb_red_1.png
+    m_Address: item_orb_red_1
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c2e7116e11ebe8840a4814272171c1c4
-    m_Address: Assets/ProjectCronosAssets/Textures/Item/Orb/item_orb_gray_1.png
+    m_Address: item_orb_gray_1
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5a909cd76659bc94290a2b5b60ef7c8d
-    m_Address: Assets/ProjectCronosAssets/Textures/Item/Orb/item_orb_green_1.png
+    m_Address: item_orb_green_1
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 136fbf4444401214eac58aabe632914e
-    m_Address: Assets/ProjectCronosAssets/Textures/Item/item_blue_portion_1.png
+    m_Address: item_blue_portion_1
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: ee31b7efcea6ff14eadc0a002b2b5bdf
-    m_Address: Assets/ProjectCronosAssets/Textures/Item/item_green_portion_1.png
+    m_Address: item_green_portion_1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3ba9a20b0ad9705498e10447ed91d3c3
+    m_Address: button_A_1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 049a98e8df591484ca087d1843927f61
+    m_Address: button_B_1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2bfce6c1d1890fa469c61fdddc408f10
+    m_Address: button_cross_1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a6ecbd68b3a22fb4981e62c1c052f83a
+    m_Address: button_cross_down_1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 684eb47ce188f384abc20051640969be
+    m_Address: button_cross_left_1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2016a844a60181f4e86e029a57bff186
+    m_Address: button_cross_right_1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b0e1a8762a7e3c542885e63052cc625e
+    m_Address: button_cross_up_1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6b0856ab3d4bde5408b8aad8ea7f363a
+    m_Address: button_L3_1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 77965906f7b4fdf4d8e206c242f38bf3
+    m_Address: button_L_1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0548c2799232eae489910a49d2da1a29
+    m_Address: button_LB_1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9faf670fc26a5fd4c92c0a546487e5e2
+    m_Address: button_LT_1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2787ea3809791144d88803ebe0ea2edc
+    m_Address: button_R3_1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 265aa5eb464d14b42abe4b98ba897928
+    m_Address: button_R_1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 968cf68f766cbdc48956902e42545c50
+    m_Address: button_RB_1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7c0da999c3b3b164082d4837d394fe74
+    m_Address: button_RT_1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f01503cb90e3c904db82939a51fd664c
+    m_Address: button_Select_1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c2a5f687e3b7b1745b64c6549f840f6d
+    m_Address: button_Start_1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 76ac036bb5ebed04bb46ee786b766c3c
+    m_Address: button_X_1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 69f2ffc2b7adc8c4fa7f4a1c5383d6da
+    m_Address: button_Y_1
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

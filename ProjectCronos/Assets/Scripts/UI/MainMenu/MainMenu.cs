@@ -29,6 +29,12 @@ namespace ProjectCronos
         MainMenuCategoryTabView tabView;
 
         /// <summary>
+        /// 操作ガイドビュー
+        /// </summary>
+        [SerializeField]
+        MainMenuOperateView operateView;
+
+        /// <summary>
         /// 事前読み込み
         /// マネージャー系生成後に呼ばれる
         /// </summary>
@@ -36,7 +42,8 @@ namespace ProjectCronos
         public async UniTask PreLoadAsync()
         {
             // ここで事前に必要な素材を読み込む
-            contentView.PreLoadAsync();
+            await contentView.PreLoadAsync();
+            await operateView.PreLoadAsync();
         }
 
         /// <summary>
@@ -46,7 +53,8 @@ namespace ProjectCronos
         {
             currentCategory = EnumCollection.UI.MAIN_MENU_CATEGORY.ITEM;
             tabView.Initialize();
-            contentView.Initialize();
+            operateView.Initialize();
+            contentView.Initialize(operateView);
 
             UpdateView();
 
@@ -70,12 +78,13 @@ namespace ProjectCronos
         void OnToggleTabLeft(InputAction.CallbackContext context)
         {
             SoundManager.Instance.Play("Button47");
-            currentCategory--;
-            if (currentCategory < 0)
+            var nextCategory = currentCategory - 1;
+            if (nextCategory < 0)
             {
-                currentCategory = EnumCollection.UI.MAIN_MENU_CATEGORY.MAXMUM - 1;
+                nextCategory = EnumCollection.UI.MAIN_MENU_CATEGORY.MAXMUM - 1;
             }
 
+            SetCurrentMainMenuCategory(nextCategory);
             UpdateView();
         }
 
@@ -86,13 +95,38 @@ namespace ProjectCronos
         void OnToggleTabRight(InputAction.CallbackContext context)
         {
             SoundManager.Instance.Play("Button47");
-            currentCategory++;
-            if (currentCategory == EnumCollection.UI.MAIN_MENU_CATEGORY.MAXMUM)
+            var nextCategory = currentCategory + 1;
+            if (nextCategory == EnumCollection.UI.MAIN_MENU_CATEGORY.MAXMUM)
             {
-                currentCategory = 0;
+                nextCategory = 0;
             }
 
+            SetCurrentMainMenuCategory(nextCategory);
             UpdateView();
+        }
+
+        void SetCurrentMainMenuCategory(EnumCollection.UI.MAIN_MENU_CATEGORY category)
+        {
+            currentCategory = category;
+
+            switch (currentCategory)
+            {
+                case EnumCollection.UI.MAIN_MENU_CATEGORY.ITEM:
+                    operateView.SetUpDescription("アイテムの種類を選択してください。");
+                    break;
+                case EnumCollection.UI.MAIN_MENU_CATEGORY.SKILL:
+                    operateView.SetUpDescription("スキルを設定してください。");
+                    break;
+                case EnumCollection.UI.MAIN_MENU_CATEGORY.MAP:
+                    operateView.SetUpDescription("マップを確認してください。");
+                    break;
+                case EnumCollection.UI.MAIN_MENU_CATEGORY.SETTING:
+                    operateView.SetUpDescription("変更する設定を選択してください。");
+                    break;
+
+                default:
+                    break;
+            }
         }
 
         void RegisterInputActions()

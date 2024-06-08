@@ -48,14 +48,14 @@ namespace ProjectCronos
         /// <summary>
         /// 初期化
         /// </summary>
-        public void Initialize()
+        public void Initialize(MainMenuOperateView operateView)
         {
             itemView.gameObject.SetActive(false);
             skillView.gameObject.SetActive(false);
             mapView.gameObject.SetActive(false);
             settingView.gameObject.SetActive(false);
 
-            itemView.Initialize();
+            itemView.Initialize(operateView);
         }
 
         /// <summary>

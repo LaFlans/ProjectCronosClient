@@ -17,7 +17,7 @@ MonoBehaviour:
     name: "\u30C0\u30DF\u30FC\u30A2\u30A4\u30C6\u30E0"
     description: "\u3053\u306E\u30A2\u30A4\u30C6\u30E0\u306F\u30C6\u30B9\u30C8\u7528\u306E\u30C0\u30DF\u30FC\u30A2\u30A4\u30C6\u30E0\u3067\u3059\u3002<br>\u3053\u306E\u30A2\u30A4\u30C6\u30E0\u304C\u8868\u793A\u3055\u308C\u3066\u3044\u308B\u5834\u5408\u3001\u6B63\u3057\u304F\u30A2\u30A4\u30C6\u30E0\u3092\u8AAD\u307F\u8FBC\u3081\u3066\u3044\u306A\u3044\u306E\u3067\u3001\u78BA\u8A8D\u3057\u3066\u304F\u3060\u3055\u3044\u3002"
     category: 0
-    imagePath: Assets/ProjectCronosAssets/Textures/Item/item_dummy_1.png
+    imagePath: item_dummy_1
     effectValue1: 0
     effectValue2: 0
     effectValue3: 0
@@ -25,7 +25,7 @@ MonoBehaviour:
     name: "\u30E9\u30A6\u30E0\u306E\u9928\u306E\u9375"
     description: "\u9928\u306B\u5165\u308B\u305F\u3081\u306E\u9375\u3002<br>\u3046\u304A\u304A\u304A\u304A\u304A\u304A\u304A\u304A\u304A\u304A\u304A\u304A\u304A\u304A\u304A\u304A\u304A\u304A\u304A\u304A\u304A\u304A\u304A\u304A\u304A\u304A\u304A\u304A\u304A\u304A\u304A\u304A\u304A\u304A<br>\u304A\u304A\u304A\u304A\u304A\u304A\u304A\u304A"
     category: 0
-    imagePath: Assets/ProjectCronosAssets/Textures/Item/item_raum_house_key_1.png
+    imagePath: item_raum_house_key_1
     effectValue1: 0
     effectValue2: 0
     effectValue3: 0
@@ -33,7 +33,7 @@ MonoBehaviour:
     name: "\u30D6\u30EB\u30FC\u30AA\u30FC\u30D6"
     description: "\u9752\u3044\u30AA\u30FC\u30D6\u3002"
     category: 0
-    imagePath: Assets/ProjectCronosAssets/Textures/Item/Orb/item_orb_blue_1.png
+    imagePath: item_orb_blue_1
     effectValue1: 0
     effectValue2: 0
     effectValue3: 0
@@ -41,7 +41,7 @@ MonoBehaviour:
     name: "\u30E9\u30A4\u30C8\u30B0\u30EA\u30FC\u30F3\u30AA\u30FC\u30D6"
     description: "\u8584\u7DD1\u306E\u30AA\u30FC\u30D6\u3002"
     category: 3
-    imagePath: Assets/ProjectCronosAssets/Textures/Item/Orb/item_orb_light_green_1.png
+    imagePath: item_orb_light_green_1
     effectValue1: 0
     effectValue2: 0
     effectValue3: 0
@@ -49,7 +49,7 @@ MonoBehaviour:
     name: "\u30D4\u30F3\u30AF\u30AA\u30FC\u30D6"
     description: "\u30D4\u30F3\u30AF\u8272\u306E\u30AA\u30FC\u30D6\u3002"
     category: 3
-    imagePath: Assets/ProjectCronosAssets/Textures/Item/Orb/item_orb_pink_1.png
+    imagePath: item_orb_pink_1
     effectValue1: 0
     effectValue2: 0
     effectValue3: 0
@@ -57,7 +57,7 @@ MonoBehaviour:
     name: "\u30E9\u30A4\u30C8\u30D6\u30EB\u30FC\u30AA\u30FC\u30D6"
     description: "\u5C11\u3057\u9752\u3044\u30AA\u30FC\u30D6\u3002"
     category: 3
-    imagePath: Assets/ProjectCronosAssets/Textures/Item/Orb/item_orb_light_blue_1.png
+    imagePath: item_orb_light_blue_1
     effectValue1: 0
     effectValue2: 0
     effectValue3: 0
@@ -65,7 +65,7 @@ MonoBehaviour:
     name: "\u30A4\u30A8\u30ED\u30FC\u30AA\u30FC\u30D6"
     description: "\u9EC4\u8272\u3044\u30AA\u30FC\u30D6\u3002"
     category: 3
-    imagePath: Assets/ProjectCronosAssets/Textures/Item/Orb/item_orb_yellow_1.png
+    imagePath: item_orb_yellow_1
     effectValue1: 0
     effectValue2: 0
     effectValue3: 0
@@ -81,7 +81,7 @@ MonoBehaviour:
     name: "\u30EC\u30C3\u30C9\u30AA\u30FC\u30D6"
     description: "\u8D64\u3044\u30AA\u30FC\u30D6\u3002"
     category: 0
-    imagePath: Assets/ProjectCronosAssets/Textures/Item/Orb/item_orb_red_1.png
+    imagePath: item_orb_red_1
     effectValue1: 0
     effectValue2: 0
     effectValue3: 0
@@ -89,7 +89,7 @@ MonoBehaviour:
     name: "\u30B0\u30EC\u30FC\u30AA\u30FC\u30D6"
     description: "\u7070\u8272\u306E\u30AA\u30FC\u30D6\u3002"
     category: 0
-    imagePath: Assets/ProjectCronosAssets/Textures/Item/Orb/item_orb_gray_1.png
+    imagePath: item_orb_gray_1
     effectValue1: 0
     effectValue2: 0
     effectValue3: 0
@@ -97,7 +97,7 @@ MonoBehaviour:
     name: "\u30B0\u30EA\u30FC\u30F3\u30AA\u30FC\u30D6"
     description: "\u7FE0\u306E\u30AA\u30FC\u30D6\u3002"
     category: 2
-    imagePath: Assets/ProjectCronosAssets/Textures/Item/Orb/item_orb_green_1.png
+    imagePath: item_orb_green_1
     effectValue1: 0
     effectValue2: 0
     effectValue3: 0
@@ -105,7 +105,7 @@ MonoBehaviour:
     name: "\u30B0\u30EA\u30FC\u30F3\u30DD\u30FC\u30B7\u30E7\u30F3"
     description: "\u4F53\u529B\u3092\u56DE\u5FA9\u3059\u308B\u30DD\u30FC\u30B7\u30E7\u30F3\u3002"
     category: 2
-    imagePath: Assets/ProjectCronosAssets/Textures/Item/item_green_portion_1.png
+    imagePath: item_green_portion_1
     effectValue1: 100
     effectValue2: 0
     effectValue3: 0
@@ -113,7 +113,7 @@ MonoBehaviour:
     name: "\u30D6\u30EB\u30FC\u30DD\u30FC\u30B7\u30E7\u30F3"
     description: "MP\u3092\u56DE\u5FA9\u3059\u308B\u30DD\u30FC\u30B7\u30E7\u30F3\u3002"
     category: 2
-    imagePath: Assets/ProjectCronosAssets/Textures/Item/item_blue_portion_1.png
+    imagePath: item_blue_portion_1
     effectValue1: 100
     effectValue2: 0
     effectValue3: 0
@@ -121,7 +121,7 @@ MonoBehaviour:
     name: "\u30D6\u30EB\u30FC\u30DD\u30FC\u30B7\u30E7\u30F3"
     description: "MP\u3092\u56DE\u5FA9\u3059\u308B\u30DD\u30FC\u30B7\u30E7\u30F3\u3002"
     category: 2
-    imagePath: Assets/ProjectCronosAssets/Textures/Item/item_blue_portion_1.png
+    imagePath: item_blue_portion_1
     effectValue1: 100
     effectValue2: 0
     effectValue3: 0
@@ -129,7 +129,7 @@ MonoBehaviour:
     name: "\u30D6\u30EB\u30FC\u30DD\u30FC\u30B7\u30E7\u30F3"
     description: "MP\u3092\u56DE\u5FA9\u3059\u308B\u30DD\u30FC\u30B7\u30E7\u30F3\u3002"
     category: 2
-    imagePath: Assets/ProjectCronosAssets/Textures/Item/item_blue_portion_1.png
+    imagePath: item_blue_portion_1
     effectValue1: 100
     effectValue2: 0
     effectValue3: 0
@@ -137,7 +137,7 @@ MonoBehaviour:
     name: "\u30D6\u30EB\u30FC\u30DD\u30FC\u30B7\u30E7\u30F3"
     description: "MP\u3092\u56DE\u5FA9\u3059\u308B\u30DD\u30FC\u30B7\u30E7\u30F3\u3002"
     category: 2
-    imagePath: Assets/ProjectCronosAssets/Textures/Item/item_blue_portion_1.png
+    imagePath: item_blue_portion_1
     effectValue1: 100
     effectValue2: 0
     effectValue3: 0
@@ -145,7 +145,7 @@ MonoBehaviour:
     name: "\u30D6\u30EB\u30FC\u30DD\u30FC\u30B7\u30E7\u30F3"
     description: "MP\u3092\u56DE\u5FA9\u3059\u308B\u30DD\u30FC\u30B7\u30E7\u30F3\u3002"
     category: 2
-    imagePath: Assets/ProjectCronosAssets/Textures/Item/item_blue_portion_1.png
+    imagePath: item_blue_portion_1
     effectValue1: 100
     effectValue2: 0
     effectValue3: 0
@@ -153,7 +153,7 @@ MonoBehaviour:
     name: "\u30D6\u30EB\u30FC\u30DD\u30FC\u30B7\u30E7\u30F3"
     description: "MP\u3092\u56DE\u5FA9\u3059\u308B\u30DD\u30FC\u30B7\u30E7\u30F3\u3002"
     category: 2
-    imagePath: Assets/ProjectCronosAssets/Textures/Item/item_blue_portion_1.png
+    imagePath: item_blue_portion_1
     effectValue1: 100
     effectValue2: 0
     effectValue3: 0
@@ -161,7 +161,7 @@ MonoBehaviour:
     name: "\u30D6\u30EB\u30FC\u30DD\u30FC\u30B7\u30E7\u30F3"
     description: "MP\u3092\u56DE\u5FA9\u3059\u308B\u30DD\u30FC\u30B7\u30E7\u30F3\u3002"
     category: 2
-    imagePath: Assets/ProjectCronosAssets/Textures/Item/item_blue_portion_1.png
+    imagePath: item_blue_portion_1
     effectValue1: 100
     effectValue2: 0
     effectValue3: 0
@@ -169,7 +169,7 @@ MonoBehaviour:
     name: "\u30D6\u30EB\u30FC\u30DD\u30FC\u30B7\u30E7\u30F3"
     description: "MP\u3092\u56DE\u5FA9\u3059\u308B\u30DD\u30FC\u30B7\u30E7\u30F3\u3002"
     category: 2
-    imagePath: Assets/ProjectCronosAssets/Textures/Item/item_blue_portion_1.png
+    imagePath: item_blue_portion_1
     effectValue1: 100
     effectValue2: 0
     effectValue3: 0
@@ -177,7 +177,7 @@ MonoBehaviour:
     name: "\u30D6\u30EB\u30FC\u30DD\u30FC\u30B7\u30E7\u30F3"
     description: "MP\u3092\u56DE\u5FA9\u3059\u308B\u30DD\u30FC\u30B7\u30E7\u30F3\u3002"
     category: 2
-    imagePath: Assets/ProjectCronosAssets/Textures/Item/item_blue_portion_1.png
+    imagePath: item_blue_portion_1
     effectValue1: 100
     effectValue2: 0
     effectValue3: 0
@@ -185,7 +185,7 @@ MonoBehaviour:
     name: "\u30D6\u30EB\u30FC\u30DD\u30FC\u30B7\u30E7\u30F3"
     description: "MP\u3092\u56DE\u5FA9\u3059\u308B\u30DD\u30FC\u30B7\u30E7\u30F3\u3002"
     category: 2
-    imagePath: Assets/ProjectCronosAssets/Textures/Item/item_blue_portion_1.png
+    imagePath: item_blue_portion_1
     effectValue1: 100
     effectValue2: 0
     effectValue3: 0
@@ -193,7 +193,7 @@ MonoBehaviour:
     name: "\u30D6\u30EB\u30FC\u30DD\u30FC\u30B7\u30E7\u30F3"
     description: "MP\u3092\u56DE\u5FA9\u3059\u308B\u30DD\u30FC\u30B7\u30E7\u30F3\u3002"
     category: 2
-    imagePath: Assets/ProjectCronosAssets/Textures/Item/item_blue_portion_1.png
+    imagePath: item_blue_portion_1
     effectValue1: 100
     effectValue2: 0
     effectValue3: 0
@@ -201,7 +201,7 @@ MonoBehaviour:
     name: "\u30D6\u30EB\u30FC\u30DD\u30FC\u30B7\u30E7\u30F3"
     description: "MP\u3092\u56DE\u5FA9\u3059\u308B\u30DD\u30FC\u30B7\u30E7\u30F3\u3002"
     category: 2
-    imagePath: Assets/ProjectCronosAssets/Textures/Item/item_blue_portion_1.png
+    imagePath: item_blue_portion_1
     effectValue1: 100
     effectValue2: 0
     effectValue3: 0
@@ -209,7 +209,7 @@ MonoBehaviour:
     name: "\u30D6\u30EB\u30FC\u30DD\u30FC\u30B7\u30E7\u30F3"
     description: "MP\u3092\u56DE\u5FA9\u3059\u308B\u30DD\u30FC\u30B7\u30E7\u30F3\u3002"
     category: 2
-    imagePath: Assets/ProjectCronosAssets/Textures/Item/item_blue_portion_1.png
+    imagePath: item_blue_portion_1
     effectValue1: 100
     effectValue2: 0
     effectValue3: 0
@@ -217,7 +217,7 @@ MonoBehaviour:
     name: "\u30D6\u30EB\u30FC\u30DD\u30FC\u30B7\u30E7\u30F3"
     description: "MP\u3092\u56DE\u5FA9\u3059\u308B\u30DD\u30FC\u30B7\u30E7\u30F3\u3002"
     category: 2
-    imagePath: Assets/ProjectCronosAssets/Textures/Item/item_blue_portion_1.png
+    imagePath: item_blue_portion_1
     effectValue1: 100
     effectValue2: 0
     effectValue3: 0
@@ -225,7 +225,7 @@ MonoBehaviour:
     name: "\u30D6\u30EB\u30FC\u30DD\u30FC\u30B7\u30E7\u30F3"
     description: "MP\u3092\u56DE\u5FA9\u3059\u308B\u30DD\u30FC\u30B7\u30E7\u30F3\u3002"
     category: 2
-    imagePath: Assets/ProjectCronosAssets/Textures/Item/item_blue_portion_1.png
+    imagePath: item_blue_portion_1
     effectValue1: 100
     effectValue2: 0
     effectValue3: 0
@@ -233,7 +233,7 @@ MonoBehaviour:
     name: "\u30D6\u30EB\u30FC\u30DD\u30FC\u30B7\u30E7\u30F3"
     description: "MP\u3092\u56DE\u5FA9\u3059\u308B\u30DD\u30FC\u30B7\u30E7\u30F3\u3002"
     category: 2
-    imagePath: Assets/ProjectCronosAssets/Textures/Item/item_blue_portion_1.png
+    imagePath: item_blue_portion_1
     effectValue1: 100
     effectValue2: 0
     effectValue3: 0
@@ -241,7 +241,7 @@ MonoBehaviour:
     name: "\u30D6\u30EB\u30FC\u30DD\u30FC\u30B7\u30E7\u30F3"
     description: "MP\u3092\u56DE\u5FA9\u3059\u308B\u30DD\u30FC\u30B7\u30E7\u30F3\u3002"
     category: 2
-    imagePath: Assets/ProjectCronosAssets/Textures/Item/item_blue_portion_1.png
+    imagePath: item_blue_portion_1
     effectValue1: 100
     effectValue2: 0
     effectValue3: 0
@@ -249,7 +249,7 @@ MonoBehaviour:
     name: "\u30D6\u30EB\u30FC\u30DD\u30FC\u30B7\u30E7\u30F3"
     description: "MP\u3092\u56DE\u5FA9\u3059\u308B\u30DD\u30FC\u30B7\u30E7\u30F3\u3002"
     category: 2
-    imagePath: Assets/ProjectCronosAssets/Textures/Item/item_blue_portion_1.png
+    imagePath: item_blue_portion_1
     effectValue1: 100
     effectValue2: 0
     effectValue3: 0
@@ -257,7 +257,7 @@ MonoBehaviour:
     name: "\u30D6\u30EB\u30FC\u30DD\u30FC\u30B7\u30E7\u30F3"
     description: "MP\u3092\u56DE\u5FA9\u3059\u308B\u30DD\u30FC\u30B7\u30E7\u30F3\u3002"
     category: 2
-    imagePath: Assets/ProjectCronosAssets/Textures/Item/item_blue_portion_1.png
+    imagePath: item_blue_portion_1
     effectValue1: 100
     effectValue2: 0
     effectValue3: 0
@@ -265,7 +265,7 @@ MonoBehaviour:
     name: "\u30D6\u30EB\u30FC\u30DD\u30FC\u30B7\u30E7\u30F3"
     description: "MP\u3092\u56DE\u5FA9\u3059\u308B\u30DD\u30FC\u30B7\u30E7\u30F3\u3002"
     category: 2
-    imagePath: Assets/ProjectCronosAssets/Textures/Item/item_blue_portion_1.png
+    imagePath: item_blue_portion_1
     effectValue1: 100
     effectValue2: 0
     effectValue3: 0
@@ -273,7 +273,7 @@ MonoBehaviour:
     name: "\u30D6\u30EB\u30FC\u30DD\u30FC\u30B7\u30E7\u30F3"
     description: "MP\u3092\u56DE\u5FA9\u3059\u308B\u30DD\u30FC\u30B7\u30E7\u30F3\u3002"
     category: 2
-    imagePath: Assets/ProjectCronosAssets/Textures/Item/item_blue_portion_1.png
+    imagePath: item_blue_portion_1
     effectValue1: 100
     effectValue2: 0
     effectValue3: 0
@@ -281,7 +281,7 @@ MonoBehaviour:
     name: "\u30D6\u30EB\u30FC\u30DD\u30FC\u30B7\u30E7\u30F3"
     description: "MP\u3092\u56DE\u5FA9\u3059\u308B\u30DD\u30FC\u30B7\u30E7\u30F3\u3002"
     category: 2
-    imagePath: Assets/ProjectCronosAssets/Textures/Item/item_blue_portion_1.png
+    imagePath: item_blue_portion_1
     effectValue1: 100
     effectValue2: 0
     effectValue3: 0
@@ -289,7 +289,7 @@ MonoBehaviour:
     name: "\u30D6\u30EB\u30FC\u30DD\u30FC\u30B7\u30E7\u30F3"
     description: "MP\u3092\u56DE\u5FA9\u3059\u308B\u30DD\u30FC\u30B7\u30E7\u30F3\u3002"
     category: 2
-    imagePath: Assets/ProjectCronosAssets/Textures/Item/item_blue_portion_1.png
+    imagePath: item_blue_portion_1
     effectValue1: 100
     effectValue2: 0
     effectValue3: 0
@@ -297,7 +297,7 @@ MonoBehaviour:
     name: "\u30D6\u30EB\u30FC\u30DD\u30FC\u30B7\u30E7\u30F3"
     description: "MP\u3092\u56DE\u5FA9\u3059\u308B\u30DD\u30FC\u30B7\u30E7\u30F3\u3002"
     category: 2
-    imagePath: Assets/ProjectCronosAssets/Textures/Item/item_blue_portion_1.png
+    imagePath: item_blue_portion_1
     effectValue1: 100
     effectValue2: 0
     effectValue3: 0
@@ -305,7 +305,7 @@ MonoBehaviour:
     name: "\u30D6\u30EB\u30FC\u30DD\u30FC\u30B7\u30E7\u30F3"
     description: "MP\u3092\u56DE\u5FA9\u3059\u308B\u30DD\u30FC\u30B7\u30E7\u30F3\u3002"
     category: 2
-    imagePath: Assets/ProjectCronosAssets/Textures/Item/item_blue_portion_1.png
+    imagePath: item_blue_portion_1
     effectValue1: 100
     effectValue2: 0
     effectValue3: 0
@@ -313,7 +313,7 @@ MonoBehaviour:
     name: "\u30D6\u30EB\u30FC\u30DD\u30FC\u30B7\u30E7\u30F3"
     description: "MP\u3092\u56DE\u5FA9\u3059\u308B\u30DD\u30FC\u30B7\u30E7\u30F3\u3002"
     category: 2
-    imagePath: Assets/ProjectCronosAssets/Textures/Item/item_blue_portion_1.png
+    imagePath: item_blue_portion_1
     effectValue1: 100
     effectValue2: 0
     effectValue3: 0
@@ -321,7 +321,7 @@ MonoBehaviour:
     name: "\u30D6\u30EB\u30FC\u30DD\u30FC\u30B7\u30E7\u30F3"
     description: "MP\u3092\u56DE\u5FA9\u3059\u308B\u30DD\u30FC\u30B7\u30E7\u30F3\u3002"
     category: 2
-    imagePath: Assets/ProjectCronosAssets/Textures/Item/item_blue_portion_1.png
+    imagePath: item_blue_portion_1
     effectValue1: 100
     effectValue2: 0
     effectValue3: 0
@@ -329,7 +329,7 @@ MonoBehaviour:
     name: "\u30D6\u30EB\u30FC\u30DD\u30FC\u30B7\u30E7\u30F3"
     description: "MP\u3092\u56DE\u5FA9\u3059\u308B\u30DD\u30FC\u30B7\u30E7\u30F3\u3002"
     category: 2
-    imagePath: Assets/ProjectCronosAssets/Textures/Item/item_blue_portion_1.png
+    imagePath: item_blue_portion_1
     effectValue1: 100
     effectValue2: 0
     effectValue3: 0

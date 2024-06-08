@@ -49,11 +49,11 @@ namespace ProjectCronos
             }
             else
             {
+                // FIXME: ここは一旦1つ目のセーブデータを参照しているので後で修正
                 await SaveManager.Instance.Load(0);
             }
 
             // プレイ時間周りの設定
-            // FIXME: ここは一旦1つ目のセーブデータを参照しているので後で修正
             TimeManager.Instance.SetPlayTimeFloat(SaveManager.Instance.lastLoadSaveData.playTime);
             TimeManager.Instance.StartMeasurePlayTime();
 
@@ -129,8 +129,8 @@ namespace ProjectCronos
         /// <returns>UniTask</returns>
         public override async UniTask PreLoadAsset()
         {
-            // プレイヤーの事前読み込み
             await player.PreLoadAsync();
+            await mainMenu.PreLoadAsync();
         }
 
         /// <summary>

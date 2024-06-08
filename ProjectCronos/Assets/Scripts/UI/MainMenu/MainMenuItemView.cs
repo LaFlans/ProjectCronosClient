@@ -55,6 +55,11 @@ namespace ProjectCronos
         ItemHolder playerItemHolder;
 
         /// <summary>
+        /// 操作説明ビュー
+        /// </summary>
+        MainMenuOperateView operateView;
+
+        /// <summary>
         /// 事前読み込み
         /// マネージャー系生成後に呼ばれる
         /// </summary>
@@ -69,8 +74,10 @@ namespace ProjectCronos
         /// <summary>
         /// 初期化
         /// </summary>
-        public void Initialize()
+        public void Initialize(MainMenuOperateView operateView)
         {
+            this.operateView = operateView;
+
             itemCategoryListView.Initialize();
 
             // カテゴリー選択前はアイテム一覧と詳細は非表示
@@ -78,7 +85,7 @@ namespace ProjectCronos
             itemDetailView.gameObject.SetActive(false);
 
             currentItemCategory = EnumCollection.Item.ITEM_CATEGORY.NORMAL;
-            currentItemMenuControlStatus = EnumCollection.Item.MENU_ITEM_CONTROL_STATUS.CATEGORY;
+            SetCurrentItemMenuControlStatus(EnumCollection.Item.MENU_ITEM_CONTROL_STATUS.CATEGORY);
             noItemText.gameObject.SetActive(false);
             isShowItem = false;
             UpdateItemCategoryView();
@@ -86,6 +93,7 @@ namespace ProjectCronos
             // プレイヤーのアイテム情報を取得
             playerItemHolder = GameObject.FindGameObjectWithTag("Player").
                 GetComponent<PlayerStatus>().itemHolder;
+
         }
 
         void OnSubmit(InputAction.CallbackContext context)
@@ -109,7 +117,7 @@ namespace ProjectCronos
                         noItemText.gameObject.SetActive(true);
                     }
 
-                    currentItemMenuControlStatus = EnumCollection.Item.MENU_ITEM_CONTROL_STATUS.LIST;
+                    SetCurrentItemMenuControlStatus(EnumCollection.Item.MENU_ITEM_CONTROL_STATUS.LIST);
                     break;
                 case EnumCollection.Item.MENU_ITEM_CONTROL_STATUS.LIST:
                     break;
@@ -147,7 +155,6 @@ namespace ProjectCronos
 
         void OnDown(InputAction.CallbackContext context)
         {
-
             switch (currentItemMenuControlStatus)
             {
                 case EnumCollection.Item.MENU_ITEM_CONTROL_STATUS.CATEGORY:
@@ -221,7 +228,7 @@ namespace ProjectCronos
                     itemListView.gameObject.SetActive(false);
                     itemDetailView.gameObject.SetActive(false);
                     noItemText.gameObject.SetActive(false);
-                    currentItemMenuControlStatus = EnumCollection.Item.MENU_ITEM_CONTROL_STATUS.CATEGORY;
+                    SetCurrentItemMenuControlStatus(EnumCollection.Item.MENU_ITEM_CONTROL_STATUS.CATEGORY);
                     SoundManager.Instance.Play("Button47");
                     return false;
                 default:
@@ -230,6 +237,31 @@ namespace ProjectCronos
 
             // 来ることはないと思うけど念のため
             return false;
+        }
+
+        void SetCurrentItemMenuControlStatus(EnumCollection.Item.MENU_ITEM_CONTROL_STATUS status)
+        {
+            currentItemMenuControlStatus = status;
+
+            switch(currentItemMenuControlStatus)
+            {
+                case EnumCollection.Item.MENU_ITEM_CONTROL_STATUS.CATEGORY:
+                    operateView.SetUpDescription(
+                        "アイテムの種類を選択してください。",
+                        (EnumCollection.Input.INPUT_GAMEPAD_BUTTON.CROSS,"カテゴリ移動"),
+                        (EnumCollection.Input.INPUT_GAMEPAD_BUTTON.A, "決定"),
+                        (EnumCollection.Input.INPUT_GAMEPAD_BUTTON.B, "戻る"));
+                    break;
+                case EnumCollection.Item.MENU_ITEM_CONTROL_STATUS.LIST:
+                    operateView.SetUpDescription(
+                        "アイテムを選択してください。",
+                        (EnumCollection.Input.INPUT_GAMEPAD_BUTTON.CROSS,"カーソル移動"),
+                        (EnumCollection.Input.INPUT_GAMEPAD_BUTTON.A, "アイテム選択"),
+                        (EnumCollection.Input.INPUT_GAMEPAD_BUTTON.B, "戻る"));
+                    break;
+                default:
+                    break;
+            }
         }
 
         void UpdateItemDetailView()

@@ -247,7 +247,7 @@ namespace ProjectCronos
             //InputManager.Instance.inputActions.Player.Attack2.performed += Shot;
 
             // 回避
-            InputManager.Instance.inputActions.Player.Dogde.performed += OnDogde;
+            InputManager.Instance.inputActions.Player.Dodge.performed += OnDodge;
         }
 
         void RemoveInputAction()
@@ -275,7 +275,7 @@ namespace ProjectCronos
             //InputManager.Instance.inputActions.Player.Attack2.performed -= Shot;
 
             // 回避
-            InputManager.Instance.inputActions.Player.Dogde.performed -= OnDogde;     
+            InputManager.Instance.inputActions.Player.Dodge.performed -= OnDodge;     
         }
 
         void OnDestroy()
@@ -289,7 +289,7 @@ namespace ProjectCronos
         /// <summary>
         /// 回避処理
         /// </summary>
-        void OnDogde(InputAction.CallbackContext context)
+        void OnDodge(InputAction.CallbackContext context)
         {
             // 操作中の魔法陣がある場合、回避できない
             if (controlMagicCircle != null)
@@ -300,7 +300,7 @@ namespace ProjectCronos
             if (!isDodge && isGround)
             {
                 isDodge = true;
-                anim.SetTrigger("Dogde");
+                anim.SetTrigger("Dodge");
                 rigid.linearVelocity = Vector3.zero;
 
                 var moveVec = Vector3.ProjectOnPlane(this.transform.forward, normalVector);
