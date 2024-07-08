@@ -8431,8 +8431,8 @@ MonoBehaviour:
   m_LookaheadTime: 0
   m_LookaheadSmoothing: 0
   m_LookaheadIgnoreY: 0
-  m_HorizontalDamping: 0.5
-  m_VerticalDamping: 0.5
+  m_HorizontalDamping: 1
+  m_VerticalDamping: 1
   m_ScreenX: 0.5
   m_ScreenY: 0.5
   m_DeadZoneWidth: 0
@@ -10285,7 +10285,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 194.005, y: -30}
-  m_SizeDelta: {x: 0, y: 50}
+  m_SizeDelta: {x: 368.01, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &398287810
 MonoBehaviour:
@@ -14862,7 +14862,7 @@ MonoBehaviour:
   m_ShowCameraFrustum: 1
   m_IgnoreTimeScale: 1
   m_WorldUpOverride: {fileID: 0}
-  m_UpdateMethod: 2
+  m_UpdateMethod: 0
   m_BlendUpdateMethod: 1
   m_DefaultBlend:
     m_Style: 1
@@ -16601,6 +16601,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gimmickType: 1
+  gimmickStatus: 0
   isOpen: 0
   needItemId: 1
   anim: {fileID: 570191178}
@@ -40004,6 +40005,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gimmickType: 0
+  gimmickStatus: 0
   director: {fileID: 1546405742}
   openTimelineAsset: {fileID: 11400000, guid: de2fcc8ea48a10d4cb6b2a655b9515f0, type: 2}
   closeTimelineAsset: {fileID: 11400000, guid: fb6b7cb45c2eabe488b6e7275d04ee73, type: 2}
@@ -53358,7 +53360,7 @@ GameObject:
   - component: {fileID: 1943136461}
   - component: {fileID: 1943136462}
   m_Layer: 0
-  m_Name: Stage
+  m_Name: StageController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
