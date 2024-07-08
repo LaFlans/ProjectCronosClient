@@ -141,14 +141,13 @@ namespace ProjectCronos
             anim = this.GetComponent<Animator>();
 
             // ステータス設定
-            status = this.GetComponent<PlayerStatus>();
-            status.Initialize();
             playerStatus = this.GetComponent<PlayerStatus>();
             playerStatus.Initialize();
+            status = playerStatus;
 
             // FIXME: 本来は別の場所でやる
             // アイテム画像読み込み
-            foreach(var item in MasterDataManager.DB.ItemDataTable.All)
+            foreach (var item in MasterDataManager.DB.ItemDataTable.All)
             {
                 await AddressableManager.Instance.LoadTexture(item.Path);
             }

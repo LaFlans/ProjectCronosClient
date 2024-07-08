@@ -550,6 +550,25 @@ namespace ProjectCronos
                 /// </summary>
                 MAXMUM,
             }
+
+            /// <summary>
+            /// ギミック(仕掛け)の状態
+            /// </summary>
+            public enum GIMMICK_STATUS
+            {
+                /// <summary>
+                /// 未作動
+                /// </summary>
+                UNTRIGGERED,
+                /// <summary>
+                /// 作動済み
+                /// </summary>
+                TRIGGERED,
+                /// <summary>
+                /// 要素数
+                /// </summary>
+                MAXMUM,
+            }
         }
 
         /// <summary>

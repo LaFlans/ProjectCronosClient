@@ -34,6 +34,8 @@ namespace ProjectCronos
 
         public override void Initialize()
         {
+            base.Initialize();
+
             isInit = false;
 
             var initData = MasterDataManager.DB.PlayerDataTable.FindByKey(statusKey);

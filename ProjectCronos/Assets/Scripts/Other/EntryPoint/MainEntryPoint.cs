@@ -10,6 +10,9 @@ namespace ProjectCronos
         Player player;
 
         [SerializeField]
+        StageController stageController;
+
+        [SerializeField]
         EnemyController enemyController;
 
         [SerializeField]
@@ -53,8 +56,10 @@ namespace ProjectCronos
                 await SaveManager.Instance.Load(0);
             }
 
+            var saveData = SaveManager.Instance.lastLoadSaveData;
+
             // プレイ時間周りの設定
-            TimeManager.Instance.SetPlayTimeFloat(SaveManager.Instance.lastLoadSaveData.playTime);
+            TimeManager.Instance.SetPlayTimeFloat(saveData.playTime);
             TimeManager.Instance.StartMeasurePlayTime();
 
             isShowPopup = false;
@@ -65,6 +70,9 @@ namespace ProjectCronos
 
             // プレイヤーの初期化
             await player.Initialize();
+
+            // ステージの初期化
+            stageController.Initialize(saveData.stageSaveData.gimmicStatus);
 
             // 敵の初期化
             enemyController.Initialize();

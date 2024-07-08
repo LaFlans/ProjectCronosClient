@@ -1,9 +1,10 @@
 using UnityEngine;
 using Cysharp.Threading.Tasks;
-using System.IO;
 using System;
-using MessagePack;
+using System.Collections.Generic;
+using System.IO;
 using System.Text;
+using MessagePack;
 
 namespace ProjectCronos
 {
@@ -37,10 +38,10 @@ namespace ProjectCronos
         /// </summary>
         public async UniTask CreateNewData()
         {
-            PlayerSaveData playerData = new PlayerSaveData(0,null);
-            SaveAreaInfo info = new SaveAreaInfo(0,Vector3.zero,Quaternion.identity);
-
-            var data = new SaveData(0, Utility.GetUnixTime(DateTime.Now), playerData, info);
+            PlayerSaveData playerData = new PlayerSaveData(0, null);
+            SaveAreaInfo info = new SaveAreaInfo(0, Vector3.zero, Quaternion.identity);
+            StageSaveData stageData = new StageSaveData(new List<int>());
+            var data = new SaveData(0, Utility.GetUnixTime(DateTime.Now), playerData, info, stageData);
             await Save(data, 0, () => { Debug.Log("初期データを追加しました"); });
             lastLoadSaveData = data;
         }

@@ -35,12 +35,24 @@ namespace ProjectCronos
         [Key(3)]
         public SaveAreaInfo saveAreaInfo;
 
-        public SaveData(long playTime, long lastSaveTime, PlayerSaveData playerSaveData, SaveAreaInfo saveAreaInfo)
+        /// <summary>
+        /// ステージセーブ情報
+        /// </summary>
+        [Key(4)]
+        public StageSaveData stageSaveData;
+
+        public SaveData(
+            long playTime,
+            long lastSaveTime,
+            PlayerSaveData playerSaveData,
+            SaveAreaInfo saveAreaInfo,
+            StageSaveData stageSaveData)
         {
             this.playTime = playTime;
             this.lastSaveTime = lastSaveTime;
             this.playerSaveData = playerSaveData;
             this.saveAreaInfo = saveAreaInfo;
+            this.stageSaveData = stageSaveData;
         }
     }
 }

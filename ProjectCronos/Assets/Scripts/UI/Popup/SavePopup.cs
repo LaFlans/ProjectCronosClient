@@ -159,12 +159,16 @@ namespace ProjectCronos
             var playerStatus = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatus>();
             var playerSaveData = new PlayerSaveData(playerStatus.coinNum, playerStatus.itemHolder.CreateSaveItemData());
 
-            foreach (var item in playerSaveData.ownItems)
-            {
-                Debug.Log($"{item.Key}:{item.Value}");
-            }
+            // ステージのセーブ情報を作成
+            var stageController = GameObject.Find("StageController").GetComponent<StageController>();
+            StageSaveData stageData = new StageSaveData(stageController.GetStageSaveData());
 
-            return new SaveData(playTime, lastSaveTime, playerSaveData, saveAreaInfo);
+            return new SaveData(
+                playTime,
+                lastSaveTime,
+                playerSaveData,
+                saveAreaInfo,
+                stageData);
         }
 
         /// <summary>

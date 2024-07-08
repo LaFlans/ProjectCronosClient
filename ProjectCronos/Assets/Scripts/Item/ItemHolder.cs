@@ -124,8 +124,19 @@ namespace ProjectCronos
             }
             else
             {
-                ownItems.Add(itemId, amount);
-                Debug.Log($"新規アイテムID:{itemId}を{amount}個追加(現在{ownItems[itemId]}個)");
+                var item = MasterDataManager.DB.ItemDataTable.FindById(itemId);
+                if (item != null)
+                {
+                    ownItems.Add(itemId, amount);
+                    Debug.Log($"{item.Name}新規アイテムID:{itemId}を{amount}個追加(現在{ownItems[itemId]}個)");
+
+                    // アイテム情報保存
+                    itemInfos.Add(new Item(itemId));
+                }
+                else
+                {
+                    Debug.Log($"アイテムID:{itemId}は存在しません！");
+                }
             }
         }
 
@@ -135,7 +146,7 @@ namespace ProjectCronos
         /// <param name="itemId">消費するアイテムのID</param>
         /// <param name="amount">消費数</param>
         /// <returns>所持しているアイテムが足りずに消費に失敗したらfalse,消費に成功したらtrue</returns>
-        public bool SubItem(int itemId, int amount)
+        public bool ConsumeItem(int itemId, int amount)
         {
             if (ownItems.ContainsKey(itemId))
             {

@@ -26,6 +26,8 @@ namespace MessagePack.Formatters.ProjectCronos
         private static global::System.ReadOnlySpan<byte> GetSpan_playerSaveData() => new byte[1 + 14] { 174, 112, 108, 97, 121, 101, 114, 83, 97, 118, 101, 68, 97, 116, 97 };
         // saveAreaInfo
         private static global::System.ReadOnlySpan<byte> GetSpan_saveAreaInfo() => new byte[1 + 12] { 172, 115, 97, 118, 101, 65, 114, 101, 97, 73, 110, 102, 111 };
+        // stageSaveData
+        private static global::System.ReadOnlySpan<byte> GetSpan_stageSaveData() => new byte[1 + 13] { 173, 115, 116, 97, 103, 101, 83, 97, 118, 101, 68, 97, 116, 97 };
 
         public void Serialize(ref global::MessagePack.MessagePackWriter writer, global::ProjectCronos.SaveData value, global::MessagePack.MessagePackSerializerOptions options)
         {
@@ -36,7 +38,7 @@ namespace MessagePack.Formatters.ProjectCronos
             }
 
             var formatterResolver = options.Resolver;
-            writer.WriteMapHeader(4);
+            writer.WriteMapHeader(5);
             writer.WriteRaw(GetSpan_playTime());
             writer.Write(value.playTime);
             writer.WriteRaw(GetSpan_lastSaveTime());
@@ -45,6 +47,8 @@ namespace MessagePack.Formatters.ProjectCronos
             global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::ProjectCronos.PlayerSaveData>(formatterResolver).Serialize(ref writer, value.playerSaveData, options);
             writer.WriteRaw(GetSpan_saveAreaInfo());
             global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::ProjectCronos.SaveAreaInfo>(formatterResolver).Serialize(ref writer, value.saveAreaInfo, options);
+            writer.WriteRaw(GetSpan_stageSaveData());
+            global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::ProjectCronos.StageSaveData>(formatterResolver).Serialize(ref writer, value.stageSaveData, options);
         }
 
         public global::ProjectCronos.SaveData Deserialize(ref global::MessagePack.MessagePackReader reader, global::MessagePack.MessagePackSerializerOptions options)
@@ -61,6 +65,7 @@ namespace MessagePack.Formatters.ProjectCronos
             var __lastSaveTime__ = default(long);
             var __playerSaveData__ = default(global::ProjectCronos.PlayerSaveData);
             var __saveAreaInfo__ = default(global::ProjectCronos.SaveAreaInfo);
+            var __stageSaveData__ = default(global::ProjectCronos.StageSaveData);
 
             for (int i = 0; i < length; i++)
             {
@@ -98,11 +103,16 @@ namespace MessagePack.Formatters.ProjectCronos
 
                         __playerSaveData__ = global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::ProjectCronos.PlayerSaveData>(formatterResolver).Deserialize(ref reader, options);
                         continue;
+                    case 13:
+                        if (!global::System.MemoryExtensions.SequenceEqual(stringKey, GetSpan_stageSaveData().Slice(1))) { goto FAIL; }
+
+                        __stageSaveData__ = global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<global::ProjectCronos.StageSaveData>(formatterResolver).Deserialize(ref reader, options);
+                        continue;
 
                 }
             }
 
-            var ____result = new global::ProjectCronos.SaveData(__playTime__, __lastSaveTime__, __playerSaveData__, __saveAreaInfo__);
+            var ____result = new global::ProjectCronos.SaveData(__playTime__, __lastSaveTime__, __playerSaveData__, __saveAreaInfo__, __stageSaveData__);
             reader.Depth--;
             return ____result;
         }

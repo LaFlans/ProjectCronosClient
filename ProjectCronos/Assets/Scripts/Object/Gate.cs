@@ -8,7 +8,7 @@ namespace ProjectCronos
     /// <summary>
     /// 門クラス
     /// </summary>
-    public class Gate : MonoBehaviour
+    public class Gate : Gimmick
     {
         /// <summary>
         /// ロックされているかどうか
@@ -23,18 +23,21 @@ namespace ProjectCronos
         bool isOpen;
 
         /// <summary>
+        /// 必要なアイテムのID
+        /// </summary>
+        [SerializeField]
+        int needItemId;
+
+        /// <summary>
         /// 門のアニメーター
         /// </summary>
+        [SerializeField]
         Animator anim;
 
-        void Start()
+        public override void Initialize(EnumCollection.Stage.GIMMICK_STATUS status)
         {
-            Initialize();
-        }
+            InitializeGimmickStatus(status);
 
-        void Initialize()
-        {
-            anim = GetComponent<Animator>();
             isLock = false;
         }
 
@@ -49,18 +52,39 @@ namespace ProjectCronos
                 return;
             }
 
-            isOpen = !isOpen;
-            isLock = true;
-            SoundManager.Instance.Play("Button47");
-            Debug.Log("門" + (isOpen ? "開けます！" : "閉めます！"));
+            if (!isOpen)
+            {
+                var playerStatus = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatus>();
+                if (playerStatus.itemHolder.ConsumeItem(needItemId, 1))
+                {
+                    isOpen = true;
+                    gimmickStatus = EnumCollection.Stage.GIMMICK_STATUS.TRIGGERED;
+                    anim.SetTrigger("Open");
+                    SoundManager.Instance.Play("Button47");
+                }
+                else
+                {
+                    Debug.Log("必要なアイテムを所持していません。");
+                }
+            }
+        }
 
-            if (isOpen)
+        /// <summary>
+        /// ギミックの状態を初期化
+        /// </summary>
+        /// <param name="status">ギミックの状態</param>
+        void InitializeGimmickStatus(EnumCollection.Stage.GIMMICK_STATUS status)
+        {
+            gimmickStatus = status;
+            if (status == EnumCollection.Stage.GIMMICK_STATUS.TRIGGERED)
             {
                 anim.SetTrigger("Open");
+                isOpen = true;
             }
             else
             {
                 anim.SetTrigger("Close");
+                isOpen = false;
             }
         }
 
@@ -74,21 +98,27 @@ namespace ProjectCronos
 
         void OnTriggerEnter(Collider col)
         {
-            if (col.gameObject.tag == "Player")
+            if (!isOpen)
             {
-                Debug.Log("門の開閉範囲に入ったよ");
-                //saveAreaGuidText.SetActive(true);
-                InputManager.Instance.inputActions.Player.Action.performed += OnOperateGate;
+                if (col.gameObject.tag == "Player")
+                {
+                    Debug.Log("門の開閉範囲に入ったよ");
+                    //saveAreaGuidText.SetActive(true);
+                    InputManager.Instance.inputActions.Player.Action.performed += OnOperateGate;
+                }
             }
         }
 
         void OnTriggerExit(Collider col)
         {
-            if (col.gameObject.tag == "Player")
+            if (!isOpen)
             {
-                Debug.Log("門の開閉範囲を出たよ");
-                //saveAreaGuidText.SetActive(false);
-                InputManager.Instance.inputActions.Player.Action.performed -= OnOperateGate;
+                if (col.gameObject.tag == "Player")
+                {
+                    Debug.Log("門の開閉範囲を出たよ");
+                    //saveAreaGuidText.SetActive(false);
+                    InputManager.Instance.inputActions.Player.Action.performed -= OnOperateGate;
+                }
             }
         }
     }

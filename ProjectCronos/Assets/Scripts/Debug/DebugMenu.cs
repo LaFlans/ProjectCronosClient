@@ -151,7 +151,7 @@ namespace ProjectCronos
                         () =>
                         {
                             SoundManager.Instance.Play("Button30");
-                            playerStatus.itemHolder.SubItem(item.Id, 1);
+                            playerStatus.itemHolder.ConsumeItem(item.Id, 1);
                             UpdateItemDebugMenu(item.Id);
                         });
                 }

@@ -104,7 +104,9 @@ namespace ProjectCronos
             {
                 case EnumCollection.Item.MENU_ITEM_CONTROL_STATUS.CATEGORY:
                     isShowItem = playerItemHolder.ownItems
-                        .Any(x => MasterDataManager.DB.ItemDataTable.FindById(x.Key).Category == (int)currentItemCategory);
+                        .Any(x =>
+                        MasterDataManager.DB.ItemDataTable.FindById(x.Key).Category == (int)currentItemCategory &&
+                        x.Value > 0);
                     if (isShowItem)
                     {
                         itemListView.Initialize(playerItemHolder, currentItemCategory);

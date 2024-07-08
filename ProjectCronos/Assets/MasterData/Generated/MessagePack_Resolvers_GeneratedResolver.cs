@@ -47,20 +47,22 @@ namespace MessagePack.Resolvers
 
         static GeneratedResolverGetFormatterHelper()
         {
-            lookup = new global::System.Collections.Generic.Dictionary<global::System.Type, int>(12)
+            lookup = new global::System.Collections.Generic.Dictionary<global::System.Type, int>(14)
             {
                 { typeof(global::System.Collections.Generic.Dictionary<string, int>), 0 },
-                { typeof(global::Dictionary), 1 },
-                { typeof(global::EnemyData), 2 },
-                { typeof(global::ItemData), 3 },
-                { typeof(global::PlayerData), 4 },
-                { typeof(global::ProjectCronos.PlayerSaveData), 5 },
-                { typeof(global::ProjectCronos.SaveAreaInfo), 6 },
-                { typeof(global::ProjectCronos.SaveData), 7 },
-                { typeof(global::Sample), 8 },
-                { typeof(global::SaveAreaData), 9 },
-                { typeof(global::Sound), 10 },
-                { typeof(global::Test), 11 },
+                { typeof(global::System.Collections.Generic.List<int>), 1 },
+                { typeof(global::Dictionary), 2 },
+                { typeof(global::EnemyData), 3 },
+                { typeof(global::ItemData), 4 },
+                { typeof(global::PlayerData), 5 },
+                { typeof(global::ProjectCronos.PlayerSaveData), 6 },
+                { typeof(global::ProjectCronos.SaveAreaInfo), 7 },
+                { typeof(global::ProjectCronos.SaveData), 8 },
+                { typeof(global::ProjectCronos.StageSaveData), 9 },
+                { typeof(global::Sample), 10 },
+                { typeof(global::SaveAreaData), 11 },
+                { typeof(global::Sound), 12 },
+                { typeof(global::Test), 13 },
             };
         }
 
@@ -75,17 +77,19 @@ namespace MessagePack.Resolvers
             switch (key)
             {
                 case 0: return new global::MessagePack.Formatters.DictionaryFormatter<string, int>();
-                case 1: return new MessagePack.Formatters.DictionaryFormatter();
-                case 2: return new MessagePack.Formatters.EnemyDataFormatter();
-                case 3: return new MessagePack.Formatters.ItemDataFormatter();
-                case 4: return new MessagePack.Formatters.PlayerDataFormatter();
-                case 5: return new MessagePack.Formatters.ProjectCronos.PlayerSaveDataFormatter();
-                case 6: return new MessagePack.Formatters.ProjectCronos.SaveAreaInfoFormatter();
-                case 7: return new MessagePack.Formatters.ProjectCronos.SaveDataFormatter();
-                case 8: return new MessagePack.Formatters.SampleFormatter();
-                case 9: return new MessagePack.Formatters.SaveAreaDataFormatter();
-                case 10: return new MessagePack.Formatters.SoundFormatter();
-                case 11: return new MessagePack.Formatters.TestFormatter();
+                case 1: return new global::MessagePack.Formatters.ListFormatter<int>();
+                case 2: return new MessagePack.Formatters.DictionaryFormatter();
+                case 3: return new MessagePack.Formatters.EnemyDataFormatter();
+                case 4: return new MessagePack.Formatters.ItemDataFormatter();
+                case 5: return new MessagePack.Formatters.PlayerDataFormatter();
+                case 6: return new MessagePack.Formatters.ProjectCronos.PlayerSaveDataFormatter();
+                case 7: return new MessagePack.Formatters.ProjectCronos.SaveAreaInfoFormatter();
+                case 8: return new MessagePack.Formatters.ProjectCronos.SaveDataFormatter();
+                case 9: return new MessagePack.Formatters.ProjectCronos.StageSaveDataFormatter();
+                case 10: return new MessagePack.Formatters.SampleFormatter();
+                case 11: return new MessagePack.Formatters.SaveAreaDataFormatter();
+                case 12: return new MessagePack.Formatters.SoundFormatter();
+                case 13: return new MessagePack.Formatters.TestFormatter();
                 default: return null;
             }
         }
