@@ -44,6 +44,7 @@ namespace ProjectCronos
                 anim.SetTrigger("Open");
                 isOpen = !isOpen;
 
+                MainEntryPoint.guideView.HideControlGuide();
                 InputManager.Instance.inputActions.Player.Action.performed -= Open;
             }
         }
@@ -52,6 +53,9 @@ namespace ProjectCronos
         {
             if (!isOpen)
             {
+                MainEntryPoint.guideView.ShowControlGuide(
+                    "宝箱を開く",
+                    EnumCollection.Input.INPUT_GAMEPAD_BUTTON.B);
                 InputManager.Instance.inputActions.Player.Action.performed += Open;
             }
         }
@@ -60,6 +64,7 @@ namespace ProjectCronos
         {
             if (!isOpen)
             {
+                MainEntryPoint.guideView.HideControlGuide();
                 InputManager.Instance.inputActions.Player.Action.performed -= Open;
             }
         }

@@ -31,6 +31,9 @@ namespace ProjectCronos
         /// </summary>
         bool isFirstPlay;
 
+        [SerializeField]
+        UIMovieDirector movieDirector;
+
         public override void Initialize(EnumCollection.Stage.GIMMICK_STATUS status)
         {
             isFirstPlay = false;
@@ -41,6 +44,7 @@ namespace ProjectCronos
         {
             if (director == aDirector)
             {
+                movieDirector.EndMovie();
                 TimeManager.Instance.ApplyTimeScale();
                 //Debug.Log("PlayableDirector named " + aDirector.name + " is now stopped.");
             }
@@ -54,6 +58,7 @@ namespace ProjectCronos
             }
             else
             {
+                movieDirector.StartMovie();
                 director.Play(openTimelineAsset);
                 TimeManager.Instance.StopTime();
 
@@ -72,6 +77,7 @@ namespace ProjectCronos
             }
             else
             {
+                movieDirector.StartMovie();
                 director.Play(closeTimelineAsset);
                 TimeManager.Instance.StopTime();
 

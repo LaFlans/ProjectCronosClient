@@ -43,7 +43,6 @@ namespace ProjectCronos
         {
             // ここで事前に必要な素材を読み込む
             await contentView.PreLoadAsync();
-            await operateView.PreLoadAsync();
         }
 
         /// <summary>

@@ -34,6 +34,11 @@ namespace ProjectCronos
         bool isInitSaveData;
 
         /// <summary>
+        /// ガイド画面
+        /// </summary>
+        public static GuideView guideView;
+
+        /// <summary>
         /// シーンの初期化
         /// </summary>
         /// <returns>UniTask</returns>
@@ -82,6 +87,11 @@ namespace ProjectCronos
 
             // アイテムロガーの初期化
             await gameLogger.Initialize();
+
+
+            // ガイド画面の初期化
+            guideView = GameObject.Find("GuideView").GetComponent<GuideView>();
+            guideView.Initialize();
 
             // メインメニューを非アクティブに
             mainMenu.gameObject.SetActive(false);
@@ -139,6 +149,7 @@ namespace ProjectCronos
         {
             await player.PreLoadAsync();
             await mainMenu.PreLoadAsync();
+            await LoadedImageUtil.PreLoadAsync();
         }
 
         /// <summary>

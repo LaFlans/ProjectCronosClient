@@ -283,13 +283,13 @@ namespace ProjectCronos
 
         public void RegisterInputActions()
         {
-            Debug.Log("コンテンツ画面の入力登録");
+            //Debug.Log("コンテンツ画面の入力登録");
             RegisterItemCategoryInputActions();
         }
 
         public void UnregisterInputActions()
         {
-            Debug.Log("コンテンツ画面の入力解除");
+            //Debug.Log("コンテンツ画面の入力解除");
             UnregisterItemCategoryInputActions();
         }
 

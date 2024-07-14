@@ -61,6 +61,10 @@ namespace ProjectCronos
                     gimmickStatus = EnumCollection.Stage.GIMMICK_STATUS.TRIGGERED;
                     anim.SetTrigger("Open");
                     SoundManager.Instance.Play("Button47");
+
+                    
+                    MainEntryPoint.guideView.HideControlGuide();
+                    InputManager.Instance.inputActions.Player.Action.performed -= OnOperateGate;
                 }
                 else
                 {
@@ -103,6 +107,9 @@ namespace ProjectCronos
                 if (col.gameObject.tag == "Player")
                 {
                     Debug.Log("門の開閉範囲に入ったよ");
+                    MainEntryPoint.guideView.ShowControlGuide(
+                        "門を開く",
+                        EnumCollection.Input.INPUT_GAMEPAD_BUTTON.B);
                     //saveAreaGuidText.SetActive(true);
                     InputManager.Instance.inputActions.Player.Action.performed += OnOperateGate;
                 }
@@ -116,6 +123,7 @@ namespace ProjectCronos
                 if (col.gameObject.tag == "Player")
                 {
                     Debug.Log("門の開閉範囲を出たよ");
+                    MainEntryPoint.guideView.HideControlGuide();
                     //saveAreaGuidText.SetActive(false);
                     InputManager.Instance.inputActions.Player.Action.performed -= OnOperateGate;
                 }

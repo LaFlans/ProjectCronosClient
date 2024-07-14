@@ -17,6 +17,9 @@ namespace ProjectCronos
         [SerializeField]
         public EnumCollection.Stage.GIMMICK_TYPE gimmickType;
 
+        /// <summary>
+        /// ギミックの状態
+        /// </summary>
         public EnumCollection.Stage.GIMMICK_STATUS gimmickStatus;
 
         abstract public void Initialize(EnumCollection.Stage.GIMMICK_STATUS status);

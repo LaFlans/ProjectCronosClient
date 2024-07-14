@@ -35,6 +35,8 @@ namespace ProjectCronos
         /// </summary>
         Animator anim;
 
+        GameObject guideView;
+
         void Start()
         {
             isLock = false;
@@ -92,8 +94,10 @@ namespace ProjectCronos
         {
             if (col.gameObject.tag == "Player")
             {
-                Debug.Log("レバー切り替え範囲に入ったよ");
-                //saveAreaGuidText.SetActive(true);
+                MainEntryPoint.guideView.ShowControlGuide(
+                    "レバーを操作する",
+                    EnumCollection.Input.INPUT_GAMEPAD_BUTTON.B);
+
                 InputManager.Instance.inputActions.Player.Action.performed += OnSwitch;
             }
         }
@@ -102,8 +106,7 @@ namespace ProjectCronos
         {
             if (col.gameObject.tag == "Player")
             {
-                Debug.Log("レバー切り替え範囲を出たよ");
-                //saveAreaGuidText.SetActive(false);
+                MainEntryPoint.guideView.HideControlGuide();
                 InputManager.Instance.inputActions.Player.Action.performed -= OnSwitch;
             }
         }

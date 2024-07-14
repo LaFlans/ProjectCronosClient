@@ -10,9 +10,6 @@ namespace ProjectCronos
     public class SaveArea : MonoBehaviour
     {
         [SerializeField]
-        GameObject saveAreaGuidText;
-
-        [SerializeField]
         GameObject savePopup;
 
         bool canSave;
@@ -37,7 +34,6 @@ namespace ProjectCronos
         {
             canSave = false;
             isActive = false;
-            saveAreaGuidText.SetActive(false);
         }
 
         public async UniTask<bool> Initialize()
@@ -85,8 +81,9 @@ namespace ProjectCronos
                     return;
                 }
 
-                //Debug.Log("SaveArea内に入ったよ");
-                saveAreaGuidText.SetActive(true);
+                MainEntryPoint.guideView.ShowControlGuide(
+                    "セーブする？",
+                    EnumCollection.Input.INPUT_GAMEPAD_BUTTON.B);
                 canSave = true;
                 InputManager.Instance.inputActions.Player.Action.performed += OnSave;
             }
@@ -103,7 +100,7 @@ namespace ProjectCronos
                 }
 
                 //Debug.Log("SaveAreaを出たよ");
-                saveAreaGuidText.SetActive(false);
+                MainEntryPoint.guideView.HideControlGuide();
                 canSave = false;
                 InputManager.Instance.inputActions.Player.Action.performed -= OnSave;
             }

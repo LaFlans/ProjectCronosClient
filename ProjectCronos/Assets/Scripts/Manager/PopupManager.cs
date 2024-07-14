@@ -23,6 +23,8 @@ namespace ProjectCronos
         [SerializeField]
         Stack<Param> popupParams;
 
+        PopupView popupView;
+
         /// <summary>
         /// ポップアッププレハブ取得
         /// 表示するキャンバスの親オブジェクトがない場合、nullを返す
@@ -32,8 +34,10 @@ namespace ProjectCronos
         public GameObject GetPopupObject(EnumCollection.Popup.POPUP_TYPE type)
         {
             var obj = AddressableManager.Instance.GetLoadedObject(GetPopupPath(type));
-            obj.transform.parent = GameObject.Find("PopupParent").transform;
+            var parent = GameObject.Find("PopupParent");
+            obj.transform.parent = parent.transform;
             obj.transform.localPosition = Vector3.zero;
+            popupView = parent.GetComponent<PopupView>();
             PushPopup(new Param(obj.GetComponent<PopupBase>()));
             return obj;
         }
@@ -108,6 +112,7 @@ namespace ProjectCronos
             {
                 InputManager.Instance.SetInputStatus(EnumCollection.Input.INPUT_STATUS.UI);
                 TimeManager.Instance.StopTime();
+                popupView.SetActiveUIObjects(false);
             }
         }
 
@@ -132,6 +137,7 @@ namespace ProjectCronos
             {
                 InputManager.Instance.SetInputStatus(EnumCollection.Input.INPUT_STATUS.PLAYER);
                 TimeManager.Instance.ApplyTimeScale();
+                popupView.SetActiveUIObjects(true);
             }
         }
 
