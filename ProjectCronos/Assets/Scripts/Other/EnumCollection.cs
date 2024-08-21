@@ -538,6 +538,10 @@ namespace ProjectCronos
             public enum GIMMICK_TYPE
             {
                 /// <summary>
+                /// 仕掛けなし
+                /// </summary>
+                None,
+                /// <summary>
                 /// スイッチで動作する仕掛け
                 /// </summary>
                 Switch,

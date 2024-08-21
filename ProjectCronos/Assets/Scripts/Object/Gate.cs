@@ -54,21 +54,34 @@ namespace ProjectCronos
 
             if (!isOpen)
             {
-                var playerStatus = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatus>();
-                if (playerStatus.itemHolder.ConsumeItem(needItemId, 1))
+                switch(gimmickType)
                 {
-                    isOpen = true;
-                    gimmickStatus = EnumCollection.Stage.GIMMICK_STATUS.TRIGGERED;
-                    anim.SetTrigger("Open");
-                    SoundManager.Instance.Play("Button47");
+                    case EnumCollection.Stage.GIMMICK_TYPE.None:
+                        isOpen = true;
+                        anim.SetTrigger("Open");
+                        SoundManager.Instance.Play("Button47");
+                        MainEntryPoint.guideView.HideControlGuide();
+                        InputManager.Instance.inputActions.Player.Action.performed -= OnOperateGate;
+                        break;
+                    case EnumCollection.Stage.GIMMICK_TYPE.Item:
+                        var playerStatus = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatus>();
+                        if (playerStatus.itemHolder.ConsumeItem(needItemId, 1))
+                        {
+                            isOpen = true;
+                            gimmickStatus = EnumCollection.Stage.GIMMICK_STATUS.TRIGGERED;
+                            anim.SetTrigger("Open");
+                            SoundManager.Instance.Play("Button47");
 
-                    
-                    MainEntryPoint.guideView.HideControlGuide();
-                    InputManager.Instance.inputActions.Player.Action.performed -= OnOperateGate;
-                }
-                else
-                {
-                    Debug.Log("必要なアイテムを所持していません。");
+
+                            MainEntryPoint.guideView.HideControlGuide();
+                            InputManager.Instance.inputActions.Player.Action.performed -= OnOperateGate;
+                        }
+                        else
+                        {
+                            Debug.Log("必要なアイテムを所持していません。");
+                        }
+
+                        break;
                 }
             }
         }
@@ -106,7 +119,6 @@ namespace ProjectCronos
             {
                 if (col.gameObject.tag == "Player")
                 {
-                    Debug.Log("門の開閉範囲に入ったよ");
                     MainEntryPoint.guideView.ShowControlGuide(
                         "門を開く",
                         EnumCollection.Input.INPUT_GAMEPAD_BUTTON.B);
@@ -122,7 +134,6 @@ namespace ProjectCronos
             {
                 if (col.gameObject.tag == "Player")
                 {
-                    Debug.Log("門の開閉範囲を出たよ");
                     MainEntryPoint.guideView.HideControlGuide();
                     //saveAreaGuidText.SetActive(false);
                     InputManager.Instance.inputActions.Player.Action.performed -= OnOperateGate;
