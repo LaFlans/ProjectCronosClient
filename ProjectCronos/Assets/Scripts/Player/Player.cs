@@ -95,7 +95,6 @@ namespace ProjectCronos
 
         string demonHandPrefabPath = "Assets/Resources_moved/Prefabs/DemonHand.prefab";
         string demonHandTrapPrefabPath = "Assets/Resources_moved/Prefabs/MagicCircle/DemonHandTrap.prefab";
-        //string fireSkeltonPrefabPath = "Assets/Prefabs/FireSkelton.prefab";
         string fireSkeltonPrefabPath = "Assets/Prefabs/NierBullet.prefab";
 
         /// <summary>
@@ -678,8 +677,7 @@ namespace ProjectCronos
         void Move()
         {
             var vec = GetDirection();
-
-            var moveVec = Vector3.ProjectOnPlane(vec, normalVector);
+            //var moveVec = Vector3.ProjectOnPlane(vec, normalVector);
 
             // 高さ調整
             if (isGround)
@@ -690,21 +688,17 @@ namespace ProjectCronos
             // アニメーション中は移動速度を落とす
             if (anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
             {
-                //rigid.velocity = new Vector3(vec.x * status.moveSpeed / attackMoveDelayRate, rigid.velocity.y, vec.z * status.moveSpeed / attackMoveDelayRate);
-
                 rigid.linearVelocity = new Vector3(
-                    moveVec.x * status.moveSpeed / attackMoveDelayRate,
+                    vec.x * status.moveSpeed / attackMoveDelayRate,
                     rigid.linearVelocity.y,
-                    moveVec.z * status.moveSpeed / attackMoveDelayRate);
+                    vec.z * status.moveSpeed / attackMoveDelayRate);
             }
             else
             {
-                //rigid.velocity = new Vector3(vec.x * status.moveSpeed, rigid.velocity.y, vec.z * status.moveSpeed);
-
                 rigid.linearVelocity = new Vector3(
-                    moveVec.x * status.moveSpeed,
+                    vec.x * status.moveSpeed,
                     rigid.linearVelocity.y,
-                    moveVec.z * status.moveSpeed);
+                    vec.z* status.moveSpeed);
             }
 
             anim.SetFloat("Speed", vec.magnitude);

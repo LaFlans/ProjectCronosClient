@@ -91,6 +91,8 @@ namespace ProjectCronos
             rockOnCamera.transform.position = freeLookCamera.transform.position;
             SetPriority(rockOnPriority: 15);
             isRockOn = true;
+
+            rockOnCamera.LookAt = target;
         }
 
         /// <summary>
@@ -103,6 +105,8 @@ namespace ProjectCronos
             targetTransform = null;
             SetPriority(rockOnPriority: 5);
             isRockOn = false;
+
+            rockOnCamera.LookAt = null;
         }
 
         /// <summary>
