@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 using Cysharp.Threading.Tasks;
 
 namespace ProjectCronos
@@ -30,8 +31,9 @@ namespace ProjectCronos
         /// 被弾時処理
         /// </summary>
         /// <param name="value">ダメージの値</param>
+        /// <param name="isRight">被弾箇所が体の右側かどうか(ここは必須)</param>
         /// <returns>この被弾により死亡した場合、Trueで返す</returns>
-        public virtual bool Damage(int value) 
+        public virtual bool Damage(int value, bool isRight = false) 
         {
             Debug.Log($"{value}ダメージを受けました");
             if (status != null)
@@ -52,6 +54,14 @@ namespace ProjectCronos
         public virtual void Death()
         {
             // 一旦消す
+            //Destroy(this.gameObject);
+            StartCoroutine(DeathDelay());
+        }
+
+        IEnumerator DeathDelay()
+        {
+            yield return new WaitForSeconds(2.0f);
+
             Destroy(this.gameObject);
         }
     }

@@ -13,17 +13,40 @@ MonoBehaviour:
   m_Name: Sound(SE)
   m_EditorClassIdentifier: 
   m_GroupName: Sound(SE)
-  m_Data:
-    m_SerializedData: []
   m_GUID: 129af39cbfe382146ba504e272d4fe57
   m_SerializeEntries:
+  - m_GUID: 16979f2d001024f41aa3065a85020c00
+    m_Address: Assets/ProjectCronosAssets/Sounds/SE/kurage/button/button38.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2bb27fccf29daa145b1aa200b83b4065
+    m_Address: Assets/ProjectCronosAssets/Sounds/SE/Landing1.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4743b0a1f1a3d704195274deef60d69f
+    m_Address: "Assets/ProjectCronosAssets/Sounds/SE/\u52B9\u679C\u97F3\u30E9\u30DC/\u6C7A\u5B9A\u30DC\u30BF\u30F3\u3092\u62BC\u305946.mp3"
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5c028dad69678f84689410bf2c76ef82
+    m_Address: Assets/ProjectCronosAssets/Sounds/SE/kurage/button/button14.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5f542cabe7eb76d49ab67268097cfd78
     m_Address: Assets/ProjectCronosAssets/Sounds/SE/SlashSE.mp3
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: f5fde279da8cffb4fa17ce9ac07039e8
-    m_Address: Assets/ProjectCronosAssets/Sounds/SE/kurage/button/button30.mp3
+  - m_GUID: 68b03ba7da8b7ed47ad580bb9992bbcb
+    m_Address: "Assets/ProjectCronosAssets/Sounds/SE/\u52B9\u679C\u97F3\u30E9\u30DC/openTresureBox.mp3"
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6c80e73d55240b848954fc21fed207e0
+    m_Address: Assets/ProjectCronosAssets/Sounds/SE/Damage1.mp3
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -42,28 +65,13 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 16979f2d001024f41aa3065a85020c00
-    m_Address: Assets/ProjectCronosAssets/Sounds/SE/kurage/button/button38.mp3
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 2bb27fccf29daa145b1aa200b83b4065
-    m_Address: Assets/ProjectCronosAssets/Sounds/SE/Landing1.mp3
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 6c80e73d55240b848954fc21fed207e0
-    m_Address: Assets/ProjectCronosAssets/Sounds/SE/Damage1.mp3
+  - m_GUID: f5fde279da8cffb4fa17ce9ac07039e8
+    m_Address: Assets/ProjectCronosAssets/Sounds/SE/kurage/button/button30.mp3
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f6a8e5a77f44436468151b3dc241a30d
     m_Address: Assets/ProjectCronosAssets/Sounds/SE/Swish1.mp3
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 5c028dad69678f84689410bf2c76ef82
-    m_Address: Assets/ProjectCronosAssets/Sounds/SE/kurage/button/button14.mp3
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

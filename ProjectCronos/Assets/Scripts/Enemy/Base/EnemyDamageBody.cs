@@ -25,8 +25,9 @@ namespace ProjectCronos
         /// ダメージを与える
         /// </summary>
         /// <param name="value">ダメージの値</param>
+        /// <param name="isRight">被弾箇所が体の右側かどうか(ここは必須)</param>
         /// <returns>この被弾により死亡した場合、Trueで返す</returns>
-        public bool Damage(int value)
+        public bool Damage(int value, bool isRight = false)
         {
             if (enemy == null)
             {
@@ -34,7 +35,7 @@ namespace ProjectCronos
                 return false;
             }
 
-            return enemy.Damage(value * damageRate);
+            return enemy.Damage(value * damageRate, isRight);
         }
     }
 }

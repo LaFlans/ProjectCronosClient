@@ -1,4 +1,6 @@
 using UnityEngine;
+using Cysharp.Threading.Tasks;
+
 
 namespace ProjectCronos
 {
@@ -81,6 +83,20 @@ namespace ProjectCronos
         public void DestroyMagicCircle()
         {
             // FIXME: 一旦そのまま削除していますが、拡縮で小さくして言って最後に削除
+
+            Destroy(this.gameObject.transform.parent.gameObject);
+            //ShrinkDelete(this.gameObject.transform.parent.gameObject);
+        }
+
+        async UniTask ShrinkDelete(GameObject obj)
+        {
+            await UniTask.WaitUntil(() =>
+            {
+                var size = obj.transform.localScale.x - 0.1f;
+                obj.transform.localScale = new Vector3(size, size, size);
+                return size > 0;
+            });
+
             Destroy(this.gameObject.transform.parent.gameObject);
         }
 

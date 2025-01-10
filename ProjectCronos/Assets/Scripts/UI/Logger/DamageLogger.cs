@@ -45,10 +45,12 @@ namespace ProjectCronos
         {
             if (isInitialize)
             {
+                Vector3 displace = new Vector2(200, -100);
+
                 GameObject obj = AddressableManager.Instance.GetLoadedObject(prefabPath);
                 obj.transform.SetParent(GameObject.Find("DamageLogger").transform);
                 obj.transform.localScale = Vector3.one;
-                obj.GetComponent<RectTransform>().position = Camera.main.WorldToScreenPoint(position);
+                obj.GetComponent<RectTransform>().position = Camera.main.WorldToScreenPoint(position) + displace;
                 obj.GetComponent<DamageLogCell>().Initialize(damageVal.ToString(), type);
             }
         }

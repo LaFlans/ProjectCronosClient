@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AI;
@@ -112,6 +114,10 @@ namespace ProjectCronos
         /// </summary>
         Action deathAction;
 
+        IEnumerator hitStopCoroutine;
+        bool isHitStop = false;
+        float animSpeed = 1;
+
         protected virtual void OnEnemyTimeScaleApply()
         {
             var enemyTimeScale = TimeManager.Instance.GetEnemyTimeScale();
@@ -150,6 +156,9 @@ namespace ProjectCronos
             // コンストレイント設定
             bodyParentConstraint.enabled = true;
             navmeshParentConstraint.enabled = false;
+
+            hitStopCoroutine = HitStop();
+            animSpeed = anim.speed;
 
             await base.Initialize();
 
@@ -413,10 +422,61 @@ namespace ProjectCronos
         /// 被弾時処理
         /// </summary>
         /// <param name="value">ダメージの値</param>
+        /// <param name="isRight">被弾箇所が体の右側かどうか(ここは必須)</param>
         /// <returns>この被弾により死亡した場合、Trueで返す</returns>
-        public override bool Damage(int value)
+        public override bool Damage(int value, bool isRight = false)
         {
-            return base.Damage(value);
+            HitAnimation(value, isRight);
+            return base.Damage(value, isRight);
+        }
+
+        void HitAnimation(int value, bool isRight = false)
+        {
+            if (isRight)
+            {
+                if (value < 10)
+                {
+                    anim.SetTrigger("Hit_S_R");
+                }
+                else
+                {
+                    anim.SetTrigger("Hit_M_R");
+                }
+            }
+            else
+            {
+                if (value < 10)
+                {
+                    anim.SetTrigger("Hit_S_L");
+                }
+                else
+                {
+                    anim.SetTrigger("Hit_M_L");
+                }
+            }
+
+            // 既に進んでいるヒットストップコルーチンが進んでいたら一旦止める
+            if (isHitStop)
+            {
+                StopCoroutine(hitStopCoroutine);
+            }
+
+            StartCoroutine(HitStop());
+        }
+
+        IEnumerator HitStop()
+        {
+            isHitStop = true;
+
+            yield return new WaitForSeconds(0.2f);
+
+            anim.speed = 0;
+
+            yield return new WaitForSeconds(0.5f);
+
+            anim.speed = animSpeed;
+
+            isHitStop = false;
         }
 
         /// <summary>

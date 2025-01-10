@@ -4,6 +4,7 @@ using System.IO;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering.HighDefinition;
+using UnityEngine.VFX;
 
 namespace ProjectCronos
 {
@@ -56,8 +57,15 @@ namespace ProjectCronos
         [SerializeField]
         MagicCircleTriggerCollider magicCircleTriggerCol;
 
+        /// <summary>
+        /// 魔法陣設置時エフェクトオブジェクト
+        /// </summary>
+        [SerializeField]
+        GameObject placeEffectObj;
+
         [SerializeField]
         TextMeshPro debugLevelText;
+
 
         EnumCollection.Attack.MAGIC_CIRCLE_STATUS magicCircleStatus;
 
@@ -84,6 +92,7 @@ namespace ProjectCronos
 
             InitSummonMat();
             anim = target.GetComponent<Animator>();
+            placeEffectObj.SetActive(false);
 
             target.GetComponent<DefaultAnimationEvent>().Init(
                 finishAction: AnimationFinishEvent,
@@ -229,6 +238,10 @@ namespace ProjectCronos
         {
             magicCircleStatus = EnumCollection.Attack.MAGIC_CIRCLE_STATUS.TRAP;
             TrapStatusUpdate();
+
+            // 設置エフェクトを再生して削除
+            placeEffectObj.SetActive(true);
+            Destroy(placeEffectObj, 1.0f);
         }
 
         /// <summary>

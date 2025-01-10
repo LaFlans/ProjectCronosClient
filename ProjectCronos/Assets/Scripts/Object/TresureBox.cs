@@ -8,50 +8,38 @@ namespace ProjectCronos
     /// </summary>
     public class TresureBox : MonoBehaviour
     {
+        /// <summary>
+        /// 当たり判定
+        /// </summary>
+        Collider col;
+
         bool isOpen;
-
-        [SerializeField]
-        Animator anim;
-
-        [SerializeField]
-        int itemId;
-        [SerializeField]
-        int itemAmount;
-
-        private void Start()
+        [SerializeField] Animator anim;
+        [SerializeField] int itemId;
+        [SerializeField] int itemAmount;
+        [SerializeField] DropItem dropItem;
+        void Start()
         {
+            col = GetComponent<Collider>();
             isOpen = false;
             anim.SetTrigger(isOpen ? "Open" : "Close");
         }
 
         void Open(InputAction.CallbackContext context)
         {
-            if (isOpen)
-            {
-                anim.SetTrigger("Close");
-                isOpen = !isOpen;
-            }
-            else
-            {
-                Debug.Log("宝箱を開けました！");
-                var playerStatus = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatus>();
-                if (playerStatus != null)
-                {
-                    Debug.Log("アイテムを追加しました！");
-                    playerStatus.itemHolder.AddItem(itemId, itemAmount);
-                }
+            SoundManager.Instance.Play("OpenTresureBox");
+            MainEntryPoint.guideView.HideControlGuide();
+            InputManager.Instance.inputActions.Player.Action.performed -= Open;
 
-                anim.SetTrigger("Open");
-                isOpen = !isOpen;
-
-                MainEntryPoint.guideView.HideControlGuide();
-                InputManager.Instance.inputActions.Player.Action.performed -= Open;
-            }
+            col.enabled = false;
+            dropItem.Init(itemId, itemAmount);
+            anim.SetTrigger("Open");
+            isOpen = true;
         }
 
         void OnTriggerEnter(Collider other)
         {
-            if (!isOpen)
+            if (!isOpen && other.gameObject.tag == "Player")
             {
                 MainEntryPoint.guideView.ShowControlGuide(
                     "宝箱を開く",
@@ -62,7 +50,7 @@ namespace ProjectCronos
 
         void OnTriggerExit(Collider other)
         {
-            if (!isOpen)
+            if (!isOpen && other.gameObject.tag == "Player")
             {
                 MainEntryPoint.guideView.HideControlGuide();
                 InputManager.Instance.inputActions.Player.Action.performed -= Open;

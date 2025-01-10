@@ -2,8 +2,14 @@ using System.Collections;
 using System.Collections.Generic;using UnityEngine;
 using System.Linq;
 using Cysharp.Threading.Tasks;
-namespace ProjectCronos{    /// <summary>    /// サウンドプレイヤー    /// </summary>    internal class SoundPlayer : MonoBehaviour    {        const int SOURCE_BGM_NUM = 2;        const int SOURCE_SE_NUM = 16;        float masterVolume = 1.0f;
+namespace ProjectCronos{    /// <summary>    /// サウンドプレイヤー    /// </summary>    internal class SoundPlayer : MonoBehaviour    {        const int SOURCE_BGM_NUM = 2;        const int SOURCE_SE_NUM = 16;
+
+        [SerializeField, Range(0f,1f)]        float masterVolume = 1.0f;
+
+        [SerializeField, Range(0f, 1f)]
         float bgmVolume = 0.0f;
+
+        [SerializeField, Range(0f, 1f)]
         float seVolume = 1.0f;        List<SoundSource> bgmSources;        List<SoundSource> seSources;        [SerializeField]        Transform sourceSeParent;        [SerializeField]        Transform sourceBgmParent;
 
         Coroutine FadeInOutCoroutine;

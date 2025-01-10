@@ -256,18 +256,21 @@ EnumCollection.Attack.ATTACK_TYPE type, int attack, float delayTime,
                 case EnumCollection.Attack.ATTACK_TYPE.PLAYER:
                     if (col.gameObject.tag == "EnemyBody")
                     {
-                        if (col.gameObject.GetComponent<EnemyDamageBody>().Damage(attack))
-                        {
-                            //var rididBody = col.gameObject.GetComponent<Rigidbody>();
-                            //Debug.Log($"トドメをさしました！");
-                            //rididBody?.AddForce(this.transform.up * 50, ForceMode.Impulse);
-                        }
 
                         Vector3 hitPos = col.ClosestPointOnBounds(this.transform.position);
                         Utility.CreateObject("Assets/Resources_moved/Prefabs/Effects/DamageEffect1.prefab", hitPos, 1.0f);
 
+                        var ab = col.transform.forward - col.transform.position;
+                        var ac = hitPos - col.transform.position;
+                        var cross = Vector3.Dot(ab, ac);
+
                         DamageLogger.ShowLog(attack, hitPos, EnumCollection.Attack.ATTACK_TYPE.PLAYER);
-                        Debug.Log($"エネミーに{attack}を与えました。");
+
+                        if (col.gameObject.GetComponent<EnemyDamageBody>().Damage(attack, cross > 0))
+                        {
+                            var rididBody = col.gameObject.GetComponent<Rigidbody>();
+                            rididBody?.AddForce(this.transform.up * 50, ForceMode.Impulse);
+                        }
 
                         if (isHitDestory)
                         {

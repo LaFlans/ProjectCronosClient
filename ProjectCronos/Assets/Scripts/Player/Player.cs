@@ -7,6 +7,7 @@ using Cinemachine;
 using System.Diagnostics.Contracts;
 using Cysharp.Threading.Tasks.Triggers;
 using UnityEngine.UIElements;
+using UnityEngine.VFX;
 
 namespace ProjectCronos
 {
@@ -123,6 +124,8 @@ namespace ProjectCronos
         [SerializeField]
         Transform attackObjParent;
 
+        [SerializeField]
+        GameObject summonWaitEffect;
 
         GameObject controlMagicCircle;
 
@@ -161,6 +164,9 @@ namespace ProjectCronos
 
             //　地面判定設定
             groundChecker.Initialized(OnLanding, OnTakeoff);
+
+            // エフェクト初期化
+            summonWaitEffect.SetActive(false);
 
             // カメラ設定
             playerCamera = this.GetComponent<PlayerCamera>();
@@ -309,7 +315,7 @@ namespace ProjectCronos
 
         void OnTest(InputAction.CallbackContext context)
         {
-            if (controlMagicCircle == null)
+            if (controlMagicCircle == null && isGround)
             {
                 // トラップ攻撃テスト
                 GameObject obj = AddressableManager.Instance.GetLoadedObject(demonHandTrapPrefabPath);
@@ -317,14 +323,18 @@ namespace ProjectCronos
                 obj.transform.position += new Vector3(0, 0.1f, 0);
                 obj.GetComponent<DemonHand>().Initialize(10, 1);
                 controlMagicCircle = obj;
+                anim.SetBool("IsSummon", true);
+                summonWaitEffect.SetActive(true);
             }
             else
             {
-                if(controlMagicCircle.GetComponent<MagicCircle>().IsPutTrap())
+                if (controlMagicCircle.GetComponent<MagicCircle>().IsPutTrap())
                 {
                     // 魔法陣の操作を解除
                     controlMagicCircle.GetComponent<MagicCircle>().PutTrap();
                     controlMagicCircle = null;
+                    anim.SetBool("IsSummon", false);
+                    summonWaitEffect.SetActive(false);
                 }
                 else
                 {
@@ -365,11 +375,12 @@ namespace ProjectCronos
         /// 被弾時処理
         /// </summary>
         /// <param name="value">ダメージの値</param>
+        /// <param name="isRight">被弾箇所が体の右側かどうか(ここは必須)</param>
         /// <returns>この被弾により死亡した場合、Trueで返す</returns>
-        public override bool Damage(int value)
+        public override bool Damage(int value, bool isRight = false)
         {
             SoundManager.Instance.Play("Damage1");
-            return base.Damage(value);
+            return base.Damage(value, isRight);
         }
 
         /// <summary>
@@ -554,6 +565,7 @@ namespace ProjectCronos
         void OnJump(InputAction.CallbackContext context)
         {
             if (isGround &&
+                controlMagicCircle == null &&
                 jumpState == EnumCollection.Player.PLAYER_JUMP_STATE.IDOL)
             {
                 jumpState = EnumCollection.Player.PLAYER_JUMP_STATE.START;
@@ -723,10 +735,22 @@ namespace ProjectCronos
             rigid.linearVelocity = Vector3.zero;
             anim.SetFloat("Speed", 0);
 
-
             var moveVec = Vector3.ProjectOnPlane(vec, normalVector);
 
             controlMagicCircle.transform.position += moveVec * controlMagicCircleSpeed;
+
+            var circleVec = controlMagicCircle.transform.position - this.transform.position;
+            circleVec.y = 0;
+
+            if (circleVec.magnitude > 0.1f)
+            {
+                transform.rotation = Quaternion.Slerp(
+                    transform.rotation,
+                    Quaternion.LookRotation(
+                        circleVec,
+                        Vector3.up),
+                    rotateSpeed * Time.deltaTime);
+            }
         }
 
         /// <summary>

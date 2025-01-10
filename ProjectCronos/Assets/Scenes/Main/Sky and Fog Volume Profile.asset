@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: HDShadowSettings
   m_EditorClassIdentifier: 
   active: 1
+  interCascadeBorders: 1
   maxShadowDistance:
     m_OverrideState: 1
     m_Value: 500
@@ -98,10 +99,10 @@ MonoBehaviour:
     m_Value: 1
   upperHemisphereLuxValue:
     m_OverrideState: 1
-    m_Value: 0.18292066
+    m_Value: 0.18292059
   upperHemisphereLuxColor:
     m_OverrideState: 1
-    m_Value: {x: 0.5, y: 0.49550655, z: 0.4759314}
+    m_Value: {x: 0.5, y: 0.4955066, z: 0.4759314}
   desiredLuxValue:
     m_OverrideState: 1
     m_Value: 1
@@ -140,6 +141,12 @@ MonoBehaviour:
       customValue: 100
       additiveValue: 0
       multiplyValue: 1
+  sunInitialRotation:
+    m_OverrideState: 0
+    m_Value: -Infinity
+  lockSun:
+    m_OverrideState: 0
+    m_Value: 0
   enableBackplate:
     m_OverrideState: 0
     m_Value: 0
@@ -414,6 +421,9 @@ MonoBehaviour:
   sliceDistributionUniformity:
     m_OverrideState: 0
     m_Value: 0.75
+  multipleScatteringIntensity:
+    m_OverrideState: 0
+    m_Value: 0
   m_FogControlMode:
     m_OverrideState: 0
     m_Value: 0

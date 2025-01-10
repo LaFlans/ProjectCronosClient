@@ -15,7 +15,7 @@ MonoBehaviour:
   data:
   - Key: Bifrons
     Name: "\u30D3\u30D5\u30ED\u30F3\u30B9"
-    MaxHp: 900
+    MaxHp: 300
     TimeHpHealPerSeconds: 0
     MaxMp: 0
     TimeMpHealPerSeconds: 0
