@@ -21,37 +21,55 @@ MonoBehaviour:
     path: Assets/ProjectCronosAssets/Sounds/BGM/RengokuTeien/Noir_Memory.mp3
   - key: Button30
     type: 1
-    path: Assets/ProjectCronosAssets/Sounds/SE/kurage/button/button30.mp3
+    path: button30
   - key: Button37
     type: 1
-    path: Assets/ProjectCronosAssets/Sounds/SE/kurage/button/button37.mp3
+    path: button37
   - key: Button38
     type: 1
-    path: Assets/ProjectCronosAssets/Sounds/SE/kurage/button/button38.mp3
+    path: button38
   - key: Button47
     type: 1
-    path: Assets/ProjectCronosAssets/Sounds/SE/kurage/button/button47.mp3
+    path: button47
   - key: Button55
     type: 1
-    path: Assets/ProjectCronosAssets/Sounds/SE/kurage/button/button55.mp3
+    path: button55
+  - key: Cancel8
+    type: 1
+    path: cancelButton8
   - key: Damage1
     type: 1
-    path: Assets/ProjectCronosAssets/Sounds/SE/Damage1.mp3
+    path: Damage1
   - key: GetDropItem
     type: 1
-    path: "Assets/ProjectCronosAssets/Sounds/SE/\u52B9\u679C\u97F3\u30E9\u30DC/\u6C7A\u5B9A\u30DC\u30BF\u30F3\u3092\u62BC\u305946.mp3"
+    path: button46
   - key: LandingPlayer
     type: 1
-    path: Assets/ProjectCronosAssets/Sounds/SE/Landing1.mp3
+    path: Landing1
+  - key: OpenDoor1
+    type: 1
+    path: openDoor1
+  - key: OpenDoor2
+    type: 1
+    path: openDoor2
+  - key: OpenGate
+    type: 1
+    path: openGate
   - key: OpenTresureBox
     type: 1
-    path: "Assets/ProjectCronosAssets/Sounds/SE/\u52B9\u679C\u97F3\u30E9\u30DC/openTresureBox.mp3"
+    path: openTresureBox
   - key: Shot1
     type: 1
-    path: Assets/ProjectCronosAssets/Sounds/SE/kurage/button/button14.mp3
+    path: button14
+  - key: SummonPut
+    type: 1
+    path: button43
+  - key: SummonStart
+    type: 1
+    path: Aura1
   - key: TakeoffPlayer
     type: 1
-    path: Assets/ProjectCronosAssets/Sounds/SE/Swish1.mp3
+    path: Swish1
   - key: WorkBGM1
     type: 0
     path: "Assets/ProjectCronosAssets/Sounds/BGM/WorkBGM/\u4E88\u611F\u306E\u3074\u3093\u307D\u3093\u805E\u3053\u3048\u305F\u3089.mp3"

@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
+using static UnityEngine.Rendering.DebugUI;
+using static UnityEditor.Progress;
 
 
 namespace ProjectCronos
@@ -121,6 +123,9 @@ namespace ProjectCronos
             {
                 ownItems[itemId] += amount;
                 Debug.Log($"更新アイテムID:{itemId}を{amount}個追加(現在{ownItems[itemId]}個)");
+
+                var item = MasterDataManager.DB.ItemDataTable.FindById(itemId);
+                ItemLogger.ShowItemLog($"{item.Name}×{amount}");
             }
             else
             {
@@ -132,6 +137,8 @@ namespace ProjectCronos
 
                     // アイテム情報保存
                     itemInfos.Add(new Item(itemId));
+
+                    ItemLogger.ShowItemLog($"{item.Name}×{amount}");
                 }
                 else
                 {

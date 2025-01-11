@@ -317,14 +317,23 @@ namespace ProjectCronos
         {
             if (controlMagicCircle == null && isGround)
             {
-                // トラップ攻撃テスト
-                GameObject obj = AddressableManager.Instance.GetLoadedObject(demonHandTrapPrefabPath);
-                obj.transform.position = this.transform.position;
-                obj.transform.position += new Vector3(0, 0.1f, 0);
-                obj.GetComponent<DemonHand>().Initialize(10, 1);
-                controlMagicCircle = obj;
-                anim.SetBool("IsSummon", true);
-                summonWaitEffect.SetActive(true);
+                if (playerStatus.DamageMp(50))
+                {
+                    SoundManager.Instance.Play("Cancel8");
+                    Debug.LogError("MPが足りないのでトラップを設置することができません");
+                }
+                else
+                {
+                    // トラップ攻撃テスト
+                    GameObject obj = AddressableManager.Instance.GetLoadedObject(demonHandTrapPrefabPath);
+                    obj.transform.position = this.transform.position;
+                    obj.transform.position += new Vector3(0, 0.1f, 0);
+                    obj.GetComponent<DemonHand>().Initialize(10, 1);
+                    controlMagicCircle = obj;
+                    anim.SetBool("IsSummon", true);
+                    //SoundManager.Instance.Play("SummonStart");
+                    summonWaitEffect.SetActive(true);
+                }
             }
             else
             {
@@ -334,10 +343,12 @@ namespace ProjectCronos
                     controlMagicCircle.GetComponent<MagicCircle>().PutTrap();
                     controlMagicCircle = null;
                     anim.SetBool("IsSummon", false);
+                    SoundManager.Instance.Play("SummonPut");
                     summonWaitEffect.SetActive(false);
                 }
                 else
                 {
+                    SoundManager.Instance.Play("Cancel8");
                     Debug.LogError("この場所にはトラップを設置することができません");
                 }
             }

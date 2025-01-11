@@ -44,7 +44,7 @@ namespace ProjectCronos
         }
 
         /// <summary>
-        /// BGM再生
+        /// 再生
         /// </summary>
         /// <param name="key">再生したいサウンドリソースのキー</param>
         public void Play(string key)

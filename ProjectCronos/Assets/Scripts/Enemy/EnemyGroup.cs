@@ -53,14 +53,14 @@ namespace ProjectCronos
         void SubEnemy()
         {
             enemyCount = enemyCount - 1;
-            Debug.LogError($"残りの敵はあと{enemyCount}体です!");
+            Debug.Log($"残りの敵はあと{enemyCount}体です!");
 
             if (enemyCount <= 0)
             {
                 if (col != null)
                 {
-                    Debug.LogError($"敵を全滅しました");
-                    this.gameObject.SetActive(false);
+                    eventCol.DisappearObject();
+                    Debug.Log($"敵を全滅しました");
                 }
             }
         }

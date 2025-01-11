@@ -38,6 +38,20 @@ namespace ProjectCronos
         }
 
         /// <summary>
+        /// 現れたオブジェクトを消す
+        /// </summary>
+        public void DisappearObject()
+        {
+            if (appearObject.Any())
+            {
+                foreach (var obj in appearObject)
+                {
+                    obj.SetActive(false);
+                }
+            }
+        }
+
+        /// <summary>
         /// 当たり判定に入った時に呼ばれる(トリガー用)
         /// </summary>
         /// <param name="col"></param>
@@ -50,7 +64,7 @@ namespace ProjectCronos
                 // このオブジェクトの当たり判定を非活性化
                 gameObject.GetComponent<Collider>().enabled = false;
 
-                if (appearObject != null)
+                if (appearObject.Any())
                 {
                     foreach (var obj in appearObject)
                     {

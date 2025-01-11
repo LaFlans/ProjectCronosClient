@@ -28,10 +28,10 @@ namespace ProjectCronos
         /// ログ表示
         /// </summary>
         /// <param name="message"></param>
-        public void ShowItemLog(string message)
+        public static void ShowItemLog(string message)
         {
             GameObject obj = AddressableManager.Instance.GetLoadedObject(prefabPath);
-            obj.transform.parent = this.transform;
+            obj.transform.SetParent(GameObject.Find("ItemLogger").transform);
             obj.transform.localScale = Vector3.one;
             obj.GetComponent<ItemLogCell>().Initialize(message);
         }

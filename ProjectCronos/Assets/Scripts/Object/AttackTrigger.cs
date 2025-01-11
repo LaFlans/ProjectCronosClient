@@ -268,8 +268,9 @@ EnumCollection.Attack.ATTACK_TYPE type, int attack, float delayTime,
 
                         if (col.gameObject.GetComponent<EnemyDamageBody>().Damage(attack, cross > 0))
                         {
-                            var rididBody = col.gameObject.GetComponent<Rigidbody>();
-                            rididBody?.AddForce(this.transform.up * 50, ForceMode.Impulse);
+                            col.enabled = false;
+                            //var rididBody = col.gameObject.GetComponent<Rigidbody>();
+                            //rididBody?.AddForce(this.transform.up * 50, ForceMode.Impulse);
                         }
 
                         if (isHitDestory)

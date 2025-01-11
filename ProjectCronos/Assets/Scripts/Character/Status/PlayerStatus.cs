@@ -104,7 +104,7 @@ namespace ProjectCronos
             statusUpdateEvent?.Invoke();
 
             // FIXME: ここは後でマスタ文言に差し替え
-            itemLogger.ShowItemLog($"{value}コイン入手しました");
+            ItemLogger.ShowItemLog($"{value}コイン入手しました");
         }
 
         /// <summary>

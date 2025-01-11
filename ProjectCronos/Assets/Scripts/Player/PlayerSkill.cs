@@ -45,8 +45,10 @@ namespace ProjectCronos
                 if (timeStopTimer > 1)
                 {
                     timeStopTimer = 0;
-                    if (status.DamageMp(200))
+                    if (status.DamageMp(10))
                     {
+                        SoundManager.Instance.Play("Cancel8");
+
                         //　MPが足りなくなった場合、スキルを停止する
                         TimeStop();
                     }
@@ -73,6 +75,14 @@ namespace ProjectCronos
 
         public void OnActiveFirstSkill(InputAction.CallbackContext context)
         {
+            // 発動する前にMPが足りているか確認
+            if (status.DamageMp(10))
+            {
+                SoundManager.Instance.Play("Cancel8");
+                Debug.LogError("MPが足りないのでスキルを発動することができません");
+                return;
+            }
+
             switch (firstSkillType)
             {
                 case EnumCollection.Attack.SKILL_TYPE.TIME_STOP:

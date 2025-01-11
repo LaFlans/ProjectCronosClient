@@ -59,7 +59,7 @@ namespace ProjectCronos
                     case EnumCollection.Stage.GIMMICK_TYPE.None:
                         isOpen = true;
                         anim.SetTrigger("Open");
-                        SoundManager.Instance.Play("Button47");
+                        SoundManager.Instance.Play("OpenDoor1");
                         MainEntryPoint.guideView.HideControlGuide();
                         InputManager.Instance.inputActions.Player.Action.performed -= OnOperateGate;
                         break;
@@ -70,9 +70,7 @@ namespace ProjectCronos
                             isOpen = true;
                             gimmickStatus = EnumCollection.Stage.GIMMICK_STATUS.TRIGGERED;
                             anim.SetTrigger("Open");
-                            SoundManager.Instance.Play("Button47");
-
-
+                            SoundManager.Instance.Play("OpenDoor1");
                             MainEntryPoint.guideView.HideControlGuide();
                             InputManager.Instance.inputActions.Player.Action.performed -= OnOperateGate;
                         }

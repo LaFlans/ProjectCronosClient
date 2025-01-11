@@ -108,8 +108,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6159088ad337a94cabf5b9b19f92a74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  masterVolume: 0.5
-  bgmVolume: 0.1
+  masterVolume: 1
+  bgmVolume: 0
   seVolume: 1
   sourceSeParent: {fileID: 8682813276031952684}
   sourceBgmParent: {fileID: 8682813274906687746}
