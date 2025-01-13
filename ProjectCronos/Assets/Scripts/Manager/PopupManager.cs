@@ -68,6 +68,8 @@ namespace ProjectCronos
                     return "Assets/Resources_moved/Prefabs/Popup/DefaultPopup.prefab";
                 case EnumCollection.Popup.POPUP_TYPE.SAVE:
                     return "Assets/Resources_moved/Prefabs/Popup/SavePopup.prefab";
+                case EnumCollection.Popup.POPUP_TYPE.SHOP:
+                    return "Assets/Resources_moved/Prefabs/Popup/ShopPopup.prefab";
                 default:
                     // デフォルトのポップアップのパスを返す
                     return "Assets/Resources_moved/Prefabs/Popup/DefaultPopup.prefab";  

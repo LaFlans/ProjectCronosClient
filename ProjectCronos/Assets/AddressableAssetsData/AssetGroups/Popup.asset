@@ -13,8 +13,6 @@ MonoBehaviour:
   m_Name: Popup
   m_EditorClassIdentifier: 
   m_GroupName: Popup
-  m_Data:
-    m_SerializedData: []
   m_GUID: 6b5fd1b536d8bf34d9aa3820412180c1
   m_SerializeEntries:
   - m_GUID: 99c1c8aba9fb3824898ab62394690f6b
@@ -24,6 +22,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a3c0a8458a9f08b43bc00fd310b2a277
     m_Address: Assets/Resources_moved/Prefabs/Popup/DefaultPopup.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ddf1631a308f326439e64947ac364a69
+    m_Address: Assets/Resources_moved/Prefabs/Popup/ShopPopup.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

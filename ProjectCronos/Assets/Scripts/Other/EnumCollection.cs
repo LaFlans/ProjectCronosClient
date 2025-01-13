@@ -329,6 +329,10 @@ namespace ProjectCronos
                 /// </summary>
                 SAVE,
                 /// <summary>
+                /// ショップポップアップ
+                /// </summary>
+                SHOP,
+                /// <summary>
                 /// 要素数
                 /// </summary>
                 MAXMUM,

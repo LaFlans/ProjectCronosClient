@@ -27,6 +27,8 @@ MonoBehaviour:
     message: "\u30E9\u30A6\u30E0\u6226\u524D\u91CE\u55B6\u5730"
   - key: SavePopupTitle
     message: SAVE MENU
+  - key: ShopPopupTitle
+    message: "\u3042\u3042\u3042\u3042\u3042\u3042\u3042\u3042\u3042\u3042\u3042"
   - key: TransitionTitleConfirmPopupButtonNoMessage
     message: "\u3044\u3044\u3048"
   - key: TransitionTitleConfirmPopupButtonYesMessage

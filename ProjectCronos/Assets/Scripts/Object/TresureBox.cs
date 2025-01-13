@@ -18,6 +18,7 @@ namespace ProjectCronos
         [SerializeField] int itemId;
         [SerializeField] int itemAmount;
         [SerializeField] DropItem dropItem;
+
         void Start()
         {
             col = GetComponent<Collider>();
