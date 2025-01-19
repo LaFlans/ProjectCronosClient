@@ -19,9 +19,9 @@ MonoBehaviour:
   - key: BGM2
     type: 0
     path: Assets/ProjectCronosAssets/Sounds/BGM/RengokuTeien/Noir_Memory.mp3
-  - key: Button30
+  - key: Button14
     type: 1
-    path: button30
+    path: button14
   - key: Button37
     type: 1
     path: button37
@@ -73,6 +73,3 @@ MonoBehaviour:
   - key: WorkBGM1
     type: 0
     path: "Assets/ProjectCronosAssets/Sounds/BGM/WorkBGM/\u4E88\u611F\u306E\u3074\u3093\u307D\u3093\u805E\u3053\u3048\u305F\u3089.mp3"
-  - key: WorkBGM2
-    type: 0
-    path: "Assets/ProjectCronosAssets/Sounds/BGM/WorkBGM/32_\u30BB\u30AB\u30A4\u304C\u30AB\u30D5\u30A7\u306B\u306A\u3063\u3061\u3083\u3063\u305F\uFF01.wav"

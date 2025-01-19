@@ -35,12 +35,13 @@ namespace ProjectCronos
             var scenarioView = GameObject.Find("ScenarioView");
             if (scenarioView != null)
             {
+                shopCamera.Priority = 20;
+                SoundManager.Instance.Play("Button47");
+                isEnterShop = !isEnterShop;
+
                 scenarioView.GetComponent<ScenarioView>().Show(
                 () =>
                 {
-                    isEnterShop = !isEnterShop;
-                    shopCamera.Priority = 20;
-                    SoundManager.Instance.Play("Button47");
                     var obj = PopupManager.Instance.GetPopupObject(
                         EnumCollection.Popup.POPUP_TYPE.SHOP);
 
