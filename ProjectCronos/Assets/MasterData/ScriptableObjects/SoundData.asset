@@ -22,6 +22,9 @@ MonoBehaviour:
   - key: Button14
     type: 1
     path: button14
+  - key: Button30
+    type: 1
+    path: button30
   - key: Button37
     type: 1
     path: button37
@@ -63,7 +66,7 @@ MonoBehaviour:
     path: button14
   - key: SummonPut
     type: 1
-    path: button43
+    path: cancelButton8
   - key: SummonStart
     type: 1
     path: Aura1

@@ -694,6 +694,13 @@ namespace ProjectCronos
             }
         }
 
+        public void StopPlayerMove()
+        {
+            // プレイヤーの移動を止める
+            rigid.linearVelocity = Vector3.zero;
+            anim.SetFloat("Speed", 0);
+        }
+
         /// <summary>
         /// 移動
         /// </summary>
@@ -731,7 +738,6 @@ namespace ProjectCronos
                 transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(vec, Vector3.up), rotateSpeed * Time.deltaTime);
             }
 
-
             latestPos = transform.position;
         }
 
@@ -743,8 +749,7 @@ namespace ProjectCronos
             var vec = GetDirection();
 
             // プレイヤーの移動を止める
-            rigid.linearVelocity = Vector3.zero;
-            anim.SetFloat("Speed", 0);
+            StopPlayerMove();
 
             var moveVec = Vector3.ProjectOnPlane(vec, normalVector);
 
@@ -771,7 +776,6 @@ namespace ProjectCronos
         Vector3 GetDirection()
         {
             return SetCameraDirection(new Vector3(inputVec.x, 0, inputVec.y));
-            //return SetCameraDirection(new Vector3(inputVec.x, 0, inputVec.y));
         }
 
         /// <summary>

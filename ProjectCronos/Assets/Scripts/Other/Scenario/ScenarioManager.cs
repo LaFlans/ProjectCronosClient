@@ -21,7 +21,7 @@ namespace ProjectCronos
             string path = DIRECTORY_PATH + sceneId + SCENARIO_FILE_EXTENSION;
             string line = string.Empty;
             List<string> texts = new List<string>();
-            using (StreamReader sr = new StreamReader(path, Encoding.GetEncoding("Shift_JIS")))
+            using (StreamReader sr = new StreamReader(path))
             {
                 while ((line = sr.ReadLine()) != null)
                 {

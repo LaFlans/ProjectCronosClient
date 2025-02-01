@@ -39,7 +39,8 @@ namespace ProjectCronos
                 SoundManager.Instance.Play("Button47");
                 isEnterShop = !isEnterShop;
 
-                scenarioView.GetComponent<ScenarioView>().Show(
+                scenarioView.GetComponent<ScenarioView>().ShowScenario(
+                "001",
                 () =>
                 {
                     var obj = PopupManager.Instance.GetPopupObject(
