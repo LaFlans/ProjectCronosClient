@@ -246,6 +246,10 @@ namespace ProjectCronos
                         Debug.LogError($"カスタムキーにintに変換できない値が入っているよ！:{line}:{loadScenarioTitle}");
                     }
                 }
+                else if(line.Contains("memo"))
+                {
+                    // メモはエディタ上でしか使用しないのでなにもせずに次に進む
+                }
 
                 talkNum++;
                 NextMessage();

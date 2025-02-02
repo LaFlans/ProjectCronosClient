@@ -47,6 +47,7 @@ namespace ProjectCronos
 
         private Vector2 scrollPosition = Vector2.zero;
         string useFileName = string.Empty;
+        string memoText = string.Empty;
 
         [MenuItem("Cronos/ScenarioEditor")]
         static void Open()
@@ -95,6 +96,9 @@ namespace ProjectCronos
 
                     GUILayout.FlexibleSpace();
                 }
+
+                GUILayout.Label("メモ");
+                memoText = EditorGUILayout.TextArea(memoText, GUILayout.MinWidth(400), GUILayout.MinHeight(40));
 
                 using (new EditorGUILayout.HorizontalScope("BOX"))
                 {
@@ -227,6 +231,9 @@ namespace ProjectCronos
                 {
                     using (StreamWriter sw = new StreamWriter(path))
                     {
+                        // 1行目にメモを記載
+                        sw.WriteLine($"$memo={memoText}");
+
                         foreach (var command in commands)
                         {
                             sw.WriteLine(command);
@@ -267,11 +274,21 @@ namespace ProjectCronos
 
             scenarioCommands.Clear();
 
+            // 初期状態でもし無ければメモであることのテンプレ分を入れておく
+            memoText = "ここはエディタ上でしか使用しないメモ";
+
             string line = string.Empty;
             using (StreamReader sr = new StreamReader(path))
             {
                 while ((line = sr.ReadLine()) != null)
                 {
+                    // エディタ上でしか使用しないメモコマンド
+                    if (line.Contains("$memo"))
+                    {
+                        memoText = line.Replace("$memo=", "");
+                        continue;
+                    }
+
                     scenarioCommands.Add(ConvertScenarioCommand(line));
                 }
             }
