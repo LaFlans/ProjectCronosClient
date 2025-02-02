@@ -19,6 +19,8 @@ namespace ProjectCronos
             PlaySE,     // SE再生
             PlayBGM,    // BGM再生
             SetSpeaker, // 喋る人の設定
+            Choice,     // 選択肢
+            CustomKey,  // カスタムキー
         }
 
         public class ScenarioCommand
@@ -299,6 +301,18 @@ namespace ProjectCronos
                     line = line.Replace("play_bgm=", "");
                     return new ScenarioCommand(CommandType.PlayBGM, line);
                 }
+                else if (line.Contains("choice"))
+                {
+                    // 選択肢
+                    line = line.Replace("choice=", "");
+                    return new ScenarioCommand(CommandType.Choice, line);
+                }
+                else if (line.Contains("custom_key"))
+                {
+                    // カスタムキー
+                    line = line.Replace("custom_key=", "");
+                    return new ScenarioCommand(CommandType.CustomKey, line);
+                }
             }
             else if (line.Contains("["))
             {
@@ -316,6 +330,8 @@ namespace ProjectCronos
             CommandType.SetSpeaker => Color.blue,
             CommandType.PlayBGM => Color.cyan,
             CommandType.PlaySE => Color.cyan,
+            CommandType.Choice => Color.red,
+            CommandType.CustomKey => Color.green,
             _ => GUI.backgroundColor,
         };
 
@@ -325,6 +341,8 @@ namespace ProjectCronos
             CommandType.SetSpeaker => "喋っている人の名前",
             CommandType.PlayBGM => "BGMのAddressableキー",
             CommandType.PlaySE => "SEのAddressableキー",
+            CommandType.Choice => "選択肢",
+            CommandType.CustomKey => "カスタムキー(現在はintのみ対応しています)",
             _ => string.Empty,
         };
 
@@ -334,6 +352,8 @@ namespace ProjectCronos
             CommandType.SetSpeaker => $"$speaker={text}",
             CommandType.PlayBGM => $"$play_bgm={text}",
             CommandType.PlaySE => $"$play_se={text}",
+            CommandType.Choice => $"$choice={text}",
+            CommandType.CustomKey => $"$custom_key={text}",
             _ => string.Empty,
         };
     }

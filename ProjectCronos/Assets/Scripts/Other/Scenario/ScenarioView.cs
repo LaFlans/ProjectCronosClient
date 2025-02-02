@@ -58,17 +58,26 @@ namespace ProjectCronos
         /// </summary>
         string lastMessage;
 
-        int talkNum = 0;
-        int selectIndex = 0;
-        int choiceCount = 0;
-        string playerName;
-        bool isChoice = false;
-        bool isChoiceStart = false;
-        Action onCompleted;
-        Coroutine showCoroutine;
-        Coroutine choiceCoroutine;
-        List<string> messages;
-        Dictionary<string, string> textKey;
+        /// <summary>
+        /// 読了完了時に呼ばれるコールバック
+        /// intはカスタムキーで任意の数字を読了時最後に設定されていた数字返すことが出来る(0がデフォルト値)
+        /// 返ってきた数字によって挙動を変える使用想定(例:商人に話しかけた時、0→そのまま話終了、1→ショップ画面を開く)
+        /// </summary>
+        Action<int> onCompleted;
+        int customKey;
+
+        string loadScenarioTitle;           // 読み込んだシナリオタイトル
+        int talkNum;                        // 読んでいるメッセージの行数
+        int selectIndex;                    // 選択中のインデックス
+        int choiceCount;                    // 選択肢の数
+        string playerName;                  // プレイヤー名
+        bool isChoice = false;              // 選択肢の中から選択したかどうか
+        bool isChoiceStart = false;         // 選択肢での選択が始まったかどうか
+        Coroutine showCoroutine;            // メッセージ表示コルーチン
+        Coroutine choiceCoroutine;          // 選択肢表示コルーチン
+        List<string> messages;              // 表示するメッセージ文
+        Dictionary<string, string> textKey; // メッセージ文中の補完するキー
+
 
         private void Start()
         {
@@ -78,6 +87,11 @@ namespace ProjectCronos
                 { "playerName", playerName }
             };
 
+            Init();
+        }
+
+        void Init()
+        {
             container.SetActive(false);
             nameBoxContainer.SetActive(false);
             messageBoxContainer.SetActive(false);
@@ -85,10 +99,16 @@ namespace ProjectCronos
             currentViewType = ViewType.Message;
             nameText.text = string.Empty;
             messageText.text = string.Empty;
+            talkNum = 0;
+            selectIndex = 0;
+            choiceCount = 0;
+            customKey = 0;
         }
 
-        public void ShowScenario(string loadScenarioTitle, Action onCompleted)
+        public void ShowScenario(string loadScenarioTitle, Action<int> onCompleted)
         {
+            this.loadScenarioTitle = loadScenarioTitle;
+
             // プレイヤー操作可能状態だった場合、UI操作可能状態にする
             if (InputManager.Instance.IsMatchInputStatus(EnumCollection.Input.INPUT_STATUS.PLAYER))
             {
@@ -100,8 +120,15 @@ namespace ProjectCronos
             var player = GameObject.FindGameObjectWithTag("Player");
             player.GetComponent<Player>().StopPlayerMove();
 
+            Init();
+
             this.onCompleted = onCompleted;
-            messages = ScenarioManager.LoadScenarioScene(loadScenarioTitle).ToList();
+            messages = ScenarioManager.LoadScenarioScene(loadScenarioTitle);
+
+            foreach(var message in messages)
+            {
+                Debug.Log($"{message}");
+            }
 
             if (messages.Count < 0)
             {
@@ -145,22 +172,19 @@ namespace ProjectCronos
                     InputManager.Instance.SetInputStatus(EnumCollection.Input.INPUT_STATUS.PLAYER);
                 }
 
-                Init();
+                // シナリオ終了時に設定されていたカスタムキーを返す
+                onCompleted?.Invoke(customKey);
+
+                onCompleted = null;
+                container.SetActive(false);
+                talkNum = 0;
+                nameText.text = string.Empty;
+                messageText.text = string.Empty;
 
                 return;
             }
 
             ReadMessage();
-        }
-
-        void Init()
-        {
-            onCompleted?.Invoke();
-            onCompleted = null;
-            container.SetActive(false);
-            talkNum = 0;
-            nameText.text = string.Empty;
-            messageText.text = string.Empty;
         }
 
         void ReadMessage()
@@ -209,6 +233,19 @@ namespace ProjectCronos
                     choiceCoroutine = StartCoroutine(Choice(choiceMessages, actionMessages));
                     return;
                 }
+                else if(line.Contains("custom_key"))
+                {
+                    // カスタムキー
+                    line = line.Replace("custom_key=", "");
+                    if (Int32.TryParse(line, out int value))
+                    {
+                        customKey = value;
+                    }
+                    else
+                    {
+                        Debug.LogError($"カスタムキーにintに変換できない値が入っているよ！:{line}:{loadScenarioTitle}");
+                    }
+                }
 
                 talkNum++;
                 NextMessage();
@@ -228,7 +265,7 @@ namespace ProjectCronos
                     }
                     else
                     {
-                        Debug.LogError($"キーが見つからなかったから削除するよ！");
+                        Debug.LogError($"キーが見つからなかったから削除するよ！:{key}:{loadScenarioTitle}");
                         line = line.Replace(key, "").Replace("{", "").Replace("}", "");
                     }
                 }
@@ -262,7 +299,6 @@ namespace ProjectCronos
             selectIndex = 0;
             choiceCount = choiceMessages.Length;
 
-            ApplySelectChoiceStatus();
 
             var index = 0;
             foreach (var message in choiceMessages)
@@ -283,6 +319,8 @@ namespace ProjectCronos
 
                 index++;
             }
+
+            ApplySelectChoiceStatus();
 
             yield return new WaitUntil(() => isChoice == true);
 
@@ -392,6 +430,11 @@ namespace ProjectCronos
                 if (button.index == selectIndex)
                 {
                     button.item.SelectButton();
+                    button.item.SetSelectAnim(true);
+                }
+                else
+                {
+                    button.item.SetSelectAnim(false);
                 }
             }
         }

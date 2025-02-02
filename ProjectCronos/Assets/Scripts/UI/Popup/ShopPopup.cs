@@ -45,12 +45,10 @@ namespace ProjectCronos
                 return;
             }
 
-            closeAction?.Invoke();
-
-            Debug.Log("閉じるを押したよ！");
             SoundManager.Instance.Play("Button47");
-
             Close();
+
+            closeAction?.Invoke();
         }
 
         protected override void Close()

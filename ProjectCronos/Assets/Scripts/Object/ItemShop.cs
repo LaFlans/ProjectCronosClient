@@ -32,23 +32,49 @@ namespace ProjectCronos
 
         void OnEnterShop(InputAction.CallbackContext context)
         {
+            // 既にショップに入っている場合、何もしない
+            if (isEnterShop)
+            {
+                return;
+            }
+
             var scenarioView = GameObject.Find("ScenarioView");
             if (scenarioView != null)
             {
                 shopCamera.Priority = 20;
                 SoundManager.Instance.Play("Button47");
-                isEnterShop = !isEnterShop;
+                isEnterShop = true;
 
                 scenarioView.GetComponent<ScenarioView>().ShowScenario(
                 "001",
-                () =>
+                (customKey) =>
                 {
-                    var obj = PopupManager.Instance.GetPopupObject(
-                        EnumCollection.Popup.POPUP_TYPE.SHOP);
-
-                    if (obj != null)
+                    if (customKey == 0)
                     {
-                        obj.GetComponent<ShopPopup>().Apply(() => { shopCamera.Priority = 0; });
+                        // 0の場合、何もせずに会話終了
+                        shopCamera.Priority = 0;
+                        isEnterShop = false;
+                    }
+                    else
+                    {
+                        // 0出ない場合、ショップを表示する
+                        var obj = PopupManager.Instance.GetPopupObject(
+                            EnumCollection.Popup.POPUP_TYPE.SHOP);
+
+                        if (obj != null)
+                        {
+                            obj.GetComponent<ShopPopup>().Apply(
+                                () =>
+                                {
+                                    scenarioView.GetComponent<ScenarioView>().ShowScenario(
+                                        "002",
+                                        (customKey) =>
+                                        {
+                                            shopCamera.Priority = 0;
+                                            isEnterShop = false;
+                                        });
+                                });
+                        }
                     }
                 });
             }

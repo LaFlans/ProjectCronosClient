@@ -46,5 +46,10 @@ namespace ProjectCronos
         {
             EventSystem.current.SetSelectedGameObject(this.gameObject);
         }
+
+        public void SetSelectAnim(bool isSelect)
+        {
+            anim.SetBool("IsSelect", isSelect);
+        }
     }
 }
