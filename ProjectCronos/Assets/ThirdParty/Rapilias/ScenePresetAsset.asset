@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: ScenePresetAsset
   m_EditorClassIdentifier: 
   elements:
+  - presetName: Title
+    scenes:
+    - {fileID: 102900000, guid: 763eeaf33e7970b47befebc9f1ce9fb3, type: 3}
   - presetName: Main
     scenes:
     - {fileID: 102900000, guid: 3db1837cc97a95e4c98610966fac2b0b, type: 3}

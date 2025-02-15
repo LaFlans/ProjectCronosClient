@@ -12,4 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cccf1860b828ff4dae98c5ef8336135, type: 3}
   m_Name: FolderNavigationAsset
   m_EditorClassIdentifier: 
-  Folders: []
+  Folders:
+  - Name: Scenario
+    Folder:
+      Guid: fe6e3d4e8e3789446bb61a664a39519b
+  - Name: Texture
+    Folder:
+      Guid: ea2cd26eba571af41aff0b41dddf1526
+  - Name: Material
+    Folder:
+      Guid: 05ca7934d745ce24ca08c5dbe1e9724b

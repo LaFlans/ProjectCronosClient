@@ -123,7 +123,7 @@ namespace ProjectCronos
             Init();
 
             this.onCompleted = onCompleted;
-            messages = ScenarioManager.LoadScenarioScene(loadScenarioTitle);
+            messages = ScenarioManager.LoadJsonScenarioScene(loadScenarioTitle);
 
             foreach(var message in messages)
             {
@@ -180,6 +180,7 @@ namespace ProjectCronos
                 talkNum = 0;
                 nameText.text = string.Empty;
                 messageText.text = string.Empty;
+
 
                 return;
             }
@@ -327,9 +328,9 @@ namespace ProjectCronos
 
             yield return new WaitUntil(() => isChoice == true);
 
-            if (ScenarioManager.TryLoadScenarioScene(actionCommands[selectIndex]))
+            if (ScenarioManager.IsExistScenarioScene(actionCommands[selectIndex]))
             {
-                messages = ScenarioManager.LoadScenarioScene(actionCommands[selectIndex]);
+                messages = ScenarioManager.LoadJsonScenarioScene(actionCommands[selectIndex]);
                 talkNum = 0;
             }
             else

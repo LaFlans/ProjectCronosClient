@@ -59,7 +59,6 @@ namespace ProjectCronos
             var streamWriter = new StreamWriter(fileStream, Encoding.UTF8);
             var json = MessagePackSerializer.SerializeToJson(data);
             await streamWriter.WriteAsync(json);
-            //streamWriter.Flush();
             streamWriter.Close();
 
             callback?.Invoke();

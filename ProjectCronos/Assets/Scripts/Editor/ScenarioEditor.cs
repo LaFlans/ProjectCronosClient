@@ -309,9 +309,12 @@ namespace ProjectCronos
 
             var commands = scenarioCommands
                 .Where(x => x.text.Length > 0 || x.type == CommandType.Choice)
-                .Select(x => GetScenarioCommandText(x));       
-            string path = SCENARIO_DIRECTORY_PATH + "/" + useFileName + ".txt";
-            if (File.Exists(path))
+                .Select(x => GetScenarioCommandText(x)).ToList();
+
+            // 1行目にメモを記載
+            commands.Insert(0, $"$memo={memoText}");
+
+            if (ScenarioManager.IsExistScenarioScene(useFileName))
             {
                 //ダイアログ表示、返り値でOKボタンが押されたかどうかを受け取る
                 bool isOK = EditorUtility.DisplayDialog(
@@ -321,30 +324,13 @@ namespace ProjectCronos
                     "Cancel");
                 if (isOK)
                 {
-                    using (StreamWriter sw = new StreamWriter(path))
-                    {
-                        // 1行目にメモを記載
-                        sw.WriteLine($"$memo={memoText}");
-
-                        foreach (var command in commands)
-                        {
-                            sw.WriteLine(command);
-                        }
-                    }
-
+                    ScenarioManager.SaveJsonScenarioScene(useFileName, commands);
                     AssetDatabase.Refresh();
                 }
             }
             else
             {
-                using (StreamWriter sw = new StreamWriter(path))
-                {
-                    foreach (var command in commands)
-                    {
-                        sw.WriteLine(command);
-                    }
-                }
-
+                ScenarioManager.SaveJsonScenarioScene(useFileName, commands);
                 AssetDatabase.Refresh();
             }
         }
@@ -357,10 +343,10 @@ namespace ProjectCronos
                 return;
             }
 
-            string path = SCENARIO_DIRECTORY_PATH + "/" + useFileName + ".txt";
-            if (!File.Exists(path))
+            var scenarioData = ScenarioManager.LoadJsonScenarioScene(useFileName);
+            if (scenarioData == null)
             {
-                Debug.LogError("読み込むファイル名が存在しないよ！");
+                Debug.LogError("読み込むファイルが存在しないよ！");
                 return;
             }
 
@@ -369,20 +355,16 @@ namespace ProjectCronos
             // 初期状態でもし無ければメモであることのテンプレ分を入れておく
             memoText = "ここはエディタ上でしか使用しないメモ";
 
-            string line = string.Empty;
-            using (StreamReader sr = new StreamReader(path))
+            foreach(var data in scenarioData)
             {
-                while ((line = sr.ReadLine()) != null)
+                // エディタ上でしか使用しないメモコマンド
+                if (data.Contains("$memo"))
                 {
-                    // エディタ上でしか使用しないメモコマンド
-                    if (line.Contains("$memo"))
-                    {
-                        memoText = line.Replace("$memo=", "");
-                        continue;
-                    }
-
-                    scenarioCommands.Add(ConvertScenarioCommand(line));
+                    memoText = data.Replace("$memo=", "");
+                    continue;
                 }
+
+                scenarioCommands.Add(ConvertScenarioCommand(data));
             }
         }
 
