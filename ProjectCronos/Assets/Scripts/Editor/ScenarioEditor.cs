@@ -125,7 +125,18 @@ namespace ProjectCronos
                     GUILayout.FlexibleSpace();
                 }
 
-                GUILayout.Label("メモ");
+                using (new EditorGUILayout.HorizontalScope("BOX"))
+                {
+                    GUILayout.Label("メモ");
+                    if (GUILayout.Button("シナリオフォルダを開く"))
+                    {
+                        var obj = AssetDatabase.LoadAssetAtPath<Object>("Assets/ProjectCronosAssets/ScenarioScenes/ScenarioPingData.txt");
+                        if(obj != null)
+                        {
+                            EditorGUIUtility.PingObject(obj);
+                        }
+                    }
+                }
                 memoText = EditorGUILayout.TextArea(memoText, GUILayout.MinWidth(400), GUILayout.MinHeight(40));
 
                 using (new EditorGUILayout.HorizontalScope("BOX"))
@@ -238,9 +249,16 @@ namespace ProjectCronos
                     }
                     else
                     {
-                        if (GUILayout.Button("+", GUILayout.MaxWidth(50)))
+                        using (new EditorGUILayout.VerticalScope("BOX", GUILayout.ExpandHeight(true)))
                         {
-                            command.choiceCommands = new List<ScenarioChoiceCommand>() { new ScenarioChoiceCommand("message", "command")};
+                            GUILayout.FlexibleSpace();
+
+                            if (GUILayout.Button("+", GUILayout.MaxWidth(50)))
+                            {
+                                command.choiceCommands = new List<ScenarioChoiceCommand>() { new ScenarioChoiceCommand("message", "command") };
+                            }
+
+                            GUILayout.FlexibleSpace();
                         }
                     }
                 }
@@ -266,7 +284,7 @@ namespace ProjectCronos
                         scenarioCommands.Insert(index, new ScenarioCommand(CommandType.Message, string.Empty));
                     }
 
-                    GUILayout.Label("+");
+                    GUILayout.Label("追加", GUILayout.ExpandWidth(true));
 
                     if (GUILayout.Button("↓", GUILayout.MaxWidth(50)))
                     {
@@ -289,7 +307,9 @@ namespace ProjectCronos
                 return;
             }
 
-            var commands = scenarioCommands.Select(x => GetScenarioCommandText(x));       
+            var commands = scenarioCommands
+                .Where(x => x.text.Length > 0 || x.type == CommandType.Choice)
+                .Select(x => GetScenarioCommandText(x));       
             string path = SCENARIO_DIRECTORY_PATH + "/" + useFileName + ".txt";
             if (File.Exists(path))
             {
