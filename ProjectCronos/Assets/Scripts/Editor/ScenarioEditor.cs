@@ -36,10 +36,38 @@ namespace ProjectCronos
             /// </summary>
             public string text;
 
-            public ScenarioCommand(CommandType type, string text)
+            /// <summary>
+            /// 選択肢コマンド
+            /// </summary>
+            public List<ScenarioChoiceCommand> choiceCommands;
+
+            public ScenarioCommand(CommandType type, string text, List<ScenarioChoiceCommand> choiceCommands = null)
             {
                 this.type = type;
                 this.text = text;
+                this.choiceCommands = choiceCommands ?? new List<ScenarioChoiceCommand>() { new ScenarioChoiceCommand("message", "command")};
+            }
+        }
+
+        /// <summary>
+        /// シナリオ選択肢コマンド
+        /// </summary>
+        public class ScenarioChoiceCommand
+        {
+            /// <summary>
+            /// 選択肢の文字
+            /// </summary>
+            public string message;
+
+            /// <summary>
+            /// 選択肢コマンド
+            /// </summary>
+            public string command;
+
+            public ScenarioChoiceCommand(string message, string command)
+            {
+                this.message = message;
+                this.command = command;
             }
         }
 
@@ -72,7 +100,7 @@ namespace ProjectCronos
         void ScenarioConfirmView()
         {
             GUILayout.TextField(
-                string.Join("\n", scenarioCommands.Select(x => x.text)),
+                string.Join("\n", scenarioCommands.Select(x => GetScenarioCommandConfirmText(x))),
                 GUILayout.MinWidth(300),
                 GUILayout.ExpandHeight(true),
                 GUILayout.ExpandWidth(true));
@@ -173,16 +201,62 @@ namespace ProjectCronos
                 string  test = $"<b><size=50>{index + 1}</b>";
                 GUILayout.Label(test, style);
 
-                using (new EditorGUILayout.VerticalScope("BOX",GUILayout.ExpandWidth(true)))
+                if (command.type == CommandType.Choice)
                 {
-                    GUILayout.Label(GetLabelText(command.type));
-                    command.text = EditorGUILayout.TextArea(command.text, GUILayout.MinWidth(400), GUILayout.MinHeight(40));
-                }
+                    if (command.choiceCommands != null)
+                    {
+                        using (new EditorGUILayout.VerticalScope("BOX", GUILayout.ExpandWidth(true)))
+                        {
+                            foreach (var choiceCommand in command.choiceCommands)
+                            {
+                                using (new EditorGUILayout.HorizontalScope("BOX", GUILayout.ExpandWidth(true)))
+                                {
+                                    choiceCommand.message = EditorGUILayout.TextArea(choiceCommand.message, GUILayout.MinWidth(200), GUILayout.MinHeight(20));
+                                    choiceCommand.command = EditorGUILayout.TextArea(choiceCommand.command, GUILayout.MinWidth(200), GUILayout.MinHeight(20));
+                                }
+                            }
+                        }
 
-                using (new EditorGUILayout.VerticalScope("BOX"))
+                        using (new EditorGUILayout.VerticalScope("BOX", GUILayout.ExpandWidth(true)))
+                        {
+                            if (command.choiceCommands.Count < 3)
+                            {
+                                if (GUILayout.Button("+", GUILayout.MaxWidth(50)))
+                                {
+                                    command.choiceCommands.Add(new ScenarioChoiceCommand("message", "command"));
+                                }
+                            }
+
+                            if (command.choiceCommands.Count > 1)
+                            {
+                                if (GUILayout.Button("-", GUILayout.MaxWidth(50)))
+                                {
+                                    command.choiceCommands.RemoveAt(command.choiceCommands.Count - 1);
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (GUILayout.Button("+", GUILayout.MaxWidth(50)))
+                        {
+                            command.choiceCommands = new List<ScenarioChoiceCommand>() { new ScenarioChoiceCommand("message", "command")};
+                        }
+                    }
+                }
+                else
                 {
-                    GUILayout.Label("CommandType");
-                    command.type = (CommandType)EditorGUILayout.EnumPopup(command.type, GUILayout.MinWidth(100));
+                    using (new EditorGUILayout.VerticalScope("BOX", GUILayout.ExpandWidth(true)))
+                    {
+                        GUILayout.Label(GetLabelText(command.type));
+                        command.text = EditorGUILayout.TextArea(command.text, GUILayout.MinWidth(400), GUILayout.MinHeight(40));
+                    }
+
+                    using (new EditorGUILayout.VerticalScope("BOX"))
+                    {
+                        GUILayout.Label("CommandType");
+                        command.type = (CommandType)EditorGUILayout.EnumPopup(command.type, GUILayout.MinWidth(100));
+                    }
                 }
 
                 using (new EditorGUILayout.VerticalScope("BOX"))
@@ -215,10 +289,8 @@ namespace ProjectCronos
                 return;
             }
 
-            var commands = scenarioCommands.Select(x => GetScenarioCommandText(x.type, x.text));
-            
+            var commands = scenarioCommands.Select(x => GetScenarioCommandText(x));       
             string path = SCENARIO_DIRECTORY_PATH + "/" + useFileName + ".txt";
-
             if (File.Exists(path))
             {
                 //ダイアログ表示、返り値でOKボタンが押されたかどうかを受け取る
@@ -322,7 +394,25 @@ namespace ProjectCronos
                 {
                     // 選択肢
                     line = line.Replace("choice=", "");
-                    return new ScenarioCommand(CommandType.Choice, line);
+
+                    // まず選択肢の文言を取得
+                    var str = line.Remove(0, line.IndexOf("[") + 1);
+                    var choiceMessages = str.Remove(str.IndexOf("]")).Split(',');
+
+                    // 必要のなくなった分を削除
+                    line = line.Remove(0, str.IndexOf("[") + 1);
+
+                    // 次に選択肢を選んだ時のコマンドを取得
+                    str = line.Remove(0, line.IndexOf("[") + 1);
+                    var actionMessages = str.Remove(str.IndexOf("]")).Split(',');
+
+                    var choiceCommands = new List<ScenarioChoiceCommand>();
+                    for (int i = 0; i < choiceMessages.Length;i++)
+                    {
+                        choiceCommands.Add(new ScenarioChoiceCommand(choiceMessages[i], actionMessages[i]));
+                    }
+
+                    return new ScenarioCommand(CommandType.Choice, line, choiceCommands);
                 }
                 else if (line.Contains("custom_key"))
                 {
@@ -363,15 +453,34 @@ namespace ProjectCronos
             _ => string.Empty,
         };
 
-        string GetScenarioCommandText(CommandType type, string text) => type switch
+        string GetScenarioCommandText(ScenarioCommand command) => command.type switch
         {
-            CommandType.Message => $"[{text}]",
-            CommandType.SetSpeaker => $"$speaker={text}",
-            CommandType.PlayBGM => $"$play_bgm={text}",
-            CommandType.PlaySE => $"$play_se={text}",
-            CommandType.Choice => $"$choice={text}",
-            CommandType.CustomKey => $"$custom_key={text}",
+            CommandType.Message => $"[{command.text}]",
+            CommandType.SetSpeaker => $"$speaker={command.text}",
+            CommandType.PlayBGM => $"$play_bgm={command.text}",
+            CommandType.PlaySE => $"$play_se={command.text}",
+            CommandType.Choice => ConvertChoiceCommand(command, true),
+            CommandType.CustomKey => $"$custom_key={command.text}",
             _ => string.Empty,
         };
+
+        string GetScenarioCommandConfirmText(ScenarioCommand command) => command.type switch
+        {
+            CommandType.Message => $"{command.text}",
+            CommandType.SetSpeaker => $"{command.text}",
+            CommandType.PlayBGM => $"{command.text}",
+            CommandType.PlaySE => $"{command.text}",
+            CommandType.Choice => ConvertChoiceCommand(command, false),
+            CommandType.CustomKey => $"{command.text}",
+            _ => string.Empty,
+        };
+
+        string ConvertChoiceCommand(ScenarioCommand command, bool showCommand)
+        {
+            var messages = command.choiceCommands.Select(x => $"{x.message}").ToArray();
+            var commands = command.choiceCommands.Select(x => $"{x.command}").ToArray();
+            return (showCommand ? "$choice=" : "")
+                + $"[{string.Join(",",messages)}][{string.Join(",",commands)}]";
+        }
     }
 }

@@ -303,7 +303,6 @@ namespace ProjectCronos
             selectIndex = 0;
             choiceCount = choiceMessages.Length;
 
-
             var index = 0;
             foreach (var message in choiceMessages)
             {
@@ -328,8 +327,16 @@ namespace ProjectCronos
 
             yield return new WaitUntil(() => isChoice == true);
 
-            messages = ScenarioManager.LoadScenarioScene(actionCommands[selectIndex]);
-            talkNum = 0;
+            if (ScenarioManager.TryLoadScenarioScene(actionCommands[selectIndex]))
+            {
+                messages = ScenarioManager.LoadScenarioScene(actionCommands[selectIndex]);
+                talkNum = 0;
+            }
+            else
+            {
+                talkNum++;
+            }
+
             choiceCoroutine = null;
             isChoiceStart = false;
             isChoice = false;

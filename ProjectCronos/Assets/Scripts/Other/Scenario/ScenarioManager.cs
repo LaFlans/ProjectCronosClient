@@ -31,5 +31,12 @@ namespace ProjectCronos
 
             return texts;
         }
+
+        public static bool TryLoadScenarioScene(string sceneId)
+        {
+            string path = DIRECTORY_PATH + sceneId + SCENARIO_FILE_EXTENSION;
+
+            return File.Exists(path);
+        }
     }
 }
