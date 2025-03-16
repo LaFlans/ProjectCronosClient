@@ -3,6 +3,8 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 using System.IO;
+using UnityEngine.AddressableAssets;
+using UnityEditor.AddressableAssets;
 
 namespace ProjectCronos
 {
@@ -35,6 +37,12 @@ namespace ProjectCronos
             /// 表示するメッセージ以外にもアセット名や表示する名前等でも使用する想定　　
             /// </summary>
             public string text;
+
+            /// <summary>
+            /// シナリオテキスト
+            /// 表示するメッセージ以外にもアセット名や表示する名前等でも使用する想定　　
+            /// </summary>
+            public AssetReference assetRef;
 
             /// <summary>
             /// 選択肢コマンド
@@ -144,7 +152,7 @@ namespace ProjectCronos
                     using (new EditorGUILayout.HorizontalScope("BOX"))
                     {
                         GUILayout.Label("FileName");
-                        useFileName = EditorGUILayout.TextArea(useFileName,GUILayout.ExpandWidth(true));
+                        useFileName = EditorGUILayout.TextArea(useFileName, GUILayout.ExpandWidth(true));
                     }
 
                     if (GUILayout.Button("CLEAR"))
@@ -163,6 +171,44 @@ namespace ProjectCronos
                         if (GUILayout.Button("SAVE"))
                         {
                             Save();
+                        }
+                    }
+                }
+
+                var color = GUI.color;
+                GUI.color = Color.grey;
+
+                using (new EditorGUILayout.VerticalScope("Box", GUILayout.ExpandWidth(true)))
+                {
+                    GUI.color = color;
+
+                    var dragAreaStyle = new GUIStyle(EditorStyles.label);
+                    dragAreaStyle.richText = true;
+                    string dragAreaText = $"<size=25><color=#c0c0c0>ここにシナリオファイルをD&Dでもいいよ</color>";
+                    var area = GUILayoutUtility.GetRect(0.0f, 50.0f, GUILayout.ExpandWidth(true));
+                    GUI.Box(area, dragAreaText, dragAreaStyle);
+
+                    if (area.Contains(Event.current.mousePosition))
+                    {
+                        switch (Event.current.type)
+                        {
+                            case EventType.DragUpdated:
+                                DragAndDrop.visualMode = DragAndDropVisualMode.Copy;
+                                Event.current.Use();
+                                break;
+                            case EventType.DragPerform:
+                                DragAndDrop.AcceptDrag();
+                                var references = DragAndDrop.objectReferences;
+
+                                if (references != null)
+                                {
+                                    // 複数の場合一番上のオブジェクトを指定
+                                    useFileName = references.First().name;
+                                }
+
+                                DragAndDrop.activeControlID = 0;
+                                Event.current.Use();
+                                break;
                         }
                     }
                 }
@@ -223,7 +269,32 @@ namespace ProjectCronos
                                 using (new EditorGUILayout.HorizontalScope("BOX", GUILayout.ExpandWidth(true)))
                                 {
                                     choiceCommand.message = EditorGUILayout.TextArea(choiceCommand.message, GUILayout.MinWidth(200), GUILayout.MinHeight(20));
-                                    choiceCommand.command = EditorGUILayout.TextArea(choiceCommand.command, GUILayout.MinWidth(200), GUILayout.MinHeight(20));
+                                    var area = GUILayoutUtility.GetRect(150.0f, 20.0f, GUILayout.ExpandWidth(true));
+                                    GUI.Box(area, choiceCommand.command);
+
+                                    if (area.Contains(Event.current.mousePosition))
+                                    {
+                                        switch (Event.current.type)
+                                        {
+                                            case EventType.DragUpdated:
+                                                DragAndDrop.visualMode = DragAndDropVisualMode.Copy;
+                                                Event.current.Use();
+                                                break;
+                                            case EventType.DragPerform:
+                                                DragAndDrop.AcceptDrag();
+                                                var references = DragAndDrop.objectReferences;
+
+                                                if (references != null)
+                                                {
+                                                    // 複数の場合一番上のオブジェクトを指定
+                                                    choiceCommand.command = references.First().name;
+                                                }
+
+                                                DragAndDrop.activeControlID = 0;
+                                                Event.current.Use();
+                                                break;
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -260,6 +331,20 @@ namespace ProjectCronos
 
                             GUILayout.FlexibleSpace();
                         }
+                    }
+                }
+                else if(command.type == CommandType.PlaySE || command.type == CommandType.PlayBGM)
+                {
+                    using (new EditorGUILayout.VerticalScope("BOX", GUILayout.ExpandWidth(true)))
+                    {
+                        GUILayout.Label(GetLabelText(command.type));
+                        command.text = EditorGUILayout.TextArea(command.text, GUILayout.MinWidth(400), GUILayout.MinHeight(40));
+                    }
+
+                    using (new EditorGUILayout.VerticalScope("BOX"))
+                    {
+                        GUILayout.Label("CommandType");
+                        command.type = (CommandType)EditorGUILayout.EnumPopup(command.type, GUILayout.MinWidth(100));
                     }
                 }
                 else
@@ -314,7 +399,11 @@ namespace ProjectCronos
             // 1行目にメモを記載
             commands.Insert(0, $"$memo={memoText}");
 
-            if (ScenarioManager.IsExistScenarioScene(useFileName))
+            // スクリプタブルオブジェクトで保存
+            const string DIRECTORY_PATH = "Assets/ProjectCronosAssets/ScenarioScenes/";
+            const string SCENARIO_FILE_EXTENSION = ".asset";
+            var filePath = DIRECTORY_PATH + useFileName + SCENARIO_FILE_EXTENSION;
+            if (File.Exists(filePath))
             {
                 //ダイアログ表示、返り値でOKボタンが押されたかどうかを受け取る
                 bool isOK = EditorUtility.DisplayDialog(
@@ -324,13 +413,28 @@ namespace ProjectCronos
                     "Cancel");
                 if (isOK)
                 {
-                    ScenarioManager.SaveJsonScenarioScene(useFileName, commands);
+                    var obj = AssetDatabase.LoadAssetAtPath<ScenarioSceneScriptableObject>(filePath);
+                    obj.scenarioTexts = commands;
+                    EditorUtility.SetDirty(obj);
+                    AssetDatabase.SaveAssets();
                     AssetDatabase.Refresh();
                 }
             }
             else
             {
-                ScenarioManager.SaveJsonScenarioScene(useFileName, commands);
+                var obj = ScriptableObject.CreateInstance<ScenarioSceneScriptableObject>();
+                obj.scenarioTexts = commands;
+                AssetDatabase.CreateAsset(obj, filePath);
+
+                // Addressable側にも追加
+                var settings = AddressableAssetSettingsDefaultObject.Settings;
+                var group = settings.FindGroup("ScenarioScenes");
+                if (group != null)
+                {
+                    var assetEntry = settings.CreateOrMoveEntry(AssetDatabase.AssetPathToGUID(filePath), group);
+                    assetEntry.SetAddress(assetEntry.MainAsset.name);
+                }
+
                 AssetDatabase.Refresh();
             }
         }
@@ -343,12 +447,16 @@ namespace ProjectCronos
                 return;
             }
 
-            var scenarioData = ScenarioManager.LoadJsonScenarioScene(useFileName);
-            if (scenarioData == null)
+            const string DIRECTORY_PATH = "Assets/ProjectCronosAssets/ScenarioScenes/";
+            const string SCENARIO_FILE_EXTENSION = ".asset";
+            var filePath = DIRECTORY_PATH + useFileName + SCENARIO_FILE_EXTENSION;
+            if (!File.Exists(filePath))
             {
-                Debug.LogError("読み込むファイルが存在しないよ！");
                 return;
             }
+
+            var obj = AssetDatabase.LoadAssetAtPath<ScenarioSceneScriptableObject>(filePath);
+            var scenarioData = obj.scenarioTexts;
 
             scenarioCommands.Clear();
 
