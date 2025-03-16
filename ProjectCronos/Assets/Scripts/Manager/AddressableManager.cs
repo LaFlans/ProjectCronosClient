@@ -34,6 +34,11 @@ namespace ProjectCronos
         Dictionary<string, AsyncOperationHandle<Texture2D>> loadedTextures;
 
         /// <summary>
+        /// 読み込み済みシナリオシーンパス
+        /// </summary>
+        Dictionary<string, AsyncOperationHandle<ScenarioSceneScriptableObject>> loadedScenarioScenes;
+
+        /// <summary>
         /// 初期化
         /// </summary>
         /// <returns>初期化に成功したかどうか</returns>
@@ -43,6 +48,7 @@ namespace ProjectCronos
             loadedMaterials = new Dictionary<string, AsyncOperationHandle<Material>>();
             loadedclips = new Dictionary<string, AsyncOperationHandle<AudioClip>>();
             loadedTextures = new Dictionary<string, AsyncOperationHandle<Texture2D>>();
+            loadedScenarioScenes = new Dictionary<string, AsyncOperationHandle<ScenarioSceneScriptableObject>>();
 
             Debug.Log("AddressableManager初期化");
 
@@ -201,6 +207,46 @@ namespace ProjectCronos
             return null;
         }
 
+        public async UniTask LoadScenarioScenes(string path, Action callback = null)
+        {
+            if (!loadedScenarioScenes.ContainsKey(path))
+            {
+                var handle = Addressables.LoadAssetAsync<ScenarioSceneScriptableObject>(path);
+                await handle.Task;
+                handle.Completed += op =>
+                {
+                    if (op.Status == AsyncOperationStatus.Succeeded)
+                    {
+                        if (!loadedScenarioScenes.ContainsKey(path))
+                        {
+                            loadedScenarioScenes.Add(path, op);
+
+                            if (callback != null)
+                            {
+                                callback.Invoke();
+                            }
+                        }
+                    }
+                };
+            }
+            else
+            {
+                Debug.Log($"path:{path}のクリップは既に読み込まれているよ！");
+            }
+        }
+
+        public List<string> GetLoadedScenarioScenes(string path)
+        {
+            if (loadedScenarioScenes.ContainsKey(path))
+            {
+                return loadedScenarioScenes[path].Result.scenarioTexts;
+            }
+
+            LoadScenarioScenes(path);
+            Debug.Log("事前に読み込むようにしてね！");
+            return null;
+        }
+
         public async void Load<T>(string path, Action callback = null)
         {
             if (!loadedObjects.ContainsKey(path))
@@ -328,6 +374,28 @@ namespace ProjectCronos
                 }
 
                 loadedclips.Clear();
+            }
+
+            // 読み込んだAddressbleテクスチャオブジェクトを解放
+            if (loadedTextures != null)
+            {
+                foreach (var obj in loadedTextures.Values)
+                {
+                    Addressables.Release(obj);
+                }
+
+                loadedTextures.Clear();
+            }
+
+            // 読み込んだAddressbleシナリオシーンオブジェクトを解放
+            if (loadedScenarioScenes != null)
+            {
+                foreach (var obj in loadedScenarioScenes.Values)
+                {
+                    Addressables.Release(obj);
+                }
+
+                loadedScenarioScenes.Clear();
             }
         }
     }

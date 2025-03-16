@@ -123,9 +123,10 @@ namespace ProjectCronos
             Init();
 
             this.onCompleted = onCompleted;
-            messages = ScenarioManager.LoadJsonScenarioScene(loadScenarioTitle);
 
-            foreach(var message in messages)
+            messages = AddressableManager.Instance.GetLoadedScenarioScenes(loadScenarioTitle);
+
+            foreach (var message in messages)
             {
                 Debug.Log($"{message}");
             }
@@ -330,7 +331,8 @@ namespace ProjectCronos
 
             if (ScenarioManager.IsExistScenarioScene(actionCommands[selectIndex]))
             {
-                messages = ScenarioManager.LoadJsonScenarioScene(actionCommands[selectIndex]);
+                loadScenarioTitle = actionCommands[selectIndex];
+                messages = AddressableManager.Instance.GetLoadedScenarioScenes(loadScenarioTitle);
                 talkNum = 0;
             }
             else

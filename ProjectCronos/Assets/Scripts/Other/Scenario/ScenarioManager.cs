@@ -13,7 +13,7 @@ namespace ProjectCronos
     public class ScenarioManager : MonoBehaviour
     {
         const string DIRECTORY_PATH = "Assets/ProjectCronosAssets/ScenarioScenes/";
-        const string SCENARIO_FILE_EXTENSION = ".json";
+        const string SCENARIO_FILE_EXTENSION = ".asset";
 
         /// <summary>
         /// 指定のシナリオデータを読み込みます

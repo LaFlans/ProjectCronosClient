@@ -23731,7 +23731,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 749338496}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -3.88, y: 0.1, z: -0.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -23739,7 +23739,7 @@ Transform:
   - {fileID: 148889934}
   - {fileID: 917448565}
   - {fileID: 692557218}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1668669078}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &749338498
 BoxCollider:
@@ -50769,6 +50769,38 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 688d46ebf3801d84c939d7af7d9a699f, type: 3}
+--- !u!1 &1668669077
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1668669078}
+  m_Layer: 0
+  m_Name: Shops
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1668669078
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1668669077}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 749338497}
+  m_Father: {fileID: 1943136461}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1670340689 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 75f90c17fef49e8449ec8d7f249d8d6a, type: 3}
@@ -58239,6 +58271,7 @@ Transform:
   - {fileID: 1282334611}
   - {fileID: 2035486488}
   - {fileID: 763808276}
+  - {fileID: 1668669078}
   m_Father: {fileID: 1729653123}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1943136462
@@ -58256,6 +58289,8 @@ MonoBehaviour:
   gimmicks:
   - {fileID: 1439420501}
   - {fileID: 570191179}
+  itemShops:
+  - {fileID: 749338499}
 --- !u!4 &1946037940 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8366494260668928647, guid: d5ab202ca818f5e4c8ae1eaf6b8d73ca, type: 3}
@@ -75988,4 +76023,3 @@ SceneRoots:
   - {fileID: 1779286115}
   - {fileID: 82793912}
   - {fileID: 235873597}
-  - {fileID: 749338497}

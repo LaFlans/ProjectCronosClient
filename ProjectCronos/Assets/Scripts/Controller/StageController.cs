@@ -8,8 +8,12 @@ namespace ProjectCronos
         [SerializeField]
         Gimmick[] gimmicks;
 
+        [SerializeField]
+        ItemShop[] itemShops;
+
         public async void Initialize(List<int> gimmickStatus)
         {
+            // ギミックの初期化
             int index = -1;
             foreach (var gimmick in gimmicks)
             {
@@ -22,6 +26,12 @@ namespace ProjectCronos
                 {
                     gimmick.Initialize(EnumCollection.Stage.GIMMICK_STATUS.UNTRIGGERED);
                 }
+            }
+
+            // アイテムショップの初期化
+            foreach (var itemShop in itemShops)
+            {
+                await itemShop.Initialize();
             }
         }
 

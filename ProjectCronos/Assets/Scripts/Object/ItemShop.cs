@@ -27,6 +27,13 @@ namespace ProjectCronos
 
         public async UniTask<bool> Initialize()
         {
+            // FIXME: sakoguchi-s 絶対無い、どこかでシナリオシーンを一気に読み込む等必要
+            await AddressableManager.Instance.LoadScenarioScenes("001");
+            await AddressableManager.Instance.LoadScenarioScenes("001_01");
+            await AddressableManager.Instance.LoadScenarioScenes("001_02");
+            await AddressableManager.Instance.LoadScenarioScenes("001_03");
+            await AddressableManager.Instance.LoadScenarioScenes("002");
+
             return true;
         }
 
