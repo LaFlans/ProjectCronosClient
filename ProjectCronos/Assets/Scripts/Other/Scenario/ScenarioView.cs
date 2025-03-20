@@ -126,11 +126,6 @@ namespace ProjectCronos
 
             messages = AddressableManager.Instance.GetLoadedScenarioScenes(loadScenarioTitle);
 
-            foreach (var message in messages)
-            {
-                Debug.Log($"{message}");
-            }
-
             if (messages.Count < 0)
             {
                 return;

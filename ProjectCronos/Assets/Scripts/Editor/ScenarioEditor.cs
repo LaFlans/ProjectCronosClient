@@ -127,8 +127,8 @@ namespace ProjectCronos
 
                     var style = new GUIStyle(EditorStyles.label);
                     style.richText = true;
-                    string test = $"<b><size=50><color=#4169e1>SCENARIO EDITOR</color></b>";
-                    GUILayout.Label(test, style);
+                    string toolTitle = $"<b><size=50><color=#4169e1>SCENARIO EDITOR</color></b>";
+                    GUILayout.Label(toolTitle, style);
 
                     GUILayout.FlexibleSpace();
                 }
@@ -433,6 +433,7 @@ namespace ProjectCronos
                 {
                     var assetEntry = settings.CreateOrMoveEntry(AssetDatabase.AssetPathToGUID(filePath), group);
                     assetEntry.SetAddress(assetEntry.MainAsset.name);
+                    assetEntry.SetLabel("ScenarioScene", true, true);
                 }
 
                 AssetDatabase.Refresh();

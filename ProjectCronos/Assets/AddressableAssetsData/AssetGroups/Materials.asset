@@ -13,44 +13,49 @@ MonoBehaviour:
   m_Name: Materials
   m_EditorClassIdentifier: 
   m_GroupName: Materials
-  m_Data:
-    m_SerializedData: []
   m_GUID: 4268006072f8a4348a4bf430cad945bf
   m_SerializeEntries:
   - m_GUID: 18e6fa25b2d60b24180a0731a9e25d8f
     m_Address: Assets/ProjectCronosAssets/Materials/MagicCircle/MagicCircleLevel1.mat
     m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 6557616b3a7afb040aacc2ea8f385c63
-    m_Address: Assets/ProjectCronosAssets/Materials/MagicCircle/MagicCircleLevel2.mat
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 8f586ad1ca5b3f14eb5624f17eabf979
-    m_Address: Assets/ProjectCronosAssets/Materials/MagicCircle/MagicCircleLevel3.mat
-    m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Material
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1afbca0d02765c340b636741f95920bf
     m_Address: Assets/ProjectCronosAssets/Materials/MagicCircle/MagicCircleLevel4.mat
     m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: ae0e47db48fe49b4ab673840c17e1ce9
-    m_Address: Assets/ProjectCronosAssets/Materials/MagicCircle/MagicCircleLevel5.mat
-    m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Material
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 3410c5171bc961c40a822d8df8062e75
     m_Address: Assets/ProjectCronosAssets/Materials/MagicCircle/MagicCircleLevel6.mat
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6557616b3a7afb040aacc2ea8f385c63
+    m_Address: Assets/ProjectCronosAssets/Materials/MagicCircle/MagicCircleLevel2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8f586ad1ca5b3f14eb5624f17eabf979
+    m_Address: Assets/ProjectCronosAssets/Materials/MagicCircle/MagicCircleLevel3.mat
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Material
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 993c79fa73c1ab64990274b5ae39ddd0
     m_Address: Assets/ProjectCronosAssets/Materials/MagicCircle/MagicCircleLevel7.mat
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - Material
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ae0e47db48fe49b4ab673840c17e1ce9
+    m_Address: Assets/ProjectCronosAssets/Materials/MagicCircle/MagicCircleLevel5.mat
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Material
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 935c614e6cbfb024884f0f3e5a7850c3, type: 2}
