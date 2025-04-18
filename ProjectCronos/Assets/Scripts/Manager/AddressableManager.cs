@@ -16,27 +16,27 @@ namespace ProjectCronos
         /// <summary>
         /// 読み込み済みオブジェクトパス
         /// </summary>
-        Dictionary<string, AsyncOperationHandle<GameObject>> loadedObjects;
+        Dictionary<string, GameObject> loadedObjects;
 
         /// <summary>
         /// 読み込み済みマテリアルパス
         /// </summary>
-        Dictionary<string, AsyncOperationHandle<Material>> loadedMaterials;
+        Dictionary<string, Material> loadedMaterials;
+
+        /// <summary>
+        /// 読み込み済みAudioClip
+        /// </summary>
+        Dictionary<string, AudioClip> loadedAudioClips;
 
         /// <summary>
         /// 読み込み済みAudioClipパス
         /// </summary>
-        Dictionary<string, AsyncOperationHandle<AudioClip>> loadedclips;
+        Dictionary<string, Texture2D> loadedTextures;
 
         /// <summary>
-        /// 読み込み済みAudioClipパス
+        /// 読み込み済みシナリオシーン
         /// </summary>
-        Dictionary<string, AsyncOperationHandle<Texture2D>> loadedTextures;
-
-        /// <summary>
-        /// 読み込み済みシナリオシーンパス
-        /// </summary>
-        Dictionary<string, AsyncOperationHandle<ScenarioSceneScriptableObject>> loadedScenarioScenes;
+        Dictionary<string, ScenarioSceneScriptableObject> loadedScenarioScenes;
 
         /// <summary>
         /// 初期化
@@ -44,15 +44,26 @@ namespace ProjectCronos
         /// <returns>初期化に成功したかどうか</returns>
         public override async UniTask<bool> Initialize()
         {
-            loadedObjects = new Dictionary<string, AsyncOperationHandle<GameObject>>();
-            loadedMaterials = new Dictionary<string, AsyncOperationHandle<Material>>();
-            loadedclips = new Dictionary<string, AsyncOperationHandle<AudioClip>>();
-            loadedTextures = new Dictionary<string, AsyncOperationHandle<Texture2D>>();
-            loadedScenarioScenes = new Dictionary<string, AsyncOperationHandle<ScenarioSceneScriptableObject>>();
+            loadedObjects = new Dictionary<string, GameObject>();
+            loadedMaterials = new Dictionary<string, Material>();
+            loadedAudioClips = new Dictionary<string, AudioClip>();
+            loadedTextures = new Dictionary<string, Texture2D>();
+            loadedScenarioScenes = new Dictionary<string, ScenarioSceneScriptableObject>();
 
             Debug.Log("AddressableManager初期化");
 
             return true;
+        }
+
+        /// <summary>
+        /// 全てのAddressableなアセットの読み込み
+        /// </summary>
+        /// <returns>UniTask.</returns>
+        public async UniTask LoadAllAddressableAssets()
+        {
+            await LoadAllTextures();       // テクスチャ
+            await LoadAllAudioClips();     // オーディオクリップ
+            await LoadAllScenarioScenes(); // シナリオ
         }
 
         /// <summary>
@@ -73,7 +84,7 @@ namespace ProjectCronos
                     {
                         if (!loadedObjects.ContainsKey(path))
                         {
-                            loadedObjects.Add(path, op);
+                            loadedObjects.Add(path, op.Result);
                             if (callback != null)
                             {
                                 callback.Invoke();
@@ -88,9 +99,53 @@ namespace ProjectCronos
             }
         }
 
-        public async UniTask LoadClip(string path, Action callback = null)
+        /// <summary>
+        /// 全てのオーディオクリップを読み込む
+        /// </summary>
+        /// <param name="callback">完了後の</param>
+        /// <returns></returns>
+        public async UniTask LoadAllAudioClips(Action callback = null)
         {
-            if (!loadedclips.ContainsKey(path))
+            var t = Addressables.LoadResourceLocationsAsync("Sound");
+            await t.Task;
+            var locations = t.Result;
+            foreach(var location in locations)
+            {
+                var p = location.PrimaryKey;
+            }
+
+            var handle = Addressables.LoadAssetsAsync<AudioClip>("Sound", null);
+            await handle.Task;
+
+            handle.Completed += op =>
+            {
+                if (op.Status == AsyncOperationStatus.Succeeded)
+                {
+                    foreach (var item in handle.Result)
+                    {
+                        if (!loadedAudioClips.ContainsKey(item.name))
+                        {
+                            Debug.Log($"path:{item.name}を読みこみ！");
+
+                            loadedAudioClips.Add(item.name, item);
+
+                            if (callback != null)
+                            {
+                                callback.Invoke();
+                            }
+                        }
+                        else
+                        {
+                            Debug.Log($"path:{item.name}は既に読み込まれているよ！");
+                        }
+                    }
+                }
+            };
+        }
+
+        public async UniTask LoadAudioClip(string path, Action callback = null)
+        {
+            if (!loadedAudioClips.ContainsKey(path))
             {
                 var handle = Addressables.LoadAssetAsync<AudioClip>(path);
                 await handle.Task;
@@ -98,9 +153,9 @@ namespace ProjectCronos
                 {
                     if (op.Status == AsyncOperationStatus.Succeeded)
                     {
-                        if (!loadedclips.ContainsKey(path))
+                        if (!loadedAudioClips.ContainsKey(path))
                         {
-                            loadedclips.Add(path, op);
+                            loadedAudioClips.Add(path, op.Result);
 
                             if (callback != null)
                             {
@@ -118,12 +173,12 @@ namespace ProjectCronos
 
         public AudioClip GetLoadedClip(string path)
         {
-            if (loadedclips.ContainsKey(path))
+            if (loadedAudioClips.ContainsKey(path))
             {
-                return loadedclips[path].Result;
+                return loadedAudioClips[path];
             }
 
-            LoadClip(path);
+            LoadAudioClip(path);
             return null;
         }
 
@@ -139,7 +194,7 @@ namespace ProjectCronos
                     {
                         if (!loadedMaterials.ContainsKey(path))
                         {
-                            loadedMaterials.Add(path, op);
+                            loadedMaterials.Add(path, op.Result);
 
                             if (callback != null)
                             {
@@ -159,13 +214,48 @@ namespace ProjectCronos
         {
             if (loadedMaterials.ContainsKey(path))
             {
-                return loadedMaterials[path].Result;
+                return loadedMaterials[path];
             }
 
             LoadMaterial(path);
             Debug.Log("事前に読み込むようにしてね！");
             return null;
         }
+
+        /// <summary>
+        /// 全てのテクスチャを読み込む
+        /// </summary>
+        /// <param name="callback">完了後の</param>
+        /// <returns></returns>
+        public async UniTask LoadAllTextures(Action callback = null)
+        {
+            var handle = Addressables.LoadAssetsAsync<Texture2D>("Image", null);
+            await handle.Task;
+
+            handle.Completed += op =>
+            {
+                if (op.Status == AsyncOperationStatus.Succeeded)
+                {
+                    foreach (var item in handle.Result)
+                    {
+                        if (!loadedTextures.ContainsKey(item.name))
+                        {
+                            loadedTextures.Add(item.name, item);
+
+                            if (callback != null)
+                            {
+                                callback.Invoke();
+                            }
+                        }
+                        else
+                        {
+                            Debug.Log($"path:{item.name}は既に読み込まれているよ！");
+                        }
+                    }
+                }
+            };
+        }
+
 
         public async UniTask LoadTexture(string path, Action callback = null)
         {
@@ -179,7 +269,7 @@ namespace ProjectCronos
                     {
                         if (!loadedTextures.ContainsKey(path))
                         {
-                            loadedTextures.Add(path, op);
+                            loadedTextures.Add(path, op.Result);
 
                             if (callback != null)
                             {
@@ -199,12 +289,46 @@ namespace ProjectCronos
         {
             if (loadedTextures.ContainsKey(path))
             {
-                return loadedTextures[path].Result;
+                return loadedTextures[path];
             }
 
             LoadTexture(path);
             Debug.Log("事前に読み込むようにしてね！");
             return null;
+        }
+
+        /// <summary>
+        /// 全てのシナリオシーンを読み込む
+        /// </summary>
+        /// <param name="callback">完了後の</param>
+        /// <returns></returns>
+        public async UniTask LoadAllScenarioScenes(Action callback = null)
+        {
+            var handle = Addressables.LoadAssetsAsync<ScenarioSceneScriptableObject>("ScenarioScene", null);
+            await handle.Task;
+
+            handle.Completed += op =>
+            {
+                if (op.Status == AsyncOperationStatus.Succeeded)
+                {
+                    foreach (var item in handle.Result)
+                    {
+                        if (!loadedScenarioScenes.ContainsKey(item.name))
+                        {
+                            loadedScenarioScenes.Add(item.name, item);
+
+                            if (callback != null)
+                            {
+                                callback.Invoke();
+                            }
+                        }
+                        else
+                        {
+                            Debug.Log($"path:{item.name}は既に読み込まれているよ！");
+                        }
+                    }
+                }
+            };
         }
 
         public async UniTask LoadScenarioScenes(string path, Action callback = null)
@@ -219,7 +343,7 @@ namespace ProjectCronos
                     {
                         if (!loadedScenarioScenes.ContainsKey(path))
                         {
-                            loadedScenarioScenes.Add(path, op);
+                            loadedScenarioScenes.Add(path, op.Result);
 
                             if (callback != null)
                             {
@@ -239,7 +363,7 @@ namespace ProjectCronos
         {
             if (loadedScenarioScenes.ContainsKey(path))
             {
-                return loadedScenarioScenes[path].Result.scenarioTexts;
+                return loadedScenarioScenes[path].scenarioTexts;
             }
 
             LoadScenarioScenes(path);
@@ -286,16 +410,16 @@ namespace ProjectCronos
                     {
                         if (!loadedObjects.ContainsKey(path))
                         {
-                            loadedObjects.Add(path, op);
+                            loadedObjects.Add(path, op.Result);
                             if (callback != null)
                             {
                                 if (parent != null)
                                 {
-                                    callback.Invoke(Instantiate(loadedObjects[path].Result, parent));
+                                    callback.Invoke(Instantiate(loadedObjects[path], parent));
                                     return;
                                 }
 
-                                callback.Invoke(Instantiate(loadedObjects[path].Result));
+                                callback.Invoke(Instantiate(loadedObjects[path]));
                             }
                         }
                     }
@@ -311,7 +435,7 @@ namespace ProjectCronos
         {
             if (loadedObjects.ContainsKey(path))
             {
-                return Instantiate(loadedObjects[path].Result, transform);
+                return Instantiate(loadedObjects[path], transform);
             }
 
             Load(path);
@@ -323,9 +447,9 @@ namespace ProjectCronos
         {
             if (loadedObjects.ContainsKey(path))
             {
-                if (typeof(T) == loadedObjects[path].Result.GetType())
+                if (typeof(T) == loadedObjects[path].GetType())
                 {
-                    return loadedObjects[path].Result.GetComponent<T>();
+                    return loadedObjects[path].GetComponent<T>();
                 }
                 else
                 {
@@ -343,60 +467,60 @@ namespace ProjectCronos
         /// </summary>
         void OnDestroy()
         {
-            // 読み込んだAddressbleオブジェクトを解放
-            if (loadedObjects != null)
-            {
-                foreach(var obj in loadedObjects.Values)
-                {
-                    Addressables.Release(obj);
-                }
+            //// 読み込んだAddressbleオブジェクトを解放
+            //if (loadedObjects != null)
+            //{
+            //    foreach(var obj in loadedObjects.Values)
+            //    {
+            //        Addressables.Release(obj);
+            //    }
 
-                loadedObjects.Clear();
-            }
+            //    loadedObjects.Clear();
+            //}
 
-            // 読み込んだAddressbleオブジェクトを解放
-            if (loadedMaterials != null)
-            {
-                foreach (var obj in loadedMaterials.Values)
-                {
-                    Addressables.Release(obj);
-                }
+            //// 読み込んだAddressbleオブジェクトを解放
+            //if (loadedMaterials != null)
+            //{
+            //    foreach (var obj in loadedMaterials.Values)
+            //    {
+            //        Addressables.Release(obj);
+            //    }
 
-                loadedMaterials.Clear();
-            }
+            //    loadedMaterials.Clear();
+            //}
 
-            // 読み込んだAddressbleAudioClipオブジェクトを解放
-            if (loadedclips != null)
-            {
-                foreach (var obj in loadedclips.Values)
-                {
-                    Addressables.Release(obj);
-                }
+            //// 読み込んだAddressbleAudioClipオブジェクトを解放
+            //if (loadedclips != null)
+            //{
+            //    foreach (var obj in loadedclips.Values)
+            //    {
+            //        Addressables.Release(obj);
+            //    }
 
-                loadedclips.Clear();
-            }
+            //    loadedclips.Clear();
+            //}
 
-            // 読み込んだAddressbleテクスチャオブジェクトを解放
-            if (loadedTextures != null)
-            {
-                foreach (var obj in loadedTextures.Values)
-                {
-                    Addressables.Release(obj);
-                }
+            //// 読み込んだAddressbleテクスチャオブジェクトを解放
+            //if (loadedTextures != null)
+            //{
+            //    foreach (var obj in loadedTextures.Values)
+            //    {
+            //        Addressables.Release(obj);
+            //    }
 
-                loadedTextures.Clear();
-            }
+            //    loadedTextures.Clear();
+            //}
 
-            // 読み込んだAddressbleシナリオシーンオブジェクトを解放
-            if (loadedScenarioScenes != null)
-            {
-                foreach (var obj in loadedScenarioScenes.Values)
-                {
-                    Addressables.Release(obj);
-                }
+            //// 読み込んだAddressbleシナリオシーンオブジェクトを解放
+            //if (loadedScenarioScenes != null)
+            //{
+            //    foreach (var obj in loadedScenarioScenes)
+            //    {
+            //        Addressables.Release(obj.Value);
+            //    }
 
-                loadedScenarioScenes.Clear();
-            }
+            //    loadedScenarioScenes.Clear();
+            //}
         }
     }
 }

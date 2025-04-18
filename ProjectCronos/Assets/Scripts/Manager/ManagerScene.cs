@@ -72,7 +72,8 @@ namespace ProjectCronos
 
             // その他データ読み込み
             // マスタデータに登録されているサウンドデータを読み込む
-            await MasterDataManager.Instance.LoadSoundData();
+            await AddressableManager.Instance.LoadAllAddressableAssets();
+            Debug.Log("全てのAddressableアセットを読みこみ");
 
             isLaunch = true;
         }

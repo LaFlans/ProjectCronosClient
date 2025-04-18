@@ -42,34 +42,6 @@ namespace ProjectCronos
             _ => "dummy_image_1"
         };
 
-        /// <summary>
-        /// 事前読み込み
-        /// </summary>
-        /// <returns>UniTask</returns>
-        public static async UniTask PreLoadAsync()
-        {
-            // ここで事前に必要な素材を読み込む
-            await AddressableManager.Instance.LoadTexture(SwitchGamepadButtonImagePath(EnumCollection.Input.INPUT_GAMEPAD_BUTTON.A));
-            await AddressableManager.Instance.LoadTexture(SwitchGamepadButtonImagePath(EnumCollection.Input.INPUT_GAMEPAD_BUTTON.B));
-            await AddressableManager.Instance.LoadTexture(SwitchGamepadButtonImagePath(EnumCollection.Input.INPUT_GAMEPAD_BUTTON.X));
-            await AddressableManager.Instance.LoadTexture(SwitchGamepadButtonImagePath(EnumCollection.Input.INPUT_GAMEPAD_BUTTON.Y));
-            await AddressableManager.Instance.LoadTexture(SwitchGamepadButtonImagePath(EnumCollection.Input.INPUT_GAMEPAD_BUTTON.L));
-            await AddressableManager.Instance.LoadTexture(SwitchGamepadButtonImagePath(EnumCollection.Input.INPUT_GAMEPAD_BUTTON.R));
-            await AddressableManager.Instance.LoadTexture(SwitchGamepadButtonImagePath(EnumCollection.Input.INPUT_GAMEPAD_BUTTON.LT));
-            await AddressableManager.Instance.LoadTexture(SwitchGamepadButtonImagePath(EnumCollection.Input.INPUT_GAMEPAD_BUTTON.RT));
-            await AddressableManager.Instance.LoadTexture(SwitchGamepadButtonImagePath(EnumCollection.Input.INPUT_GAMEPAD_BUTTON.LB));
-            await AddressableManager.Instance.LoadTexture(SwitchGamepadButtonImagePath(EnumCollection.Input.INPUT_GAMEPAD_BUTTON.RB));
-            await AddressableManager.Instance.LoadTexture(SwitchGamepadButtonImagePath(EnumCollection.Input.INPUT_GAMEPAD_BUTTON.L3));
-            await AddressableManager.Instance.LoadTexture(SwitchGamepadButtonImagePath(EnumCollection.Input.INPUT_GAMEPAD_BUTTON.R3));
-            await AddressableManager.Instance.LoadTexture(SwitchGamepadButtonImagePath(EnumCollection.Input.INPUT_GAMEPAD_BUTTON.START));
-            await AddressableManager.Instance.LoadTexture(SwitchGamepadButtonImagePath(EnumCollection.Input.INPUT_GAMEPAD_BUTTON.SELECT));
-            await AddressableManager.Instance.LoadTexture(SwitchGamepadButtonImagePath(EnumCollection.Input.INPUT_GAMEPAD_BUTTON.CROSS));
-            await AddressableManager.Instance.LoadTexture(SwitchGamepadButtonImagePath(EnumCollection.Input.INPUT_GAMEPAD_BUTTON.CROSS_UP));
-            await AddressableManager.Instance.LoadTexture(SwitchGamepadButtonImagePath(EnumCollection.Input.INPUT_GAMEPAD_BUTTON.CROSS_DOWN));
-            await AddressableManager.Instance.LoadTexture(SwitchGamepadButtonImagePath(EnumCollection.Input.INPUT_GAMEPAD_BUTTON.CROSS_LEFT));
-            await AddressableManager.Instance.LoadTexture(SwitchGamepadButtonImagePath(EnumCollection.Input.INPUT_GAMEPAD_BUTTON.CROSS_RIGHT));
-        }
-
         public static Texture2D GetGamepadButtonImageTexture(EnumCollection.Input.INPUT_GAMEPAD_BUTTON gamepadButtonType)
         {
             return AddressableManager.Instance.GetLoadedTextures(SwitchGamepadButtonImagePath(gamepadButtonType));

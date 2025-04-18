@@ -15,64 +15,64 @@ MonoBehaviour:
   data:
   - key: BGM1
     type: 0
-    path: Assets/ProjectCronosAssets/Sounds/BGM/RengokuTeien/Black_Money.mp3
+    path: BGM/RengokuTeien/Black_Money.mp3
   - key: BGM2
     type: 0
-    path: Assets/ProjectCronosAssets/Sounds/BGM/RengokuTeien/Noir_Memory.mp3
+    path: BGM/RengokuTeien/Noir_Memory.mp3
   - key: Button14
     type: 1
-    path: button14
+    path: SE/kurage/button/button14.mp3
   - key: Button30
     type: 1
-    path: button30
+    path: SE/kurage/button/button30.mp3
   - key: Button37
     type: 1
-    path: button37
+    path: SE/kurage/button/button37.mp3
   - key: Button38
     type: 1
-    path: button38
+    path: SE/kurage/button/button38.mp3
   - key: Button47
     type: 1
-    path: button47
+    path: SE/kurage/button/button47.mp3
   - key: Button55
     type: 1
-    path: button55
+    path: SE/kurage/button/button55.mp3
   - key: Cancel8
     type: 1
-    path: cancelButton8
+    path: SE/koukaonLab/cancelButton8.mp3
   - key: Damage1
     type: 1
-    path: Damage1
+    path: SE/Damage1.mp3
   - key: GetDropItem
     type: 1
-    path: button46
+    path: SE/koukaonLab/button46.mp3
   - key: LandingPlayer
     type: 1
-    path: Landing1
+    path: SE/Landing1.mp3
   - key: OpenDoor1
     type: 1
-    path: openDoor1
+    path: SE/koukaonLab/openDoor1.mp3
   - key: OpenDoor2
     type: 1
-    path: openDoor2
+    path: SE/koukaonLab/openDoor2.mp3
   - key: OpenGate
     type: 1
-    path: openGate
+    path: SE/koukaonLab/openDoor1.mp3
   - key: OpenTresureBox
     type: 1
-    path: openTresureBox
+    path: SE/koukaonLab/openTresureBox.mp3
   - key: Shot1
     type: 1
-    path: button14
+    path: SE/kurage/button/button14.mp3
   - key: SummonPut
     type: 1
-    path: cancelButton8
+    path: SE/koukaonLab/cancelButton8.mp3
   - key: SummonStart
     type: 1
-    path: Aura1
+    path: SE/koukaonLab/Aura1.mp3
   - key: TakeoffPlayer
     type: 1
-    path: Swish1
+    path: SE/Swish1.mp3
   - key: WorkBGM1
     type: 0
-    path: "Assets/ProjectCronosAssets/Sounds/BGM/WorkBGM/\u4E88\u611F\u306E\u3074\u3093\u307D\u3093\u805E\u3053\u3048\u305F\u3089.mp3"
+    path: "BGM/WorkBGM/\u4E88\u611F\u306E\u3074\u3093\u307D\u3093\u805E\u3053\u3048\u305F\u3089.mp3"

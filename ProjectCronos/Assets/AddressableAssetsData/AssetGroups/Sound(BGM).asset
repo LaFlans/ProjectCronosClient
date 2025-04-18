@@ -16,25 +16,25 @@ MonoBehaviour:
   m_GUID: 47cb2beacd8faa74e8953bff2dc77c53
   m_SerializeEntries:
   - m_GUID: 16d7844f876f1384b9f1a42585b82d46
-    m_Address: Assets/ProjectCronosAssets/Sounds/BGM/RengokuTeien/Noir_Memory.mp3
+    m_Address: BGM/RengokuTeien/Noir_Memory.mp3
     m_ReadOnly: 0
     m_SerializedLabels:
     - Sound
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 68392b8a98642e740a918a389be0f3e7
-    m_Address: Assets/ProjectCronosAssets/Sounds/BGM/RengokuTeien/Black_Money.mp3
+    m_Address: BGM/RengokuTeien/Black_Money.mp3
     m_ReadOnly: 0
     m_SerializedLabels:
     - Sound
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6bda261ec846da34b88c7ccf592d6f3d
-    m_Address: "Assets/ProjectCronosAssets/Sounds/BGM/WorkBGM/32_\u30BB\u30AB\u30A4\u304C\u30AB\u30D5\u30A7\u306B\u306A\u3063\u3061\u3083\u3063\u305F\uFF01.wav"
+    m_Address: "BGM/WorkBGM/32_\u30BB\u30AB\u30A4\u304C\u30AB\u30D5\u30A7\u306B\u306A\u3063\u3061\u3083\u3063\u305F\uFF01.wav"
     m_ReadOnly: 0
     m_SerializedLabels:
     - Sound
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: cfc7da00797839543b88c6d8f0992991
-    m_Address: "Assets/ProjectCronosAssets/Sounds/BGM/WorkBGM/\u4E88\u611F\u306E\u3074\u3093\u307D\u3093\u805E\u3053\u3048\u305F\u3089.mp3"
+    m_Address: "BGM/WorkBGM/\u4E88\u611F\u306E\u3074\u3093\u307D\u3093\u805E\u3053\u3048\u305F\u3089.mp3"
     m_ReadOnly: 0
     m_SerializedLabels:
     - Sound

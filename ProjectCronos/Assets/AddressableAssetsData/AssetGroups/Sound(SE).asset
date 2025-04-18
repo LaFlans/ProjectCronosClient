@@ -15,110 +15,200 @@ MonoBehaviour:
   m_GroupName: Sound(SE)
   m_GUID: 129af39cbfe382146ba504e272d4fe57
   m_SerializeEntries:
+  - m_GUID: 072e1d43405657e49afc800dcfed5d3b
+    m_Address: SE/kurage/button/button31.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Sound
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 0766cc774c7e49247b1e136a5e72cbe1
-    m_Address: openGate
+    m_Address: SE/koukaonLab/openGate.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Sound
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0ce9e33b430edd644a1f3956d615153a
+    m_Address: SE/kurage/button/button43.mp3
     m_ReadOnly: 0
     m_SerializedLabels:
     - Sound
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 16979f2d001024f41aa3065a85020c00
-    m_Address: button38
+    m_Address: SE/kurage/button/button38.mp3
     m_ReadOnly: 0
     m_SerializedLabels:
     - Sound
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1780c4553069f83449b21edb0fc9b019
-    m_Address: openDoor1
+    m_Address: SE/koukaonLab/openDoor1.mp3
     m_ReadOnly: 0
     m_SerializedLabels:
     - Sound
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 1966350173929104cbcf715b77e88e60
-    m_Address: button43
+    m_Address: SE/koukaonLab/button43.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Sound
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 20091c246c972a648a25f6287a2dda9f
+    m_Address: SE/kurage/button/button61.mp3
     m_ReadOnly: 0
     m_SerializedLabels:
     - Sound
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 2bb27fccf29daa145b1aa200b83b4065
-    m_Address: Landing1
+    m_Address: SE/Landing1.mp3
     m_ReadOnly: 0
     m_SerializedLabels:
     - Sound
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4743b0a1f1a3d704195274deef60d69f
-    m_Address: button46
+    m_Address: SE/koukaonLab/button46.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Sound
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 54c6c38c95a893446bfedd5174b9c1d1
+    m_Address: SE/kurage/OnePhrase/one33.mp3
     m_ReadOnly: 0
     m_SerializedLabels:
     - Sound
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5c028dad69678f84689410bf2c76ef82
-    m_Address: button14
+    m_Address: SE/kurage/button/button14.mp3
     m_ReadOnly: 0
     m_SerializedLabels:
     - Sound
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5f542cabe7eb76d49ab67268097cfd78
-    m_Address: SlashSE
+    m_Address: SE/SlashSE.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Sound
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 609c6ab91a546d04f8498408fc1b3751
+    m_Address: "SE/koukaonLab/\u9375\u3092\u958B\u3051\u308B1.mp3"
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Sound
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 628d86894a62f064f884433acb0bec1c
+    m_Address: SE/kurage/button/button44.mp3
     m_ReadOnly: 0
     m_SerializedLabels:
     - Sound
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 68b03ba7da8b7ed47ad580bb9992bbcb
-    m_Address: openTresureBox
+    m_Address: SE/koukaonLab/openTresureBox.mp3
     m_ReadOnly: 0
     m_SerializedLabels:
     - Sound
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6c80e73d55240b848954fc21fed207e0
-    m_Address: Damage1
+    m_Address: SE/Damage1.mp3
     m_ReadOnly: 0
     m_SerializedLabels:
     - Sound
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 7d9c9aeeb98aeee479733a2b1d3bcb79
-    m_Address: button47
+    m_Address: SE/kurage/button/button47.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Sound
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 82f37621956e8a649ba488647bec841c
+    m_Address: SE/kurage/button/button70.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Sound
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 882532c68baacee4eb7c3694f90c4781
+    m_Address: SE/kurage/button/button36.mp3
     m_ReadOnly: 0
     m_SerializedLabels:
     - Sound
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 9ff99a11d4f71d4498d82558abd7cac1
-    m_Address: button55
+    m_Address: SE/kurage/button/button55.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Sound
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a18f45c4ea8872847a19fcdc4faa8d15
+    m_Address: SE/kurage/button/button07.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Sound
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a9875d1fb277bd24895f189021c6d97d
+    m_Address: SE/kurage/button/button42.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Sound
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: af8ea3cd866997d4aaded7b47007947c
+    m_Address: SE/kurage/button/button25.mp3
     m_ReadOnly: 0
     m_SerializedLabels:
     - Sound
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b7f4b8d09d9819d4e9661f079bb15ded
-    m_Address: cancelButton8
+    m_Address: SE/koukaonLab/cancelButton8.mp3
     m_ReadOnly: 0
     m_SerializedLabels:
     - Sound
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: bafed41d46d69cf44b44c7d96a359075
-    m_Address: button37
+    m_Address: SE/kurage/button/button37.mp3
     m_ReadOnly: 0
     m_SerializedLabels:
     - Sound
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c4eac28940d3dc540bacf34e1df803e4
-    m_Address: Aura1
+    m_Address: SE/koukaonLab/Aura1.mp3
     m_ReadOnly: 0
     m_SerializedLabels:
     - Sound
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: cfa0564e585059b41b75a7124160f02e
-    m_Address: openDoor2
+    m_Address: SE/koukaonLab/openDoor2.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Sound
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d93f91d743dc64041bb1223a10c076ca
+    m_Address: SE/gun_1.wav
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Sound
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d9ea8f8a2658f5c4c90399912052f6e8
+    m_Address: SE/kurage/button/button21.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Sound
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e3fb95eb9268fa7428e97fa9288c2ae4
+    m_Address: SE/kurage/button/button32.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Sound
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ebfb4b37b9d9063438af875644eef79f
+    m_Address: SE/kurage/button/button08.mp3
     m_ReadOnly: 0
     m_SerializedLabels:
     - Sound
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f5fde279da8cffb4fa17ce9ac07039e8
-    m_Address: button30
+    m_Address: SE/kurage/button/button30.mp3
     m_ReadOnly: 0
     m_SerializedLabels:
     - Sound
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f6a8e5a77f44436468151b3dc241a30d
-    m_Address: Swish1
+    m_Address: SE/Swish1.mp3
     m_ReadOnly: 0
     m_SerializedLabels:
     - Sound
