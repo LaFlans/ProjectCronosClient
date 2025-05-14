@@ -27,6 +27,7 @@ namespace ProjectCronos
 
         public async UniTask<bool> Initialize()
         {
+            await AddressableManager.Instance.Load("Assets/Prefabs/UIs/Shop/ShopItemCell.prefab");
             return true;
         }
 
@@ -63,7 +64,7 @@ namespace ProjectCronos
 
                         if (obj != null)
                         {
-                            obj.GetComponent<ShopPopup>().Apply(
+                            _ = obj.GetComponent<ShopPopup>().Apply(
                                 () =>
                                 {
                                     scenarioView.GetComponent<ScenarioView>().ShowScenario(

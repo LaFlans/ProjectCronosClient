@@ -21,6 +21,8 @@ MonoBehaviour:
     message: "\u7D42\u4E86\u78BA\u8A8D"
   - key: ApplicationPopupQuitYesButtonMessage
     message: "\u306F\u3044"
+  - key: MonetaryUnit
+    message: Gold
   - key: SaveAreaName1
     message: "\u30B9\u30BF\u30FC\u30C8\u5730\u70B9"
   - key: SaveAreaName2
@@ -28,7 +30,7 @@ MonoBehaviour:
   - key: SavePopupTitle
     message: SAVE MENU
   - key: ShopPopupTitle
-    message: "\u3042\u3042\u3042\u3042\u3042\u3042\u3042\u3042\u3042\u3042\u3042"
+    message: "\u9732\u5929\u5546"
   - key: TransitionTitleConfirmPopupButtonNoMessage
     message: "\u3044\u3044\u3048"
   - key: TransitionTitleConfirmPopupButtonYesMessage

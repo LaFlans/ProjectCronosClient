@@ -1,11 +1,8 @@
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
 using System;
 using Cysharp.Threading.Tasks;
-using UnityEngine.UI;
 
 namespace ProjectCronos
 {
@@ -15,7 +12,25 @@ namespace ProjectCronos
         /// 画面のタイトルテキスト
         /// </summary>
         [SerializeField]
-        TextMeshProUGUI savePopupTitleText;
+        TextMeshProUGUI shopPopupTitleText;
+
+        /// <summary>
+        /// ショップのアイテム一覧画面
+        /// </summary>
+        [SerializeField]
+        ShopItemListView shopItemListView;
+
+        /// <summary>
+        /// 所持金タイトルテキスト
+        /// </summary>
+        [SerializeField]
+        TextMeshProUGUI moneyTitleText;
+
+        /// <summary>
+        /// 所持金量テキスト
+        /// </summary>
+        [SerializeField]
+        UnitView moneyUnitView;
 
         /// <summary>
         /// 操作できるかどうか
@@ -31,7 +46,13 @@ namespace ProjectCronos
         {
             isOperate = true;
             this.closeAction = closeAction;
-            savePopupTitleText.text = MasterDataManager.Instance.GetDic("ShopPopupTitle");
+            shopPopupTitleText.text = MasterDataManager.Instance.GetDic("ShopPopupTitle");
+
+            // プレイヤーのセーブ情報を作成  
+            var playerStatus = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatus>();
+            moneyUnitView.Init(playerStatus.coinNum, isComma: true);
+
+            shopItemListView.Init();
         }
 
         /// <summary>

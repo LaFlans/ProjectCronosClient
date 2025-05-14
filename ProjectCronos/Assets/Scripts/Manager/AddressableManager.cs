@@ -125,7 +125,7 @@ namespace ProjectCronos
                     {
                         if (!loadedAudioClips.ContainsKey(item.name))
                         {
-                            Debug.Log($"path:{item.name}を読みこみ！");
+                            //Debug.Log($"path:{item.name}を読みこみ！");
 
                             loadedAudioClips.Add(item.name, item);
 
@@ -178,7 +178,7 @@ namespace ProjectCronos
                 return loadedAudioClips[path];
             }
 
-            LoadAudioClip(path);
+            _ = LoadAudioClip(path);
             return null;
         }
 
@@ -217,7 +217,7 @@ namespace ProjectCronos
                 return loadedMaterials[path];
             }
 
-            LoadMaterial(path);
+            _ = LoadMaterial(path);
             Debug.Log("事前に読み込むようにしてね！");
             return null;
         }
@@ -292,7 +292,7 @@ namespace ProjectCronos
                 return loadedTextures[path];
             }
 
-            LoadTexture(path);
+            _ = LoadTexture(path);
             Debug.Log("事前に読み込むようにしてね！");
             return null;
         }
@@ -366,7 +366,7 @@ namespace ProjectCronos
                 return loadedScenarioScenes[path].scenarioTexts;
             }
 
-            LoadScenarioScenes(path);
+            _ = LoadScenarioScenes(path);
             Debug.Log("事前に読み込むようにしてね！");
             return null;
         }
@@ -431,14 +431,14 @@ namespace ProjectCronos
             }
         }
 
-        public GameObject GetLoadedObject(string path)
+        public GameObject GetLoadedObject(string path, Transform parent = null)
         {
             if (loadedObjects.ContainsKey(path))
             {
-                return Instantiate(loadedObjects[path], transform);
+                return Instantiate(loadedObjects[path], parent);
             }
 
-            Load(path);
+            _ = Load(path);
             Debug.Log("事前に読み込むようにしてね！");
             return null;
         }
@@ -458,7 +458,7 @@ namespace ProjectCronos
                 }
             }
 
-            Load(path);
+            _ = Load(path);
             return default(T);
         }
 

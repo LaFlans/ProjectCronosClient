@@ -45,6 +45,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Prefab
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a3830229404f7a14c9ca2d20c19ffa17
+    m_Address: Assets/Prefabs/UIs/Shop/ShopItemCell.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Prefab
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: aeb91f5672971bf49aeab1e2453d5622
     m_Address: Assets/Prefabs/UIs/Save/SaveDataSlot.prefab
     m_ReadOnly: 0
