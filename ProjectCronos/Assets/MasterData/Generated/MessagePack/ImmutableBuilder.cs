@@ -34,6 +34,7 @@ namespace Generated
                 memory.PlayerDataTable,
                 memory.SampleTable,
                 memory.SaveAreaDataTable,
+                memory.ShopItemDataTable,
                 memory.SoundTable,
                 memory.TestTable
             
@@ -52,6 +53,7 @@ namespace Generated
                 memory.PlayerDataTable,
                 memory.SampleTable,
                 memory.SaveAreaDataTable,
+                memory.ShopItemDataTable,
                 memory.SoundTable,
                 memory.TestTable
             
@@ -70,6 +72,7 @@ namespace Generated
                 memory.PlayerDataTable,
                 memory.SampleTable,
                 memory.SaveAreaDataTable,
+                memory.ShopItemDataTable,
                 memory.SoundTable,
                 memory.TestTable
             
@@ -87,6 +90,7 @@ namespace Generated
                 memory.PlayerDataTable,
                 memory.SampleTable,
                 memory.SaveAreaDataTable,
+                memory.ShopItemDataTable,
                 memory.SoundTable,
                 memory.TestTable
             
@@ -105,6 +109,7 @@ namespace Generated
                 memory.PlayerDataTable,
                 memory.SampleTable,
                 memory.SaveAreaDataTable,
+                memory.ShopItemDataTable,
                 memory.SoundTable,
                 memory.TestTable
             
@@ -123,6 +128,7 @@ namespace Generated
                 memory.PlayerDataTable,
                 memory.SampleTable,
                 memory.SaveAreaDataTable,
+                memory.ShopItemDataTable,
                 memory.SoundTable,
                 memory.TestTable
             
@@ -140,6 +146,7 @@ namespace Generated
                 memory.PlayerDataTable,
                 memory.SampleTable,
                 memory.SaveAreaDataTable,
+                memory.ShopItemDataTable,
                 memory.SoundTable,
                 memory.TestTable
             
@@ -158,6 +165,7 @@ namespace Generated
                 memory.PlayerDataTable,
                 memory.SampleTable,
                 memory.SaveAreaDataTable,
+                memory.ShopItemDataTable,
                 memory.SoundTable,
                 memory.TestTable
             
@@ -176,6 +184,7 @@ namespace Generated
                 memory.PlayerDataTable,
                 memory.SampleTable,
                 memory.SaveAreaDataTable,
+                memory.ShopItemDataTable,
                 memory.SoundTable,
                 memory.TestTable
             
@@ -193,6 +202,7 @@ namespace Generated
                 table,
                 memory.SampleTable,
                 memory.SaveAreaDataTable,
+                memory.ShopItemDataTable,
                 memory.SoundTable,
                 memory.TestTable
             
@@ -211,6 +221,7 @@ namespace Generated
                 table,
                 memory.SampleTable,
                 memory.SaveAreaDataTable,
+                memory.ShopItemDataTable,
                 memory.SoundTable,
                 memory.TestTable
             
@@ -229,6 +240,7 @@ namespace Generated
                 table,
                 memory.SampleTable,
                 memory.SaveAreaDataTable,
+                memory.ShopItemDataTable,
                 memory.SoundTable,
                 memory.TestTable
             
@@ -246,6 +258,7 @@ namespace Generated
                 memory.PlayerDataTable,
                 table,
                 memory.SaveAreaDataTable,
+                memory.ShopItemDataTable,
                 memory.SoundTable,
                 memory.TestTable
             
@@ -264,6 +277,7 @@ namespace Generated
                 memory.PlayerDataTable,
                 table,
                 memory.SaveAreaDataTable,
+                memory.ShopItemDataTable,
                 memory.SoundTable,
                 memory.TestTable
             
@@ -282,6 +296,7 @@ namespace Generated
                 memory.PlayerDataTable,
                 table,
                 memory.SaveAreaDataTable,
+                memory.ShopItemDataTable,
                 memory.SoundTable,
                 memory.TestTable
             
@@ -299,6 +314,7 @@ namespace Generated
                 memory.PlayerDataTable,
                 memory.SampleTable,
                 table,
+                memory.ShopItemDataTable,
                 memory.SoundTable,
                 memory.TestTable
             
@@ -317,6 +333,7 @@ namespace Generated
                 memory.PlayerDataTable,
                 memory.SampleTable,
                 table,
+                memory.ShopItemDataTable,
                 memory.SoundTable,
                 memory.TestTable
             
@@ -335,6 +352,63 @@ namespace Generated
                 memory.PlayerDataTable,
                 memory.SampleTable,
                 table,
+                memory.ShopItemDataTable,
+                memory.SoundTable,
+                memory.TestTable
+            
+            );
+        }
+
+        public void ReplaceAll(System.Collections.Generic.IList<ShopItemData> data)
+        {
+            var newData = CloneAndSortBy(data, x => x.Id, System.Collections.Generic.Comparer<int>.Default);
+            var table = new ShopItemDataTable(newData);
+            memory = new MemoryDatabase(
+                memory.DictionaryTable,
+                memory.EnemyDataTable,
+                memory.ItemDataTable,
+                memory.PlayerDataTable,
+                memory.SampleTable,
+                memory.SaveAreaDataTable,
+                table,
+                memory.SoundTable,
+                memory.TestTable
+            
+            );
+        }
+
+        public void RemoveShopItemData(int[] keys)
+        {
+            var data = RemoveCore(memory.ShopItemDataTable.GetRawDataUnsafe(), keys, x => x.Id, System.Collections.Generic.Comparer<int>.Default);
+            var newData = CloneAndSortBy(data, x => x.Id, System.Collections.Generic.Comparer<int>.Default);
+            var table = new ShopItemDataTable(newData);
+            memory = new MemoryDatabase(
+                memory.DictionaryTable,
+                memory.EnemyDataTable,
+                memory.ItemDataTable,
+                memory.PlayerDataTable,
+                memory.SampleTable,
+                memory.SaveAreaDataTable,
+                table,
+                memory.SoundTable,
+                memory.TestTable
+            
+            );
+        }
+
+        public void Diff(ShopItemData[] addOrReplaceData)
+        {
+            var data = DiffCore(memory.ShopItemDataTable.GetRawDataUnsafe(), addOrReplaceData, x => x.Id, System.Collections.Generic.Comparer<int>.Default);
+            var newData = CloneAndSortBy(data, x => x.Id, System.Collections.Generic.Comparer<int>.Default);
+            var table = new ShopItemDataTable(newData);
+            memory = new MemoryDatabase(
+                memory.DictionaryTable,
+                memory.EnemyDataTable,
+                memory.ItemDataTable,
+                memory.PlayerDataTable,
+                memory.SampleTable,
+                memory.SaveAreaDataTable,
+                table,
                 memory.SoundTable,
                 memory.TestTable
             
@@ -352,6 +426,7 @@ namespace Generated
                 memory.PlayerDataTable,
                 memory.SampleTable,
                 memory.SaveAreaDataTable,
+                memory.ShopItemDataTable,
                 table,
                 memory.TestTable
             
@@ -370,6 +445,7 @@ namespace Generated
                 memory.PlayerDataTable,
                 memory.SampleTable,
                 memory.SaveAreaDataTable,
+                memory.ShopItemDataTable,
                 table,
                 memory.TestTable
             
@@ -388,6 +464,7 @@ namespace Generated
                 memory.PlayerDataTable,
                 memory.SampleTable,
                 memory.SaveAreaDataTable,
+                memory.ShopItemDataTable,
                 table,
                 memory.TestTable
             
@@ -405,6 +482,7 @@ namespace Generated
                 memory.PlayerDataTable,
                 memory.SampleTable,
                 memory.SaveAreaDataTable,
+                memory.ShopItemDataTable,
                 memory.SoundTable,
                 table
             
@@ -423,6 +501,7 @@ namespace Generated
                 memory.PlayerDataTable,
                 memory.SampleTable,
                 memory.SaveAreaDataTable,
+                memory.ShopItemDataTable,
                 memory.SoundTable,
                 table
             
@@ -441,6 +520,7 @@ namespace Generated
                 memory.PlayerDataTable,
                 memory.SampleTable,
                 memory.SaveAreaDataTable,
+                memory.ShopItemDataTable,
                 memory.SoundTable,
                 table
             

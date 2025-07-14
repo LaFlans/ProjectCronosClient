@@ -28,6 +28,8 @@ namespace MessagePack.Formatters
         private static global::System.ReadOnlySpan<byte> GetSpan_Category() => new byte[1 + 8] { 168, 67, 97, 116, 101, 103, 111, 114, 121 };
         // Path
         private static global::System.ReadOnlySpan<byte> GetSpan_Path() => new byte[1 + 4] { 164, 80, 97, 116, 104 };
+        // BasePrice
+        private static global::System.ReadOnlySpan<byte> GetSpan_BasePrice() => new byte[1 + 9] { 169, 66, 97, 115, 101, 80, 114, 105, 99, 101 };
         // EffectValue1
         private static global::System.ReadOnlySpan<byte> GetSpan_EffectValue1() => new byte[1 + 12] { 172, 69, 102, 102, 101, 99, 116, 86, 97, 108, 117, 101, 49 };
         // EffectValue2
@@ -44,7 +46,7 @@ namespace MessagePack.Formatters
             }
 
             var formatterResolver = options.Resolver;
-            writer.WriteMapHeader(8);
+            writer.WriteMapHeader(9);
             writer.WriteRaw(GetSpan_Id());
             writer.Write(value.Id);
             writer.WriteRaw(GetSpan_Name());
@@ -55,6 +57,8 @@ namespace MessagePack.Formatters
             writer.Write(value.Category);
             writer.WriteRaw(GetSpan_Path());
             global::MessagePack.FormatterResolverExtensions.GetFormatterWithVerify<string>(formatterResolver).Serialize(ref writer, value.Path, options);
+            writer.WriteRaw(GetSpan_BasePrice());
+            writer.Write(value.BasePrice);
             writer.WriteRaw(GetSpan_EffectValue1());
             writer.Write(value.EffectValue1);
             writer.WriteRaw(GetSpan_EffectValue2());
@@ -78,6 +82,7 @@ namespace MessagePack.Formatters
             var __Description__ = default(string);
             var __Category__ = default(int);
             var __Path__ = default(string);
+            var __BasePrice__ = default(int);
             var __EffectValue1__ = default(int);
             var __EffectValue2__ = default(int);
             var __EffectValue3__ = default(int);
@@ -117,6 +122,11 @@ namespace MessagePack.Formatters
 
                         __Category__ = reader.ReadInt32();
                         continue;
+                    case 9:
+                        if (!global::System.MemoryExtensions.SequenceEqual(stringKey, GetSpan_BasePrice().Slice(1))) { goto FAIL; }
+
+                        __BasePrice__ = reader.ReadInt32();
+                        continue;
                     case 12:
                         switch (global::MessagePack.Internal.AutomataKeyGen.GetKey(ref stringKey))
                         {
@@ -141,7 +151,7 @@ namespace MessagePack.Formatters
                 }
             }
 
-            var ____result = new global::ItemData(__Id__, __Name__, __Description__, __Category__, __Path__, __EffectValue1__, __EffectValue2__, __EffectValue3__);
+            var ____result = new global::ItemData(__Id__, __Name__, __Description__, __Category__, __Path__, __BasePrice__, __EffectValue1__, __EffectValue2__, __EffectValue3__);
             reader.Depth--;
             return ____result;
         }

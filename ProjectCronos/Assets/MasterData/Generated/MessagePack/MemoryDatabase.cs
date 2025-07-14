@@ -17,6 +17,7 @@ namespace Generated
         public PlayerDataTable PlayerDataTable { get; private set; }
         public SampleTable SampleTable { get; private set; }
         public SaveAreaDataTable SaveAreaDataTable { get; private set; }
+        public ShopItemDataTable ShopItemDataTable { get; private set; }
         public SoundTable SoundTable { get; private set; }
         public TestTable TestTable { get; private set; }
 
@@ -27,6 +28,7 @@ namespace Generated
             PlayerDataTable PlayerDataTable,
             SampleTable SampleTable,
             SaveAreaDataTable SaveAreaDataTable,
+            ShopItemDataTable ShopItemDataTable,
             SoundTable SoundTable,
             TestTable TestTable
         )
@@ -37,6 +39,7 @@ namespace Generated
             this.PlayerDataTable = PlayerDataTable;
             this.SampleTable = SampleTable;
             this.SaveAreaDataTable = SaveAreaDataTable;
+            this.ShopItemDataTable = ShopItemDataTable;
             this.SoundTable = SoundTable;
             this.TestTable = TestTable;
         }
@@ -66,6 +69,7 @@ namespace Generated
             this.PlayerDataTable = ExtractTableData<PlayerData, PlayerDataTable>(header, databaseBinary, options, xs => new PlayerDataTable(xs));
             this.SampleTable = ExtractTableData<Sample, SampleTable>(header, databaseBinary, options, xs => new SampleTable(xs));
             this.SaveAreaDataTable = ExtractTableData<SaveAreaData, SaveAreaDataTable>(header, databaseBinary, options, xs => new SaveAreaDataTable(xs));
+            this.ShopItemDataTable = ExtractTableData<ShopItemData, ShopItemDataTable>(header, databaseBinary, options, xs => new ShopItemDataTable(xs));
             this.SoundTable = ExtractTableData<Sound, SoundTable>(header, databaseBinary, options, xs => new SoundTable(xs));
             this.TestTable = ExtractTableData<Test, TestTable>(header, databaseBinary, options, xs => new TestTable(xs));
         }
@@ -80,6 +84,7 @@ namespace Generated
                 () => this.PlayerDataTable = ExtractTableData<PlayerData, PlayerDataTable>(header, databaseBinary, options, xs => new PlayerDataTable(xs)),
                 () => this.SampleTable = ExtractTableData<Sample, SampleTable>(header, databaseBinary, options, xs => new SampleTable(xs)),
                 () => this.SaveAreaDataTable = ExtractTableData<SaveAreaData, SaveAreaDataTable>(header, databaseBinary, options, xs => new SaveAreaDataTable(xs)),
+                () => this.ShopItemDataTable = ExtractTableData<ShopItemData, ShopItemDataTable>(header, databaseBinary, options, xs => new ShopItemDataTable(xs)),
                 () => this.SoundTable = ExtractTableData<Sound, SoundTable>(header, databaseBinary, options, xs => new SoundTable(xs)),
                 () => this.TestTable = ExtractTableData<Test, TestTable>(header, databaseBinary, options, xs => new TestTable(xs)),
             };
@@ -104,6 +109,7 @@ namespace Generated
             builder.Append(this.PlayerDataTable.GetRawDataUnsafe());
             builder.Append(this.SampleTable.GetRawDataUnsafe());
             builder.Append(this.SaveAreaDataTable.GetRawDataUnsafe());
+            builder.Append(this.ShopItemDataTable.GetRawDataUnsafe());
             builder.Append(this.SoundTable.GetRawDataUnsafe());
             builder.Append(this.TestTable.GetRawDataUnsafe());
             return builder;
@@ -118,6 +124,7 @@ namespace Generated
             builder.Append(this.PlayerDataTable.GetRawDataUnsafe());
             builder.Append(this.SampleTable.GetRawDataUnsafe());
             builder.Append(this.SaveAreaDataTable.GetRawDataUnsafe());
+            builder.Append(this.ShopItemDataTable.GetRawDataUnsafe());
             builder.Append(this.SoundTable.GetRawDataUnsafe());
             builder.Append(this.TestTable.GetRawDataUnsafe());
             return builder;
@@ -136,6 +143,7 @@ namespace Generated
                 PlayerDataTable,
                 SampleTable,
                 SaveAreaDataTable,
+                ShopItemDataTable,
                 SoundTable,
                 TestTable,
             });
@@ -152,6 +160,8 @@ namespace Generated
             ValidateTable(SampleTable.All, database, "Id", SampleTable.PrimaryKeySelector, result);
             ((ITableUniqueValidate)SaveAreaDataTable).ValidateUnique(result);
             ValidateTable(SaveAreaDataTable.All, database, "Id", SaveAreaDataTable.PrimaryKeySelector, result);
+            ((ITableUniqueValidate)ShopItemDataTable).ValidateUnique(result);
+            ValidateTable(ShopItemDataTable.All, database, "Id", ShopItemDataTable.PrimaryKeySelector, result);
             ((ITableUniqueValidate)SoundTable).ValidateUnique(result);
             ValidateTable(SoundTable.All, database, "Key", SoundTable.PrimaryKeySelector, result);
             ((ITableUniqueValidate)TestTable).ValidateUnique(result);
@@ -180,6 +190,8 @@ namespace Generated
                     return db.SampleTable;
                 case "m_save_area_data":
                     return db.SaveAreaDataTable;
+                case "m_shop_item":
+                    return db.ShopItemDataTable;
                 case "m_sound":
                     return db.SoundTable;
                 case "m_test":
@@ -203,6 +215,7 @@ namespace Generated
             dict.Add("m_player_data", Generated.Tables.PlayerDataTable.CreateMetaTable());
             dict.Add("m_sample", Generated.Tables.SampleTable.CreateMetaTable());
             dict.Add("m_save_area_data", Generated.Tables.SaveAreaDataTable.CreateMetaTable());
+            dict.Add("m_shop_item", Generated.Tables.ShopItemDataTable.CreateMetaTable());
             dict.Add("m_sound", Generated.Tables.SoundTable.CreateMetaTable());
             dict.Add("m_test", Generated.Tables.TestTable.CreateMetaTable());
 

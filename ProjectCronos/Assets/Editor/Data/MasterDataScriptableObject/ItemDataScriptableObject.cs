@@ -19,6 +19,7 @@ namespace ProjectCronos
             public string description;
             public EnumCollection.Item.ITEM_CATEGORY category;
             public string imagePath;
+            public int basePrice;
             public int effectValue1;
             public int effectValue2;
             public int effectValue3;
@@ -29,6 +30,7 @@ namespace ProjectCronos
                 string description,
                 EnumCollection.Item.ITEM_CATEGORY category,
                 string imagePath,
+                int basePrice,
                 int effectValue1,
                 int effectValue2,
                 int effectValue3)
@@ -38,6 +40,7 @@ namespace ProjectCronos
                 this.description = description;
                 this.category = category;
                 this.imagePath = imagePath;
+                this.basePrice = basePrice;
                 this.effectValue1 = effectValue1;
                 this.effectValue2 = effectValue2;
                 this.effectValue3 = effectValue3;
@@ -72,6 +75,7 @@ namespace ProjectCronos
                         item.Description,
                         (EnumCollection.Item.ITEM_CATEGORY)item.Category,
                         item.Path,
+                        item.BasePrice,
                         item.EffectValue1,
                         item.EffectValue2,
                         item.EffectValue3));
@@ -90,6 +94,7 @@ namespace ProjectCronos
                         item.Value.description,
                         (int)item.Value.category,
                         item.Value.imagePath,
+                        item.Value.basePrice,
                         item.Value.effectValue1,
                         item.Value.effectValue2,
                         item.Value.effectValue3));
@@ -141,21 +146,10 @@ namespace ProjectCronos
                         sb.Append(ShowDiffMessage("DESCRIPTION", item.Value.Description, value.description));
                         sb.Append(ShowDiffMessage("CATEGORY", item.Value.Category, (int)value.category));
                         sb.Append(ShowDiffMessage("IMAGEPATH", item.Value.Path, value.imagePath));
+                        sb.Append(ShowDiffMessage("BASEPRICE", item.Value.BasePrice, value.basePrice));
                         sb.Append(ShowDiffMessage("EFFECTVALUE1", item.Value.EffectValue1, value.effectValue1));
                         sb.Append(ShowDiffMessage("EFFECTVALUE2", item.Value.EffectValue2, value.effectValue2));
                         sb.Append(ShowDiffMessage("EFFECTVALUE3", item.Value.EffectValue3, value.effectValue3));
-
-
-
-
-                        //sb.Append("ID:" + (item.Value.Id == value.id ? $"{value.id} " : $"{item.Value.Id}→<color={colorCodeYellow}>{value.id}</color> "));
-                        //sb.Append("NAME:" + (item.Value.Name == value.name ? $"{value.name} " : $"{item.Value.Name}→<color={colorCodeYellow}>{value.name}</color> "));
-                        //sb.Append("DESCRIPTION:" + (item.Value.Description == value.description ? $"{value.description} " : $"{item.Value.Description}→<color={colorCodeYellow}>{value.description}</color> "));
-                        //sb.Append("CATEGORY:" + (item.Value.Category == (int)value.category ? $"{value.category} " : $"{((EnumCollection.Item.ITEM_CATEGORY)item.Value.Category).ToString()}→<color={colorCodeYellow}>{value.category.ToString()}</color> "));
-                        //sb.Append("IMAGEPATH:" + (item.Value.Path == value.imagePath ? $"{value.imagePath} " : $"{item.Value.Path}→<color={colorCodeYellow}>{value.imagePath}</color> "));
-                        //sb.Append("EFFECTVALUE1:" + (item.Value.EffectValue1 == value.effectValue1 ? $"{value.effectValue1} " : $"{item.Value.EffectValue1}→<color={colorCodeYellow}>{value.effectValue1}</color> "));
-                        //sb.Append("EFFECTVALUE2:" + (item.Value.EffectValue2 == value.effectValue2 ? $"{value.effectValue2} " : $"{item.Value.EffectValue2}→<color={colorCodeYellow}>{value.effectValue2}</color> "));
-                        //sb.Append("EFFECTVALUE3:" + (item.Value.EffectValue3 == value.effectValue3 ? $"{value.effectValue3} " : $"{item.Value.EffectValue3}→<color={colorCodeYellow}>{value.effectValue3}</color> "));
                     }
                     else
                     {
@@ -164,6 +158,7 @@ namespace ProjectCronos
                         sb.Append(ShowDiffMessage("DESCRIPTION", item.Value.Description, value.description, true));
                         sb.Append(ShowDiffMessage("CATEGORY", item.Value.Category, (int)value.category, true));
                         sb.Append(ShowDiffMessage("IMAGEPATH", item.Value.Path, value.imagePath, true));
+                        sb.Append(ShowDiffMessage("BASEPRICE", item.Value.BasePrice, value.basePrice, true));
                         sb.Append(ShowDiffMessage("EFFECTVALUE1", item.Value.EffectValue1, value.effectValue1, true));
                         sb.Append(ShowDiffMessage("EFFECTVALUE2", item.Value.EffectValue2, value.effectValue2, true));
                         sb.Append(ShowDiffMessage("EFFECTVALUE3", item.Value.EffectValue3, value.effectValue3, true));
@@ -182,7 +177,7 @@ namespace ProjectCronos
                 if (!existsDiff) existsDiff = true;
 
                 // ScriptableObject側の要素が少ない場合、青で表示
-                messages.Add($"-<color={colorCodeBlue}>KEY:{item.Value.Id} NAME:{item.Value.Name} DESCRIPTION:{item.Value.Description} CATEGORY:{item.Value.Category.ToString()} IMAGEPATH:{item.Value.Path} EFFECTVALUE1:{item.Value.EffectValue1} EFFECTVALUE2:{item.Value.EffectValue2} EFFECTVALUE3:{item.Value.EffectValue3}</color>");
+                messages.Add($"-<color={colorCodeBlue}>KEY:{item.Value.Id} NAME:{item.Value.Name} DESCRIPTION:{item.Value.Description} CATEGORY:{item.Value.Category.ToString()} IMAGEPATH:{item.Value.Path} BASEPRICE:{item.Value.BasePrice} EFFECTVALUE1:{item.Value.EffectValue1} EFFECTVALUE2:{item.Value.EffectValue2} EFFECTVALUE3:{item.Value.EffectValue3}</color>");
             }
 
             // ScriptableObject側の要素が多い場合、赤で表示
@@ -193,7 +188,7 @@ namespace ProjectCronos
 
                 for (int i = dbData.Count; i < data.Count; i++)
                 {
-                    messages.Add($"+<color={colorCodeRed}>ID:{data[i].id} NAME:{data[i].name} DESCRIPTION:{data[i].description} CATEGORY:{data[i].category.ToString()} IMAGEPATH:{data[i].imagePath} EFFECTVALUE1:{data[i].effectValue1} EFFECTVALUE2:{data[i].effectValue2} EFFECTVALUE3:{data[i].effectValue3}</color>");
+                    messages.Add($"+<color={colorCodeRed}>ID:{data[i].id} NAME:{data[i].name} DESCRIPTION:{data[i].description} CATEGORY:{data[i].category.ToString()} IMAGEPATH:{data[i].imagePath} BASEPRICE:{data[i].basePrice} EFFECTVALUE1:{data[i].effectValue1} EFFECTVALUE2:{data[i].effectValue2} EFFECTVALUE3:{data[i].effectValue3}</color>");
                 }
             }
 
@@ -215,7 +210,7 @@ namespace ProjectCronos
             List<string> debugMessage = new List<string>();
             foreach (var item in dbData)
             {
-                debugMessage.Add($"ID:{item.Id} NAME:{item.Name} DESCRIPTION:{item.Description} CATEGORY:{((EnumCollection.Item.ITEM_CATEGORY)item.Category).ToString()} IMAGEPATH:{item.Path} EFFECTVALUE1:{item.EffectValue1} EFFECTVALUE2:{item.EffectValue2} EFFECTVALUE3:{item.EffectValue3}");
+                debugMessage.Add($"ID:{item.Id} NAME:{item.Name} DESCRIPTION:{item.Description} CATEGORY:{((EnumCollection.Item.ITEM_CATEGORY)item.Category).ToString()} IMAGEPATH:{item.Path} BASEPRICE:{item.BasePrice} EFFECTVALUE1:{item.EffectValue1} EFFECTVALUE2:{item.EffectValue2} EFFECTVALUE3:{item.EffectValue3}");
             }
 
             return debugMessage;

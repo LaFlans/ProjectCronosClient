@@ -147,6 +147,7 @@ GameObject:
   - component: {fileID: 1276538216411623535}
   - component: {fileID: 5170235686087995805}
   - component: {fileID: 2705764974583453622}
+  - component: {fileID: 3525987224673544021}
   m_Layer: 5
   m_Name: SavePopup
   m_TagString: Untagged
@@ -214,6 +215,18 @@ MonoBehaviour:
   - {fileID: 7046946962235888206}
   - {fileID: 7216844326473762469}
   - {fileID: 296630053360256911}
+--- !u!225 &3525987224673544021
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1276538216411623532}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &3604920217829843227
 GameObject:
   m_ObjectHideFlags: 0

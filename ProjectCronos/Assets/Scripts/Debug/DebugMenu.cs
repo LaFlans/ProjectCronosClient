@@ -54,6 +54,12 @@ namespace ProjectCronos
         [SerializeField]
         Transform debugMenuParent;
 
+        /// <summary>
+        /// コイン関連のデバックメニュー
+        /// </summary>
+        [SerializeField]
+        CoinDebugMenu coinDebugMenu;
+
         List<ItemDebugCell> itemDebugCells;
 
         void Start()
@@ -83,6 +89,8 @@ namespace ProjectCronos
             InputManager.Instance.inputActions.DebugActions.ShowDebugMenu.performed += OnShowDebugMenu;
 
             debugMenuEnableButton.onClick.AddListener(() => { debugMenuParent.gameObject.SetActive(!debugMenuParent.gameObject.activeSelf); });
+
+            coinDebugMenu.Initialize();
         }
 
         /// <summary>

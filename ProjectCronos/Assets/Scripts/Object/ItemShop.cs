@@ -18,6 +18,12 @@ namespace ProjectCronos
         int itemShopId;
 
         /// <summary>
+        /// 料金レート
+        /// </summary>
+        [SerializeField]
+        float priceRate = 1.0f;
+
+        /// <summary>
         /// 自由視点カメラ
         /// </summary>
         [SerializeField]
@@ -65,6 +71,8 @@ namespace ProjectCronos
                         if (obj != null)
                         {
                             _ = obj.GetComponent<ShopPopup>().Apply(
+                                itemShopId,
+                                priceRate,
                                 () =>
                                 {
                                     scenarioView.GetComponent<ScenarioView>().ShowScenario(

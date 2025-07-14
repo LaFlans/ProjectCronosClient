@@ -45,7 +45,7 @@ namespace ProjectCronos
         public void ShowSystemPopup(PopupBase.MessageParam messageParam, Action closeCallback = null)
         {
             var obj = PopupManager.Instance.GetPopupObject(
-                EnumCollection.Popup.POPUP_TYPE.TRANSITION_TITLE_CONFIRM);
+                EnumCollection.Popup.POPUP_TYPE.DEFAULT);
 
             if (obj != null)
             {
@@ -61,18 +61,18 @@ namespace ProjectCronos
             switch(type)
             {
                 case EnumCollection.Popup.POPUP_TYPE.DEFAULT:
-                    return "Assets/Resources_moved/Prefabs/Popup/DefaultPopup.prefab";
+                    return "Assets/Resources_moved/Prefabs/Popup/SystemPopup.prefab";
                 case EnumCollection.Popup.POPUP_TYPE.QUIT_APPLICATION:
-                    return "Assets/Resources_moved/Prefabs/Popup/DefaultPopup.prefab";
+                    return "Assets/Resources_moved/Prefabs/Popup/SystemPopup.prefab";
                 case EnumCollection.Popup.POPUP_TYPE.TRANSITION_TITLE_CONFIRM:
-                    return "Assets/Resources_moved/Prefabs/Popup/DefaultPopup.prefab";
+                    return "Assets/Resources_moved/Prefabs/Popup/SystemPopup.prefab";
                 case EnumCollection.Popup.POPUP_TYPE.SAVE:
                     return "Assets/Resources_moved/Prefabs/Popup/SavePopup.prefab";
                 case EnumCollection.Popup.POPUP_TYPE.SHOP:
                     return "Assets/Resources_moved/Prefabs/Popup/ShopPopup.prefab";
                 default:
                     // デフォルトのポップアップのパスを返す
-                    return "Assets/Resources_moved/Prefabs/Popup/DefaultPopup.prefab";  
+                    return "Assets/Resources_moved/Prefabs/Popup/SystemPopup.prefab";  
             }
         }
 
@@ -108,7 +108,7 @@ namespace ProjectCronos
 
             popupParams.Push(param);
             param.popup.RegisterInputActions();
-            
+
             // ポップアップを表示した時、プレイヤー操作可能状態だった場合、UI操作可能状態にする
             if (InputManager.Instance.IsMatchInputStatus(EnumCollection.Input.INPUT_STATUS.PLAYER))
             {

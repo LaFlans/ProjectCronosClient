@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using TMPro;
 using System;
+using UnityEngine.EventSystems;
 using System.Linq;
 
 namespace ProjectCronos
@@ -33,14 +34,14 @@ namespace ProjectCronos
         TextMeshProUGUI negativeButtonMessageText;
         [SerializeField]
         TextMeshProUGUI otherButtonMessageText;
-        [SerializeField]
-        CanvasGroup canvasGroup;
 
         bool isSetup = false;
         bool isOpenAnimation = false;
 
         public override void Setup(EnumCollection.Popup.POPUP_BUTTON_STATUS buttonStatus, Param param = null, MessageParam messageParam = null)
         {
+            popupCanvasGroup = GetComponent<CanvasGroup>();
+
             base.Setup(buttonStatus);
 
             // デフォルトはノーに合わせる
@@ -52,7 +53,7 @@ namespace ProjectCronos
             buttons[(int)EnumCollection.Popup.POPUP_SELECT_STATUS.NEGATIVE].onClick.AddListener(OnClickNegativeButton);
             buttons[(int)EnumCollection.Popup.POPUP_SELECT_STATUS.OTHER].onClick.AddListener(OnClickOtherButton);
 
-            canvasGroup.alpha = 0;
+            popupCanvasGroup.alpha = 0;
 
             // メッセージ設定
             titleText.text = messageParam?.title != null ? messageParam.title : "仮_タイトル";
@@ -71,6 +72,8 @@ namespace ProjectCronos
             // ボタンの設定
             ButtonSetup(buttonStatus);
 
+            EventSystem.current.SetSelectedGameObject(buttons.First().gameObject);
+
             isSetup = true;
         }
 
@@ -79,7 +82,7 @@ namespace ProjectCronos
             if (!isOpenAnimation && isSetup)
             {
                 isOpenAnimation = true;
-                canvasGroup.alpha = 1;
+                popupCanvasGroup.alpha = 1;
 
                 // アニメーション開始
                 anim.SetTrigger("Open");
@@ -249,41 +252,41 @@ namespace ProjectCronos
 
         void OnClickPositiveButton()
         {
+            // デフォルトの挙動としてクローズ処理を行う
+            Close();
+
             if (buttonActions[(int)EnumCollection.Popup.POPUP_SELECT_STATUS.POSITIVE] != null)
             {
                 SoundManager.Instance.Play("Button38");
 
                 buttonActions[(int)EnumCollection.Popup.POPUP_SELECT_STATUS.POSITIVE].Invoke();
             }
-
-            // デフォルトの挙動としてクローズ処理を行う
-            Close();
         }
 
         void OnClickNegativeButton()
         {
+            // デフォルトの挙動としてクローズ処理を行う
+            Close();
+
             if (buttonActions[(int)EnumCollection.Popup.POPUP_SELECT_STATUS.NEGATIVE] != null)
             {
                 SoundManager.Instance.Play("Button37");
 
                 buttonActions[(int)EnumCollection.Popup.POPUP_SELECT_STATUS.NEGATIVE].Invoke();
             }
-
-            // デフォルトの挙動としてクローズ処理を行う
-            Close();
         }
 
         void OnClickOtherButton()
         {
+            // デフォルトの挙動としてクローズ処理を行う
+            Close();
+
             if (buttonActions[(int)EnumCollection.Popup.POPUP_SELECT_STATUS.OTHER] != null)
             {
                 SoundManager.Instance.Play("Button37");
 
                 buttonActions[(int)EnumCollection.Popup.POPUP_SELECT_STATUS.OTHER].Invoke();
             }
-
-            // デフォルトの挙動としてクローズ処理を行う
-            Close();
         }
 
         protected override void Close()
@@ -296,21 +299,42 @@ namespace ProjectCronos
             base.Close();
         }
 
-
         public override void RegisterInputActions()
         {
-            Debug.Log("SystemPopupのアクションを登録");
-            InputManager.Instance.inputActions.UI.Submit.performed += OnSubmit;
-            InputManager.Instance.inputActions.UI.Left.performed += OnLeft;
-            InputManager.Instance.inputActions.UI.Right.performed += OnRight;
+            if (popupCanvasGroup == null)
+            {
+                Debug.Log($"中身がないよ…");
+                popupCanvasGroup = GetComponent<CanvasGroup>();
+            }
+
+            popupCanvasGroup.interactable = true;
+
+            //Debug.Log($"インタラクティブオン！:{popupCanvasGroup.interactable}");
+
+            //Debug.Log("SystemPopupのアクションを登録");
+            //InputManager.Instance.inputActions.UI.Submit.performed += OnSubmit;
+            //InputManager.Instance.inputActions.UI.Left.performed += OnLeft;
+            //InputManager.Instance.inputActions.UI.Right.performed += OnRight;
         }
 
         public override void UnregisterInputActions()
         {
-            Debug.Log("SystemPopupのアクションを解除");
-            InputManager.Instance.inputActions.UI.Submit.performed -= OnSubmit;
-            InputManager.Instance.inputActions.UI.Left.performed -= OnLeft;
-            InputManager.Instance.inputActions.UI.Right.performed -= OnRight;
+            //Debug.Log("インタラクティブオフ！");
+
+            if (gameObject != null)
+            {
+                if (popupCanvasGroup == null)
+                {
+                    popupCanvasGroup = GetComponent<CanvasGroup>();
+                }
+
+                popupCanvasGroup.interactable = false;
+            }
+
+            //Debug.Log("SystemPopupのアクションを解除");
+            //InputManager.Instance.inputActions.UI.Submit.performed -= OnSubmit;
+            //InputManager.Instance.inputActions.UI.Left.performed -= OnLeft;
+            //InputManager.Instance.inputActions.UI.Right.performed -= OnRight;
         }
     }
 }

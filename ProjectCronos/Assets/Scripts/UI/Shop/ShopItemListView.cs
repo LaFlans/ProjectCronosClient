@@ -8,6 +8,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.Threading;
 using UnityEngine.InputSystem;
+using System;
 
 namespace ProjectCronos
 {
@@ -59,21 +60,15 @@ namespace ProjectCronos
         /// </summary>
         GameObject lastSelectObj;
 
-        public void Init()
+        public void Init(Func<(int, int), bool> purchaceItemFunc, float priceRate, int shopGroupId)
         {
-            items = new List<ItemCellInfo>()
+            items = new List<ItemCellInfo>();
+            var shopItems = MasterDataManager.DB.ShopItemDataTable.All.Where(x => x.GroupId == shopGroupId);
+            foreach(var i in shopItems)
             {
-                new ItemCellInfo(0, "アイテム1", 100),
-                new ItemCellInfo(1, "アイテム2", 1000),
-                new ItemCellInfo(2, "アイテム3", 19),
-                new ItemCellInfo(3,"アイテム4", 11),
-                new ItemCellInfo(4,"アイテム5", 120),
-                new ItemCellInfo(5,"アイテム6", 150),
-                new ItemCellInfo(6,"アイテム7", 10110),
-                new ItemCellInfo(7,"アイテム8", 110),
-                new ItemCellInfo(8,"アイテム9", 69),
-                new ItemCellInfo(9,"アイテム10", 569),
-            };
+                var itemInfo = MasterDataManager.DB.ItemDataTable.FindById(i.ItemId);
+                items.Add(new ItemCellInfo(i.ItemId, itemInfo.Name, (int)(itemInfo.BasePrice * priceRate)));
+            }
 
             if (items.Any())
             {
@@ -81,11 +76,14 @@ namespace ProjectCronos
                 foreach (var item in items)
                 {
                     GameObject obj = AddressableManager.Instance.GetLoadedObject(shopItemListCellPrefabPath, contentParent);
-                    obj.GetComponent<ShopItemCell>().Init(item.itemName, item.itemPrice);
+                    obj.GetComponent<ShopItemCell>().Init(item.itemId, item.itemName, item.itemPrice, purchaceItemFunc);
                     itemsList.Add(obj);
                 }
 
+                // 初期選択ボタンの初期化と追加
+                EventSystem.current.SetSelectedGameObject(null);
                 EventSystem.current.SetSelectedGameObject(itemsList.First());
+
                 lastSelectObj = EventSystem.current.currentSelectedGameObject;
 
                 var selects = itemsList.Select(x => x.GetComponent<Selectable>()).ToList();
@@ -100,6 +98,14 @@ namespace ProjectCronos
 
                 CancellationToken token = destroyCancellationToken;
                 OnCurrentSelectedGameObjectChanged(token).Forget();
+            }
+        }
+
+        public void SelectedItemCell()
+        {
+            if (lastSelectObj != null)
+            {
+                EventSystem.current.SetSelectedGameObject(lastSelectObj);
             }
         }
 

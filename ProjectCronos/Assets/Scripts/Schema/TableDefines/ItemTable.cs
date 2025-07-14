@@ -30,6 +30,11 @@ public class ItemData
     public string Path {  get; set; }
 
     /// <summary>
+    /// アイテムの基本価格
+    /// </summary>
+    public int BasePrice { get; set; }
+
+    /// <summary>
     /// アイテムの効果値1
     /// </summary>
     public int EffectValue1 {  get; set; }
@@ -44,13 +49,14 @@ public class ItemData
     /// </summary>
     public int EffectValue3 { get; set; }
 
-    public ItemData(int Id, string Name, string Description, int Category, string Path, int EffectValue1, int EffectValue2, int EffectValue3)
+    public ItemData(int Id, string Name, string Description, int Category, string Path, int BasePrice, int EffectValue1, int EffectValue2, int EffectValue3)
     {
         this.Id = Id;
         this.Name = Name;
         this.Description = Description;
         this.Category = Category;
         this.Path = Path;
+        this.BasePrice = BasePrice;
         this.EffectValue1 = EffectValue1;
         this.EffectValue2 = EffectValue2;
         this.EffectValue3 = EffectValue3;

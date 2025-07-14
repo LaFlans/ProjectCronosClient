@@ -8,6 +8,7 @@ namespace ProjectCronos
     /// <summary>
     /// ポップアップのベースとなるクラス
     /// </summary>
+    [RequireComponent(typeof(CanvasGroup))]
     public abstract class PopupBase : MonoBehaviour
     {
         public class Param
@@ -55,6 +56,8 @@ namespace ProjectCronos
         protected Action closeAction;
 
         protected Animator anim;
+
+        protected CanvasGroup popupCanvasGroup;
 
         public virtual void Setup(EnumCollection.Popup.POPUP_BUTTON_STATUS buttonStatus, Param param = null, MessageParam messageParam = null)
         {

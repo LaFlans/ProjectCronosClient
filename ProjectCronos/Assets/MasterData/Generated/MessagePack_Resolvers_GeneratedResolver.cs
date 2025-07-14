@@ -47,7 +47,7 @@ namespace MessagePack.Resolvers
 
         static GeneratedResolverGetFormatterHelper()
         {
-            lookup = new global::System.Collections.Generic.Dictionary<global::System.Type, int>(14)
+            lookup = new global::System.Collections.Generic.Dictionary<global::System.Type, int>(15)
             {
                 { typeof(global::System.Collections.Generic.Dictionary<string, int>), 0 },
                 { typeof(global::System.Collections.Generic.List<int>), 1 },
@@ -61,8 +61,9 @@ namespace MessagePack.Resolvers
                 { typeof(global::ProjectCronos.StageSaveData), 9 },
                 { typeof(global::Sample), 10 },
                 { typeof(global::SaveAreaData), 11 },
-                { typeof(global::Sound), 12 },
-                { typeof(global::Test), 13 },
+                { typeof(global::ShopItemData), 12 },
+                { typeof(global::Sound), 13 },
+                { typeof(global::Test), 14 },
             };
         }
 
@@ -88,8 +89,9 @@ namespace MessagePack.Resolvers
                 case 9: return new MessagePack.Formatters.ProjectCronos.StageSaveDataFormatter();
                 case 10: return new MessagePack.Formatters.SampleFormatter();
                 case 11: return new MessagePack.Formatters.SaveAreaDataFormatter();
-                case 12: return new MessagePack.Formatters.SoundFormatter();
-                case 13: return new MessagePack.Formatters.TestFormatter();
+                case 12: return new MessagePack.Formatters.ShopItemDataFormatter();
+                case 13: return new MessagePack.Formatters.SoundFormatter();
+                case 14: return new MessagePack.Formatters.TestFormatter();
                 default: return null;
             }
         }

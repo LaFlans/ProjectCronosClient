@@ -8,13 +8,13 @@ using System;
 
 namespace Generated.Tables
 {
-   public sealed partial class ItemDataTable : TableBase<ItemData>, ITableUniqueValidate
+   public sealed partial class ShopItemDataTable : TableBase<ShopItemData>, ITableUniqueValidate
    {
-        public Func<ItemData, int> PrimaryKeySelector => primaryIndexSelector;
-        readonly Func<ItemData, int> primaryIndexSelector;
+        public Func<ShopItemData, int> PrimaryKeySelector => primaryIndexSelector;
+        readonly Func<ShopItemData, int> primaryIndexSelector;
 
 
-        public ItemDataTable(ItemData[] sortedData)
+        public ShopItemDataTable(ShopItemData[] sortedData)
             : base(sortedData)
         {
             this.primaryIndexSelector = x => x.Id;
@@ -25,7 +25,7 @@ namespace Generated.Tables
 
 
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-        public ItemData FindById(int key)
+        public ShopItemData FindById(int key)
         {
             var lo = 0;
             var hi = data.Length - 1;
@@ -42,7 +42,7 @@ namespace Generated.Tables
         }
 
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-        public bool TryFindById(int key, out ItemData result)
+        public bool TryFindById(int key, out ShopItemData result)
         {
             var lo = 0;
             var hi = data.Length - 1;
@@ -59,12 +59,12 @@ namespace Generated.Tables
             return false;
         }
 
-        public ItemData FindClosestById(int key, bool selectLower = true)
+        public ShopItemData FindClosestById(int key, bool selectLower = true)
         {
             return FindUniqueClosestCore(data, primaryIndexSelector, System.Collections.Generic.Comparer<int>.Default, key, selectLower);
         }
 
-        public RangeView<ItemData> FindRangeById(int min, int max, bool ascendant = true)
+        public RangeView<ShopItemData> FindRangeById(int min, int max, bool ascendant = true)
         {
             return FindUniqueRangeCore(data, primaryIndexSelector, System.Collections.Generic.Comparer<int>.Default, min, max, ascendant);
         }
@@ -83,22 +83,18 @@ namespace Generated.Tables
 
         public static MasterMemory.Meta.MetaTable CreateMetaTable()
         {
-            return new MasterMemory.Meta.MetaTable(typeof(ItemData), typeof(ItemDataTable), "m_item",
+            return new MasterMemory.Meta.MetaTable(typeof(ShopItemData), typeof(ShopItemDataTable), "m_shop_item",
                 new MasterMemory.Meta.MetaProperty[]
                 {
-                    new MasterMemory.Meta.MetaProperty(typeof(ItemData).GetProperty("Id")),
-                    new MasterMemory.Meta.MetaProperty(typeof(ItemData).GetProperty("Name")),
-                    new MasterMemory.Meta.MetaProperty(typeof(ItemData).GetProperty("Description")),
-                    new MasterMemory.Meta.MetaProperty(typeof(ItemData).GetProperty("Category")),
-                    new MasterMemory.Meta.MetaProperty(typeof(ItemData).GetProperty("Path")),
-                    new MasterMemory.Meta.MetaProperty(typeof(ItemData).GetProperty("BasePrice")),
-                    new MasterMemory.Meta.MetaProperty(typeof(ItemData).GetProperty("EffectValue1")),
-                    new MasterMemory.Meta.MetaProperty(typeof(ItemData).GetProperty("EffectValue2")),
-                    new MasterMemory.Meta.MetaProperty(typeof(ItemData).GetProperty("EffectValue3")),
+                    new MasterMemory.Meta.MetaProperty(typeof(ShopItemData).GetProperty("Id")),
+                    new MasterMemory.Meta.MetaProperty(typeof(ShopItemData).GetProperty("GroupId")),
+                    new MasterMemory.Meta.MetaProperty(typeof(ShopItemData).GetProperty("ItemId")),
+                    new MasterMemory.Meta.MetaProperty(typeof(ShopItemData).GetProperty("PriceRate")),
+                    new MasterMemory.Meta.MetaProperty(typeof(ShopItemData).GetProperty("PurchaseLimit")),
                 },
                 new MasterMemory.Meta.MetaIndex[]{
                     new MasterMemory.Meta.MetaIndex(new System.Reflection.PropertyInfo[] {
-                        typeof(ItemData).GetProperty("Id"),
+                        typeof(ShopItemData).GetProperty("Id"),
                     }, true, true, System.Collections.Generic.Comparer<int>.Default),
                 });
         }

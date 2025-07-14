@@ -103,8 +103,41 @@ namespace ProjectCronos
             // ステータス更新イベント処理
             statusUpdateEvent?.Invoke();
 
-            // FIXME: ここは後でマスタ文言に差し替え
             ItemLogger.ShowItemLog($"{value}コイン入手しました");
+        }
+
+        /// <summary>
+        /// コインを減らす
+        /// 0以下になる場合、0になります
+        /// </summary>
+        /// <param name="value">減らすコイン数</param>
+        public void SubCoin(int value)
+        {
+            coinNum -= value;
+
+            if(coinNum < 0 )
+            {
+                coinNum = 0;
+            }
+
+            // ステータス更新イベント処理
+            statusUpdateEvent?.Invoke();
+
+            ItemLogger.ShowItemLog($"{value}コイン減らしました");
+        }
+
+        /// <summary>
+        /// コイン数設定
+        /// </summary>
+        /// <param name="value">設定するコイン数</param>
+        public void SetCoin(int value)
+        {
+            coinNum = value;
+
+            // ステータス更新イベント処理
+            statusUpdateEvent?.Invoke();
+
+            ItemLogger.ShowItemLog($"{value}コインに設定しました");
         }
 
         /// <summary>
@@ -112,7 +145,7 @@ namespace ProjectCronos
         /// </summary>
         /// <param name="value">消費するコイン数</param>
         /// <returns>所持しているコインが足りずに消費に失敗したらfalse,消費に成功したらtrue</returns>
-        public bool SubCoin(int value)
+        public bool ConsumeCoin(int value)
         {
             if (coinNum < value)
             {
@@ -123,6 +156,8 @@ namespace ProjectCronos
 
             // ステータス更新イベント処理
             statusUpdateEvent?.Invoke();
+
+            ItemLogger.ShowItemLog($"{value}コイン消費しました");
 
             return true;
         }

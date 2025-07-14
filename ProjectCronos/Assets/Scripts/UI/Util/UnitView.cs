@@ -20,6 +20,8 @@ namespace ProjectCronos
         [SerializeField]
         TextMeshProUGUI unitText;
 
+        string commaFormat;
+
         public enum UnitType
         {
             Money,
@@ -27,9 +29,14 @@ namespace ProjectCronos
 
         public void Init(int amount, UnitType type = UnitType.Money, bool isComma = false)
         {
-            var commaFormat = isComma ? "N0" : "";
+            commaFormat = isComma ? "N0" : "";
             amountText.text = amount.ToString(commaFormat);
             unitText.text = GetUnitText(type);
+        }
+
+        public void ApplyView(int amount)
+        {
+            amountText.text = amount.ToString(commaFormat);
         }
 
         string GetUnitText(UnitType type)

@@ -58,6 +58,8 @@ namespace ProjectCronos
         /// </summary>
         public async UniTask Apply(SaveAreaInfo saveAreaInfo)
         {
+            popupCanvasGroup = GetComponent<CanvasGroup>();
+
             saveAreaInfoCache = saveAreaInfo;
             isOperate = true;
 
@@ -186,7 +188,7 @@ namespace ProjectCronos
                 SoundManager.Instance.Play("Button47");
 
                 // 保存処理
-                SaveManager.Instance.Save(
+                _ = SaveManager.Instance.Save(
                     CreateSaveData(saveAreaInfoCache),
                     selectSlotNum,
                     () =>
@@ -195,7 +197,7 @@ namespace ProjectCronos
                             new PopupBase.MessageParam("セーブ", "セーブが完了しました。", "はい"),
                             () =>
                             {
-                                ApplySaveDataSlot();
+                                _ = ApplySaveDataSlot();
                                 SoundManager.Instance.Play("Button55");
                                 isOperate = true;
                             });
@@ -219,7 +221,7 @@ namespace ProjectCronos
 
             // 削除処理
             SaveManager.Instance.Delete(selectSlotNum);
-            ApplySaveDataSlot();
+            _ = ApplySaveDataSlot();
         }
 
         /// <summary>

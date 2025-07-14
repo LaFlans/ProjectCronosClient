@@ -22,7 +22,7 @@ MonoBehaviour:
     - Popup
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a3c0a8458a9f08b43bc00fd310b2a277
-    m_Address: Assets/Resources_moved/Prefabs/Popup/DefaultPopup.prefab
+    m_Address: Assets/Resources_moved/Prefabs/Popup/SystemPopup.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
     - Popup
