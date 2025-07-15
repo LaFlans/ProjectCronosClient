@@ -60,8 +60,15 @@ namespace ProjectCronos
         /// </summary>
         GameObject lastSelectObj;
 
-        public void Init(Func<(int, int), bool> purchaceItemFunc, float priceRate, int shopGroupId)
+        /// <summary>
+        /// アイテム詳細の更新処理
+        /// </summary>
+        Action<int> updateItemDetailView;
+
+        public void Init(Func<(int, int), bool> purchaceItemFunc, Action<int> updateItemDetailView, float priceRate, int shopGroupId)
         {
+            this.updateItemDetailView = updateItemDetailView;
+
             items = new List<ItemCellInfo>();
             var shopItems = MasterDataManager.DB.ShopItemDataTable.All.Where(x => x.GroupId == shopGroupId);
             foreach(var i in shopItems)
@@ -83,6 +90,7 @@ namespace ProjectCronos
                 // 初期選択ボタンの初期化と追加
                 EventSystem.current.SetSelectedGameObject(null);
                 EventSystem.current.SetSelectedGameObject(itemsList.First());
+                updateItemDetailView?.Invoke(itemsList.First().GetComponent<ShopItemCell>().GetItemId());
 
                 lastSelectObj = EventSystem.current.currentSelectedGameObject;
 
@@ -126,6 +134,7 @@ namespace ProjectCronos
                         if (cell != null)
                         {
                             Scroll(cell.NodeNumber);
+                            updateItemDetailView?.Invoke(cell.GetItemId());
                             SoundManager.Instance.Play("Button47");
                             lastSelectObj = obj;
                         }

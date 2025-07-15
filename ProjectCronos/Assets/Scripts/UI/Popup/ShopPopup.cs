@@ -35,6 +35,12 @@ namespace ProjectCronos
         UnitView moneyUnitView;
 
         /// <summary>
+        /// アイテム詳細画面
+        /// </summary>
+        [SerializeField]
+        ItemDetailView itemDetailView;
+
+        /// <summary>
         /// 操作できるかどうか
         /// </summary>
         bool isOperate;
@@ -62,7 +68,17 @@ namespace ProjectCronos
             playerStatus = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatus>();
             moneyUnitView.Init(playerStatus.coinNum, isComma: true);
 
-            shopItemListView.Init(PurchaseItem, this.priceRate, shopGroupId);
+            shopItemListView.Init(PurchaseItem, UpdateItemDetailView, this.priceRate, shopGroupId);
+        }
+
+        /// <summary>
+        /// アイテムの詳細画面の更新
+        /// </summary>
+        public void UpdateItemDetailView(int itemId)
+        {
+            var itemHolder = playerStatus.itemHolder;
+            var info = itemHolder.GetItemDetailInfo(itemId);
+            itemDetailView.UpdateView(info, itemHolder.GetHoldItemCount(itemId));
         }
 
         /// <summary>

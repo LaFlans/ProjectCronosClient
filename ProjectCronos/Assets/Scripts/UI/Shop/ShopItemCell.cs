@@ -61,9 +61,9 @@ namespace ProjectCronos
             UpdateView();
         }
 
-        int test(float t)
+        public int GetItemId()
         {
-            return 1;
+            return itemId;
         }
 
         void OnClickButton()
