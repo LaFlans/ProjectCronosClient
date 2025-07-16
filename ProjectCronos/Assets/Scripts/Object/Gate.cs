@@ -65,18 +65,44 @@ namespace ProjectCronos
                         break;
                     case EnumCollection.Stage.GIMMICK_TYPE.Item:
                         var playerStatus = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatus>();
-                        if (playerStatus.itemHolder.ConsumeItem(needItemId, 1))
+                        var itemInfo = playerStatus.itemHolder.GetItemDetailInfo(needItemId);
+                        if (playerStatus.itemHolder.IsHoldItem(needItemId))
                         {
-                            isOpen = true;
-                            gimmickStatus = EnumCollection.Stage.GIMMICK_STATUS.TRIGGERED;
-                            anim.SetTrigger("Open");
-                            SoundManager.Instance.Play("OpenDoor1");
-                            MainEntryPoint.guideView.HideControlGuide();
-                            InputManager.Instance.inputActions.Player.Action.performed -= OnOperateGate;
+                            Debug.Log($"{itemInfo.name}を所持していました");
+                            var obj = PopupManager.Instance.GetPopupObject(
+                                EnumCollection.Popup.POPUP_TYPE.DEFAULT);
+
+                            if (obj != null)
+                            {
+                                obj.GetComponent<PopupBase>().Setup(
+                                    EnumCollection.Popup.POPUP_BUTTON_STATUS.DEFAULT,
+                                    new PopupBase.Param(
+                                        () =>
+                                        {
+                                            if (playerStatus.itemHolder.ConsumeItem(needItemId, 1))
+                                            {
+                                                isOpen = true;
+                                                gimmickStatus = EnumCollection.Stage.GIMMICK_STATUS.TRIGGERED;
+                                                anim.SetTrigger("Open");
+                                                SoundManager.Instance.Play("OpenDoor1");
+                                                MainEntryPoint.guideView.HideControlGuide();
+                                                InputManager.Instance.inputActions.Player.Action.performed -= OnOperateGate;
+
+                                                Debug.Log("アイテムを消費しました");
+                                            }
+                                            else
+                                            {
+                                                // MEMO: ここはほぼ通らないはず
+                                                Debug.Log("アイテムの消費に失敗しました");
+                                            }
+                                        },
+                                        null, null, null),
+                                    new PopupBase.MessageParam("確認", $"{itemInfo.name}を持っているようだ。\n{itemInfo.name}を消費して開けますか？", "はい", "いいえ"));
+                            }
                         }
                         else
                         {
-                            Debug.Log("必要なアイテムを所持していません。");
+                            PopupManager.Instance.ShowSystemPopup(new PopupBase.MessageParam("確認", $"{itemInfo.name}が必要そうだ…", "はい"));
                         }
 
                         break;

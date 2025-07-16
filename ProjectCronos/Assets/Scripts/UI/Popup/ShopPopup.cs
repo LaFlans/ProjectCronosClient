@@ -69,6 +69,8 @@ namespace ProjectCronos
             moneyUnitView.Init(playerStatus.coinNum, isComma: true);
 
             shopItemListView.Init(PurchaseItem, UpdateItemDetailView, this.priceRate, shopGroupId);
+
+            RegisterInputActions();
         }
 
         /// <summary>

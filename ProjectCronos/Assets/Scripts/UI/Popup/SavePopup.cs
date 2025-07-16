@@ -71,6 +71,8 @@ namespace ProjectCronos
 
             selectSlotNum = 0;
             ApplySlotSelectStatus();
+
+            RegisterInputActions();
         }
 
         /// <summary>

@@ -69,6 +69,13 @@ namespace ProjectCronos
             anim.updateMode = AnimatorUpdateMode.UnscaledTime;
         }
 
+        protected virtual void OnFinishOpenAnimation()
+        {
+            Debug.Log("ポップアップが開くアニメーション終了！");
+
+            RegisterInputActions();
+        }
+
         /// <summary>
         /// ポップアップを閉じる処理
         /// </summary>

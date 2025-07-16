@@ -98,7 +98,7 @@ namespace ProjectCronos
         /// <returns>所持している場合、Trueを返す</returns>
         public bool IsHoldItem(int itemId)
         {
-            return ownItems.ContainsKey(itemId);
+            return ownItems[itemId] > 0;
         }
 
         /// <summary>

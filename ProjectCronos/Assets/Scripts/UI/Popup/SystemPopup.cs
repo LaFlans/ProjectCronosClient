@@ -48,11 +48,6 @@ namespace ProjectCronos
             selectStatus = EnumCollection.Popup.POPUP_SELECT_STATUS.NEGATIVE;
             UpdateSelectButtonView();
 
-            // ボタン設定
-            buttons[(int)EnumCollection.Popup.POPUP_SELECT_STATUS.POSITIVE].onClick.AddListener(OnClickPositiveButton);
-            buttons[(int)EnumCollection.Popup.POPUP_SELECT_STATUS.NEGATIVE].onClick.AddListener(OnClickNegativeButton);
-            buttons[(int)EnumCollection.Popup.POPUP_SELECT_STATUS.OTHER].onClick.AddListener(OnClickOtherButton);
-
             popupCanvasGroup.alpha = 0;
 
             // メッセージ設定
@@ -309,7 +304,12 @@ namespace ProjectCronos
 
             popupCanvasGroup.interactable = true;
 
-            //Debug.Log($"インタラクティブオン！:{popupCanvasGroup.interactable}");
+            Debug.Log($"インタラクティブオン！:{popupCanvasGroup.interactable}");
+
+            // ボタン設定
+            buttons[(int)EnumCollection.Popup.POPUP_SELECT_STATUS.POSITIVE].onClick.AddListener(OnClickPositiveButton);
+            buttons[(int)EnumCollection.Popup.POPUP_SELECT_STATUS.NEGATIVE].onClick.AddListener(OnClickNegativeButton);
+            buttons[(int)EnumCollection.Popup.POPUP_SELECT_STATUS.OTHER].onClick.AddListener(OnClickOtherButton);
 
             //Debug.Log("SystemPopupのアクションを登録");
             //InputManager.Instance.inputActions.UI.Submit.performed += OnSubmit;
@@ -319,7 +319,7 @@ namespace ProjectCronos
 
         public override void UnregisterInputActions()
         {
-            //Debug.Log("インタラクティブオフ！");
+            Debug.Log("インタラクティブオフ！");
 
             if (gameObject != null)
             {

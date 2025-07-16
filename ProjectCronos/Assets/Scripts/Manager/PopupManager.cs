@@ -107,7 +107,6 @@ namespace ProjectCronos
             }
 
             popupParams.Push(param);
-            param.popup.RegisterInputActions();
 
             // ポップアップを表示した時、プレイヤー操作可能状態だった場合、UI操作可能状態にする
             if (InputManager.Instance.IsMatchInputStatus(EnumCollection.Input.INPUT_STATUS.PLAYER))

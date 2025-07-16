@@ -88,7 +88,17 @@ namespace ProjectCronos
             // 入力設定
             InputManager.Instance.inputActions.DebugActions.ShowDebugMenu.performed += OnShowDebugMenu;
 
-            debugMenuEnableButton.onClick.AddListener(() => { debugMenuParent.gameObject.SetActive(!debugMenuParent.gameObject.activeSelf); });
+            debugMenuEnableButton.onClick.AddListener(
+                () =>
+                {
+                    // デバックメニューを開いた時にアイテム一覧の更新も行っておく
+                    foreach (var item in MasterDataManager.DB.ItemDataTable.All)
+                    {
+                        UpdateItemDebugMenu(item.Id);
+                    }
+
+                    debugMenuParent.gameObject.SetActive(!debugMenuParent.gameObject.activeSelf);
+                });
 
             coinDebugMenu.Initialize();
         }
@@ -107,6 +117,11 @@ namespace ProjectCronos
                     currentTime = 0f;
                 }
             }
+        }
+
+        public void ShowTestSystemPopup()
+        {
+            PopupManager.Instance.ShowSystemPopup(new PopupBase.MessageParam("確認", "これはテスト用ポップアップです。", "はい"));
         }
 
         private void OnDestroy()
@@ -138,8 +153,8 @@ namespace ProjectCronos
         void InitializeItemDebugMenu()
         {
             itemDebugCells = new List<ItemDebugCell>();
-            var test = MasterDataManager.DB.ItemDataTable.All;
-            foreach (var item in test)
+            var items = MasterDataManager.DB.ItemDataTable.All;
+            foreach (var item in items)
             {
                 var obj = Instantiate(itemDebugCellprefab, itemDebugCellParent.transform);
                 itemDebugCells.Add(obj);
